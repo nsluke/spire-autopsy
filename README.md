@@ -68,6 +68,19 @@ STS2_HISTORY="$HOME/Library/Application Support/SlayTheSpire2/steam/<id>/profile
 - Sample data (`public/demo/`) and test fixtures are real, solo-only runs
   (co-op files are excluded — they contain other players' Steam ids).
 
+## Deploying
+
+The site is a static bundle — any static host works.
+
+**GitHub Pages** (zero config): push to `main`; `.github/workflows/pages.yml`
+runs tests, builds, and deploys. One-time setup in the repo settings:
+*Settings → Pages → Source: GitHub Actions*. Hash routing and relative asset
+paths mean project pages (`user.github.io/repo/`) work as-is. The privacy CSP
+is injected as a `<meta>` tag at build time since Pages can't set headers.
+
+**Cloudflare Pages**: build command `npm run build`, output `dist` — picks up
+the stricter header CSP from `public/_headers` automatically.
+
 ## Privacy, verifiably
 
 - Deployed with a strict `Content-Security-Policy` (see `public/_headers`):
