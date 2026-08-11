@@ -1,0 +1,246 @@
+/* Landing / import view (Mockup A) — owned by views/Landing.tsx + components/Dropzone.tsx. */
+
+.landing {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 44px 20px 72px;
+  text-align: center;
+}
+
+.landingBrand {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink2);
+  margin: 0 0 36px;
+  letter-spacing: 0.01em;
+}
+.landingMark { color: var(--ember); margin-right: 2px; }
+
+.backRow { margin: 0 0 18px; }
+.backLink {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.backLink:hover { color: var(--ember); }
+
+.landingTitle {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+
+.landingSub {
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+.landingSub strong { color: var(--ink); }
+.inlineMono { font-family: var(--mono); font-size: 0.9em; color: var(--ember); }
+
+/* ---- dropzone ---- */
+
+.dropzone {
+  display: block;
+  width: 100%;
+  border: 2px dashed rgba(232, 163, 61, 0.4);
+  border-radius: 14px;
+  padding: 38px 20px;
+  text-align: center;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(232, 163, 61, 0.06), transparent);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.dropzone.dragOver {
+  border-color: var(--ember);
+  border-style: solid;
+  background-color: var(--ember-dim);
+}
+.dropzone:hover { border-color: rgba(232, 163, 61, 0.7); }
+.dropzone[aria-disabled='true'] { cursor: default; opacity: 0.6; }
+/* children must not swallow drag events, or dragleave fires on every child */
+.dropzone > * { pointer-events: none; }
+
+.dropBig {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+.dropFolder { font-family: var(--mono); color: var(--ember); }
+.dropHint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.dropInput { display: none; }
+
+/* ---- sample data ---- */
+
+.demoRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+.demoBtn {
+  font-size: 0.85rem;
+  color: var(--ink2);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.demoBtn:hover:enabled { color: var(--ember); border-color: rgba(232, 163, 61, 0.5); }
+.demoBtn:disabled { opacity: 0.6; cursor: default; }
+.demoNote { font-size: 0.75rem; color: var(--faint); }
+
+/* ---- import progress ---- */
+
+.importPanel {
+  margin-top: 24px;
+  text-align: left;
+}
+.importPhase {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+.phaseLabel { color: var(--ink); font-weight: 600; font-size: 0.9rem; }
+.phaseCount { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+
+.progressTrack {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line-soft);
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--ember);
+  transition: width 0.2s;
+}
+
+.importSummary {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--ink2);
+}
+.importSummary li { margin: 4px 0; }
+.importSummary b { color: var(--ink); font-weight: 600; }
+
+.failBlock { margin-top: 10px; }
+.failIntro { margin: 0 0 6px; font-size: 0.82rem; color: var(--ink2); }
+.failList {
+  list-style: none;
+  margin: 0;
+  padding: 8px 12px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--ink2);
+  background: #171310;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  text-align: left;
+  word-break: break-all;
+}
+.failName { color: var(--loss); }
+
+/* ---- OS chips + path ---- */
+
+.osChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.pathBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #171310;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  text-align: left;
+}
+.pathText {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink2);
+  word-break: break-all;
+  user-select: all;
+}
+.copyBtn {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--ember);
+  background: none;
+  border: 1px solid rgba(232, 163, 61, 0.35);
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s;
+}
+.copyBtn:hover { border-color: var(--ember); }
+
+.pathNote {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+/* ---- step cards ---- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  text-align: left;
+}
+.step {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  color: var(--ink2);
+}
+.step b {
+  display: block;
+  color: var(--ink);
+  font-weight: 650;
+  margin-bottom: 3px;
+}
+
+/* ---- privacy footer ---- */
+
+.privacyLine {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: var(--faint);
+}

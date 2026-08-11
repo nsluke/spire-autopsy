@@ -1,0 +1,150 @@
+/* Dashboard view (Mockup B). Every selector is scoped under .dash so this
+   file can never restyle other views' panels. */
+
+.dash .dashHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.dash .dashHead h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+.dash .dashSub { color: var(--muted); margin: 0; }
+.dash .filterRow { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* stat tiles */
+.dash .tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.dash .tile {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.dash .tile .k {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dash .tile .v {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  color: var(--ink);
+}
+.dash .tile .d { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+/* two-column panel row */
+.dash .dashCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 22px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .dash .dashCols { grid-template-columns: 1fr; }
+}
+
+/* space between stacked sections inside a panel */
+.dash .panel section + section { margin-top: 26px; }
+.dash .sectionTitle.withPill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.dash .sectionTitle.withPill .pill { text-transform: none; letter-spacing: 0.08em; }
+
+/* character win-rate bars */
+.dash .cbar {
+  display: grid;
+  grid-template-columns: 92px 1fr 96px;
+  align-items: center;
+  gap: 10px;
+  margin: 9px 0;
+  font-size: 0.8rem;
+}
+.dash .cbar .nm { color: var(--ink2); white-space: nowrap; }
+.dash .cbar .tr {
+  background: var(--line-soft);
+  border-radius: 3px;
+  height: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.dash .cbar .fl { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 3px; }
+.dash .cbar .vl {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+.dash .cbar .vl span { color: var(--faint); font-size: 0.7rem; }
+.dash .sigLine { font-size: 0.78rem; color: var(--muted); margin: 12px 0 0; }
+
+/* quarterly sparks */
+.dash .sparkRow { display: flex; gap: 22px; flex-wrap: wrap; }
+.dash .spark { flex: 1 1 170px; min-width: 170px; }
+.dash .spark svg { display: block; width: 100%; height: auto; }
+.dash .readTogether { font-size: 0.8rem; color: var(--ink2); margin: 8px 0 0; }
+
+/* nemesis board */
+.dash .nem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.8rem;
+}
+.dash .nem:last-of-type { border-bottom: 0; }
+.dash .nem .nm { color: var(--ink); grid-column: 1; grid-row: 1; }
+.dash .nem .nm .pill { margin-left: 6px; }
+.dash .nem .meta { color: var(--muted); font-size: 0.72rem; grid-column: 1; grid-row: 2; }
+.dash .nem .rate {
+  font-variant-numeric: tabular-nums;
+  color: var(--loss);
+  font-weight: 600;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+/* deaths-by-act mini strip */
+.dash .actStrip { display: flex; gap: 14px; align-items: flex-end; margin-top: 6px; }
+.dash .actCol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.dash .actCount {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.dash .actBar {
+  width: 100%;
+  max-width: 64px;
+  background: var(--loss);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+}
+.dash .actLbl {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.dash .miniMeta { font-size: 0.72rem; color: var(--muted); margin: 10px 0 0; }
+
+.dash .emptyNote { color: var(--muted); font-size: 0.8rem; margin: 6px 0 0; }

@@ -1,0 +1,218 @@
+/* Coach view (Mockup C) — leak cards, the win/loss dumbbell, observations
+   drawer, locked/cold-start card. Owned by Coach.tsx + LeakCard.tsx +
+   Dumbbell.tsx. All colors come from tokens.css. */
+
+/* ---- page header ---- */
+.coachHead { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+.coachTitle { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 4px; }
+.coachSub { color: var(--muted); margin: 0 0 10px; font-size: 0.9rem; }
+.voiceRow { display: flex; gap: 6px; flex-wrap: wrap; }
+.voiceRow .pill:disabled { cursor: not-allowed; opacity: 0.55; }
+
+/* ---- leak card ---- */
+.leakCard {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  margin: 14px 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.leakCard:hover { border-color: rgba(232, 163, 61, 0.35); }
+.leakHead { display: flex; align-items: baseline; gap: 10px; padding: 14px 18px 0; flex-wrap: wrap; }
+.leakSev {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--loss);
+  border: 1px solid rgba(204, 90, 78, 0.45);
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.leakTitle { margin: 0; font-size: 1rem; font-weight: 650; }
+.leakRatio {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--loss);
+  border: 1px solid rgba(204, 90, 78, 0.4);
+  border-radius: 6px;
+  padding: 2px 8px;
+  background: rgba(204, 90, 78, 0.08);
+  white-space: nowrap;
+}
+.leakBody { padding: 6px 18px 16px; color: var(--ink2); font-size: 0.85rem; }
+.leakText { margin: 0; }
+
+/* drill box — dashed ember border */
+.leakDrill {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px dashed rgba(232, 163, 61, 0.45);
+  background: var(--ember-dim);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+.leakDrill b {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+/* receipts drawer */
+.leakCard > details { border-top: 1px solid var(--line-soft); font-size: 0.82rem; }
+.leakCard summary {
+  cursor: pointer;
+  padding: 10px 18px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  list-style: none;
+}
+.leakCard summary::-webkit-details-marker { display: none; }
+.leakCard summary::before { content: '▸ '; color: var(--ember); }
+.leakCard details[open] summary::before { content: '▾ '; }
+.leakReceipts { padding: 2px 18px 16px; color: var(--ink2); }
+.receiptLine {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  background: #171310;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  color: var(--ink2);
+  overflow-wrap: break-word;
+}
+a.receiptLine { text-decoration: none; }
+a.receiptLine:hover { border-color: rgba(232, 163, 61, 0.5); }
+.openCue { color: var(--ember); white-space: nowrap; }
+.confoundNote { color: var(--faint); font-size: 0.78rem; margin: 10px 0 0; }
+.demoteRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.strengthTag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.demoteBtn {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.demoteBtn:hover { color: var(--loss); border-color: rgba(204, 90, 78, 0.45); }
+
+/* ---- dumbbell (the house chart) ----
+   Win label lives above the rail, loss label below: they can never collide. */
+.dumbbell { margin: 14px 0 4px; }
+.dbLabelRow { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); margin-bottom: 4px; }
+.dbSample { text-align: right; }
+.dbTrack { position: relative; height: 44px; }
+.dbRail { position: absolute; left: 0; right: 0; top: 21px; height: 2px; background: var(--line); }
+.dbSeg { position: absolute; top: 21px; height: 2px; }
+.dbDot {
+  position: absolute;
+  top: 15px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  border: 2px solid var(--ground);
+}
+.dbDot.win { background: var(--win); }
+.dbDot.loss { background: var(--loss); }
+.dbTag { position: absolute; font-family: var(--mono); font-size: 0.68rem; white-space: nowrap; }
+.dbTag.win { top: 0; color: var(--win); }
+.dbTag.loss { bottom: 0; color: var(--loss); }
+.dbTicks { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 6px; }
+.dbTicks i { width: 3px; height: 8px; border-radius: 1px; background: var(--faint); opacity: 0.55; }
+.dbTicks i.hot { background: var(--loss); opacity: 0.95; }
+
+/* ---- quiet states ---- */
+.coachClear {
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 16px 18px;
+  color: var(--ink2);
+  font-size: 0.9rem;
+  margin: 14px 0;
+}
+.lockedCard {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.lockedTitle {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.lockedCard ul { margin: 0; padding-left: 1.15em; }
+.lockedCard li { margin: 5px 0; }
+.lockedCard b { color: var(--ink2); font-weight: 600; }
+
+/* ---- observations drawer ---- */
+.obsDrawer { border: 1px solid var(--line-soft); border-radius: 10px; margin-top: 18px; }
+.obsDrawer > summary {
+  cursor: pointer;
+  padding: 12px 18px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  list-style: none;
+}
+.obsDrawer > summary::-webkit-details-marker { display: none; }
+.obsDrawer > summary::before { content: '▸ '; color: var(--ember); }
+.obsDrawer[open] > summary::before { content: '▾ '; }
+.obsList { padding: 0 18px 14px; }
+.obsItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.82rem;
+}
+.obsItem:first-child { border-top: 0; }
+.obsTitle { color: var(--ink); font-weight: 600; }
+.obsBody { color: var(--ink2); }
+.obsItem.demoted .obsTitle { color: var(--muted); }
+.restoreBtn {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.restoreBtn:hover { color: var(--ember); border-color: rgba(232, 163, 61, 0.5); }

@@ -1,0 +1,122 @@
+/* Autopsy view — owned by views/Autopsy.tsx and components/HpTrajectory.tsx. */
+
+/* run picker */
+.runPicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.runPicker .runPill {
+  text-decoration: none;
+}
+.runPillWin {
+  color: var(--win);
+}
+
+/* header */
+.autopsyHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.autopsyTitle {
+  font-family: var(--sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+.autopsyWin {
+  color: var(--win);
+}
+.autopsyLoss {
+  color: var(--loss);
+}
+.autopsyEnd {
+  color: var(--muted);
+}
+.autopsySub {
+  color: var(--muted);
+  margin: 0;
+}
+
+/* trajectory chart */
+.trajPanel {
+  margin-top: 16px;
+  padding: 14px 16px 12px;
+}
+.trajWrap {
+  overflow-x: auto;
+}
+.trajChart {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+}
+.trajChart text {
+  font-family: var(--sans);
+}
+.trajEmpty {
+  color: var(--muted);
+  margin: 4px 0;
+}
+
+.trajLegend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.trajLegend .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+.swatchEmber {
+  background: var(--ember);
+}
+.swatchLoss {
+  background: var(--loss);
+}
+.swatchWin {
+  background: var(--win);
+}
+.legendHeal {
+  color: var(--win);
+}
+
+/* coach's read */
+.coachRead {
+  margin-top: 16px;
+}
+.coachPara {
+  margin: 0.3em 0;
+  color: var(--ink2);
+}
+.patternLinks {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin: 0.9em 0 0;
+}
+.patternLinks a {
+  color: var(--ember);
+  text-decoration: none;
+}
+.patternLinks a:hover,
+.patternLinks a:focus-visible {
+  text-decoration: underline;
+}
+
+/* empty state */
+.autopsyEmpty {
+  color: var(--muted);
+}

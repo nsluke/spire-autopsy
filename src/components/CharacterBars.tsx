@@ -1,0 +1,51 @@
+/**
+ * Win rate by character: direct-labeled horizontal bars filled with the
+ * colorblind-validated character colors, plus the signature-pick line.
+ * Bars are scaled relative to the best character's rate; the exact
+ * percentage AND the raw fraction are always printed next to each bar,
+ * so color never carries the information alone.
+ */
+import { characterColor, characterName, displayName } from '../lib/idFormat';
+import type { CharacterStats } from '../lib/types';
+
+interface CharacterBarsProps {
+  byCharacter: CharacterStats[];
+}
+
+export default function CharacterBars({ byCharacter }: CharacterBarsProps) {
+  if (byCharacter.length === 0) return null;
+
+  // byCharacter arrives sorted by win rate (descending) from computeStats.
+  const maxRate = Math.max(1, ...byCharacter.map((c) => c.winRatePct));
+
+  const signatures = byCharacter
+    .filter((c) => c.favoriteCard)
+    .map((c) => `${characterName(c.character)}: ${displayName(c.favoriteCard!.id)}`);
+
+  return (
+    <section>
+      <h2 className="sectionTitle">Win rate by character</h2>
+      {byCharacter.map((c) => (
+        <div className="cbar" key={c.character}>
+          <span className="nm">{characterName(c.character)}</span>
+          <div className="tr" aria-hidden="true">
+            <div
+              className="fl"
+              style={{
+                width: `${Math.min(100, (c.winRatePct / maxRate) * 82).toFixed(1)}%`,
+                background: characterColor(c.character),
+              }}
+            />
+          </div>
+          <span className="vl num">
+            {c.winRatePct.toFixed(1)}%{' '}
+            <span>
+              {c.wins}/{c.runs}
+            </span>
+          </span>
+        </div>
+      ))}
+      {signatures.length > 0 && <p className="sigLine">Signature picks — {signatures.join(' · ')}</p>}
+    </section>
+  );
+}

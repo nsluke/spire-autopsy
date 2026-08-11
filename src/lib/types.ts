@@ -222,6 +222,14 @@ export interface DumbbellStat {
   /** how to format values, e.g. 'pct' | 'count' */
   format: 'pct' | 'count';
   sampleLabel: string; // e.g. "323 boss fights"
+  /**
+   * Cohort tags for the two dots. Omit ONLY when the values really are
+   * win-cohort vs loss-cohort figures (the default labels say "wins"/"losses"
+   * and the aria text says "in runs you win/lose"). Detectors comparing any
+   * other cohort pair (e.g. healthy vs low boss entries) MUST set both.
+   */
+  winLabel?: string; // e.g. "entered 60%+"
+  lossLabel?: string; // e.g. "entered <60%"
 }
 
 export interface LeakResult {
@@ -241,6 +249,12 @@ export interface LeakResult {
   expectedWinsLost: number;
   /** false when the corpus is too small for this detector to speak */
   applicable: boolean;
+  /**
+   * true when the detector RAN and found nothing to fix (distinct from
+   * applicable:false = not enough data). Healthy results never render as
+   * leak cards or "locked" analyses — they read as a clean bill of health.
+   */
+  healthy?: boolean;
 }
 
 // ---------- autopsy ----------

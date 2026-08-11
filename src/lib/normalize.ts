@@ -70,7 +70,12 @@ export function normalizeRun(json: unknown, fileName: string): NormalizedRun {
     for (const node of act) {
       floor += 1;
       const allStats = node.player_stats ?? [];
-      const ps = allStats.find((s) => s.player_id === primaryId) ?? allStats[0];
+      // Join by player_id, tolerating number-vs-string id encodings. Solo files
+      // may safely fall back to the only row; in co-op a missing primary row
+      // must become emptyStats — never another player's numbers.
+      const ps =
+        allStats.find((s) => String(s.player_id) === String(primaryId)) ??
+        (raw.players.length === 1 ? allStats[0] : undefined);
       const stats: NodeStats = ps
         ? {
             playerId: ps.player_id,
