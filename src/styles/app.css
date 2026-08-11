@@ -1,0 +1,61 @@
+/* App shell layout. View-specific styles live in styles/views.css (owned by view components). */
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.shell { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.brandMark { color: var(--ember); margin-right: 2px; }
+
+.nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.nav a.on { color: var(--ember); background: var(--ember-dim); }
+.nav a:hover { color: var(--ink); }
+
+.privacyBadge {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--win);
+  border: 1px solid rgba(78, 158, 71, 0.4);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.content { padding-top: 22px; }
+
+.footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--faint);
+  font-size: 0.75rem;
+}
