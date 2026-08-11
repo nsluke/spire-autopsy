@@ -32,3 +32,25 @@ Notes on representative sprites for group enemies:
 - `BOWLBUG_ROCK.png` uses the rock-variant Bowlbug sprite (`File:StS2 Bowlbug (Rock).png`).
 - `LEAF_SLIME_S.png` / `TWIG_SLIME_S.png` use the small (S) slime sprites.
 - `INFESTED_PRISMS.png` / `PHANTASMAL_GARDENERS.png` use the singular enemy sprites.
+
+## Encounter sprite fill (August 2026)
+
+40 additional encounter sprites were added, all sourced from **slaythespire.wiki.gg**
+(no game-file extraction was needed). Files are named after the encounter base name;
+per-file original URLs are in `manifest.json` under `"sources"`. Representative-sprite
+choices for group/event encounters:
+
+- `AXEBOTS.png`, `CHOMPERS.png`, `INKLETS.png` use the singular enemy sprites
+  (`File:StS2 Axebot.png`, `File:StS2 Chomper.png`, `File:StS2 Inklet.png`).
+- `CULTISTS.png` uses the Damp Cultist sprite (`File:StS2 Damp Cultist.png`).
+- `RUBY_RAIDERS.png` uses the Axe Raider sprite (`File:StS2 Axe Raider.png`).
+- `THE_LOST_AND_FORGOTTEN.png` uses The Lost sprite (`File:StS2 The Lost.png`).
+- `FAKE_MERCHANT.png` uses the fake merchant enemy sprite
+  (`File:StS2 The Merchant???.png`).
+- `SLIMES.png` uses the medium Leaf Slime sprite (`File:StS2 Leaf Slime (M).png`).
+- `CONSTRUCT_MENAGERIE.png` is a copy of the Cubex Construct sprite (the encounter is
+  a mixed group of constructs).
+- `OVERGROWTH_CRAWLERS.png` is a copy of the Fuzzy Wurm Crawler sprite (the encounter
+  mixes Fuzzy Wurm Crawlers and Shrinker Beetles).
+- `BATTLEWORN_DUMMY.png`, `HAUNTED_SHIP.png`, `PUNCH_OFF.png`, `DENSE_VEGETATION.png`
+  are event-encounter illustrations from their wiki event pages.
