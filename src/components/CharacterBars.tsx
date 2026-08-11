@@ -5,8 +5,10 @@
  * percentage AND the raw fraction are always printed next to each bar,
  * so color never carries the information alone.
  */
+import { characterArt } from '../lib/art';
 import { characterColor, characterName, displayName } from '../lib/idFormat';
 import type { CharacterStats } from '../lib/types';
+import ArtImg from './ArtImg';
 
 interface CharacterBarsProps {
   byCharacter: CharacterStats[];
@@ -27,7 +29,10 @@ export default function CharacterBars({ byCharacter }: CharacterBarsProps) {
       <h2 className="sectionTitle">Win rate by character</h2>
       {byCharacter.map((c) => (
         <div className="cbar" key={c.character}>
-          <span className="nm">{characterName(c.character)}</span>
+          <span className="nm">
+            <ArtImg src={characterArt(c.character)} className="cbarArt" />
+            {characterName(c.character)}
+          </span>
           <div className="tr" aria-hidden="true">
             <div
               className="fl"

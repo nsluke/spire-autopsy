@@ -6,8 +6,10 @@
  * Run selection: the runId prop when it matches an imported run, else the most
  * recent non-abandoned loss, else the most recent run.
  */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import ArtImg from '../components/ArtImg';
 import HpTrajectory from '../components/HpTrajectory';
+import { monsterArt } from '../lib/art';
 import { buildAutopsy } from '../lib/autopsy';
 import { characterName, displayName, formatDuration, shortDate } from '../lib/idFormat';
 import { detectLeaks } from '../lib/leaks';
@@ -26,6 +28,11 @@ function pretty(s: string): string {
 
 export default function Autopsy({ runs, runId }: Props) {
   const newestFirst = useMemo(() => [...runs].sort((a, b) => b.startTime - a.startTime), [runs]);
+  // Two-way link between the coach's read and the chart: hovering a beat rings
+  // its floors on the trajectory; hovering the chart lights up the beats that
+  // mention that floor.
+  const [beatFloors, setBeatFloors] = useState<number[] | null>(null);
+  const [chartFloor, setChartFloor] = useState<number | null>(null);
 
   const selected =
     (runId ? runs.find((r) => r.id === runId) : undefined) ??
@@ -103,21 +110,43 @@ export default function Autopsy({ runs, runId }: Props) {
               .join(' · ')}
           </p>
         </div>
-        <span className="pill num">{report.runId}.run</span>
+        <div className="autopsyHeadRight">
+          {!report.win && <ArtImg src={monsterArt(selected.killedByEncounter)} className="killerArt" />}
+          <span className="pill num">{report.runId}.run</span>
+        </div>
       </header>
 
       <section className="panel trajPanel">
-        <HpTrajectory report={report} />
+        <HpTrajectory report={report} highlightFloors={beatFloors ?? undefined} onFloorHover={setChartFloor} />
       </section>
 
       {(report.narrative.length > 0 || linkedLeaks.length > 0) && (
         <section className="panel coachRead">
           <h2 className="sectionTitle">The coach's read</h2>
-          {report.narrative.map((para, i) => (
-            <p key={i} className="coachPara">
-              {para}
-            </p>
-          ))}
+          <ul className="beatList">
+            {report.narrative.map((beat, i) => {
+              const anchored = beat.floors.length > 0;
+              const lit = chartFloor !== null && beat.floors.includes(chartFloor);
+              return (
+                <li
+                  key={i}
+                  className={['beat', anchored ? 'beatAnchored' : '', lit ? 'beatLit' : ''].filter(Boolean).join(' ')}
+                  tabIndex={anchored ? 0 : undefined}
+                  onMouseEnter={anchored ? () => setBeatFloors(beat.floors) : undefined}
+                  onMouseLeave={anchored ? () => setBeatFloors(null) : undefined}
+                  onFocus={anchored ? () => setBeatFloors(beat.floors) : undefined}
+                  onBlur={anchored ? () => setBeatFloors(null) : undefined}
+                >
+                  <span className="beatText">{beat.text}</span>
+                  {anchored && (
+                    <span className="beatFloors num" aria-label={`floors ${beat.floors.join(', ')}`}>
+                      {beat.floors.map((f) => `fl ${f}`).join(' · ')} ↗
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
           {linkedLeaks.length > 0 && (
             <p className="patternLinks">
               Pattern links:{' '}

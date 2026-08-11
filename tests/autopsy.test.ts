@@ -94,12 +94,20 @@ describe('autopsy of 1785858459 (loss)', () => {
     expect([...floors].sort((a, b) => a - b)).toEqual(floors);
   });
 
-  it('writes a 2-3 paragraph narrative from computed numbers', () => {
+  it('writes floor-anchored beats from computed numbers', () => {
     expect(report.narrative.length).toBeGreaterThanOrEqual(2);
-    expect(report.narrative.length).toBeLessThanOrEqual(3);
-    for (const p of report.narrative) expect(p.length).toBeGreaterThan(0);
-    expect(report.narrative[0]).toContain('Floor 12');
-    expect(report.narrative[0]).toContain('47');
+    for (const b of report.narrative) expect(b.text.length).toBeGreaterThan(0);
+    // the wound beat anchors on floor 12 and cites the 47 damage
+    const wound = report.narrative[0];
+    expect(wound.text).toContain('Floor 12');
+    expect(wound.text).toContain('47');
+    expect(wound.floors).toContain(12);
+    // the kill beat anchors on the death floor
+    const kill = report.narrative.find((b) => b.floors.includes(33));
+    expect(kill).toBeDefined();
+    // every anchored floor exists in the trajectory (the chart can ring it)
+    const floors = new Set(report.trajectory.map((t) => t.floor));
+    for (const b of report.narrative) for (const f of b.floors) expect(floors.has(f)).toBe(true);
   });
 
   it('links the leaks this run exhibits — and only those', () => {
@@ -143,14 +151,14 @@ describe('runs with no floor history (schema-legal map_point_history: [])', () =
     const report = buildAutopsy(run, [run], []);
     expect(report.trajectory).toHaveLength(0);
     expect(report.narrative.length).toBeGreaterThan(0);
-    expect(report.narrative[0]).toContain('win');
+    expect(report.narrative[0].text).toContain('win');
   });
 
   it('a zero-floor loss is not mislabeled as abandoned', () => {
     const run = withoutNodes(loss1785, { win: false, abandoned: false });
     const report = buildAutopsy(run, [run], []);
     expect(report.narrative.length).toBeGreaterThan(0);
-    expect(report.narrative[0]).not.toContain('abandoned');
+    expect(report.narrative[0].text).not.toContain('abandoned');
   });
 });
 
@@ -160,6 +168,6 @@ describe('autopsy of an abandoned run', () => {
   it('stays brief and kind — no death moment, no post-mortem', () => {
     expect(report.moments.some((m) => m.kind === 'death')).toBe(false);
     expect(report.narrative).toHaveLength(1);
-    expect(report.narrative[0]).toContain('abandoned');
+    expect(report.narrative[0].text).toContain('Abandoned');
   });
 });

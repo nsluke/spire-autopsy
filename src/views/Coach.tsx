@@ -13,6 +13,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { detectLeaks } from '../lib/leaks';
+import { climbSummary } from '../lib/climb';
 import { getMeta, setMeta } from '../lib/db';
 import { fmtInt } from '../lib/idFormat';
 import { completedRuns } from '../lib/normalize';
@@ -46,6 +47,7 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
 
   const leaks = useMemo<LeakResult[]>(() => detectLeaks(runs), [runs]);
   const completedCount = useMemo(() => completedRuns(runs).length, [runs]);
+  const climb = useMemo(() => climbSummary(runs, leaks), [runs, leaks]);
 
   if (dismissed === null) return null; // IndexedDB read resolves in milliseconds
 
@@ -80,8 +82,7 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
         <div>
           <h1 className="coachTitle">What's costing you runs</h1>
           <p className="coachSub">
-            Ranked by estimated wins lost · evidence from <span className="num">{fmtInt(completedCount)}</span>{' '}
-            completed runs
+            From <span className="num">{fmtInt(completedCount)}</span> completed runs
           </p>
         </div>
         <div className="voiceRow" role="group" aria-label="Coach voice">
@@ -96,6 +97,44 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
           </button>
         </div>
       </header>
+
+      {climb.frontier !== null && (
+        <section className="climbStrip" aria-label="Ascension climb progress">
+          <div className="climbCell">
+            <span className="climbK">Beaten</span>
+            <span className="climbV num">A{climb.frontier}</span>
+          </div>
+          <span className="climbArrow" aria-hidden="true">
+            →
+          </span>
+          <div className="climbCell climbTarget">
+            <span className="climbK">Next target</span>
+            <span className="climbV num">A{climb.target}</span>
+          </div>
+          <div className="climbNote">
+            {climb.targetAttempts > 0 ? (
+              <>
+                <span className="num">{climb.targetAttempts}</span>{' '}
+                {climb.targetAttempts === 1 ? 'attempt' : 'attempts'} so far
+                {climb.bestTargetActs > 0 && (
+                  <>
+                    {' '}
+                    · deepest reached act <span className="num">{climb.bestTargetActs}</span>
+                  </>
+                )}
+              </>
+            ) : (
+              <>fresh ground — no attempts yet</>
+            )}
+            {climb.leverTitle && (
+              <>
+                {' '}
+                · biggest lever: <b>{climb.leverTitle}</b>
+              </>
+            )}
+          </div>
+        </section>
+      )}
 
       {cards.map((leak, i) => (
         <LeakCard key={leak.id} leak={leak} rank={i + 1} defaultOpen={i === 0} onDemote={demote} />

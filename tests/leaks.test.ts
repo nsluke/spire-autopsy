@@ -19,7 +19,7 @@ import { normalizeRun } from '../src/lib/normalize';
 import { detectLeaks } from '../src/lib/leaks';
 import { bossEntryLeak } from '../src/lib/leaks/bossEntry';
 import { removalDisciplineLeak, STARTER_CARD_RE } from '../src/lib/leaks/removals';
-import { ascensionPacingLeak } from '../src/lib/leaks/ascensionPacing';
+import { climbSummary } from '../src/lib/climb';
 import { eliteAppetite, goldAtDeath, potionHoarding } from '../src/lib/leaks/observations';
 import type { NormalizedRun } from '../src/lib/types';
 
@@ -71,26 +71,21 @@ const corpusMain = [
 describe('gating (applicable=false below thresholds)', () => {
   it('every detector declines politely on the 5-completed-run fixture corpus', () => {
     const results = detectLeaks(fixtures);
-    expect(results).toHaveLength(6);
+    expect(results).toHaveLength(5); // 2 leak detectors + 3 observations (ascension retired to climb.ts)
     for (const r of results) {
       expect(r.applicable).toBe(false);
       expect(r.body.length).toBeGreaterThan(0);
       expect(r.receiptLines).toHaveLength(0);
       expect(r.expectedWinsLost).toBe(0);
     }
-    expect(results.slice(0, 3).every((r) => r.tier === 'leak')).toBe(true);
-    expect(results.slice(3).every((r) => r.tier === 'observation')).toBe(true);
+    expect(results.slice(0, 2).every((r) => r.tier === 'leak')).toBe(true);
+    expect(results.slice(2).every((r) => r.tier === 'observation')).toBe(true);
   });
 
   it('boss-entry-hp needs 20 completed runs', () => {
     const nineteen = [...clones(win1779, 10), ...clones(loss1785, 9)];
     expect(bossEntryLeak(nineteen).applicable).toBe(false);
     expect(bossEntryLeak([...nineteen, ...clones(loss1785, 1)]).applicable).toBe(true);
-  });
-
-  it('ascension-pacing needs 30 completed runs', () => {
-    expect(ascensionPacingLeak(corpusMain.slice(0, 29)).applicable).toBe(false);
-    expect(ascensionPacingLeak(corpusMain).applicable).toBe(true);
   });
 
   it('abandoned runs never count toward thresholds or numbers', () => {
@@ -210,29 +205,40 @@ describe('removal-discipline', () => {
   });
 
   it('names its confounder and prescribes the shop drill', () => {
-    expect(leak.confoundNote).toContain('act 2');
+    expect(leak.confoundNote).toContain('act-2+');
     expect(leak.drill?.body).toContain('under 100 gold');
   });
 });
 
-describe('ascension-pacing', () => {
-  const leak = ascensionPacingLeak(corpusMain);
+describe('the climb (replaces the retired ascension-pacing detector)', () => {
+  const leaks = detectLeaks(corpusMain);
+  const climb = climbSummary(corpusMain, leaks);
+  const completed = corpusMain.filter((r) => !r.abandoned);
+  const winAscs = completed.filter((r) => r.win).map((r) => r.ascension);
 
-  it('reports per-level win rates, marking levels with n<10 as too small', () => {
-    expect(leak.applicable).toBe(true);
-    expect(leak.receiptLines).toContain('A6: 7/21 wins (33%)');
-    expect(leak.receiptLines).toContain('A0: 7/7 — sample too small to judge');
-    expect(leak.receiptLines).toContain('A1: 0/2 — sample too small to judge');
+  it('frames the frontier as the highest ascension beaten, target one above', () => {
+    expect(climb.frontier).toBe(Math.max(...winAscs));
+    expect(climb.target).toBe(climb.frontier! + 1);
+    expect(climb.targetAttempts).toBe(completed.filter((r) => r.ascension === climb.target).length);
+    expect(climb.aboveFrontierAttempts).toBeGreaterThanOrEqual(climb.targetAttempts);
+    expect(climb.recentPushShare).toBeGreaterThanOrEqual(0);
+    expect(climb.recentPushShare).toBeLessThanOrEqual(1);
   });
 
-  it('tracks the rolling last-30 window', () => {
-    expect(leak.receiptLines).toContain('last 30 runs: 14/30 wins (47%), average level A4.3');
+  it('pairs the climb with the top applicable leak as the lever', () => {
+    const topLeak = leaks.find((l) => l.tier === 'leak' && l.applicable && !l.healthy);
+    expect(climb.leverTitle).toBe(topLeak?.title);
   });
 
-  it('recommends the highest level with n>=10 and >=25% wins, hedged', () => {
-    expect(leak.drill?.title).toBe('Settle at A6');
-    expect(leak.body).toContain('A6');
-    expect(leak.body).toMatch(/might/); // hedged phrasing, never a command
+  it('handles a winless corpus without inventing a frontier', () => {
+    const winless = completed.filter((r) => !r.win);
+    const c = climbSummary(winless, detectLeaks(winless));
+    expect(c.frontier).toBeNull();
+    expect(c.target).toBe(0);
+  });
+
+  it('never appears among leak detectors (climbing is a goal, not a mistake)', () => {
+    expect(leaks.some((l) => l.id === 'ascension-pacing')).toBe(false);
   });
 });
 
@@ -291,11 +297,10 @@ describe('observations', () => {
 describe('detectLeaks ordering', () => {
   it('returns leaks ranked by expectedWinsLost, observations after', () => {
     const results = detectLeaks(corpusMain);
-    expect(results).toHaveLength(6);
-    expect(results.slice(0, 3).map((r) => r.tier)).toEqual(['leak', 'leak', 'leak']);
-    expect(results.slice(3).map((r) => r.tier)).toEqual(['observation', 'observation', 'observation']);
+    expect(results).toHaveLength(5); // 2 leak detectors + 3 observations (ascension retired to climb.ts)
+    expect(results.slice(0, 2).map((r) => r.tier)).toEqual(['leak', 'leak']);
+    expect(results.slice(2).map((r) => r.tier)).toEqual(['observation', 'observation', 'observation']);
     expect(results[0].id).toBe('boss-entry-hp');
     expect(results[0].expectedWinsLost).toBeGreaterThanOrEqual(results[1].expectedWinsLost);
-    expect(results[1].expectedWinsLost).toBeGreaterThanOrEqual(results[2].expectedWinsLost);
   });
 });

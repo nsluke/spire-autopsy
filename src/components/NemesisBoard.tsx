@@ -4,8 +4,10 @@
  * stands on a real sample. The act pill is computed from where each
  * encounter was actually fought (modal act across the corpus).
  */
+import { monsterArt } from '../lib/art';
 import { displayName, encounterTier, fmtInt } from '../lib/idFormat';
 import type { KillCause, NormalizedRun } from '../lib/types';
+import ArtImg from './ArtImg';
 
 const MIN_FIGHTS = 10;
 const TOP_N = 5;
@@ -82,6 +84,7 @@ export default function NemesisBoard({ killCauses, runs }: NemesisBoardProps) {
           else if (k.deaths === maxDeaths && qualified[0].deaths !== maxDeaths) flourish = ' — your top raw killer';
           return (
             <div className="nem" key={k.encounter}>
+              <ArtImg src={monsterArt(k.encounter)} className="nemArt" />
               <span className="nm">
                 {displayName(k.encounter)} <span className="pill">{tierLabel}</span>
               </span>

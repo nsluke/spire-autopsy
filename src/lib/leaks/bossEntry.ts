@@ -110,8 +110,8 @@ export function bossEntryLeak(completed: NormalizedRun[]): LeakResult {
   }
 
   const body = bothSolid
-    ? `Across ${fights.length} boss fights, the door you walk in through matters: when you entered below 60% HP, the fight ended your run ${lowDeaths} times out of ${low.length} (${pctLabel(lowRate)}). When you arrived at 60% or better, that dropped to ${healthyDeaths} out of ${healthy.length} (${pctLabel(healthyRate)}). In runs you win, you tend to reach the boss door healthy — the fight is half-decided before the first card is played. Spending a rest site, a potion, or a safer route on arriving topped up is some of the cheapest win rate available to you.`
-    : `Your history has ${low.length} boss ${low.length === 1 ? 'fight' : 'fights'} entered below 60% HP (${lowDeaths} became deaths) and ${healthy.length} entered at 60% or better (${healthyDeaths} deaths). That sample is still small, so treat this as a nudge rather than a verdict — but every boss plan breathes easier when you arrive healthy.`;
+    ? `Enter a boss under 60% HP and it ends your run ${pctLabel(lowRate)} of the time — arrive healthy and that drops to ${pctLabel(healthyRate)}. The fight is half-decided at the door.`
+    : `${low.length} boss ${low.length === 1 ? 'fight' : 'fights'} entered below 60% HP so far (${lowDeaths} ${lowDeaths === 1 ? 'death' : 'deaths'}). Small sample — a nudge, not a verdict.`;
 
   const lowEntryDeaths = low.filter((f) => f.died);
   const runReceipts = mostRecent(lowEntryDeaths, (f) => f.run.startTime, 5).map((f) => ({
@@ -137,11 +137,10 @@ export function bossEntryLeak(completed: NormalizedRun[]): LeakResult {
     },
     receiptLines: rateLines,
     runReceipts,
-    confoundNote:
-      'Arriving at a boss low is partly a symptom of a run that was already struggling — a weak deck bleeds HP all act. Read this as a routing signal, not the whole story.',
+    confoundNote: 'Arriving low is partly a symptom of an already-struggling run — read this as a routing signal.',
     drill: {
       title: 'Arrive at 60%+',
-      body: 'For your next 5 runs, plan the last stretch of every act so you reach the boss above 60% HP — take the rest site, drink the potion, pick the quieter path, even when it costs a card reward.',
+      body: 'Next 5 runs: route the last stretch of each act to reach the boss above 60% — rest site, potion, or the quieter path.',
     },
     strength,
     expectedWinsLost: rankScore(low.length / completed.length, lowRate - healthyRate, strength),

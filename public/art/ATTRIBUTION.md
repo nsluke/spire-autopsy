@@ -1,0 +1,34 @@
+# Art Attribution
+
+All enemy, boss, and character artwork in this directory is © Mega Crit and originates
+from **Slay the Spire 2**. Spire Autopsy is an unofficial, non-commercial, fan-made tool
+and is not affiliated with or endorsed by Mega Crit. Artwork will be removed immediately
+on request from the rights holder.
+
+## Fan content policy
+
+Mega Crit explicitly encourages fan content about their games:
+
+- FAQ ("we encourage you to make content about our games!"): https://www.megacrit.com/faq/
+- Full content policy: https://megacrit.com/content-policy/
+
+Key points of the content policy relevant to this project: fan works and content about
+the games are encouraged; monetized video content is allowed with credit; selling
+merchandise that uses direct game assets is prohibited (this project sells nothing and
+is fully non-commercial); no claim of official affiliation may be made (none is made).
+No Slay the Spire 2–specific policy exists as of August 2026 — the general Mega Crit
+content policy applies to both games.
+
+## Image source
+
+All images were sourced from the community wiki **slaythespire.wiki.gg**
+(Slay the Spire 2 namespace), which hosts them as game-asset uploads © Mega Crit.
+Per-file original URLs are recorded in `manifest.json` under `"sources"`.
+
+Notes on representative sprites for group enemies:
+- `THE_KIN.png` uses the Kin Priest sprite (`File:StS2 Kin Priest.png`).
+- `KNIGHTS.png` uses the Mysterious Knight sprite (`File:StS2 Mysterious Knight.png`)
+  from the Knight Gang encounter.
+- `BOWLBUG_ROCK.png` uses the rock-variant Bowlbug sprite (`File:StS2 Bowlbug (Rock).png`).
+- `LEAF_SLIME_S.png` / `TWIG_SLIME_S.png` use the small (S) slime sprites.
+- `INFESTED_PRISMS.png` / `PHANTASMAL_GARDENERS.png` use the singular enemy sprites.

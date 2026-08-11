@@ -23,6 +23,7 @@ import type {
   AutopsyMoment,
   AutopsyReport,
   LeakResult,
+  NarrativeBeat,
   NodeVisit,
   NormalizedRun,
   RoomType,
@@ -208,91 +209,90 @@ interface NarrativeParts {
   leaks: LeakResult[];
 }
 
-function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: NarrativeParts): string[] {
+function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: NarrativeParts): NarrativeBeat[] {
   const { death, spikeNode, moments, killer, linkedLeakIds, leaks } = parts;
-  const who = `${characterName(run.player.character)} at Ascension ${run.ascension}`;
-  const paragraphs: string[] = [];
+  const who = `${characterName(run.player.character)} at A${run.ascension}`;
+  const beats: NarrativeBeat[] = [];
 
-  // Depth context from the rest of the history (uses every completed run except this one).
+  // Depth context from the rest of the history (every completed run except this one).
   const others = completedRuns(allRuns).filter((r) => r.id !== run.id);
   const medianFloors = Math.round(medianOf(others.map((r) => r.nodes.length)));
   const depthNote =
-    others.length >= 5 && medianFloors > 0
-      ? run.nodes.length > medianFloors
-        ? ` — deeper than your typical run (${medianFloors} floors)`
-        : run.nodes.length < medianFloors
-          ? ` — shorter than your typical run (${medianFloors} floors)`
-          : ` — right at your typical depth (${medianFloors} floors)`
+    others.length >= 5 && medianFloors > 0 && run.nodes.length > medianFloors
+      ? ` — deeper than your median run (${medianFloors})`
       : '';
 
   if (run.win) {
     const finalNode = run.nodes[run.nodes.length - 1]; // undefined when the file recorded no floor history
     if (!finalNode) {
-      paragraphs.push(
-        `A win with ${who}. The file recorded no floor-by-floor history for this run, so there is no trajectory to read — but a win is a win.`,
-      );
-      return paragraphs;
+      beats.push({ text: `A win with ${who}. No floor history in the file — but a win is a win.`, floors: [] });
+      return beats;
     }
     const clutch = moments.find((m) => m.kind === 'clutch');
-    paragraphs.push(
-      `A win with ${who}: ${run.nodes.length} floors${depthNote}, ending at ${finalNode.stats.hp}/${finalNode.stats.maxHp} HP. ${clutch ? `The run's tightest moment came on floor ${clutch.floor} — ${clutch.label.toLowerCase()} — and you found the way through.` : 'A controlled run from start to finish.'}`,
-    );
-    if (spikeNode) {
-      paragraphs.push(
-        `The hardest single floor was ${spikeNode.floor}, where ${roomLabel(spikeNode) ?? 'the fight there'} took ${spikeNode.stats.damageTaken} HP. Worth a glance at what made that fight expensive — winning runs like this one are where those reviews are cheapest.`,
-      );
+    beats.push({
+      text: `A win with ${who}: ${run.nodes.length} floors, out at ${finalNode.stats.hp}/${finalNode.stats.maxHp} HP.`,
+      floors: [finalNode.floor],
+    });
+    if (clutch) {
+      beats.push({
+        text: `Tightest squeeze: floor ${clutch.floor} — ${clutch.label.toLowerCase()}.`,
+        floors: [clutch.floor],
+      });
     }
-    return paragraphs;
+    if (spikeNode) {
+      beats.push({
+        text: `Most expensive floor: ${spikeNode.floor} — ${roomLabel(spikeNode) ?? 'that fight'} took ${spikeNode.stats.damageTaken} HP.`,
+        floors: [spikeNode.floor],
+      });
+    }
+    return beats;
   }
 
   if (!death) {
-    // Abandoned run (or a loss whose file recorded no floors) — brief and kind.
-    paragraphs.push(
-      run.abandoned
-        ? `This ${who} run was abandoned after ${run.nodes.length} ${run.nodes.length === 1 ? 'floor' : 'floors'}. No autopsy needed — sometimes the right call is a fresh seed.`
-        : `This ${who} run ended, but the file recorded no floor-by-floor history — nothing here to dissect. On to the next one.`,
-    );
-    return paragraphs;
+    beats.push({
+      text: run.abandoned
+        ? `Abandoned after ${run.nodes.length} ${run.nodes.length === 1 ? 'floor' : 'floors'}. Sometimes the right call is a fresh seed.`
+        : `This ${who} run ended with no floor history recorded — nothing to dissect.`,
+      floors: [],
+    });
+    return beats;
   }
 
-  // Paragraph 1: the wound.
-  const opening = `This ${who} run ended on floor ${death.floor}${killer ? ` against ${killer}` : ''}, after ${run.nodes.length} floors${depthNote}.`;
+  // The wound.
   if (spikeNode && spikeNode !== death) {
-    paragraphs.push(
-      `${opening} Floor ${spikeNode.floor} was the wound: ${roomLabel(spikeNode) ?? 'the fight there'} took ${spikeNode.stats.damageTaken} HP in one visit, and the run carried that scar forward.`,
-    );
-  } else {
-    paragraphs.push(`${opening} The damage that decided it arrived all at once, in the final fight itself.`);
+    beats.push({
+      text: `Floor ${spikeNode.floor} was the wound: ${roomLabel(spikeNode) ?? 'the fight'} took ${spikeNode.stats.damageTaken} HP${depthNote}.`,
+      floors: [spikeNode.floor],
+    });
   }
 
-  // Paragraph 2: the descent.
+  // The descent.
   const pnr = moments.find((m) => m.kind === 'point-of-no-return');
-  const bossEntry = moments.find((m) => m.kind === 'boss-entry');
-  const descent: string[] = [];
-  if (pnr) descent.push(`After floor ${pnr.floor}, your HP never got back above half`);
-  if (bossEntry) {
-    const entry = entryHpPct(run, run.nodes.length - 1);
-    descent.push(
-      `${pnr ? 'and you' : 'You'} walked into ${killer ?? 'the final fight'} at ${entry !== undefined ? Math.round(entry * 100) : '?'}%`,
-    );
-  }
-  if (descent.length) {
-    paragraphs.push(
-      `${descent.join(', ')}. The final fight took ${death.stats.damageTaken} more damage than you had answers for. None of this is about play skill in the fight itself — it is about the shape you arrived in.`,
-    );
+  if (pnr) {
+    beats.push({
+      text: `After floor ${pnr.floor}, HP never crossed half again.`,
+      floors: [pnr.floor, death.floor],
+    });
   }
 
-  // Paragraph 3: the way forward.
+  // The kill.
+  const bossEntry = moments.find((m) => m.kind === 'boss-entry');
+  const entry = entryHpPct(run, run.nodes.length - 1);
+  beats.push({
+    text: bossEntry
+      ? `Walked into ${killer ?? 'the final fight'} at ${entry !== undefined ? Math.round(entry * 100) : '?'}% — it had ${death.stats.damageTaken} damage waiting.`
+      : `${killer ?? 'The final fight'} ended it on floor ${death.floor} — ${death.stats.damageTaken} damage in the fight.`,
+    floors: [death.floor],
+  });
+
+  // The way forward — one line, only when a real pattern matches.
   const linkedLeak = leaks.find((l) => l.applicable && linkedLeakIds.includes(l.id) && l.drill);
   if (linkedLeak?.drill) {
-    paragraphs.push(
-      `This run fits a pattern in your wider history — "${linkedLeak.title}". The drill that targets it: ${linkedLeak.drill.body} One loss is one data point; the pattern is the thing worth practicing against.`,
-    );
-  } else {
-    paragraphs.push(
-      `One loss is one data point — nothing here says anything about you that a good next run won't overwrite. The habit worth keeping: glance at the floor where the damage arrived, and ask what would have made that floor cheaper.`,
-    );
+    beats.push({
+      text: `Fits your wider pattern — “${linkedLeak.title}”. Drill: ${linkedLeak.drill.body}`,
+      floors: [],
+    });
   }
 
-  return paragraphs;
+  return beats;
 }

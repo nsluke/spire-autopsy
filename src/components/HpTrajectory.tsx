@@ -4,9 +4,15 @@
  * guide, and every pivotal moment (spikes, boss entries, clutches, heals, the
  * death itself) marked where it happened.
  *
+ * Interactive: hovering the plot shows a per-floor tooltip (room, HP, damage);
+ * `highlightFloors` (driven by hovering the coach's read) rings those floors;
+ * `onFloorHover` reports the hovered floor back so the narrative can light up
+ * the sentences that mention it.
+ *
  * Every coordinate is computed from report.trajectory / report.moments —
  * nothing here is hardcoded data.
  */
+import { useCallback, useRef, useState, type PointerEvent } from 'react';
 import { displayName } from '../lib/idFormat';
 import type { AutopsyMoment, AutopsyReport } from '../lib/types';
 
@@ -50,8 +56,18 @@ interface DotMarker {
   bold: boolean;
 }
 
-export default function HpTrajectory({ report }: { report: AutopsyReport }) {
+interface Props {
+  report: AutopsyReport;
+  /** floors to ring (e.g. the ones a hovered narrative beat mentions) */
+  highlightFloors?: number[];
+  /** fires with the hovered floor, or null when the pointer leaves the plot */
+  onFloorHover?: (floor: number | null) => void;
+}
+
+export default function HpTrajectory({ report, highlightFloors, onFloorHover }: Props) {
   const traj = report.trajectory;
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
   if (traj.length === 0) {
     return (
       <p className="trajEmpty">
@@ -170,10 +186,59 @@ export default function HpTrajectory({ report }: { report: AutopsyReport }) {
   const hasLossDots = markers.some((mk) => mk.m.kind !== 'clutch');
   const hasClutch = markers.some((mk) => mk.m.kind === 'clutch');
 
+  // ---------- interaction ----------
+  const handlePointerMove = (e: PointerEvent<SVGSVGElement>) => {
+    const svg = svgRef.current;
+    if (!svg || n === 0) return;
+    const rect = svg.getBoundingClientRect();
+    const xView = ((e.clientX - rect.left) / rect.width) * W;
+    if (xView < L - 10 || xView > R + 10) {
+      setHoverIdx(null);
+      onFloorHover?.(null);
+      return;
+    }
+    const idx = n > 1 ? Math.round(((xView - L) / (R - L)) * (n - 1)) : 0;
+    const clamped = Math.min(n - 1, Math.max(0, idx));
+    setHoverIdx(clamped);
+    onFloorHover?.(pts[clamped].floor);
+  };
+  const handlePointerLeave = useCallback(() => {
+    setHoverIdx(null);
+    onFloorHover?.(null);
+  }, [onFloorHover]);
+
+  // Tooltip content for the hovered floor.
+  const hover = hoverIdx !== null ? traj[hoverIdx] : undefined;
+  const hoverPt = hoverIdx !== null ? pts[hoverIdx] : undefined;
+  const tipLines: string[] = hover
+    ? [
+        `Floor ${hover.floor} · ${hover.roomLabel ? pretty(hover.roomLabel) : hover.mapPointType.replace('_', ' ')}`,
+        `HP ${hover.hp}/${hover.maxHp} (${Math.round(toFrac(hover.hpPct) * 100)}%)`,
+        ...(hover.damageTaken > 0 ? [`−${hover.damageTaken} damage`] : []),
+        ...(hover.restChoice ? [`Campfire: ${hover.restChoice.toLowerCase()}`] : []),
+      ]
+    : [];
+  const tipW = Math.max(...tipLines.map((l) => l.length), 0) * 5.4 + 16;
+  const tipH = tipLines.length * 13 + 10;
+  const tipX = hoverPt ? (hoverPt.x + 12 + tipW > R ? hoverPt.x - 12 - tipW : hoverPt.x + 12) : 0;
+  const tipY = hoverPt ? Math.max(T, Math.min(B - tipH, hoverPt.y - tipH / 2)) : 0;
+
+  const highlightPts = (highlightFloors ?? [])
+    .map((f) => byFloor.get(f))
+    .filter((p): p is Pt => p !== undefined);
+
   return (
     <>
       <div className="trajWrap">
-        <svg className="trajChart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={aria}>
+        <svg
+          ref={svgRef}
+          className="trajChart"
+          viewBox={`0 0 ${W} ${H}`}
+          role="img"
+          aria-label={aria}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+        >
           {/* axes */}
           <line x1={L} y1={T} x2={L} y2={B} stroke="var(--line)" />
           <line x1={L} y1={B} x2={R} y2={B} stroke="var(--line)" />
@@ -241,6 +306,29 @@ export default function HpTrajectory({ report }: { report: AutopsyReport }) {
               </text>
             );
           })}
+
+          {/* narrative-driven highlight rings */}
+          {highlightPts.map((p) => (
+            <g key={`hl-${p.floor}`} className="trajHalo">
+              <line x1={p.x} y1={p.y + 8} x2={p.x} y2={B} stroke="var(--ember)" opacity={0.35} strokeDasharray="2 4" />
+              <circle cx={p.x} cy={p.y} r={9} fill="none" stroke="var(--ember)" strokeWidth={2} />
+              <circle cx={p.x} cy={p.y} r={3} fill="var(--ember)" />
+            </g>
+          ))}
+
+          {/* hover crosshair + tooltip */}
+          {hoverPt && hover && (
+            <g className="trajTip" pointerEvents="none">
+              <line x1={hoverPt.x} y1={T} x2={hoverPt.x} y2={B} stroke="var(--ink2)" opacity={0.25} />
+              <circle cx={hoverPt.x} cy={hoverPt.y} r={4.5} fill="var(--ember)" stroke="var(--ground)" strokeWidth={1.5} />
+              <rect x={tipX} y={tipY} width={tipW} height={tipH} rx={5} fill="var(--surface2)" stroke="var(--line)" />
+              {tipLines.map((l, i) => (
+                <text key={i} x={tipX + 8} y={tipY + 15 + i * 13} fontSize={9.5} fill={i === 0 ? 'var(--ink)' : 'var(--ink2)'} fontWeight={i === 0 ? 600 : undefined}>
+                  {l}
+                </text>
+              ))}
+            </g>
+          )}
         </svg>
       </div>
       <div className="trajLegend">

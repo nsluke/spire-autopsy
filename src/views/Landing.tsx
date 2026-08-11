@@ -227,26 +227,11 @@ export default function Landing({ onImport, onDemo, importState, hasData }: Land
       </div>
       <p className="pathNote">({info.note})</p>
 
-      <div className="steps">
-        <div className="step">
-          <b>1 · Point</b>
-          Find your save folder — we auto-detect your OS above and give you the exact path to paste.
-        </div>
-        <div className="step">
-          <b>2 · Parse</b>
-          Runs parse locally in a background thread — a few hundred files take about two seconds. Backups and corrupt
-          files are skipped, counted, and shown.
-        </div>
-        <div className="step">
-          <b>3 · Read</b>
-          Lifetime stats, your top three leaks, and an autopsy of your latest death.
-        </div>
-      </div>
-
-      <p className="privacyLine">
-        Proof, not promises: a strict CSP means the browser physically can’t send your data anywhere — the site works in
-        airplane mode, and the code is open source.
+      <p className="stepsLine num" aria-label="How it works">
+        <b>1</b> Point at the folder · <b>2</b> Two-second local parse · <b>3</b> Read your autopsy
       </p>
+
+      <p className="privacyLine">Open source · works in airplane mode · the browser can't phone home (strict CSP).</p>
     </div>
   );
 }

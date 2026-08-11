@@ -266,6 +266,16 @@ export interface AutopsyMoment {
   detail?: string;
 }
 
+/**
+ * One sentence of the coach's read, anchored to the floors it talks about.
+ * Hovering/focusing a beat highlights those floors on the trajectory chart;
+ * beats with no anchors (general advice) carry an empty floors list.
+ */
+export interface NarrativeBeat {
+  text: string;
+  floors: number[];
+}
+
 export interface AutopsyReport {
   runId: string;
   character: string;
@@ -279,8 +289,8 @@ export interface AutopsyReport {
   /** hp/maxHp after each node, in visit order */
   trajectory: { floor: number; act: number; hpPct: number; hp: number; maxHp: number; mapPointType: string; roomLabel?: string; restChoice?: string; damageTaken: number }[];
   moments: AutopsyMoment[];
-  /** Warm Coach narrative paragraphs */
-  narrative: string[];
+  /** Warm Coach read as floor-anchored beats (see NarrativeBeat) */
+  narrative: NarrativeBeat[];
   /** ids of aggregate leaks this run exhibits */
   linkedLeakIds: string[];
 }

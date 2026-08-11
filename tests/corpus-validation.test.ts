@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { completedRuns, deathNode, entryGold, entryHpPct, normalizeRun } from '../src/lib/normalize';
 import { computeStats } from '../src/lib/stats';
+import { climbSummary } from '../src/lib/climb';
 import { detectLeaks } from '../src/lib/leaks';
 import type { NormalizedRun, StatsSummary } from '../src/lib/types';
 
@@ -165,11 +166,16 @@ describe.skipIf(!HISTORY)('full-corpus validation against audited reference numb
     expect(byAsc.get(9)).toMatchObject({ runs: 9, wins: 0 });
   });
 
-  it('detects the three audited leaks, ranked, on this corpus', () => {
-    const leaks = detectLeaks(runs).filter((l) => l.tier === 'leak' && l.applicable && !l.healthy);
-    const ids = leaks.map((l) => l.id);
+  it('detects the audited leaks and frames the climb correctly on this corpus', () => {
+    const leaks = detectLeaks(runs);
+    const ids = leaks.filter((l) => l.tier === 'leak' && l.applicable && !l.healthy).map((l) => l.id);
     expect(ids).toContain('boss-entry-hp');
     expect(ids).toContain('removal-discipline');
-    expect(ids).toContain('ascension-pacing');
+    // Ascension is climb framing, never a leak: highest win was A8 (audited),
+    // so the target is A9 with 9 audited attempts and no suggestion to settle.
+    const climb = climbSummary(runs, leaks);
+    expect(climb.frontier).toBe(8);
+    expect(climb.target).toBe(9);
+    expect(climb.targetAttempts).toBe(9);
   });
 });

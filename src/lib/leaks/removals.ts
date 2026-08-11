@@ -92,8 +92,8 @@ export function removalDisciplineLeak(completed: NormalizedRun[]): LeakResult {
   const lossesLabel = `${losses.length} act-2+ ${losses.length === 1 ? 'loss' : 'losses'}`;
 
   const body = bothSolid
-    ? `In runs you win, the starter deck gets trimmed: your ${winsLabel} finished with ${winStarters} starter Strikes and Defends on average, against ${lossStarters} in your ${lossesLabel}, and you averaged ${winAct1} act-1 removals in wins vs ${lossAct1} in losses. Meanwhile you walked out of ${skipped.length} of ${richShops.length} shops (${pctLabel(skipRate)}) with 100+ gold and no removal purchased. Every Strike you cut makes the cards you actually drafted show up more often — the shop's removal service is usually the best card in the store.`
-    : `Among runs that reached act 2, your ${winsLabel} ended with ${winStarters} starter Strikes and Defends on average and your ${lossesLabel} with ${lossStarters}; act-1 removals averaged ${winAct1} in wins vs ${lossAct1} in losses. You also left ${skipped.length} of ${richShops.length} rich shop visits (100+ gold) without buying a removal. The win-side sample is small, so hold this loosely — but deck thinning is the habit most worth practicing on purpose.`;
+    ? `Your winning decks carry ${winStarters} starter cards into act 2; your losing decks carry ${lossStarters}. And you left ${pctLabel(skipRate)} of rich shop visits without buying the removal.`
+    : `Wins carry ${winStarters} starters into act 2 vs ${lossStarters} in losses, and ${skipped.length} of ${richShops.length} rich shops went removal-less. Small win-side sample — hold it loosely.`;
 
   const runReceipts = mostRecent(skipped, (s) => s.run.startTime + s.node.floor / 1000, 5).map((s) => ({
     runId: s.run.id,
@@ -118,8 +118,7 @@ export function removalDisciplineLeak(completed: NormalizedRun[]): LeakResult {
       `starter Strikes+Defends in final deck: ${winStarters} avg in wins vs ${lossStarters} avg in act-2+ losses`,
     ],
     runReceipts,
-    confoundNote:
-      'Runs that die in act 1 never get the chance to remove much — that is exactly why the win/loss comparison here only counts runs that reached act 2.',
+    confoundNote: 'Only act-2+ runs are compared — act-1 deaths never get the chance to remove much.',
     drill: {
       title: 'Buy the removal',
       body: 'For your next 5 runs: whenever a shop offers card removal for under 100 gold, buy it before anything else in the store.',

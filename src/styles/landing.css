@@ -244,3 +244,15 @@
   font-size: 0.78rem;
   color: var(--faint);
 }
+
+/* copy-diet replacements */
+.stepsLine {
+  margin-top: 22px;
+  color: var(--ink2);
+  font-size: 0.85rem;
+}
+.stepsLine b {
+  color: var(--ember);
+  font-family: var(--mono);
+  margin: 0 2px;
+}
