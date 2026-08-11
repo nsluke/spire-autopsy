@@ -242,3 +242,81 @@ a.receiptLine:hover { border-color: rgba(232, 163, 61, 0.5); }
 .climbArrow { color: var(--faint); font-size: 1.1rem; }
 .climbNote { color: var(--ink2); font-size: 0.82rem; flex: 1; min-width: 200px; }
 .climbNote b { color: var(--ink); }
+
+/* ---- drills: interactive assignment box ---- */
+.drillLive {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ember);
+  border: 1px solid rgba(232, 163, 61, 0.5);
+  border-radius: 4px;
+  padding: 2px 8px;
+  animation: drillGlow 2.4s ease-in-out infinite;
+}
+@keyframes drillGlow {
+  0%, 100% { border-color: rgba(232, 163, 61, 0.5); }
+  50% { border-color: rgba(232, 163, 61, 0.95); }
+}
+.drillBtn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ground);
+  background: var(--ember);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: center;
+}
+.drillBtn:hover { filter: brightness(1.1); }
+.drillBtn.quiet {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.drillBtn.quiet:hover { color: var(--ink); filter: none; }
+.drillBlocked { opacity: 0.55; }
+.blockedNote { color: var(--muted); font-style: normal; }
+.drillActive { display: block; }
+.drillGrades { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 8px; }
+.gradeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  color: var(--ink2);
+  text-decoration: none;
+}
+.gradeChip i { font-style: normal; font-weight: 700; }
+.grade-pass { border-color: rgba(78, 158, 71, 0.5); }
+.grade-pass i { color: var(--win); }
+.grade-fail { border-color: rgba(204, 90, 78, 0.5); }
+.grade-fail i { color: var(--loss); }
+.grade-na { opacity: 0.55; }
+.gradeEmpty { color: var(--faint); border-style: dashed; min-width: 26px; justify-content: center; }
+.drillWaiting { color: var(--muted); font-size: 0.78rem; }
+.drillMetaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink2);
+  font-size: 0.78rem;
+}
+.drillComplete { border-style: solid; border-color: rgba(78, 158, 71, 0.55); background: rgba(78, 158, 71, 0.07); }
+.drillComplete > b { color: var(--win); }
+
+/* ---- behavior trend sparkline ---- */
+.trendSpark { margin: 12px 0 4px; }
+.trendSpark svg { display: block; width: 100%; max-width: 420px; height: auto; }
+.trendLabel { font-size: 0.72rem; color: var(--muted); }
+.trendLabel b { color: var(--ink); }
+
+.coachTitle { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; }

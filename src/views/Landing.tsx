@@ -10,6 +10,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ImportProgress } from '../lib/import';
 import { fmtInt } from '../lib/idFormat';
+import { exportJournal, importJournal, JournalImportError } from '../lib/journal';
 import Dropzone from '../components/Dropzone';
 import '../styles/landing.css';
 
@@ -22,6 +23,9 @@ interface LandingProps {
 
 type OsKey = 'macos' | 'windows' | 'linux';
 
+// All three verified against real installs / user-pasted paths (Aug 2026).
+// Steam Deck runs the native Linux build by default → same path as Linux;
+// forced-Proton installs live under compatdata/2868840/pfx/.../AppData instead.
 const OS_PATHS: Record<OsKey, { label: string; path: string; note: string }> = {
   macos: {
     label: 'macOS',
@@ -30,13 +34,13 @@ const OS_PATHS: Record<OsKey, { label: string; path: string; note: string }> = {
   },
   windows: {
     label: 'Windows',
-    path: '%USERPROFILE%\\AppData\\Local\\SlayTheSpire2\\steam\\<your-id>\\profile1\\saves\\history',
-    note: 'early access — path may vary; tell us if yours differs',
+    path: '%APPDATA%\\SlayTheSpire2\\steam\\<your-id>\\profile1\\saves\\history',
+    note: 'confirmed — paste into the Explorer address bar; %APPDATA% is the Roaming folder',
   },
   linux: {
     label: 'Linux / Steam Deck',
-    path: '~/.steam/steam/steamapps/compatdata/<app-id>/pfx/drive_c/users/steamuser/AppData/Local/SlayTheSpire2/steam/<your-id>/profile1/saves/history',
-    note: 'early access — Proton prefix path may vary; tell us if yours differs',
+    path: '~/.local/share/SlayTheSpire2/steam/<your-id>/profile1/saves/history',
+    note: 'confirmed for the native build (Deck default); Proton installs live under compatdata/2868840',
   },
 };
 
@@ -113,6 +117,52 @@ function ImportPanel({ p }: { p: ImportProgress }) {
         </div>
       )}
     </section>
+  );
+}
+
+/**
+ * Journal backup row: export downloads one JSON of every run + coach state;
+ * import restores it (idempotent) and reloads so all views recompute.
+ */
+function JournalRow({ hasData }: { hasData: boolean }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [state, setState] = useState<'idle' | 'importing' | 'error'>('idle');
+  const [error, setError] = useState('');
+
+  async function handleImport(file: File | undefined) {
+    if (!file) return;
+    setState('importing');
+    try {
+      await importJournal(file, () => undefined);
+      window.location.hash = '#/';
+      window.location.reload(); // full recompute from the restored journal
+    } catch (e) {
+      setError(e instanceof JournalImportError ? e.message : 'Import failed — is this a Spire Journal file?');
+      setState('error');
+    }
+  }
+
+  return (
+    <div className="journalRow">
+      <span className="journalLabel">Spire Journal</span>
+      {hasData && (
+        <button type="button" className="pill" onClick={() => void exportJournal()}>
+          Export backup
+        </button>
+      )}
+      <button type="button" className="pill" onClick={() => fileRef.current?.click()} disabled={state === 'importing'}>
+        {state === 'importing' ? 'Restoring…' : 'Import backup'}
+      </button>
+      <input
+        ref={fileRef}
+        type="file"
+        accept="application/json"
+        hidden
+        onChange={(e) => void handleImport(e.target.files?.[0])}
+      />
+      {state === 'error' && <span className="journalError">{error}</span>}
+      <span className="journalHint">runs + coach state, one file — your move-machines / backup story</span>
+    </div>
   );
 }
 
@@ -230,6 +280,8 @@ export default function Landing({ onImport, onDemo, importState, hasData }: Land
       <p className="stepsLine num" aria-label="How it works">
         <b>1</b> Point at the folder · <b>2</b> Two-second local parse · <b>3</b> Read your autopsy
       </p>
+
+      <JournalRow hasData={hasData} />
 
       <p className="privacyLine">Open source · works in airplane mode · the browser can't phone home (strict CSP).</p>
     </div>

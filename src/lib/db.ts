@@ -103,6 +103,13 @@ export async function migrateIfNeeded(): Promise<void> {
   await tx.done;
 }
 
+/** All raw file rows — the journal export's payload. */
+export async function exportRaws(): Promise<{ fileName: string; text: string }[]> {
+  const d = await db();
+  const raws = (await d.getAll('raw')) as RawRow[];
+  return raws.map((r) => ({ fileName: r.fileName, text: r.text }));
+}
+
 export async function clearAllData(): Promise<void> {
   const d = await db();
   const tx = d.transaction(['raw', 'summary', 'meta'], 'readwrite');

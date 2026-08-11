@@ -11,16 +11,26 @@
 
 const ENCOUNTER_SUFFIX = /_(WEAK|NORMAL|ELITE|BOSS|EVENT_ENCOUNTER)$/;
 
+/** Group encounters use plural names; the sprite is filed under the monster's singular id. */
+const ALIASES: Record<string, string> = {
+  BOWLBUGS: 'BOWLBUG_ROCK',
+  CORPSE_SLUGS: 'CORPSE_SLUG',
+  EXOSKELETONS: 'EXOSKELETON',
+  MYTES: 'MYTE',
+  NIBBITS: 'NIBBIT',
+  SCROLLS_OF_BITING: 'SCROLL_OF_BITING',
+  TOADPOLES: 'TOADPOLE',
+  TWO_TAILED_RATS: 'TWO_TAILED_RAT',
+};
+
 /** Art path for an ENCOUNTER.* or MONSTER.* id (undefined for non-entity ids). */
 export function monsterArt(id: string | undefined): string | undefined {
   if (!id) return undefined;
-  if (id.startsWith('ENCOUNTER.')) {
-    return `art/monsters/${id.slice('ENCOUNTER.'.length).replace(ENCOUNTER_SUFFIX, '')}.png`;
-  }
-  if (id.startsWith('MONSTER.')) {
-    return `art/monsters/${id.slice('MONSTER.'.length)}.png`;
-  }
-  return undefined;
+  let base: string | undefined;
+  if (id.startsWith('ENCOUNTER.')) base = id.slice('ENCOUNTER.'.length).replace(ENCOUNTER_SUFFIX, '');
+  else if (id.startsWith('MONSTER.')) base = id.slice('MONSTER.'.length);
+  if (!base) return undefined;
+  return `art/monsters/${ALIASES[base] ?? base}.png`;
 }
 
 /** Art path for a CHARACTER.* id. */

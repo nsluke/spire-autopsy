@@ -9,6 +9,7 @@
 import { useMemo, useState } from 'react';
 import { computeStats } from '../lib/stats';
 import { fmtInt, shortDate } from '../lib/idFormat';
+import { downloadLifetimeCard } from '../lib/shareCard';
 import type { NormalizedRun, StatsSummary } from '../lib/types';
 import StatTiles from '../components/StatTiles';
 import CharacterBars from '../components/CharacterBars';
@@ -67,6 +68,7 @@ interface DashboardProps {
 
 export default function Dashboard({ stats, runs }: DashboardProps) {
   const [filter, setFilter] = useState<Filter>('all');
+  const [sharing, setSharing] = useState(false);
 
   const chrono = useMemo(() => [...runs].sort((a, b) => a.startTime - b.startTime), [runs]);
   const latestBuild = chrono.length ? chrono[chrono.length - 1].buildId : '';
@@ -95,6 +97,18 @@ export default function Dashboard({ stats, runs }: DashboardProps) {
           {FILTER_LABELS[f]}
         </button>
       ))}
+      <button
+        type="button"
+        className="pill sharePill"
+        disabled={sharing}
+        onClick={() => {
+          setSharing(true);
+          void downloadLifetimeCard(view).finally(() => setSharing(false));
+        }}
+        title="Download a 1200×630 PNG of this dashboard's headline stats"
+      >
+        {sharing ? 'Rendering…' : '↓ Share card'}
+      </button>
     </div>
   );
 

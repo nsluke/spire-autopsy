@@ -256,3 +256,26 @@
   font-family: var(--mono);
   margin: 0 2px;
 }
+
+/* journal backup row */
+.journalRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 18px;
+}
+.journalLabel {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.journalRow .pill { cursor: pointer; }
+.journalHint { flex-basis: 100%; text-align: center; color: var(--faint); font-size: 0.72rem; }
+.journalError { color: var(--loss); font-size: 0.78rem; }
+
+.landingTitle { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; }
+.landingBrand { font-family: var(--display); font-weight: 700; }

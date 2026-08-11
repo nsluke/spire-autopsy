@@ -15,14 +15,16 @@ import { useEffect, useMemo, useState } from 'react';
 import { detectLeaks } from '../lib/leaks';
 import { climbSummary } from '../lib/climb';
 import { getMeta, setMeta } from '../lib/db';
+import { behaviorTrend, computeDrillProgress, DRILLS, type ActiveDrill } from '../lib/drills';
 import { fmtInt } from '../lib/idFormat';
 import { completedRuns } from '../lib/normalize';
 import type { LeakResult, NormalizedRun } from '../lib/types';
-import LeakCard from '../components/LeakCard';
+import LeakCard, { type DrillSlot } from '../components/LeakCard';
 import '../styles/coach.css';
 
 const MAX_LEAK_CARDS = 3;
 const DISMISSED_KEY = 'dismissedLeaks';
+const DRILL_KEY = 'activeDrill';
 
 /** One-line rendering of an observation body: its first sentence. */
 function firstSentence(text: string): string {
@@ -34,11 +36,15 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   // null until the persisted veto list has loaded — avoids a flash where a
   // demoted leak briefly renders as a card before dropping into the drawer.
   const [dismissed, setDismissed] = useState<string[] | null>(null);
+  const [activeDrill, setActiveDrill] = useState<ActiveDrill | null | undefined>(undefined);
 
   useEffect(() => {
     let alive = true;
     void getMeta<string[]>(DISMISSED_KEY).then((ids) => {
       if (alive) setDismissed(ids ?? []);
+    });
+    void getMeta<ActiveDrill>(DRILL_KEY).then((d) => {
+      if (alive) setActiveDrill(d ?? null);
     });
     return () => {
       alive = false;
@@ -49,7 +55,7 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   const completedCount = useMemo(() => completedRuns(runs).length, [runs]);
   const climb = useMemo(() => climbSummary(runs, leaks), [runs, leaks]);
 
-  if (dismissed === null) return null; // IndexedDB read resolves in milliseconds
+  if (dismissed === null || activeDrill === undefined) return null; // IndexedDB reads resolve in milliseconds
 
   const dismissedSet = new Set(dismissed);
   const applicable = leaks.filter((l) => l.applicable);
@@ -62,6 +68,12 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   const rankedLeaks = active
     .filter((l) => l.tier === 'leak')
     .sort((a, b) => b.expectedWinsLost - a.expectedWinsLost);
+  // The active drill's leak is pinned: a new pattern can't displace the thing
+  // the player is mid-way through practicing.
+  if (activeDrill) {
+    const i = rankedLeaks.findIndex((l) => l.id === activeDrill.leakId);
+    if (i > 0) rankedLeaks.unshift(rankedLeaks.splice(i, 1)[0]);
+  }
   const cards = rankedLeaks.slice(0, MAX_LEAK_CARDS);
   const drawerItems = [
     ...rankedLeaks.slice(MAX_LEAK_CARDS),
@@ -75,6 +87,24 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   };
   const demote = (id: string) => persist([...dismissed.filter((d) => d !== id), id]);
   const restore = (id: string) => persist(dismissed.filter((d) => d !== id));
+
+  const drillProgress = activeDrill ? computeDrillProgress(activeDrill, runs) : undefined;
+  const startDrill = (leakId: string) => {
+    if (!DRILLS[leakId]) return;
+    const drill: ActiveDrill = { leakId, acceptedAt: Date.now(), targetRuns: DRILLS[leakId].targetRuns };
+    setActiveDrill(drill);
+    void setMeta(DRILL_KEY, drill);
+  };
+  const clearDrill = () => {
+    setActiveDrill(null);
+    void setMeta(DRILL_KEY, null);
+  };
+  const drillSlotFor = (leak: LeakResult): DrillSlot => {
+    if (activeDrill?.leakId === leak.id && drillProgress) return { kind: 'active', progress: drillProgress };
+    if (!DRILLS[leak.id]) return { kind: 'none' };
+    if (activeDrill) return { kind: 'blocked', activeTitle: DRILLS[activeDrill.leakId]?.title ?? 'your active drill' };
+    return { kind: 'available' };
+  };
 
   return (
     <div className="coachView">
@@ -137,7 +167,18 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
       )}
 
       {cards.map((leak, i) => (
-        <LeakCard key={leak.id} leak={leak} rank={i + 1} defaultOpen={i === 0} onDemote={demote} />
+        <LeakCard
+          key={leak.id}
+          leak={leak}
+          rank={i + 1}
+          defaultOpen={i === 0}
+          onDemote={demote}
+          drillSlot={drillSlotFor(leak)}
+          trend={behaviorTrend(leak.id, runs)}
+          drillAcceptedAt={activeDrill?.leakId === leak.id ? activeDrill.acceptedAt : undefined}
+          onStartDrill={startDrill}
+          onClearDrill={clearDrill}
+        />
       ))}
 
       {cards.length === 0 && (

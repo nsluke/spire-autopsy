@@ -1,0 +1,10 @@
+{
+  "name": "Spire Autopsy",
+  "short_name": "Autopsy",
+  "description": "Your deaths have a paper trail. A zero-backend coach for Slay the Spire 2.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#131010",
+  "theme_color": "#131010",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
