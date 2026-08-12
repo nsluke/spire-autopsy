@@ -5,9 +5,13 @@
  * Only *.run files are read; *.run.backup and everything else is filtered by
  * NAME before any bytes are touched.
  */
-import { knownRunIds, storeRuns } from './db';
+import { knownRunIds, setMeta, storeRuns } from './db';
+import { isProgressFile, LedgerParseError, parseProgressSave } from './ledger';
 import { runIdFromFileName } from './normalize';
 import type { ParseResponse, ParsedRow } from '../worker/parser.worker';
+
+/** IndexedDB meta key holding the parsed progress.save Ledger. */
+export const LEDGER_META_KEY = 'gameLedger';
 
 export interface ImportProgress {
   phase: 'reading' | 'parsing' | 'storing' | 'done';
@@ -15,6 +19,8 @@ export interface ImportProgress {
   total: number;
   added: number;
   skippedKnown: number;
+  /** a progress.save was found and its ledger stored */
+  ledgerCaptured: boolean;
   failed: { fileName: string; error: string }[];
 }
 
@@ -54,11 +60,11 @@ export async function filesFromDataTransfer(dt: DataTransfer): Promise<File[]> {
 
 export const supportsDirectoryPicker = typeof window !== 'undefined' && 'showDirectoryPicker' in window;
 
-/** Collect *.run files from a directory handle (File System Access API). */
+/** Collect *.run files (plus progress.save) from a directory handle (File System Access API). */
 export async function filesFromDirectoryHandle(handle: FileSystemDirectoryHandle): Promise<File[]> {
   const out: File[] = [];
   for await (const [name, child] of handle as unknown as AsyncIterable<[string, FileSystemHandle]>) {
-    if (child.kind === 'file' && isRunFile(name)) {
+    if (child.kind === 'file' && (isRunFile(name) || isProgressFile(name))) {
       out.push(await (child as FileSystemFileHandle).getFile());
     }
   }
@@ -85,9 +91,26 @@ export async function importFiles(
     total: fresh.length,
     added: 0,
     skippedKnown,
+    ledgerCaptured: false,
     failed: [],
   };
   onProgress({ ...progress });
+
+  // progress.save rides along with any drop (or arrives alone): parse and
+  // store the game's own ledger. A newer drop replaces the stored one.
+  const progressFile = allFiles.find((f) => isProgressFile(f.name));
+  if (progressFile) {
+    try {
+      await setMeta(LEDGER_META_KEY, parseProgressSave(await progressFile.text()));
+      progress.ledgerCaptured = true;
+    } catch (e) {
+      progress.failed.push({
+        fileName: progressFile.name,
+        error: e instanceof LedgerParseError ? e.message : 'unreadable',
+      });
+    }
+    onProgress({ ...progress });
+  }
   if (fresh.length === 0) {
     progress.phase = 'done';
     onProgress({ ...progress });

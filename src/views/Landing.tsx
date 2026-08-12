@@ -8,11 +8,16 @@
  * listed non-fatally.
  */
 import { useEffect, useRef, useState } from 'react';
-import type { ImportProgress } from '../lib/import';
+import { getMeta } from '../lib/db';
+import { LEDGER_META_KEY, type ImportProgress } from '../lib/import';
 import { fmtInt } from '../lib/idFormat';
 import { exportJournal, importJournal, JournalImportError } from '../lib/journal';
+import type { Ledger } from '../lib/ledger';
 import Dropzone from '../components/Dropzone';
+import GameLedger from '../components/GameLedger';
 import '../styles/landing.css';
+
+export const ISSUES_URL = 'https://github.com/nsluke/spire-autopsy/issues/new/choose';
 
 interface LandingProps {
   onImport: (files: File[]) => Promise<void>;
@@ -96,7 +101,8 @@ function ImportPanel({ p }: { p: ImportProgress }) {
               <b className="num">{fmtInt(p.skippedKnown)}</b> already imported — skipped
             </li>
           )}
-          {p.added === 0 && p.skippedKnown === 0 && p.failed.length === 0 && (
+          {p.ledgerCaptured && <li>game ledger captured from progress.save</li>}
+          {p.added === 0 && p.skippedKnown === 0 && p.failed.length === 0 && !p.ledgerCaptured && (
             <li>no .run files found in what you dropped — check you picked the history folder itself</li>
           )}
         </ul>
@@ -114,6 +120,13 @@ function ImportPanel({ p }: { p: ImportProgress }) {
               </li>
             ))}
           </ul>
+          <p className="failIntro">
+            Looks like a bug on our side?{' '}
+            <a href={ISSUES_URL} target="_blank" rel="noreferrer">
+              Open an issue
+            </a>{' '}
+            with the file’s schema_version — it helps us keep up with game patches.
+          </p>
         </div>
       )}
     </section>
@@ -169,9 +182,22 @@ function JournalRow({ hasData }: { hasData: boolean }) {
 export default function Landing({ onImport, onDemo, importState, hasData }: LandingProps) {
   const [os, setOs] = useState<OsKey>(() => detectOs());
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [ledger, setLedger] = useState<Ledger | undefined>(undefined);
   const copyTimer = useRef<number | undefined>(undefined);
   const pathRef = useRef<HTMLElement>(null);
   useEffect(() => () => window.clearTimeout(copyTimer.current), []);
+
+  // The quick-look ledger (progress.save) — refreshed whenever an import finishes.
+  const importDone = importState?.phase === 'done';
+  useEffect(() => {
+    let alive = true;
+    void getMeta<Ledger>(LEDGER_META_KEY).then((l) => {
+      if (alive) setLedger(l);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [importDone]);
 
   const busy = importState !== null && importState.phase !== 'done';
   const info = OS_PATHS[os];
@@ -277,13 +303,29 @@ export default function Landing({ onImport, onDemo, importState, hasData }: Land
       </div>
       <p className="pathNote">({info.note})</p>
 
+      <p className="pathNote">
+        In a hurry? Drop just <span className="inlineMono">progress.save</span> (one folder up) for a quick look at
+        the game’s own ledger — the coach unlocks once the run files arrive.
+      </p>
+
       <p className="stepsLine num" aria-label="How it works">
         <b>1</b> Point at the folder · <b>2</b> Two-second local parse · <b>3</b> Read your autopsy
       </p>
 
+      {!hasData && ledger && (
+        <div className="panel">
+          <GameLedger ledger={ledger} />
+        </div>
+      )}
+
       <JournalRow hasData={hasData} />
 
-      <p className="privacyLine">Open source · works in airplane mode · the browser can't phone home (strict CSP).</p>
+      <p className="privacyLine">
+        Open source · works in airplane mode · the browser can't phone home (strict CSP) ·{' '}
+        <a href={ISSUES_URL} target="_blank" rel="noreferrer">
+          report a problem
+        </a>
+      </p>
     </div>
   );
 }

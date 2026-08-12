@@ -1,0 +1,36 @@
+/* ---- The game's own ledger (progress.save quick look) ---- */
+.ledgerNote {
+  color: var(--ink2);
+  font-size: 0.82rem;
+  margin: 6px 0 10px;
+}
+.ledgerChars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+.ledgerChar {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.ledgerName {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.ledgerWall {
+  color: var(--ember);
+  font-size: 0.75rem;
+}
+.ledgerRecord {
+  font-size: 0.8rem;
+}
+.ledgerMeta {
+  color: var(--muted);
+  font-size: 0.72rem;
+}

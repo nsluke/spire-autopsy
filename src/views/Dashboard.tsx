@@ -6,11 +6,15 @@
  * Filtered figures are recomputed with the same pure computeStats used by
  * the app shell, so every number on screen always comes from the runs.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { getMeta } from '../lib/db';
+import { LEDGER_META_KEY } from '../lib/import';
+import type { Ledger } from '../lib/ledger';
 import { computeStats } from '../lib/stats';
 import { fmtInt, shortDate } from '../lib/idFormat';
 import { downloadLifetimeCard } from '../lib/shareCard';
 import type { NormalizedRun, StatsSummary } from '../lib/types';
+import GameLedger from '../components/GameLedger';
 import StatTiles from '../components/StatTiles';
 import CharacterBars from '../components/CharacterBars';
 import TrendSparks from '../components/TrendSparks';
@@ -69,6 +73,17 @@ interface DashboardProps {
 export default function Dashboard({ stats, runs }: DashboardProps) {
   const [filter, setFilter] = useState<Filter>('all');
   const [sharing, setSharing] = useState(false);
+  const [ledger, setLedger] = useState<Ledger | undefined>(undefined);
+
+  useEffect(() => {
+    let alive = true;
+    void getMeta<Ledger>(LEDGER_META_KEY).then((l) => {
+      if (alive) setLedger(l);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const chrono = useMemo(() => [...runs].sort((a, b) => a.startTime - b.startTime), [runs]);
   const latestBuild = chrono.length ? chrono[chrono.length - 1].buildId : '';
@@ -160,6 +175,12 @@ export default function Dashboard({ stats, runs }: DashboardProps) {
           <DeathsByAct deathsByAct={view.deathsByAct} />
         </div>
       </div>
+
+      {ledger && (
+        <div className="panel">
+          <GameLedger ledger={ledger} />
+        </div>
+      )}
     </div>
   );
 }

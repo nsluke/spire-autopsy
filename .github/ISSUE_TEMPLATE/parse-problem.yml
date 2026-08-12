@@ -1,0 +1,30 @@
+name: Parse problem / wrong numbers
+description: A run file failed to import, or a stat looks wrong for your history
+labels: [parser]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks — reports like this are how we keep up with game patches.
+        Nothing here uploads automatically; only what you paste below is shared.
+  - type: input
+    id: schema-version
+    attributes:
+      label: schema_version
+      description: Open the .run file in a text editor and copy the "schema_version" value (and "build_id" if handy).
+      placeholder: "e.g. schema_version 9, build v0.107.1"
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect vs what the site showed? Screenshots welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: file
+    attributes:
+      label: The file (optional)
+      description: |
+        If you're comfortable, paste the failing .run file's JSON (it contains your run choices and seed — no personal info).
+        For progress.save problems, paste just the top-level fields.
+      render: json

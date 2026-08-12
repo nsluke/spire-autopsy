@@ -1,0 +1,209 @@
+{
+ "schema_version": 21,
+ "character_stats": [
+  {
+   "best_win_streak": 1,
+   "current_streak": 0,
+   "fastest_win_time": 2287,
+   "id": "CHARACTER.IRONCLAD",
+   "max_ascension": 7,
+   "playtime": 198070,
+   "preferred_ascension": 7,
+   "total_losses": 42,
+   "total_wins": 7
+  },
+  {
+   "best_win_streak": 0,
+   "current_streak": 0,
+   "fastest_win_time": -1,
+   "id": "CHARACTER.REGENT",
+   "max_ascension": 0,
+   "playtime": 151457,
+   "preferred_ascension": 0,
+   "total_losses": 22,
+   "total_wins": 0
+  },
+  {
+   "best_win_streak": 0,
+   "current_streak": 0,
+   "fastest_win_time": -1,
+   "id": "CHARACTER.RANDOM_CHARACTER",
+   "max_ascension": 0,
+   "playtime": 0,
+   "preferred_ascension": 9,
+   "total_losses": 0,
+   "total_wins": 0
+  }
+ ],
+ "encounter_stats": [
+  {
+   "encounter_id": "ENCOUNTER.KNOWLEDGE_DEMON_BOSS",
+   "fight_stats": [
+    {
+     "character": "CHARACTER.SILENT",
+     "losses": 1,
+     "wins": 5
+    },
+    {
+     "character": "CHARACTER.IRONCLAD",
+     "losses": 1,
+     "wins": 6
+    },
+    {
+     "character": "CHARACTER.NECROBINDER",
+     "losses": 4,
+     "wins": 0
+    },
+    {
+     "character": "CHARACTER.DEFECT",
+     "losses": 4,
+     "wins": 3
+    },
+    {
+     "character": "CHARACTER.REGENT",
+     "losses": 1,
+     "wins": 2
+    }
+   ]
+  },
+  {
+   "encounter_id": "ENCOUNTER.BYGONE_EFFIGY_ELITE",
+   "fight_stats": [
+    {
+     "character": "CHARACTER.IRONCLAD",
+     "losses": 2,
+     "wins": 10
+    },
+    {
+     "character": "CHARACTER.SILENT",
+     "losses": 4,
+     "wins": 18
+    },
+    {
+     "character": "CHARACTER.REGENT",
+     "losses": 0,
+     "wins": 7
+    },
+    {
+     "character": "CHARACTER.NECROBINDER",
+     "losses": 3,
+     "wins": 8
+    },
+    {
+     "character": "CHARACTER.DEFECT",
+     "losses": 1,
+     "wins": 22
+    }
+   ]
+  },
+  {
+   "encounter_id": "ENCOUNTER.INFESTED_PRISMS_ELITE",
+   "fight_stats": [
+    {
+     "character": "CHARACTER.SILENT",
+     "losses": 3,
+     "wins": 19
+    },
+    {
+     "character": "CHARACTER.NECROBINDER",
+     "losses": 3,
+     "wins": 9
+    },
+    {
+     "character": "CHARACTER.IRONCLAD",
+     "losses": 1,
+     "wins": 18
+    },
+    {
+     "character": "CHARACTER.DEFECT",
+     "losses": 1,
+     "wins": 23
+    },
+    {
+     "character": "CHARACTER.REGENT",
+     "losses": 2,
+     "wins": 5
+    }
+   ]
+  },
+  {
+   "encounter_id": "ENCOUNTER.THE_KIN_BOSS",
+   "fight_stats": [
+    {
+     "character": "CHARACTER.SILENT",
+     "losses": 6,
+     "wins": 6
+    },
+    {
+     "character": "CHARACTER.REGENT",
+     "losses": 2,
+     "wins": 2
+    },
+    {
+     "character": "CHARACTER.NECROBINDER",
+     "losses": 1,
+     "wins": 2
+    },
+    {
+     "character": "CHARACTER.DEFECT",
+     "losses": 0,
+     "wins": 9
+    },
+    {
+     "character": "CHARACTER.IRONCLAD",
+     "losses": 1,
+     "wins": 3
+    }
+   ]
+  }
+ ],
+ "card_stats": [
+  {
+   "id": "CARD.SHRUG_IT_OFF",
+   "times_lost": 22,
+   "times_picked": 33,
+   "times_skipped": 28,
+   "times_won": 6
+  },
+  {
+   "id": "CARD.BACKFLIP",
+   "times_lost": 17,
+   "times_picked": 33,
+   "times_skipped": 15,
+   "times_won": 8
+  },
+  {
+   "id": "CARD.CHARGE_BATTERY",
+   "times_lost": 32,
+   "times_picked": 33,
+   "times_skipped": 51,
+   "times_won": 5
+  },
+  {
+   "id": "CARD.NEGATIVE_PULSE",
+   "times_lost": 20,
+   "times_picked": 32,
+   "times_skipped": 9,
+   "times_won": 4
+  },
+  {
+   "id": "CARD.LIGHTNING_ROD",
+   "times_lost": 27,
+   "times_picked": 31,
+   "times_skipped": 48,
+   "times_won": 4
+  },
+  {
+   "id": "CARD.BOOST_AWAY",
+   "times_lost": 25,
+   "times_picked": 31,
+   "times_skipped": 56,
+   "times_won": 6
+  }
+ ],
+ "floors_climbed": 6580,
+ "total_playtime": 927865,
+ "unknown_future_field": {
+  "the": "parser must tolerate this"
+ }
+}
