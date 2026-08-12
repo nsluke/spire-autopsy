@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Idea or feedback
-    url: https://github.com/nsluke/spire-autopsy/discussions
+    url: https://github.com/nsluke/spire-autopsy/issues/new
     about: Coaching ideas, feature requests, or anything that isn't a bug.
