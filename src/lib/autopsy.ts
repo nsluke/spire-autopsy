@@ -216,6 +216,7 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
 
   // Depth context from the rest of the history (every completed run except this one).
   const others = completedRuns(allRuns).filter((r) => r.id !== run.id);
+  const sameCharacter = others.filter((r) => r.player.character === run.player.character);
   const medianFloors = Math.round(medianOf(others.map((r) => r.nodes.length)));
   const depthNote =
     others.length >= 5 && medianFloors > 0 && run.nodes.length > medianFloors
@@ -233,9 +234,24 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
       text: `A win with ${who}: ${run.nodes.length} floors, out at ${finalNode.stats.hp}/${finalNode.stats.maxHp} HP.`,
       floors: [finalNode.floor],
     });
+    // First win at (or above) this ascension with this character = the wall
+    // fell. Not celebrated when the character had already been playing higher
+    // — a win below the frontier of play isn't a breakthrough. Ties on
+    // startTime break by id so exactly one run can be "first".
+    const before = (r: NormalizedRun) =>
+      r.startTime < run.startTime || (r.startTime === run.startTime && r.id < run.id);
+    const breakthrough =
+      !sameCharacter.some((r) => before(r) && r.win && r.ascension >= run.ascension) &&
+      !sameCharacter.some((r) => before(r) && r.ascension > run.ascension);
+    if (breakthrough) {
+      beats.push({
+        text: `Breakthrough — ${characterName(run.player.character)}'s first win at A${run.ascension}. The wall came down.`,
+        floors: [],
+      });
+    }
     if (clutch) {
       beats.push({
-        text: `Tightest squeeze: floor ${clutch.floor} — ${clutch.label.toLowerCase()}.`,
+        text: `Tightest squeeze: floor ${clutch.floor} — ${clutch.label.replace(/^Clutch: /, '')}.`,
         floors: [clutch.floor],
       });
     }
@@ -256,6 +272,28 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
       floors: [],
     });
     return beats;
+  }
+
+  // Wall context: a loss at this character's CURRENT wall — their highest
+  // level played and never beaten — is a siege attempt, and the autopsy
+  // numbers it. Push-through framing, never "play lower": the beat is
+  // skipped once the level is beaten OR once the character has moved higher,
+  // so an outgrown level is never presented as an open objective.
+  const highestPlayed = Math.max(run.ascension, ...sameCharacter.map((r) => r.ascension));
+  if (
+    run.ascension >= highestPlayed &&
+    !sameCharacter.some((r) => r.win && r.ascension >= run.ascension)
+  ) {
+    const attemptNo =
+      sameCharacter.filter(
+        (r) =>
+          r.ascension === run.ascension &&
+          (r.startTime < run.startTime || (r.startTime === run.startTime && r.id < run.id)),
+      ).length + 1;
+    beats.push({
+      text: `A${run.ascension} wall attempt #${attemptNo} with ${characterName(run.player.character)} — the level is still standing.`,
+      floors: [],
+    });
   }
 
   // The wound.

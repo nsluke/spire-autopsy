@@ -217,7 +217,7 @@ a.receiptLine:hover { border-color: rgba(232, 163, 61, 0.5); }
 }
 .restoreBtn:hover { color: var(--ember); border-color: rgba(232, 163, 61, 0.5); }
 
-/* ---- The Climb strip (ascension progress — frames the target, never "settle") ---- */
+/* ---- The Wall (per-character ascension target — frames the climb, never "settle") ---- */
 .climbStrip {
   display: flex;
   align-items: center;
@@ -229,6 +229,29 @@ a.receiptLine:hover { border-color: rgba(232, 163, 61, 0.5); }
   background: linear-gradient(90deg, var(--ember-dim), transparent 70%);
   border-left: 3px solid var(--ember);
 }
+.wallHead { display: flex; align-items: center; gap: 14px; }
+.wallArt {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.wallChips {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wallChip {
+  font-size: 0.72rem;
+  color: var(--ink2);
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 999px;
+  padding: 2px 10px;
+  cursor: default;
+}
+.wallChip .wallTries { color: var(--muted); }
 .climbCell { display: flex; flex-direction: column; }
 .climbK {
   font-family: var(--mono);

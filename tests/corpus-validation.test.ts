@@ -175,16 +175,33 @@ describe.skipIf(!HISTORY)('full-corpus validation against audited reference numb
     expect(byAsc.get(9)).toMatchObject({ runs: 9, wins: 0 });
   });
 
-  it('detects the audited leaks and frames the climb correctly on this corpus', () => {
+  it('detects the audited leaks and frames the per-character walls correctly', () => {
     const leaks = detectLeaks(runs);
     const ids = leaks.filter((l) => l.tier === 'leak' && l.applicable && !l.healthy).map((l) => l.id);
     expect(ids).toContain('boss-entry-hp');
     expect(ids).toContain('removal-discipline');
-    // Ascension is climb framing, never a leak: highest win was A8 (audited),
-    // so the target is A9 with 9 audited attempts and no suggestion to settle.
+
+    // Ascension is climb framing, never a leak. Audited per-character walls
+    // (independently recomputed from raw files, acts entered via
+    // map_point_history):
     const climb = climbSummary(runs, leaks);
-    expect(climb.frontier).toBe(8);
-    expect(climb.target).toBe(9);
-    expect(climb.targetAttempts).toBe(9);
+    const walls = Object.fromEntries(climb.walls.map((w) => [w.character, w]));
+    expect(walls['CHARACTER.SILENT']).toMatchObject({ frontier: 8, target: 9, attempts: 9, deepestAct: 3 });
+    expect(walls['CHARACTER.SILENT'].deathsByAct).toEqual([3, 4, 2]);
+    expect(walls['CHARACTER.IRONCLAD']).toMatchObject({ frontier: 6, target: 7, attempts: 6 });
+    expect(walls['CHARACTER.IRONCLAD'].deathsByAct).toEqual([1, 2, 3]);
+    expect(walls['CHARACTER.IRONCLAD'].topKiller).toEqual({ encounter: 'ENCOUNTER.TEST_SUBJECT_BOSS', deaths: 2 });
+    expect(walls['CHARACTER.DEFECT']).toMatchObject({ frontier: 6, target: 7, attempts: 4 });
+    expect(walls['CHARACTER.DEFECT'].deathsByAct).toEqual([0, 3, 1]);
+    expect(walls['CHARACTER.NECROBINDER']).toMatchObject({ frontier: 3, target: 4, attempts: 2 });
+    expect(walls['CHARACTER.REGENT']).toMatchObject({ frontier: 0, target: 1, attempts: 0 });
+    // The active wall is the most recently played character (the cutoff run is a Defect A7 loss).
+    expect(climb.active?.character).toBe('CHARACTER.DEFECT');
+    // Never-settle invariant across the real corpus: no wall below current play.
+    for (const wall of climb.walls) {
+      const characterRuns = completedRuns(runs).filter((r) => r.player.character === wall.character);
+      const latest = characterRuns.reduce((a, b) => (b.startTime > a.startTime ? b : a));
+      expect(wall.target).toBeGreaterThanOrEqual(latest.ascension);
+    }
   });
 });

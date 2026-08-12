@@ -19,6 +19,7 @@ function loadFixture(name: string): NormalizedRun {
 }
 
 const win1779 = loadFixture('1779248265');
+const win1776 = loadFixture('1776190046'); // Defect A0 win
 const loss1785 = loadFixture('1785858459');
 const abandoned = loadFixture('1778528032');
 
@@ -95,10 +96,15 @@ describe('autopsy of 1785858459 (loss)', () => {
   });
 
   it('writes floor-anchored beats from computed numbers', () => {
-    expect(report.narrative.length).toBeGreaterThanOrEqual(2);
+    expect(report.narrative.length).toBeGreaterThanOrEqual(3);
     for (const b of report.narrative) expect(b.text.length).toBeGreaterThan(0);
+    // a loss at a level this character never beat opens as a wall attempt
+    const wall = report.narrative[0];
+    expect(wall.text).toContain('A6 wall attempt #1');
+    expect(wall.text).toContain('Defect');
+    expect(wall.floors).toEqual([]);
     // the wound beat anchors on floor 12 and cites the 47 damage
-    const wound = report.narrative[0];
+    const wound = report.narrative[1];
     expect(wound.text).toContain('Floor 12');
     expect(wound.text).toContain('47');
     expect(wound.floors).toContain(12);
@@ -135,6 +141,41 @@ describe('autopsy of 1779248265 (win)', () => {
 
   it('links no leaks when none are applicable on the corpus', () => {
     expect(report.linkedLeakIds).toEqual([]);
+  });
+
+  it('celebrates a breakthrough: the first win at this level with this character', () => {
+    const breakthrough = report.narrative.find((b) => b.text.includes('Breakthrough'));
+    expect(breakthrough).toBeDefined();
+    expect(breakthrough!.text).toContain('first win at A6');
+    expect(breakthrough!.text).toContain('Silent');
+  });
+
+  it('does not repeat the breakthrough once the level has already been beaten', () => {
+    const earlier = clones(win1779, 1)[0];
+    earlier.startTime = win1779.startTime - 3600; // an older win at the same level
+    const rerun = buildAutopsy(win1779, [earlier, win1779, loss1785], []);
+    expect(rerun.narrative.some((b) => b.text.includes('Breakthrough'))).toBe(false);
+  });
+});
+
+describe('wall framing never points backward', () => {
+  it('an outgrown level is not presented as an open wall', () => {
+    // Old A6 loss, but the character has since attempted A8: the A6 autopsy
+    // must not claim "the level is still standing" — the wall has moved up.
+    const higher = clones(loss1785, 1)[0];
+    higher.ascension = 8;
+    const report = buildAutopsy(loss1785, [loss1785, higher], []);
+    expect(report.narrative.some((b) => b.text.includes('wall attempt'))).toBe(false);
+    // while a loss at the character's highest level IS a wall attempt
+    const atWall = buildAutopsy(higher, [loss1785, higher], []);
+    expect(atWall.narrative.some((b) => b.text.includes('A8 wall attempt'))).toBe(true);
+  });
+
+  it('a win below prior play is not celebrated as a breakthrough', () => {
+    const higherLoss = clones(loss1785, 1)[0]; // Defect A6 loss, earlier
+    higherLoss.startTime = win1776.startTime - 3600;
+    const report = buildAutopsy(win1776, [higherLoss, win1776], []); // Defect A0 win after A6 play
+    expect(report.narrative.some((b) => b.text.includes('Breakthrough'))).toBe(false);
   });
 });
 

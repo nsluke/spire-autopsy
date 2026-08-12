@@ -44,6 +44,14 @@ export function mean1(values: number[]): number {
   return values.length ? +(values.reduce((a, b) => a + b, 0) / values.length).toFixed(1) : 0;
 }
 
+/**
+ * A mean for prose: integers keep a forced decimal ("1.0 attacks") so an
+ * average can never read as a grammatical singular ("1 attacks").
+ */
+export function n1(value: number): string {
+  return Number.isInteger(value) ? value.toFixed(1) : String(value);
+}
+
 /** Median of a numeric list; 0 for an empty list. */
 export function median(values: number[]): number {
   if (!values.length) return 0;

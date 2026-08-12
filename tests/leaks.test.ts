@@ -19,7 +19,7 @@ import { normalizeRun } from '../src/lib/normalize';
 import { detectLeaks } from '../src/lib/leaks';
 import { bossEntryLeak } from '../src/lib/leaks/bossEntry';
 import { removalDisciplineLeak, STARTER_CARD_RE } from '../src/lib/leaks/removals';
-import { climbSummary } from '../src/lib/climb';
+import { ASCENSION_CAP, climbSummary, wallLine } from '../src/lib/climb';
 import { eliteAppetite, goldAtDeath, potionHoarding } from '../src/lib/leaks/observations';
 import type { NormalizedRun } from '../src/lib/types';
 
@@ -210,19 +210,92 @@ describe('removal-discipline', () => {
   });
 });
 
-describe('the climb (replaces the retired ascension-pacing detector)', () => {
+describe('the climb (per-character walls; replaces the retired ascension-pacing detector)', () => {
   const leaks = detectLeaks(corpusMain);
   const climb = climbSummary(corpusMain, leaks);
-  const completed = corpusMain.filter((r) => !r.abandoned);
-  const winAscs = completed.filter((r) => r.win).map((r) => r.ascension);
+  const walls = Object.fromEntries(climb.walls.map((w) => [w.character, w]));
 
-  it('frames the frontier as the highest ascension beaten, target one above', () => {
-    expect(climb.frontier).toBe(Math.max(...winAscs));
-    expect(climb.target).toBe(climb.frontier! + 1);
-    expect(climb.targetAttempts).toBe(completed.filter((r) => r.ascension === climb.target).length);
-    expect(climb.aboveFrontierAttempts).toBeGreaterThanOrEqual(climb.targetAttempts);
-    expect(climb.recentPushShare).toBeGreaterThanOrEqual(0);
-    expect(climb.recentPushShare).toBeLessThanOrEqual(1);
+  it('gives each character a wall: the next unbeaten level, never below current play', () => {
+    // Silent: 7 A6 wins → frontier 6, wall A7, untried.
+    expect(walls['CHARACTER.SILENT']).toMatchObject({ frontier: 6, target: 7, attempts: 0 });
+    // Defect: frontier is A0 but current play is A6 — the wall must NOT point down to A1.
+    expect(walls['CHARACTER.DEFECT']).toMatchObject({ frontier: 0, target: 6, attempts: 14 });
+    // Winless Ironclad playing A1: the wall is the level being played, not A0.
+    expect(walls['CHARACTER.IRONCLAD']).toMatchObject({ frontier: null, target: 1, attempts: 2 });
+  });
+
+  it('never points a wall below any level the character has played (never-settle invariant)', () => {
+    for (const wall of climb.walls) {
+      const characterRuns = corpusMain.filter((r) => !r.abandoned && r.player.character === wall.character);
+      const highestPlayed = Math.max(...characterRuns.map((r) => r.ascension));
+      expect(wall.target).toBeGreaterThanOrEqual(highestPlayed);
+      if (!wall.summited) expect(wall.target).toBe(Math.max((wall.frontier ?? -1) + 1, highestPlayed));
+    }
+  });
+
+  it('one low-level detour run cannot drag the wall down', () => {
+    // 5 winless A8 attempts, then a casual A1 run as the most recent — the
+    // wall must stay A8, not follow the detour.
+    const highAttempts = clones(loss1774, 5, (r) => {
+      r.ascension = 8;
+    });
+    const detour = clones(loss1774, 1)[0]; // stays A1, latest startTime
+    detour.startTime = Math.max(...highAttempts.map((r) => r.startTime)) + 999_999;
+    const c = climbSummary([...highAttempts, detour], []);
+    expect(c.walls[0]).toMatchObject({ character: 'CHARACTER.IRONCLAD', target: 8, attempts: 5 });
+  });
+
+  it('data above the cap raises the effective cap instead of breaking the wall', () => {
+    // A game patch can raise the ascension ceiling before our constant moves.
+    const aboveCap = clones(loss1785, 3, (r) => {
+      r.ascension = ASCENSION_CAP + 2;
+    });
+    const c = climbSummary(aboveCap, []);
+    expect(c.walls[0]).toMatchObject({ target: ASCENSION_CAP + 2, summited: false, attempts: 3 });
+    const withWin = [
+      ...aboveCap,
+      ...clones(win1776, 1, (r) => {
+        r.ascension = ASCENSION_CAP + 2;
+      }),
+    ];
+    const summit = climbSummary(withWin, []).walls.find((w) => w.character === 'CHARACTER.DEFECT')!;
+    expect(summit.summited).toBe(true);
+    expect(summit.capRecord).toEqual({ wins: 1, runs: 4 });
+  });
+
+  it('zero-floor losses count as attempts but never claim an act of death', () => {
+    const ghost = clones(loss1774, 1, (r) => {
+      r.actsEntered = 0;
+    });
+    const c = climbSummary(ghost, []);
+    expect(c.walls[0].attempts).toBe(1);
+    expect(c.walls[0].deathsByAct).toEqual([0, 0, 0]);
+    expect(wallLine(c.walls[0])).not.toContain('act');
+  });
+
+  it('marks the most recently played character as the active wall', () => {
+    expect(climb.active?.character).toBe('CHARACTER.DEFECT'); // loss clones carry the latest startTimes
+  });
+
+  it('diagnoses where wall attempts die and who kills them', () => {
+    const defect = walls['CHARACTER.DEFECT'];
+    expect(defect.deathsByAct).toEqual([0, 14, 0]); // loss1785 dies in act 2
+    expect(defect.topKiller).toEqual({ encounter: 'ENCOUNTER.THE_INSATIABLE_BOSS', deaths: 14 });
+    expect(defect.deepestAct).toBe(2);
+    expect(wallLine(defect)).toContain('every one has died in act 2');
+    expect(wallLine(walls['CHARACTER.SILENT'])).toBe('Fresh ground — no attempts yet.');
+  });
+
+  it('switches to consistency framing only at the cap, and never invents a level above it', () => {
+    const capped = clones(win1779, 3, (r) => {
+      r.ascension = ASCENSION_CAP;
+    });
+    const c = climbSummary(capped, []);
+    const wall = c.walls[0];
+    expect(wall).toMatchObject({ summited: true, target: ASCENSION_CAP, frontier: ASCENSION_CAP });
+    expect(wall.capRecord).toEqual({ wins: 3, runs: 3 });
+    expect(wallLine(wall)).toContain('consistency');
+    expect(wallLine(wall)).not.toContain(`A${ASCENSION_CAP + 1}`);
   });
 
   it('pairs the climb with the top applicable leak as the lever', () => {
@@ -230,11 +303,12 @@ describe('the climb (replaces the retired ascension-pacing detector)', () => {
     expect(climb.leverTitle).toBe(topLeak?.title);
   });
 
-  it('handles a winless corpus without inventing a frontier', () => {
-    const winless = completed.filter((r) => !r.win);
+  it('handles a winless corpus without inventing a frontier — the wall stays at current play', () => {
+    const winless = corpusMain.filter((r) => !r.abandoned && !r.win);
     const c = climbSummary(winless, detectLeaks(winless));
-    expect(c.frontier).toBeNull();
-    expect(c.target).toBe(0);
+    const defect = c.walls.find((w) => w.character === 'CHARACTER.DEFECT')!;
+    expect(defect.frontier).toBeNull();
+    expect(defect.target).toBe(6); // still coaching the level being played, never A0
   });
 
   it('never appears among leak detectors (climbing is a goal, not a mistake)', () => {

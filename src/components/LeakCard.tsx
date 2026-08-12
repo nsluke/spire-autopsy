@@ -84,7 +84,8 @@ export default function LeakCard({
           <div className="leakDrill drillBlocked">
             <b>{leak.drill.title}</b>
             <span>
-              {leak.drill.body} <em className="blockedNote">Finish “{drillSlot.activeTitle}” first.</em>
+              {leak.drill.body}{' '}
+              <em className="blockedNote">One drill at a time — finish “{drillSlot.activeTitle}”.</em>
             </span>
           </div>
         )}
@@ -113,7 +114,11 @@ export default function LeakCard({
             <div className="drillMetaRow">
               <span className="num">
                 {active.passes}/{active.drill.targetRuns} compliant
-                {active.complete && active.passes >= 4 && ' — habit landed. Check the trend line above.'}
+                {active.complete &&
+                  active.passes >= 4 &&
+                  (trend && trend.length > 1
+                    ? ' — habit landed. Check the trend line above.'
+                    : ' — habit landed.')}
               </span>
               <button type="button" className="drillBtn quiet" onClick={onClearDrill}>
                 {active.complete ? 'Clear' : 'Abandon'}
@@ -130,8 +135,10 @@ export default function LeakCard({
               {line}
             </div>
           ))}
-          {leak.runReceipts.map((r) => (
-            <a className="receiptLine runReceipt num" key={r.runId} href={`#/autopsy/${r.runId}`}>
+          {leak.runReceipts.map((r, i) => (
+            // key includes the index: one run can appear twice (e.g. two flagged
+            // heals in the same run's receipts)
+            <a className="receiptLine runReceipt num" key={`${r.runId}-${i}`} href={`#/autopsy/${r.runId}`}>
               {r.label} <span className="openCue">· open autopsy →</span>
             </a>
           ))}

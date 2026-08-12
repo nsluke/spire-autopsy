@@ -13,12 +13,14 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { detectLeaks } from '../lib/leaks';
-import { climbSummary } from '../lib/climb';
+import { climbSummary, wallLine } from '../lib/climb';
 import { getMeta, setMeta } from '../lib/db';
 import { behaviorTrend, computeDrillProgress, DRILLS, type ActiveDrill } from '../lib/drills';
-import { fmtInt } from '../lib/idFormat';
+import { characterArt } from '../lib/art';
+import { characterColor, characterName, fmtInt } from '../lib/idFormat';
 import { completedRuns } from '../lib/normalize';
 import type { LeakResult, NormalizedRun } from '../lib/types';
+import ArtImg from '../components/ArtImg';
 import LeakCard, { type DrillSlot } from '../components/LeakCard';
 import '../styles/coach.css';
 
@@ -53,11 +55,13 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
 
   const leaks = useMemo<LeakResult[]>(() => detectLeaks(runs), [runs]);
   const completedCount = useMemo(() => completedRuns(runs).length, [runs]);
-  const climb = useMemo(() => climbSummary(runs, leaks), [runs, leaks]);
 
   if (dismissed === null || activeDrill === undefined) return null; // IndexedDB reads resolve in milliseconds
 
   const dismissedSet = new Set(dismissed);
+  // Demoted leaks are out everywhere the coach speaks — including the wall's
+  // "biggest lever", which must honor the same veto as the cards.
+  const climb = climbSummary(runs, leaks.filter((l) => !dismissedSet.has(l.id)));
   const applicable = leaks.filter((l) => l.applicable);
   const locked = leaks.filter((l) => !l.applicable);
   // Healthy = the detector ran and found nothing to fix. Never a leak card,
@@ -128,41 +132,47 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
         </div>
       </header>
 
-      {climb.frontier !== null && (
-        <section className="climbStrip" aria-label="Ascension climb progress">
-          <div className="climbCell">
-            <span className="climbK">Beaten</span>
-            <span className="climbV num">A{climb.frontier}</span>
-          </div>
-          <span className="climbArrow" aria-hidden="true">
-            →
-          </span>
-          <div className="climbCell climbTarget">
-            <span className="climbK">Next target</span>
-            <span className="climbV num">A{climb.target}</span>
+      {climb.active && (
+        <section className="climbStrip" aria-label="The wall — current ascension target per character">
+          <div className="wallHead">
+            <ArtImg src={characterArt(climb.active.character)} className="wallArt" />
+            <div className="climbCell climbTarget">
+              <span className="climbK">The wall</span>
+              <span className="climbV num" style={{ color: characterColor(climb.active.character) }}>
+                A{climb.active.target} {characterName(climb.active.character)}
+              </span>
+            </div>
+            <div className="climbCell">
+              <span className="climbK">Beaten</span>
+              <span className="climbV num">
+                {climb.active.frontier === null ? '—' : `A${climb.active.frontier}`}
+              </span>
+            </div>
           </div>
           <div className="climbNote">
-            {climb.targetAttempts > 0 ? (
-              <>
-                <span className="num">{climb.targetAttempts}</span>{' '}
-                {climb.targetAttempts === 1 ? 'attempt' : 'attempts'} so far
-                {climb.bestTargetActs > 0 && (
-                  <>
-                    {' '}
-                    · deepest reached act <span className="num">{climb.bestTargetActs}</span>
-                  </>
-                )}
-              </>
-            ) : (
-              <>fresh ground — no attempts yet</>
-            )}
-            {climb.leverTitle && (
+            {wallLine(climb.active)}
+            {climb.leverTitle && !climb.active.summited && (
               <>
                 {' '}
-                · biggest lever: <b>{climb.leverTitle}</b>
+                Biggest lever: <b>{climb.leverTitle}</b>.
               </>
             )}
           </div>
+          {climb.walls.length > 1 && (
+            <div className="wallChips" aria-label="Other characters' walls">
+              {climb.walls.slice(1).map((w) => (
+                <span
+                  key={w.character}
+                  className="wallChip num"
+                  style={{ borderColor: characterColor(w.character) }}
+                  title={wallLine(w)}
+                >
+                  {characterName(w.character)} → A{w.target}
+                  {w.attempts > 0 && <span className="wallTries"> · {w.attempts}</span>}
+                </span>
+              ))}
+            </div>
+          )}
         </section>
       )}
 

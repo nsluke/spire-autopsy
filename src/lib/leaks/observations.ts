@@ -12,7 +12,7 @@
 import { displayName } from '../idFormat';
 import { deathNode, entryGold, entryHpPct, hasRoom } from '../normalize';
 import type { EvidenceStrength, LeakResult, NormalizedRun } from '../types';
-import { healthyResult, mean1, median, mostRecent, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
+import { healthyResult, mean1, median, mostRecent, n1, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
 
 const MIN_COMPLETED = 15;
 
@@ -55,8 +55,8 @@ export function eliteAppetite(completed: NormalizedRun[]): LeakResult {
   const winsLean = winAvg > lossAvg;
 
   const body = winsLean
-    ? `Wins average ${winAvg} act-1 elites; act-2+ losses average ${lossAvg}. Gannon's math says 3 act-1 elites ≈ +3 relics, +1 rare card, ~+100 gold — the runs you win are collecting that; the runs you lose are starving for it by act 2.`
-    : `In runs you win, you fight ${winAvg} act-1 elites on average; in losses that reached act 2, ${lossAvg}. Your losses actually fight act-1 elites at least as often as your wins do — so if you have been forcing early elites out of principle, your own history says you have room to pick those fights more selectively.`;
+    ? `Wins average ${n1(winAvg)} act-1 elites; act-2+ losses average ${n1(lossAvg)}. Gannon's math says 3 act-1 elites ≈ +3 relics, +1 rare card, ~+100 gold — the runs you win are collecting that; the runs you lose are starving for it by act 2.`
+    : `In runs you win, you fight ${n1(winAvg)} act-1 elites on average; in losses that reached act 2, ${n1(lossAvg)}. Your losses actually fight act-1 elites at least as often as your wins do — so if you have been forcing early elites out of principle, your own history says you have room to pick those fights more selectively.`;
 
   // Receipts: the recent act-2+ losses that sit on the "wrong" side of the pattern.
   const offenders = winsLean
@@ -127,10 +127,13 @@ export function potionHoarding(completed: NormalizedRun[]): LeakResult {
       ? `${holding.length} of your ${deaths.length} deaths ended with potions still in your belt, and in ${noPotionThrown.length} of ${deathFights.length} death fights (${pctLabel(quietRate)}) no potion was used at all. A potion spent on an ordinary fight is HP saved; a potion held for a perfect moment that never arrives is just a museum piece. When a fight starts going sideways, that is the moment.`
       : `None of your ${deaths.length} deaths ended with potions in your belt — you spend them, which is exactly right. In ${noPotionThrown.length} of ${deathFights.length} death fights no potion was thrown, usually because the belt was already empty. Nothing to fix here; carry on.`;
 
-  const runReceipts = mostRecent(holding, (r) => r.startTime, 5).map((r) => ({
-    runId: r.id,
-    label: `${runTag(r)} · died to ${displayName(r.killedByEncounter ?? r.killedByEvent)} holding ${r.player.potions.length} ${r.player.potions.length === 1 ? 'potion' : 'potions'}`,
-  }));
+  const runReceipts = mostRecent(holding, (r) => r.startTime, 5).map((r) => {
+    const killer = displayName(r.killedByEncounter ?? r.killedByEvent);
+    return {
+      runId: r.id,
+      label: `${runTag(r)} · died ${killer ? `to ${killer} ` : ''}holding ${r.player.potions.length} ${r.player.potions.length === 1 ? 'potion' : 'potions'}`,
+    };
+  });
 
   return {
     id: ID,

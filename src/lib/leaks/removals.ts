@@ -15,7 +15,7 @@
  */
 import type { EvidenceStrength, LeakResult, NodeVisit, NormalizedRun } from '../types';
 import { entryGold, hasRoom } from '../normalize';
-import { mean1, mostRecent, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
+import { mean1, mostRecent, n1, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
 
 const ID = 'removal-discipline';
 const TITLE = 'Starter cards overstay their welcome';
@@ -92,8 +92,8 @@ export function removalDisciplineLeak(completed: NormalizedRun[]): LeakResult {
   const lossesLabel = `${losses.length} act-2+ ${losses.length === 1 ? 'loss' : 'losses'}`;
 
   const body = bothSolid
-    ? `Your winning decks carry ${winStarters} starter cards into act 2; your losing decks carry ${lossStarters}. And you left ${pctLabel(skipRate)} of rich shop visits without buying the removal.`
-    : `Wins carry ${winStarters} starters into act 2 vs ${lossStarters} in losses, and ${skipped.length} of ${richShops.length} rich shops went removal-less. Small win-side sample — hold it loosely.`;
+    ? `Your winning decks carry ${n1(winStarters)} starter cards into act 2; your losing decks carry ${n1(lossStarters)}. And you left ${pctLabel(skipRate)} of rich shop visits without buying the removal.`
+    : `Wins carry ${n1(winStarters)} starters into act 2 vs ${n1(lossStarters)} in losses, and ${skipped.length} of ${richShops.length} rich shops went removal-less. Small win-side sample — hold it loosely.`;
 
   const runReceipts = mostRecent(skipped, (s) => s.run.startTime + s.node.floor / 1000, 5).map((s) => ({
     runId: s.run.id,

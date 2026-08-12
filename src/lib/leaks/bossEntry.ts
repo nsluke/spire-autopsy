@@ -116,7 +116,7 @@ export function bossEntryLeak(completed: NormalizedRun[]): LeakResult {
   const lowEntryDeaths = low.filter((f) => f.died);
   const runReceipts = mostRecent(lowEntryDeaths, (f) => f.run.startTime, 5).map((f) => ({
     runId: f.run.id,
-    label: `${runTag(f.run)} · entered ${displayName(f.bossId)} at ${pctLabel(f.entry)}`,
+    label: `${runTag(f.run)} · entered ${displayName(f.bossId) || 'a boss'} at ${pctLabel(f.entry)}`,
   }));
 
   return {

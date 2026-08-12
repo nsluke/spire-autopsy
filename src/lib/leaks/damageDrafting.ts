@@ -14,7 +14,7 @@
  */
 import { cardType, metadataCoverage } from '../cards';
 import type { EvidenceStrength, LeakResult, NormalizedRun } from '../types';
-import { healthyResult, mean1, mostRecent, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
+import { healthyResult, mean1, mostRecent, n1, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
 
 const ID = 'damage-drafting';
 const TITLE = 'Act 1 wants damage first';
@@ -85,12 +85,21 @@ export function damageDraftingLeak(completed: NormalizedRun[]): LeakResult {
   const earlyPowerShare =
     profiles.filter((p) => p.earlyPowerPicks > 0).length / profiles.length;
 
-  if (lossAvg >= ATTACK_TARGET || lossAvg >= winAvg) {
+  if (lossAvg >= ATTACK_TARGET) {
     return healthyResult(
       ID,
       'leak',
       TITLE,
-      `You add ${lossAvg} attacks before your first elite even in losses (wins: ${winAvg}) — your act-1 damage drafting matches what the pros teach.`,
+      `You add ${n1(lossAvg)} attacks before your first elite even in losses (wins: ${n1(winAvg)}) — your act-1 damage drafting matches what the pros teach.`,
+    );
+  }
+  if (lossAvg >= winAvg) {
+    // No differential — but low absolute numbers aren't an endorsement.
+    return healthyResult(
+      ID,
+      'leak',
+      TITLE,
+      `Your losses draft as much early damage as your wins (${n1(lossAvg)} vs ${n1(winAvg)} attacks before the first elite) — this isn't what separates them. The pros' bar is ${ATTACK_TARGET}, if you want a default to draft toward.`,
     );
   }
 
@@ -106,7 +115,7 @@ export function damageDraftingLeak(completed: NormalizedRun[]): LeakResult {
     id: ID,
     tier: 'leak',
     title: TITLE,
-    body: `Your winning runs add ${winAvg} attacks before the first elite; your losses add ${lossAvg}. Gannon's act-1 rule: raw damage first — enough for ~100 in 3 turns — and early powers play like curses.`,
+    body: `Your winning runs add ${n1(winAvg)} attacks before the first elite; your losses add ${n1(lossAvg)}. Gannon's act-1 rule: raw damage first — enough for ~100 in 3 turns — and early powers play like curses.`,
     dumbbell: {
       label: 'Attacks added before the first act-1 elite',
       winValue: winAvg,
