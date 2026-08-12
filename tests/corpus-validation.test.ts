@@ -27,8 +27,17 @@ describe.skipIf(!HISTORY)('full-corpus validation against audited reference numb
   let runs: NormalizedRun[] = [];
   let stats: StatsSummary;
 
+  // The reference numbers describe the audited snapshot (231 runs; the last
+  // audited run started Aug 10 2026 15:55, filename 1786402536). The history
+  // folder keeps growing, so pin the corpus to the snapshot by filename
+  // timestamp — the validation stays exact no matter how many runs are played
+  // after the audit.
+  const AUDIT_CUTOFF = 1786402536;
+
   beforeAll(() => {
-    const files = readdirSync(HISTORY!).filter((f) => /\.run$/i.test(f) && !/\.backup$/i.test(f));
+    const files = readdirSync(HISTORY!)
+      .filter((f) => /\.run$/i.test(f) && !/\.backup$/i.test(f))
+      .filter((f) => Number(f.replace(/\.run$/i, '')) <= AUDIT_CUTOFF);
     runs = files.map((f) => normalizeRun(JSON.parse(readFileSync(join(HISTORY!, f), 'utf8')), f));
     stats = computeStats(runs);
   });

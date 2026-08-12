@@ -1,0 +1,3621 @@
+{
+  "CARD.ABRASIVE": {
+    "name": "Abrasive",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.ACCELERANT": {
+    "name": "Accelerant",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ACCURACY": {
+    "name": "Accuracy",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ACROBATICS": {
+    "name": "Acrobatics",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ADAPTIVE_STRIKE": {
+    "name": "Adaptive Strike",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.ADRENALINE": {
+    "name": "Adrenaline",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.AFTERIMAGE": {
+    "name": "Afterimage",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.AFTERLIFE": {
+    "name": "Afterlife",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.AGGRESSION": {
+    "name": "Aggression",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ALCHEMIZE": {
+    "name": "Alchemize",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ALIGNMENT": {
+    "name": "Alignment",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.ALL_FOR_ONE": {
+    "name": "All for One",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.ANGER": {
+    "name": "Anger",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.ANOINTED": {
+    "name": "Anointed",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ANTICIPATE": {
+    "name": "Anticipate",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.APOTHEOSIS": {
+    "name": "Apotheosis",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 2
+  },
+  "CARD.ARMAMENTS": {
+    "name": "Armaments",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.ARSENAL": {
+    "name": "Arsenal",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ASCENDERS_BANE": {
+    "name": "Ascender's Bane",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.ASHEN_STRIKE": {
+    "name": "Ashen Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ASSASSINATE": {
+    "name": "Assassinate",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.ASTRAL_PULSE": {
+    "name": "Astral Pulse",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.AUTOMATION": {
+    "name": "Automation",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BACKFLIP": {
+    "name": "Backflip",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BACKSTAB": {
+    "name": "Backstab",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BALL_LIGHTNING": {
+    "name": "Ball Lightning",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BANSHEES_CRY": {
+    "name": "Banshee's Cry",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 9
+  },
+  "CARD.BARRAGE": {
+    "name": "Barrage",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BARRICADE": {
+    "name": "Barricade",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.BASH": {
+    "name": "Bash",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 2
+  },
+  "CARD.BATTLE_TRANCE": {
+    "name": "Battle Trance",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BEAM_CELL": {
+    "name": "Beam Cell",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.BEAT_DOWN": {
+    "name": "Beat Down",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.BEAT_INTO_SHAPE": {
+    "name": "Beat into Shape",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.BEGONE": {
+    "name": "BEGONE!",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BELIEVE_IN_YOU": {
+    "name": "Believe in You",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BIG_BANG": {
+    "name": "Big Bang",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.BLACK_HOLE": {
+    "name": "Black Hole",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BLADE_DANCE": {
+    "name": "Blade Dance",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BLADE_OF_INK": {
+    "name": "Blade of Ink",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.BLIGHT_STRIKE": {
+    "name": "Blight Strike",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BLOODLETTING": {
+    "name": "Bloodletting",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BLOOD_WALL": {
+    "name": "Blood Wall",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.BLUDGEON": {
+    "name": "Bludgeon",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.BLUR": {
+    "name": "Blur",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BODYGUARD": {
+    "name": "Bodyguard",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.BODY_SLAM": {
+    "name": "Body Slam",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BOLAS": {
+    "name": "Bolas",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.BOMBARDMENT": {
+    "name": "Bombardment",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.BONE_SHARDS": {
+    "name": "Bone Shards",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BOOST_AWAY": {
+    "name": "Boost Away",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.BOOT_SEQUENCE": {
+    "name": "Boot Sequence",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BORROWED_TIME": {
+    "name": "Borrowed Time",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BOUNCING_FLASK": {
+    "name": "Bouncing Flask",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.BRAND": {
+    "name": "Brand",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.BREAK": {
+    "name": "Break",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.BREAKTHROUGH": {
+    "name": "Breakthrough",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.BUBBLE_BUBBLE": {
+    "name": "Bubble Bubble",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BUFFER": {
+    "name": "Buffer",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.BULK_UP": {
+    "name": "Bulk Up",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.BULLET_TIME": {
+    "name": "Bullet Time",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.BULLY": {
+    "name": "Bully",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.BULWARK": {
+    "name": "Bulwark",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.BUNDLE_OF_JOY": {
+    "name": "Bundle of Joy",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.BURNING_PACT": {
+    "name": "Burning Pact",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.BURST": {
+    "name": "Burst",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.BURY": {
+    "name": "Bury",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 4
+  },
+  "CARD.BYRDONIS_EGG": {
+    "name": "Byrdonis Egg",
+    "character": "COLORLESS",
+    "type": "quest",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.BYRD_SWOOP": {
+    "name": "Byrd Swoop",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 0
+  },
+  "CARD.CALAMITY": {
+    "name": "Calamity",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.CALCIFY": {
+    "name": "Calcify",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CALCULATED_GAMBLE": {
+    "name": "Calculated Gamble",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.CALL_OF_THE_VOID": {
+    "name": "Call of the Void",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.CALTROPS": {
+    "name": "Caltrops",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.CAPACITOR": {
+    "name": "Capacitor",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CAPTURE_SPIRIT": {
+    "name": "Capture Spirit",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CASCADE": {
+    "name": "Cascade",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": -1
+  },
+  "CARD.CATASTROPHE": {
+    "name": "Catastrophe",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.CELESTIAL_MIGHT": {
+    "name": "Celestial Might",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.CHAOS": {
+    "name": "Chaos",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CHARGE": {
+    "name": "CHARGE!!",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CHARGE_BATTERY": {
+    "name": "Charge Battery",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.CHILD_OF_THE_STARS": {
+    "name": "Child of the Stars",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CHILL": {
+    "name": "Chill",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.CINDER": {
+    "name": "Cinder",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.CLAW": {
+    "name": "Claw",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.CLEANSE": {
+    "name": "Cleanse",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CLOAK_AND_DAGGER": {
+    "name": "Cloak and Dagger",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.CLOAK_OF_STARS": {
+    "name": "Cloak of Stars",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.CLUMSY": {
+    "name": "Clumsy",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.COLD_SNAP": {
+    "name": "Cold Snap",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.COLLISION_COURSE": {
+    "name": "Collision Course",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.COLOSSUS": {
+    "name": "Colossus",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.COMET": {
+    "name": "Comet",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.COMPACT": {
+    "name": "Compact",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.COMPILE_DRIVER": {
+    "name": "Compile Driver",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.CONFLAGRATION": {
+    "name": "Conflagration",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.CONQUEROR": {
+    "name": "Conqueror",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CONSUMING_SHADOW": {
+    "name": "Consuming Shadow",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.CONVERGENCE": {
+    "name": "Convergence",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.COOLANT": {
+    "name": "Coolant",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.COOLHEADED": {
+    "name": "Coolheaded",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.CORROSIVE_WAVE": {
+    "name": "Corrosive Wave",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.COSMIC_INDIFFERENCE": {
+    "name": "Cosmic Indifference",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.COUNTDOWN": {
+    "name": "Countdown",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CRASH_LANDING": {
+    "name": "Crash Landing",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.CREATIVE_AI": {
+    "name": "Creative AI",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.CRESCENT_SPEAR": {
+    "name": "Crescent Spear",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.CRIMSON_MANTLE": {
+    "name": "Crimson Mantle",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.CRUELTY": {
+    "name": "Cruelty",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.CRUSH_UNDER": {
+    "name": "Crush Under",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DAGGER_SPRAY": {
+    "name": "Dagger Spray",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DAGGER_THROW": {
+    "name": "Dagger Throw",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DANSE_MACABRE": {
+    "name": "Danse Macabre",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DARKNESS": {
+    "name": "Darkness",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DARK_EMBRACE": {
+    "name": "Dark Embrace",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.DARK_SHACKLES": {
+    "name": "Dark Shackles",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.DASH": {
+    "name": "Dash",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.DEADLY_POISON": {
+    "name": "Deadly Poison",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DEATHBRINGER": {
+    "name": "Deathbringer",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.DEATHS_DOOR": {
+    "name": "Death's Door",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DEATH_MARCH": {
+    "name": "Death March",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DEBILITATE": {
+    "name": "Debilitate",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DEBT": {
+    "name": "Debt",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.DECAY": {
+    "name": "Decay",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.DECISIONS_DECISIONS": {
+    "name": "Decisions, Decisions",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.DEFEND_DEFECT": {
+    "name": "Defend",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DEFEND_IRONCLAD": {
+    "name": "Defend",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DEFEND_NECROBINDER": {
+    "name": "Defend",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DEFEND_REGENT": {
+    "name": "Defend",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DEFEND_SILENT": {
+    "name": "Defend",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DEFILE": {
+    "name": "Defile",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DEFLECT": {
+    "name": "Deflect",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.DEFRAGMENT": {
+    "name": "Defragment",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.DEFY": {
+    "name": "Defy",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DELAY": {
+    "name": "Delay",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.DEMESNE": {
+    "name": "Demesne",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.DEMONIC_SHIELD": {
+    "name": "Demonic Shield",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.DEMON_FORM": {
+    "name": "Demon Form",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.DEVASTATE": {
+    "name": "Devastate",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DEVOUR_LIFE": {
+    "name": "Devour Life",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.DIRGE": {
+    "name": "Dirge",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": -1
+  },
+  "CARD.DISCOVERY": {
+    "name": "Discovery",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DISMANTLE": {
+    "name": "Dismantle",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DISTRACTION": {
+    "name": "Distraction",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.DODGE_AND_ROLL": {
+    "name": "Dodge and Roll",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DOMINATE": {
+    "name": "Dominate",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.DOUBLE_ENERGY": {
+    "name": "Double Energy",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DOUBT": {
+    "name": "Doubt",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.DRAIN_POWER": {
+    "name": "Drain Power",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.DRAMATIC_ENTRANCE": {
+    "name": "Dramatic Entrance",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.DREDGE": {
+    "name": "Dredge",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DRUM_OF_BATTLE": {
+    "name": "Drum of Battle",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.DUALCAST": {
+    "name": "Dualcast",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.DUAL_WIELD": {
+    "name": "Dual Wield",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.DYING_STAR": {
+    "name": "Dying Star",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ECHOING_SLASH": {
+    "name": "Echoing Slash",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ECHO_FORM": {
+    "name": "Echo Form",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.EIDOLON": {
+    "name": "Eidolon",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.END_OF_DAYS": {
+    "name": "End of Days",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.ENFEEBLING_TOUCH": {
+    "name": "Enfeebling Touch",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ENLIGHTENMENT": {
+    "name": "Enlightenment",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 0
+  },
+  "CARD.ENTHRALLED": {
+    "name": "Enthralled",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": 2
+  },
+  "CARD.ENTROPY": {
+    "name": "Entropy",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ENVENOM": {
+    "name": "Envenom",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.EQUILIBRIUM": {
+    "name": "Equilibrium",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.ERADICATE": {
+    "name": "Eradicate",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": -1
+  },
+  "CARD.ESCAPE_PLAN": {
+    "name": "Escape Plan",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.ETERNAL_ARMOR": {
+    "name": "Eternal Armor",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.EVIL_EYE": {
+    "name": "Evil Eye",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.EXPECT_A_FIGHT": {
+    "name": "Expect a Fight",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.EXPERTISE": {
+    "name": "Expertise",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.EXPOSE": {
+    "name": "Expose",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.EXTERMINATE": {
+    "name": "Exterminate",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.FALLING_STAR": {
+    "name": "Falling Star",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 0
+  },
+  "CARD.FAN_OF_KNIVES": {
+    "name": "Fan of Knives",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.FASTEN": {
+    "name": "Fasten",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FEAR": {
+    "name": "Fear",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.FEED": {
+    "name": "Feed",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.FEEDING_FRENZY": {
+    "name": "Feeding Frenzy",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 0
+  },
+  "CARD.FEEL_NO_PAIN": {
+    "name": "Feel No Pain",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FERAL": {
+    "name": "Feral",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.FETCH": {
+    "name": "Fetch",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.FIEND_FIRE": {
+    "name": "Fiend Fire",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.FIGHT_ME": {
+    "name": "Fight Me!",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.FIGHT_THROUGH": {
+    "name": "Fight Through",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FINESSE": {
+    "name": "Finesse",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.FINISHER": {
+    "name": "Finisher",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FISTICUFFS": {
+    "name": "Fisticuffs",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FLAK_CANNON": {
+    "name": "Flak Cannon",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.FLAME_BARRIER": {
+    "name": "Flame Barrier",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.FLANKING": {
+    "name": "Flanking",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.FLASH_OF_STEEL": {
+    "name": "Flash of Steel",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.FLATTEN": {
+    "name": "Flatten",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.FLECHETTES": {
+    "name": "Flechettes",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FLICK_FLACK": {
+    "name": "Flick-Flack",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.FOCUSED_STRIKE": {
+    "name": "Focused Strike",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.FOLLOW_THROUGH": {
+    "name": "Follow Through",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.FOLLY": {
+    "name": "Folly",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.FOOTWORK": {
+    "name": "Footwork",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FOREGONE_CONCLUSION": {
+    "name": "Foregone Conclusion",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.FORGOTTEN_RITUAL": {
+    "name": "Forgotten Ritual",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FRIENDSHIP": {
+    "name": "Friendship",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FTL": {
+    "name": "FTL",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.FURNACE": {
+    "name": "Furnace",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.FUSION": {
+    "name": "Fusion",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.GAMMA_BLAST": {
+    "name": "Gamma Blast",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.GATHER_LIGHT": {
+    "name": "Gather Light",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.GENESIS": {
+    "name": "Genesis",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.GENETIC_ALGORITHM": {
+    "name": "Genetic Algorithm",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.GLACIER": {
+    "name": "Glacier",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.GLASSWORK": {
+    "name": "Glasswork",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.GLIMMER": {
+    "name": "Glimmer",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.GLITTERSTREAM": {
+    "name": "Glitterstream",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.GLOW": {
+    "name": "Glow",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.GOLD_AXE": {
+    "name": "Gold Axe",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.GO_FOR_THE_EYES": {
+    "name": "Go for the Eyes",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.GRAND_FINALE": {
+    "name": "Grand Finale",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.GRAPPLE": {
+    "name": "Grapple",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.GRAVEBLAST": {
+    "name": "Graveblast",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.GRAVE_WARDEN": {
+    "name": "Grave Warden",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.GREED": {
+    "name": "Greed",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.GUARDS": {
+    "name": "GUARDS!!!",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.GUIDING_STAR": {
+    "name": "Guiding Star",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.GUILTY": {
+    "name": "Guilty",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.GUNK_UP": {
+    "name": "Gunk Up",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.HAILSTORM": {
+    "name": "Hailstorm",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.HAND_OF_GREED": {
+    "name": "Hand of Greed",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.HAND_TRICK": {
+    "name": "Hand Trick",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.HANG": {
+    "name": "Hang",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.HAUNT": {
+    "name": "Haunt",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.HAVOC": {
+    "name": "Havoc",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.HAZE": {
+    "name": "Haze",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.HEADBUTT": {
+    "name": "Headbutt",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.HEGEMONY": {
+    "name": "Hegemony",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.HEIRLOOM_HAMMER": {
+    "name": "Heirloom Hammer",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.HELIX_DRILL": {
+    "name": "Helix Drill",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.HELLO_WORLD": {
+    "name": "Hello World",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.HELLRAISER": {
+    "name": "Hellraiser",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.HEMOKINESIS": {
+    "name": "Hemokinesis",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.HIDDEN_CACHE": {
+    "name": "Hidden Cache",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.HIDDEN_DAGGERS": {
+    "name": "Hidden Daggers",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.HIDDEN_GEM": {
+    "name": "Hidden Gem",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.HIGH_FIVE": {
+    "name": "High Five",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.HOLOGRAM": {
+    "name": "Hologram",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.HOTFIX": {
+    "name": "Hotfix",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.HOWL_FROM_BEYOND": {
+    "name": "Howl from Beyond",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.HYPERBEAM": {
+    "name": "Hyperbeam",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.ICE_LANCE": {
+    "name": "Ice Lance",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.IMPATIENCE": {
+    "name": "Impatience",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.IMPERVIOUS": {
+    "name": "Impervious",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.INFERNAL_BLADE": {
+    "name": "Infernal Blade",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.INFERNO": {
+    "name": "Inferno",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.INFINITE_BLADES": {
+    "name": "Infinite Blades",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.INFLAME": {
+    "name": "Inflame",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.INJURY": {
+    "name": "Injury",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.INTERCEPT": {
+    "name": "Intercept",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.INVOKE": {
+    "name": "Invoke",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.IRON_WAVE": {
+    "name": "Iron Wave",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.ITERATION": {
+    "name": "Iteration",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.I_AM_INVINCIBLE": {
+    "name": "I Am Invincible",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.JACKPOT": {
+    "name": "Jackpot",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.JACK_OF_ALL_TRADES": {
+    "name": "Jack of All Trades",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.JUGGERNAUT": {
+    "name": "Juggernaut",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.JUGGLING": {
+    "name": "Juggling",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.KINGLY_KICK": {
+    "name": "Kingly Kick",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 4
+  },
+  "CARD.KINGLY_PUNCH": {
+    "name": "Kingly Punch",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.KNIFE_TRAP": {
+    "name": "Knife Trap",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.KNOCKDOWN": {
+    "name": "Knockdown",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.KNOCKOUT_BLOW": {
+    "name": "Knockout Blow",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.KNOW_THY_PLACE": {
+    "name": "Know Thy Place",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.LANTERN_KEY": {
+    "name": "Lantern Key",
+    "character": "COLORLESS",
+    "type": "quest",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.LEADING_STRIKE": {
+    "name": "Leading Strike",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.LEAP": {
+    "name": "Leap",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.LEG_SWEEP": {
+    "name": "Leg Sweep",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.LETHALITY": {
+    "name": "Lethality",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.LIGHTNING_ROD": {
+    "name": "Lightning Rod",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.LOOP": {
+    "name": "Loop",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.MACHINE_LEARNING": {
+    "name": "Machine Learning",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.MAD_SCIENCE": {
+    "name": "Mad Science",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.MAKE_IT_SO": {
+    "name": "Make It So",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.MALAISE": {
+    "name": "Malaise",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": -1
+  },
+  "CARD.MANGLE": {
+    "name": "Mangle",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.MANIFEST_AUTHORITY": {
+    "name": "Manifest Authority",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.MASTER_OF_STRATEGY": {
+    "name": "Master of Strategy",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.MASTER_PLANNER": {
+    "name": "Master Planner",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.MAYHEM": {
+    "name": "Mayhem",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.MELANCHOLY": {
+    "name": "Melancholy",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.MEMENTO_MORI": {
+    "name": "Memento Mori",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.METAMORPHOSIS": {
+    "name": "Metamorphosis",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 2
+  },
+  "CARD.METEOR_SHOWER": {
+    "name": "Meteor Shower",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 0
+  },
+  "CARD.METEOR_STRIKE": {
+    "name": "Meteor Strike",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 5
+  },
+  "CARD.MIMIC": {
+    "name": "Mimic",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.MIND_BLAST": {
+    "name": "Mind Blast",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.MIRAGE": {
+    "name": "Mirage",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.MISERY": {
+    "name": "Misery",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.MODDED": {
+    "name": "Modded",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.MOLTEN_FIST": {
+    "name": "Molten Fist",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.MOMENTUM_STRIKE": {
+    "name": "Momentum Strike",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.MONARCHS_GAZE": {
+    "name": "Monarch's Gaze",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.MONOLOGUE": {
+    "name": "Monologue",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.MULTI_CAST": {
+    "name": "Multi-Cast",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": -1
+  },
+  "CARD.MURDER": {
+    "name": "Murder",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.NECRO_MASTERY": {
+    "name": "Necro Mastery",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.NEGATIVE_PULSE": {
+    "name": "Negative Pulse",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.NEOWS_FURY": {
+    "name": "Neow's Fury",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.NEUROSURGE": {
+    "name": "Neurosurge",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.NEUTRALIZE": {
+    "name": "Neutralize",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 0
+  },
+  "CARD.NEUTRON_AEGIS": {
+    "name": "Neutron Aegis",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.NIGHTMARE": {
+    "name": "Nightmare",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.NOSTALGIA": {
+    "name": "Nostalgia",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.NOT_YET": {
+    "name": "Not Yet",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.NOXIOUS_FUMES": {
+    "name": "Noxious Fumes",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.NO_ESCAPE": {
+    "name": "No Escape",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.NULL": {
+    "name": "Null",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.OBLIVION": {
+    "name": "Oblivion",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.OFFERING": {
+    "name": "Offering",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.OMNISLICE": {
+    "name": "Omnislice",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.ONE_TWO_PUNCH": {
+    "name": "One-Two Punch",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ORBIT": {
+    "name": "Orbit",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.OUTBREAK": {
+    "name": "Outbreak",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.OUTMANEUVER": {
+    "name": "Outmaneuver",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.OVERCLOCK": {
+    "name": "Overclock",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PACTS_END": {
+    "name": "Pact's End",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.PAGESTORM": {
+    "name": "Pagestorm",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PALE_BLUE_DOT": {
+    "name": "Pale Blue Dot",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PANACHE": {
+    "name": "Panache",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PANIC_BUTTON": {
+    "name": "Panic Button",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PARRY": {
+    "name": "Parry",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PARSE": {
+    "name": "Parse",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PARTICLE_WALL": {
+    "name": "Particle Wall",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PECK": {
+    "name": "Peck",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.PERFECTED_STRIKE": {
+    "name": "Perfected Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.PHANTOM_BLADES": {
+    "name": "Phantom Blades",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PHOTON_CUT": {
+    "name": "Photon Cut",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.PIERCING_WAIL": {
+    "name": "Piercing Wail",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.PILLAGE": {
+    "name": "Pillage",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PILLAR_OF_CREATION": {
+    "name": "Pillar of Creation",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PINPOINT": {
+    "name": "Pinpoint",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.POISONED_STAB": {
+    "name": "Poisoned Stab",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.POKE": {
+    "name": "Poke",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.POMMEL_STRIKE": {
+    "name": "Pommel Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.POOR_SLEEP": {
+    "name": "Poor Sleep",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.POUNCE": {
+    "name": "Pounce",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.PRECISE_CUT": {
+    "name": "Precise Cut",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PREDATOR": {
+    "name": "Predator",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.PREPARED": {
+    "name": "Prepared",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.PREP_TIME": {
+    "name": "Prep Time",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PRIMAL_FORCE": {
+    "name": "Primal Force",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.PRODUCTION": {
+    "name": "Production",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PROLONG": {
+    "name": "Prolong",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PROPHESIZE": {
+    "name": "Prophesize",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.PROTECTOR": {
+    "name": "Protector",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.PROWESS": {
+    "name": "Prowess",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PULL_AGGRO": {
+    "name": "Pull Aggro",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.PULL_FROM_BELOW": {
+    "name": "Pull from Below",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PURITY": {
+    "name": "Purity",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.PUTREFY": {
+    "name": "Putrefy",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.PYRE": {
+    "name": "Pyre",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.QUADCAST": {
+    "name": "Quadcast",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.QUASAR": {
+    "name": "Quasar",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.RADIATE": {
+    "name": "Radiate",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.RAGE": {
+    "name": "Rage",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.RAINBOW": {
+    "name": "Rainbow",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.RALLY": {
+    "name": "Rally",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.RAMPAGE": {
+    "name": "Rampage",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.RATTLE": {
+    "name": "Rattle",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.REANIMATE": {
+    "name": "Reanimate",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.REAP": {
+    "name": "Reap",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 3
+  },
+  "CARD.REAPER_FORM": {
+    "name": "Reaper Form",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.REAVE": {
+    "name": "Reave",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.REBOOT": {
+    "name": "Reboot",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.REFINE_BLADE": {
+    "name": "Refine Blade",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.REFLECT": {
+    "name": "Reflect",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.REFLEX": {
+    "name": "Reflex",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.REFRACT": {
+    "name": "Refract",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.REGRET": {
+    "name": "Regret",
+    "character": "COLORLESS",
+    "type": "curse",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.RELAX": {
+    "name": "Relax",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 3
+  },
+  "CARD.REND": {
+    "name": "Rend",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.RESONANCE": {
+    "name": "Resonance",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.RESTLESSNESS": {
+    "name": "Restlessness",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.RICOCHET": {
+    "name": "Ricochet",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.RIGHT_HAND_HAND": {
+    "name": "Right Hand Hand",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.ROCKET_PUNCH": {
+    "name": "Rocket Punch",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.ROLLING_BOULDER": {
+    "name": "Rolling Boulder",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.ROYALTIES": {
+    "name": "Royalties",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ROYAL_GAMBLE": {
+    "name": "Royal Gamble",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.RUPTURE": {
+    "name": "Rupture",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SACRIFICE": {
+    "name": "Sacrifice",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SALVO": {
+    "name": "Salvo",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SCARE": {
+    "name": "Sidestep",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.SCAVENGE": {
+    "name": "Scavenge",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SCOURGE": {
+    "name": "Scourge",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SCRAPE": {
+    "name": "Scrape",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SCRAWL": {
+    "name": "Scrawl",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SCULPTING_STRIKE": {
+    "name": "Sculpting Strike",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SEANCE": {
+    "name": "Seance",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SECOND_WIND": {
+    "name": "Second Wind",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SECRET_TECHNIQUE": {
+    "name": "Secret Technique",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.SECRET_WEAPON": {
+    "name": "Secret Weapon",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.SEEKER_STRIKE": {
+    "name": "Seeker Strike",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SEEKING_EDGE": {
+    "name": "Seeking Edge",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SENTRY_MODE": {
+    "name": "Sentry Mode",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.SERPENT_FORM": {
+    "name": "Serpent Form",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.SETUP_STRIKE": {
+    "name": "Setup Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SEVEN_STARS": {
+    "name": "Seven Stars",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.SEVERANCE": {
+    "name": "Severance",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SHADOWMELD": {
+    "name": "Shadowmeld",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SHADOW_SHIELD": {
+    "name": "Shadow Shield",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SHADOW_STEP": {
+    "name": "Shadow Step",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SHARED_FATE": {
+    "name": "Shared Fate",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.SHATTER": {
+    "name": "Shatter",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SHINING_STRIKE": {
+    "name": "Shining Strike",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SHOCKWAVE": {
+    "name": "Shockwave",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SHROUD": {
+    "name": "Shroud",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SHRUG_IT_OFF": {
+    "name": "Shrug It Off",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SIC_EM": {
+    "name": "Sic 'Em",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SIGNAL_BOOST": {
+    "name": "Signal Boost",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SKEWER": {
+    "name": "Skewer",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": -1
+  },
+  "CARD.SKIM": {
+    "name": "Skim",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SLEIGHT_OF_FLESH": {
+    "name": "Sleight of Flesh",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SLICE": {
+    "name": "Slice",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.SMOKESTACK": {
+    "name": "Smokestack",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SNAKEBITE": {
+    "name": "Snakebite",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.SNAP": {
+    "name": "Snap",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SNEAKY": {
+    "name": "Sneaky",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.SOLAR_STRIKE": {
+    "name": "Solar Strike",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SOUL_STORM": {
+    "name": "Soul Storm",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SOW": {
+    "name": "Sow",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SPECTRUM_SHIFT": {
+    "name": "Spectrum Shift",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SPEEDSTER": {
+    "name": "Speedster",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.SPINNER": {
+    "name": "Spinner",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SPIRIT_OF_ASH": {
+    "name": "Spirit of Ash",
+    "character": "NECROBINDER",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.SPITE": {
+    "name": "Spite",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.SPLASH": {
+    "name": "Splash",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SPOILS_MAP": {
+    "name": "Spoils Map",
+    "character": "COLORLESS",
+    "type": "quest",
+    "rarity": "special",
+    "cost": null
+  },
+  "CARD.SPOILS_OF_BATTLE": {
+    "name": "Spoils of Battle",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SPUR": {
+    "name": "Spur",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SQUASH": {
+    "name": "Squash",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 1
+  },
+  "CARD.SQUEEZE": {
+    "name": "Squeeze",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.STAMPEDE": {
+    "name": "Stampede",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.STARDUST": {
+    "name": "Stardust",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.STOKE": {
+    "name": "Stoke",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.STOMP": {
+    "name": "Stomp",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.STONE_ARMOR": {
+    "name": "Stone Armor",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.STORM": {
+    "name": "Storm",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.STORM_OF_STEEL": {
+    "name": "Storm of Steel",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.STRANGLE": {
+    "name": "Strangle",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.STRATAGEM": {
+    "name": "Stratagem",
+    "character": "COLORLESS",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.STRIKE_DEFECT": {
+    "name": "Strike",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.STRIKE_IRONCLAD": {
+    "name": "Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.STRIKE_NECROBINDER": {
+    "name": "Strike",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.STRIKE_REGENT": {
+    "name": "Strike",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.STRIKE_SILENT": {
+    "name": "Strike",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.SUBROUTINE": {
+    "name": "Subroutine",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SUCKER_PUNCH": {
+    "name": "Sucker Punch",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SUMMON_FORTH": {
+    "name": "Summon Forth",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SUNDER": {
+    "name": "Sunder",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.SUPERCRITICAL": {
+    "name": "Supercritical",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.SUPERMASSIVE": {
+    "name": "Supermassive",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SUPPRESS": {
+    "name": "Suppress",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 0
+  },
+  "CARD.SURVIVOR": {
+    "name": "Survivor",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.SWEEPING_BEAM": {
+    "name": "Sweeping Beam",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SWORD_BOOMERANG": {
+    "name": "Sword Boomerang",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.SWORD_SAGE": {
+    "name": "Sword Sage",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.SYNCHRONIZE": {
+    "name": "Synchronize",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.SYNTHESIS": {
+    "name": "Synthesis",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.TACTICIAN": {
+    "name": "Tactician",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 3
+  },
+  "CARD.TAUNT": {
+    "name": "Taunt",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.TEAR_ASUNDER": {
+    "name": "Tear Asunder",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.TEMPEST": {
+    "name": "Tempest",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": -1
+  },
+  "CARD.TERRAFORMING": {
+    "name": "Terraforming",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.TESLA_COIL": {
+    "name": "Tesla Coil",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.THE_BOMB": {
+    "name": "The Bomb",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.THE_GAMBIT": {
+    "name": "The Gambit",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.THE_HUNT": {
+    "name": "The Hunt",
+    "character": "SILENT",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.THE_SCYTHE": {
+    "name": "The Scythe",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.THE_SMITH": {
+    "name": "The Smith",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.THINKING_AHEAD": {
+    "name": "Thinking Ahead",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 0
+  },
+  "CARD.THRASH": {
+    "name": "Thrash",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.THRUMMING_HATCHET": {
+    "name": "Thrumming Hatchet",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.THUNDER": {
+    "name": "Thunder",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.THUNDERCLAP": {
+    "name": "Thunderclap",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.TIMES_UP": {
+    "name": "Time's Up",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.TOOLS_OF_THE_TRADE": {
+    "name": "Tools of the Trade",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.TORIC_TOUGHNESS": {
+    "name": "Toric Toughness",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "special",
+    "cost": 2
+  },
+  "CARD.TRACKING": {
+    "name": "Tracking",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.TRANSFIGURE": {
+    "name": "Transfigure",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.TRASH_TO_TREASURE": {
+    "name": "Trash to Treasure",
+    "character": "DEFECT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.TREMBLE": {
+    "name": "Tremble",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.TRUE_GRIT": {
+    "name": "True Grit",
+    "character": "IRONCLAD",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.TURBO": {
+    "name": "TURBO",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.TWIN_STRIKE": {
+    "name": "Twin Strike",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.TYRANNY": {
+    "name": "Tyranny",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1
+  },
+  "CARD.ULTIMATE_DEFEND": {
+    "name": "Ultimate Defend",
+    "character": "COLORLESS",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.ULTIMATE_STRIKE": {
+    "name": "Ultimate Strike",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.UNDEATH": {
+    "name": "Undeath",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 0
+  },
+  "CARD.UNLEASH": {
+    "name": "Unleash",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.UNMOVABLE": {
+    "name": "Unmovable",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.UNRELENTING": {
+    "name": "Unrelenting",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.UNTOUCHABLE": {
+    "name": "Untouchable",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.UPPERCUT": {
+    "name": "Uppercut",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.UPROAR": {
+    "name": "Uproar",
+    "character": "DEFECT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2
+  },
+  "CARD.UP_MY_SLEEVE": {
+    "name": "Up My Sleeve",
+    "character": "SILENT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 2
+  },
+  "CARD.VEILPIERCER": {
+    "name": "Veilpiercer",
+    "character": "NECROBINDER",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.VENERATE": {
+    "name": "Venerate",
+    "character": "REGENT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  },
+  "CARD.VICIOUS": {
+    "name": "Vicious",
+    "character": "IRONCLAD",
+    "type": "power",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.VOID_FORM": {
+    "name": "Void Form",
+    "character": "REGENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.VOLLEY": {
+    "name": "Volley",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": -1
+  },
+  "CARD.VOLTAIC": {
+    "name": "Voltaic",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3
+  },
+  "CARD.WELL_LAID_PLANS": {
+    "name": "Well-Laid Plans",
+    "character": "SILENT",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2
+  },
+  "CARD.WHIRLWIND": {
+    "name": "Whirlwind",
+    "character": "IRONCLAD",
+    "type": "attack",
+    "rarity": "uncommon",
+    "cost": -1
+  },
+  "CARD.WHISTLE": {
+    "name": "Whistle",
+    "character": "COLORLESS",
+    "type": "attack",
+    "rarity": "special",
+    "cost": 2
+  },
+  "CARD.WHITE_NOISE": {
+    "name": "White Noise",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "uncommon",
+    "cost": 1
+  },
+  "CARD.WISP": {
+    "name": "Wisp",
+    "character": "NECROBINDER",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0
+  },
+  "CARD.WROUGHT_IN_WAR": {
+    "name": "Wrought in War",
+    "character": "REGENT",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1
+  },
+  "CARD.ZAP": {
+    "name": "Zap",
+    "character": "DEFECT",
+    "type": "skill",
+    "rarity": "starter",
+    "cost": 1
+  }
+}

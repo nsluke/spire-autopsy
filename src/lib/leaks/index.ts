@@ -10,7 +10,8 @@
 import { completedRuns } from '../normalize';
 import type { LeakResult, NormalizedRun } from '../types';
 import { bossEntryLeak } from './bossEntry';
-import { eliteAppetite, goldAtDeath, potionHoarding } from './observations';
+import { damageDraftingLeak } from './damageDrafting';
+import { eliteAppetite, eventTax, goldAtDeath, potionHoarding, restDiscipline } from './observations';
 import { removalDisciplineLeak } from './removals';
 
 // Note: ascension pacing is deliberately NOT a detector. Telling a climber to
@@ -23,7 +24,15 @@ function byRank(a: LeakResult, b: LeakResult): number {
 
 export function detectLeaks(runs: NormalizedRun[]): LeakResult[] {
   const completed = completedRuns(runs);
-  const leaks = [bossEntryLeak(completed), removalDisciplineLeak(completed)].sort(byRank);
-  const observations = [eliteAppetite(completed), potionHoarding(completed), goldAtDeath(completed)].sort(byRank);
+  const leaks = [bossEntryLeak(completed), removalDisciplineLeak(completed), damageDraftingLeak(completed)].sort(
+    byRank,
+  );
+  const observations = [
+    eliteAppetite(completed),
+    potionHoarding(completed),
+    goldAtDeath(completed),
+    eventTax(completed),
+    restDiscipline(completed),
+  ].sort(byRank);
   return [...leaks, ...observations];
 }

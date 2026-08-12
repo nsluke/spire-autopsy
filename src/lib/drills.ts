@@ -15,6 +15,7 @@
  */
 import { completedRuns, deathNode, entryGold, entryHpPct } from './normalize';
 import { displayName, shortDate, characterName } from './idFormat';
+import { draftProfile } from './leaks/damageDrafting';
 import type { NormalizedRun } from './types';
 
 export type DrillVerdict = 'pass' | 'fail' | 'na';
@@ -77,6 +78,19 @@ export const DRILLS: Record<string, DrillDef> = {
       return worst
         ? { verdict: 'fail', note: `entered ${worst.name || 'a boss'} at ${Math.round(worst.pct * 100)}%` }
         : { verdict: 'pass', note: `all ${bossFights} boss ${bossFights === 1 ? 'entry' : 'entries'} healthy` };
+    },
+  },
+  'damage-drafting': {
+    leakId: 'damage-drafting',
+    title: 'Damage first',
+    assignment: 'Add at least 2 attack cards before your first elite fight.',
+    targetRuns: 5,
+    grade(run) {
+      const profile = draftProfile(run);
+      if (!profile) return { verdict: 'na', note: 'no act-1 elite fought' };
+      return profile.attacksBeforeElite >= 2
+        ? { verdict: 'pass', note: `${profile.attacksBeforeElite} attacks before the first elite` }
+        : { verdict: 'fail', note: `only ${profile.attacksBeforeElite} attack${profile.attacksBeforeElite === 1 ? '' : 's'} before the floor-${profile.firstEliteFloor} elite` };
     },
   },
   'removal-discipline': {
@@ -177,6 +191,11 @@ const RATE_FNS: Record<string, (run: NormalizedRun) => number | undefined> = {
       if (node.stats.cardsRemoved.length === 0) skipped++;
     }
     return rich ? skipped / rich : undefined;
+  },
+  'damage-drafting': (run) => {
+    const profile = draftProfile(run);
+    if (!profile) return undefined;
+    return profile.attacksBeforeElite < 2 ? 1 : 0;
   },
   // observations can trend too — potions still held at death
   'potion-hoarding': (run) => {

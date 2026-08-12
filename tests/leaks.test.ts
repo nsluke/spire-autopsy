@@ -71,15 +71,15 @@ const corpusMain = [
 describe('gating (applicable=false below thresholds)', () => {
   it('every detector declines politely on the 5-completed-run fixture corpus', () => {
     const results = detectLeaks(fixtures);
-    expect(results).toHaveLength(5); // 2 leak detectors + 3 observations (ascension retired to climb.ts)
+    expect(results).toHaveLength(8); // 3 leak detectors + 5 observations (ascension retired to climb.ts)
     for (const r of results) {
       expect(r.applicable).toBe(false);
       expect(r.body.length).toBeGreaterThan(0);
       expect(r.receiptLines).toHaveLength(0);
       expect(r.expectedWinsLost).toBe(0);
     }
-    expect(results.slice(0, 2).every((r) => r.tier === 'leak')).toBe(true);
-    expect(results.slice(2).every((r) => r.tier === 'observation')).toBe(true);
+    expect(results.slice(0, 3).every((r) => r.tier === 'leak')).toBe(true);
+    expect(results.slice(3).every((r) => r.tier === 'observation')).toBe(true);
   });
 
   it('boss-entry-hp needs 20 completed runs', () => {
@@ -297,9 +297,9 @@ describe('observations', () => {
 describe('detectLeaks ordering', () => {
   it('returns leaks ranked by expectedWinsLost, observations after', () => {
     const results = detectLeaks(corpusMain);
-    expect(results).toHaveLength(5); // 2 leak detectors + 3 observations (ascension retired to climb.ts)
-    expect(results.slice(0, 2).map((r) => r.tier)).toEqual(['leak', 'leak']);
-    expect(results.slice(2).map((r) => r.tier)).toEqual(['observation', 'observation', 'observation']);
+    expect(results).toHaveLength(8); // 3 leak detectors + 5 observations (ascension retired to climb.ts)
+    expect(results.slice(0, 3).map((r) => r.tier)).toEqual(['leak', 'leak', 'leak']);
+    expect(results.slice(3).every((r) => r.tier === 'observation')).toBe(true);
     expect(results[0].id).toBe('boss-entry-hp');
     expect(results[0].expectedWinsLost).toBeGreaterThanOrEqual(results[1].expectedWinsLost);
   });
