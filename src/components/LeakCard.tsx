@@ -140,7 +140,14 @@ export default function LeakCard({
             // key includes the index: one run can appear twice (e.g. two flagged
             // heals in the same run's receipts)
             <a className="receiptLine runReceipt num" key={`${r.runId}-${i}`} href={`#/autopsy/${r.runId}`}>
-              <RichLine text={r.label} enemyIds={r.enemyIds} /> <span className="openCue">· open autopsy →</span>
+              <RichLine
+                text={r.label}
+                enemyIds={r.enemyIds}
+                cardIds={r.cardIds}
+                relicIds={r.relicIds}
+                potionIds={r.potionIds}
+              />{' '}
+              <span className="openCue">· open autopsy →</span>
             </a>
           ))}
           {leak.confoundNote && <p className="confoundNote">{leak.confoundNote}</p>}

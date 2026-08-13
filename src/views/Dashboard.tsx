@@ -138,9 +138,12 @@ export default function Dashboard({ stats, runs }: DashboardProps) {
         <div className="dashHead">
           <div>
             <h1>The Spire awaits</h1>
-            <p className="dashSub">No runs match this filter.</p>
           </div>
           {pillRow}
+        </div>
+        <div className="emptyState">
+          <img src="art/events/NEOW.webp" alt="" />
+          <p>No runs match this filter.</p>
         </div>
       </div>
     );

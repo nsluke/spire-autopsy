@@ -167,9 +167,23 @@
   text-decoration: underline;
 }
 
-/* empty state */
+/* empty state — Neow greets you at the foot of the Spire */
 .autopsyEmpty {
   color: var(--muted);
+}
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 20px;
+  text-align: center;
+}
+.emptyState img {
+  width: 200px;
+  max-width: 60%;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6));
+  opacity: 0.92;
 }
 
 /* ---- killer portrait ---- */
@@ -237,18 +251,28 @@
   margin: 0;
   padding: 0;
 }
+/* act headers — the run's biggest structural beats get the carved display face */
 .floorActTitle {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ember);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 18px 0 8px;
   padding-left: 28px;
 }
+.floorActTitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(232, 163, 61, 0.45), transparent);
+}
 .floorAct:first-child .floorActTitle { margin-top: 0; }
-.floorActTitle span { color: var(--muted); letter-spacing: 0.08em; }
+.floorActTitle span { color: var(--ember); white-space: nowrap; }
 
 .floorRow {
   display: grid;
@@ -367,4 +391,57 @@
 .floorBit.removed { color: var(--loss); }
 .floorBit.upgraded { color: var(--ember); }
 .floorGold { color: var(--ember); }
+.floorChoice { color: var(--c-necro); }
+.floorMaxLoss { color: var(--loss); }
+.floorMaxGain { color: var(--win); }
 .floorSep { color: var(--faint); }
+
+/* ---- the final deck & relics ---- */
+.deckPanel { margin-top: 16px; }
+.deckList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.deckCard {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.deckCardJump { cursor: pointer; }
+.deckPlus {
+  color: var(--ember);
+  font-weight: 650;
+}
+.deckFloor {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--faint);
+}
+.deckCardJump:hover .deckFloor { color: var(--ember); }
+.relicStripTitle { margin-top: 14px; }
+.relicStrip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.85rem;
+}
+.relicStripItem { display: inline-flex; }
+
+/* win-contrast link inside a beat */
+.beatRunLink {
+  color: var(--ember);
+  font-size: 0.78rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.beatRunLink:hover,
+.beatRunLink:focus-visible { text-decoration: underline; }

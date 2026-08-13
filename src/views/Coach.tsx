@@ -29,9 +29,13 @@ const MAX_LEAK_CARDS = 3;
 const DISMISSED_KEY = 'dismissedLeaks';
 const DRILL_KEY = 'activeDrill';
 
-/** One-line rendering of an observation body: its first sentence. */
+/**
+ * One-line rendering of an observation body: its first sentence. Observation
+ * copy is dense with decimals ("Wins average 2.4 elites"), so a terminator
+ * only counts when it is followed by a space and a capital, or ends the text.
+ */
 function firstSentence(text: string): string {
-  const match = text.match(/^[^.!?]*[.!?]/);
+  const match = text.match(/^.*?[.!?](?=\s+[A-Z“"(]|\s*$)/s);
   return match ? match[0].trim() : text;
 }
 
@@ -96,7 +100,10 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   const drillProgress = activeDrill ? computeDrillProgress(activeDrill, runs) : undefined;
   const startDrill = (leakId: string) => {
     if (!DRILLS[leakId]) return;
-    const drill: ActiveDrill = { leakId, acceptedAt: Date.now(), targetRuns: DRILLS[leakId].targetRuns };
+    // Carry the card's own bar onto the drill: the player is graded against
+    // the number they were shown, even if later runs move the average.
+    const bar = leaks.find((l) => l.id === leakId)?.drillBar;
+    const drill: ActiveDrill = { leakId, acceptedAt: Date.now(), targetRuns: DRILLS[leakId].targetRuns, bar };
     setActiveDrill(drill);
     void setMeta(DRILL_KEY, drill);
   };
@@ -124,10 +131,10 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
           <button type="button" className="pill on" aria-pressed="true">
             Coach
           </button>
-          <button type="button" className="pill" disabled title="coming in v0.2">
+          <button type="button" className="pill" disabled title="Soon">
             Analyst
           </button>
-          <button type="button" className="pill" disabled title="coming in v0.2">
+          <button type="button" className="pill" disabled title="Soon">
             The Spire Speaks
           </button>
         </div>
@@ -197,8 +204,8 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
 
       {cards.length === 0 && (
         <p className="coachClear">
-          No glaring leak right now. Nothing in your completed runs looks like a habit that's clearly costing you wins —
-          keep playing, and check back as new runs sharpen the evidence.
+          No glaring leak. Nothing in your runs reads like a habit costing you wins. Keep climbing — the coach speaks
+          when the evidence does.
         </p>
       )}
 

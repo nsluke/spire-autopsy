@@ -24,11 +24,25 @@ content policy applies to both games.
 All images were sourced from the community wiki **slaythespire.wiki.gg**
 (Slay the Spire 2 namespace), which hosts them as game-asset uploads © Mega Crit.
 Per-file original URLs are recorded in `manifest.json` under `"sources"` (enemies/
-characters) and `"cardSources"` (card portraits).
+characters), `"cardSources"` (card portraits), `"eventSources"` (event illustrations
+and Ancient portraits), and `"mapSources"` (map-node icons).
 
 Card portraits are 220px-wide thumbs of the unupgraded wiki card image, fetched by
 `scripts/fetch-card-art.mjs`, converted to WebP, and shown only as a hover preview
 on listed card names.
+
+Relic icons (`art/relics/`) and potion icons (`art/potions/`) are fetched by
+`scripts/fetch-item-art.mjs` from `Module:Relics/StS2 data` and
+`Module:Potions/StS2 data` on the wiki; per-file original URLs are in
+`manifest.json` under `"relicSources"` and `"potionSources"`. Rules text shown
+in hover tooltips comes from the same modules.
+
+Map icons (`art/map/`) and event illustrations (`art/events/`) are fetched by
+`scripts/fetch-place-art.mjs`. Event hover copy comes from
+`Module:Events/StS2 data` on the wiki (Description, else the first sentence of
+Flavor). Ancients — Neow, Pael, Orobas, Tanx, Nonupeipe — are not in that module;
+their portraits are the wiki map-node images (`File:StS2 Map-Neow.png` and
+siblings) with short hand-written blurbs.
 
 Notes on representative sprites for group enemies:
 - `THE_KIN.png` uses the Kin Priest sprite (`File:StS2 Kin Priest.png`).

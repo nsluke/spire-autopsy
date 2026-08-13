@@ -13,9 +13,14 @@
  *    don't consume drill slots;
  *  - the drill completes when pass+fail reaches targetRuns.
  */
-import { completedRuns, deathNode, entryGold, entryHpPct } from './normalize';
+import { completedRuns, entryGold, entryHpPct, hasRoom } from './normalize';
 import { displayName, shortDate, characterName } from './idFormat';
-import { draftProfile } from './leaks/damageDrafting';
+import { ATTACK_TARGET, draftProfile } from './leaks/damageDrafting';
+import { ACT1_ADD_TARGET, deckAdditions } from './leaks/deckBloat';
+import { TURN_TARGET, hallwayFights, medianHallwayTurns } from './leaks/fightPacing';
+import { HELD_BAR, beltAtLastFight, hardFights } from './leaks/potions';
+import { REAL_SPEND, richShopGold } from './leaks/removals';
+import { bossEntries, upgradeTarget, UPGRADES_PER_ACT } from './leaks/upgradeTempo';
 import type { NormalizedRun } from './types';
 
 export type DrillVerdict = 'pass' | 'fail' | 'na';
@@ -25,7 +30,12 @@ export interface DrillDef {
   title: string;
   assignment: string;
   targetRuns: number;
-  grade(run: NormalizedRun): { verdict: DrillVerdict; note?: string };
+  /**
+   * `bar` is the leak's per-player threshold (LeakResult.drillBar), carried
+   * from the card the player accepted. Graders that have one must use it, so
+   * the number they are held to is always the number they were quoted.
+   */
+  grade(run: NormalizedRun, bar?: number): { verdict: DrillVerdict; note?: string };
 }
 
 /** Persisted shape (IndexedDB meta key 'activeDrill'). */
@@ -33,6 +43,8 @@ export interface ActiveDrill {
   leakId: string;
   acceptedAt: number; // unix ms
   targetRuns: number;
+  /** the card's drillBar at acceptance; older drills predate it */
+  bar?: number;
 }
 
 export interface GradedRun {
@@ -53,7 +65,14 @@ export interface DrillProgress {
 }
 
 const LOW = 0.6;
-const RICH = 100;
+
+/**
+ * Every grader below mirrors its detector's predicate EXACTLY, including what
+ * counts as evidence at all. A drill that fails a run the leak card would not
+ * have flagged teaches the wrong habit, so where the detector declines to
+ * accuse (a shop the removal may not have been affordable at, a belt with
+ * nothing in it), the grader returns 'na' and the run consumes no drill slot.
+ */
 
 export const DRILLS: Record<string, DrillDef> = {
   'boss-entry-hp': {
@@ -83,35 +102,112 @@ export const DRILLS: Record<string, DrillDef> = {
   'damage-drafting': {
     leakId: 'damage-drafting',
     title: 'Damage first',
-    assignment: 'Add at least 2 attack cards before your first elite fight.',
+    assignment: `Add at least ${ATTACK_TARGET} attack cards before your first elite fight — rewards, shops, and events all count.`,
     targetRuns: 5,
     grade(run) {
       const profile = draftProfile(run);
       if (!profile) return { verdict: 'na', note: 'no act-1 elite fought' };
-      return profile.attacksBeforeElite >= 2
-        ? { verdict: 'pass', note: `${profile.attacksBeforeElite} attacks before the first elite` }
-        : { verdict: 'fail', note: `only ${profile.attacksBeforeElite} attack${profile.attacksBeforeElite === 1 ? '' : 's'} before the floor-${profile.firstEliteFloor} elite` };
+      // "added" is load-bearing: the count excludes starter Strikes, and a note
+      // reading "0 attacks" is a receipt the player can disprove from memory.
+      return profile.attacksBeforeElite >= ATTACK_TARGET
+        ? { verdict: 'pass', note: `${profile.attacksBeforeElite} attacks added before the first elite` }
+        : { verdict: 'fail', note: `only ${profile.attacksBeforeElite} attack${profile.attacksBeforeElite === 1 ? '' : 's'} added before the floor-${profile.firstEliteFloor} elite, wanted ${ATTACK_TARGET}` };
     },
   },
   'removal-discipline': {
     leakId: 'removal-discipline',
     title: 'Buy the removal',
-    assignment: 'Whenever a shop offers removal and you hold 100+ gold, buy it before anything else.',
+    assignment: `Any shop where you spend ${REAL_SPEND}+ gold, the removal comes first.`,
     targetRuns: 5,
     grade(run) {
-      let rich = 0;
-      let skippedGold: number | undefined;
+      // Mirrors removals.ts: the act's removal money in hand, and real gold
+      // spent on other things while removing nothing. A visit that spent
+      // almost nothing is no evidence — the removal may not have been on offer
+      // or affordable — so it never counts either way.
+      let removed = 0;
+      let spentPast: number | undefined;
       for (const node of run.nodes) {
-        if (!node.rooms.some((r) => r.roomType === 'shop')) continue;
-        const gold = entryGold(node);
-        if (gold < RICH) continue;
-        rich++;
-        if (node.stats.cardsRemoved.length === 0 && skippedGold === undefined) skippedGold = gold;
+        if (!hasRoom(node, 'shop')) continue;
+        if (entryGold(node) < richShopGold(node.act)) continue;
+        if (node.stats.cardsRemoved.length > 0) {
+          removed += 1;
+        } else if (node.stats.goldSpent >= REAL_SPEND && spentPast === undefined) {
+          spentPast = node.stats.goldSpent;
+        }
       }
-      if (rich === 0) return { verdict: 'na', note: 'no rich shop visited' };
-      return skippedGold !== undefined
-        ? { verdict: 'fail', note: `left a shop holding ${skippedGold} gold, no removal` }
-        : { verdict: 'pass', note: `removed at all ${rich} rich ${rich === 1 ? 'shop' : 'shops'}` };
+      if (spentPast !== undefined) {
+        return { verdict: 'fail', note: `spent ${spentPast} gold at a shop, none of it on the removal` };
+      }
+      if (removed === 0) return { verdict: 'na', note: 'no shop where the removal was clearly affordable' };
+      return { verdict: 'pass', note: `removed a card at all ${removed} ${removed === 1 ? 'shop' : 'shops'} you spent at` };
+    },
+  },
+  'potion-hoarding': {
+    leakId: 'potion-hoarding',
+    title: 'Throw them at the boss',
+    assignment: `Every elite and boss gets a potion. Reaching the last fight of a run holding ${HELD_BAR}+ potions unthrown is a miss.`,
+    targetRuns: 5,
+    grade(run) {
+      // The belt is only exactly known at the run's LAST node, so that is the
+      // only fight this grades — see potions.ts.
+      const last = run.nodes[run.nodes.length - 1];
+      if (!last || !(hasRoom(last, 'elite') || hasRoom(last, 'boss'))) {
+        return { verdict: 'na', note: 'the run did not end on an elite or boss fight' };
+      }
+      const thrown = last.stats.potionsUsed.length;
+      if (thrown > 0) {
+        return { verdict: 'pass', note: `threw ${thrown} ${thrown === 1 ? 'potion' : 'potions'} in the last fight` };
+      }
+      const belt = beltAtLastFight(run);
+      if (belt < HELD_BAR) return { verdict: 'na', note: `held ${belt} potions entering the last fight` };
+      // A won run is never a miss. The habit costs you the fights you lose;
+      // charging a fail against a victory would be the drill arguing with the
+      // scoreboard.
+      if (run.win) return { verdict: 'pass', note: `won it holding ${belt} — the belt cost you nothing here` };
+      return { verdict: 'fail', note: `entered the last fight holding ${belt} potions, threw none` };
+    },
+  },
+  'deck-bloat': {
+    leakId: 'deck-bloat',
+    title: 'Skip the filler',
+    assignment: `At most ${ACT1_ADD_TARGET} cards added in act 1. If a reward does not beat a card already in the deck, take the skip.`,
+    targetRuns: 5,
+    grade(run, bar = ACT1_ADD_TARGET) {
+      if (run.actsEntered < 2) return { verdict: 'na', note: 'the run ended inside act 1' };
+      const added = deckAdditions(run, 1);
+      const cards = `${added} ${added === 1 ? 'card' : 'cards'} added in act 1`;
+      return added <= bar ? { verdict: 'pass', note: cards } : { verdict: 'fail', note: `${cards}, bar is ${bar}` };
+    },
+  },
+  'upgrade-tempo': {
+    leakId: 'upgrade-tempo',
+    title: 'Smith it',
+    assignment: `Reach each act boss with ${UPGRADES_PER_ACT} upgrades per act banked. Above half HP, the campfire is a forge.`,
+    targetRuns: 5,
+    grade(run) {
+      const entries = bossEntries(run);
+      if (entries.length === 0) return { verdict: 'na', note: 'no boss reached' };
+      const worst = entries.find((e) => e.short);
+      return worst
+        ? {
+            verdict: 'fail',
+            note: `met the act-${worst.act} boss with ${worst.banked} ${worst.banked === 1 ? 'upgrade' : 'upgrades'} banked, wanted ${upgradeTarget(worst.act)}`,
+          }
+        : { verdict: 'pass', note: `all ${entries.length} boss ${entries.length === 1 ? 'entry' : 'entries'} at the bar` };
+    },
+  },
+  'fight-pacing': {
+    leakId: 'fight-pacing',
+    title: 'Close the hallway',
+    assignment: `Keep the median act-1/2 hallway fight at ${TURN_TARGET} turns or under.`,
+    targetRuns: 5,
+    grade(run) {
+      const fights = hallwayFights(run);
+      if (fights.length < 4) return { verdict: 'na', note: 'too few hallway fights recorded' };
+      const med = medianHallwayTurns(run)!;
+      return med <= TURN_TARGET
+        ? { verdict: 'pass', note: `median ${med} turns across ${fights.length} hallway fights` }
+        : { verdict: 'fail', note: `median ${med} turns across ${fights.length} hallway fights, bar is ${TURN_TARGET}` };
     },
   },
 };
@@ -128,7 +224,7 @@ export function computeDrillProgress(drill: ActiveDrill, runs: NormalizedRun[]):
   let fails = 0;
   for (const run of eligible) {
     if (passes + fails >= drill.targetRuns) break;
-    const { verdict, note } = def.grade(run);
+    const { verdict, note } = def.grade(run, drill.bar);
     if (verdict === 'pass') passes++;
     if (verdict === 'fail') fails++;
     graded.push({
@@ -167,13 +263,18 @@ export function behaviorTrend(
   });
 }
 
-/** Rate of the leak behavior within one run; undefined = didn't come up. */
+/**
+ * Rate of the leak behavior within one run; undefined = didn't come up.
+ *
+ * Each entry mirrors its detector's headline predicate — a sparkline that
+ * trends a different rule than the card above it is a lie with a nice curve.
+ */
 const RATE_FNS: Record<string, (run: NormalizedRun) => number | undefined> = {
   'boss-entry-hp': (run) => {
     let fights = 0;
     let low = 0;
     run.nodes.forEach((node, i) => {
-      if (!node.rooms.some((r) => r.roomType === 'boss')) return;
+      if (!hasRoom(node, 'boss')) return;
       const entry = entryHpPct(run, i);
       if (entry === undefined) return;
       fights++;
@@ -181,26 +282,39 @@ const RATE_FNS: Record<string, (run: NormalizedRun) => number | undefined> = {
     });
     return fights ? low / fights : undefined;
   },
+  // removals.ts: rich visits are the denominator; only a real-spend visit with
+  // no removal is a skip.
   'removal-discipline': (run) => {
     let rich = 0;
     let skipped = 0;
     for (const node of run.nodes) {
-      if (!node.rooms.some((r) => r.roomType === 'shop')) continue;
-      if (entryGold(node) < RICH) continue;
+      if (!hasRoom(node, 'shop')) continue;
+      if (entryGold(node) < richShopGold(node.act)) continue;
       rich++;
-      if (node.stats.cardsRemoved.length === 0) skipped++;
+      if (node.stats.cardsRemoved.length === 0 && node.stats.goldSpent >= REAL_SPEND) skipped++;
     }
     return rich ? skipped / rich : undefined;
   },
   'damage-drafting': (run) => {
     const profile = draftProfile(run);
     if (!profile) return undefined;
-    return profile.attacksBeforeElite < 2 ? 1 : 0;
+    return profile.attacksBeforeElite < ATTACK_TARGET ? 1 : 0;
   },
-  // observations can trend too — potions still held at death
+  // potions.ts headline: elite/boss fights that got no potion.
   'potion-hoarding': (run) => {
-    const death = deathNode(run);
-    if (!death) return undefined;
-    return run.player.potions.length > 0 ? 1 : 0;
+    const fights = hardFights(run);
+    if (!fights.length) return undefined;
+    return fights.filter((n) => n.stats.potionsUsed.length === 0).length / fights.length;
+  },
+  'deck-bloat': (run) => (run.actsEntered < 2 ? undefined : deckAdditions(run, 1) > ACT1_ADD_TARGET ? 1 : 0),
+  'upgrade-tempo': (run) => {
+    const entries = bossEntries(run);
+    if (!entries.length) return undefined;
+    return entries.filter((e) => e.short).length / entries.length;
+  },
+  'fight-pacing': (run) => {
+    const fights = hallwayFights(run);
+    if (!fights.length) return undefined;
+    return fights.filter((f) => f.turns > TURN_TARGET).length / fights.length;
   },
 };

@@ -54,6 +54,17 @@ export function bossEntryLeak(completed: NormalizedRun[]): LeakResult {
 
   const low = fights.filter((f) => f.entry < LOW_BOSS_ENTRY);
   const healthy = fights.filter((f) => f.entry >= LOW_BOSS_ENTRY);
+  // A player who NEVER arrives hurt isn't a data gap — with a real fight count
+  // that's the habit working, and it gets credited, not filed as "locked".
+  if (low.length === 0 && fights.length >= 20) {
+    return healthyResult(
+      ID,
+      'leak',
+      TITLE,
+      `All ${fights.length} boss fights in your history were entered at 60%+ HP — the door is never half-closing on you. Keep routing that way.`,
+      [`boss fights entered at 60%+ HP: ${fights.length}/${fights.length}`],
+    );
+  }
   if (low.length === 0 || healthy.length === 0) {
     return notYetApplicable(
       ID,

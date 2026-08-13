@@ -1,0 +1,1773 @@
+{
+  "RELIC.AKABEKO": {
+    "name": "Akabeko",
+    "blurb": "At the start of each combat, gain 8 Vigor.",
+    "rarity": "Uncommon",
+    "art": "art/relics/AKABEKO.webp"
+  },
+  "RELIC.ALCHEMICAL_COFFER": {
+    "name": "Alchemical Coffer",
+    "blurb": "Upon pickup, gain 4 {{2|potion|Potion}} slots filled with random {{2|potions|Potion}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/ALCHEMICAL_COFFER.webp"
+  },
+  "RELIC.AMETHYST_AUBERGINE": {
+    "name": "Amethyst Aubergine",
+    "blurb": "Enemies drop 15 additional Gold old.",
+    "rarity": "Common",
+    "art": "art/relics/AMETHYST_AUBERGINE.webp"
+  },
+  "RELIC.ANCHOR": {
+    "name": "Anchor",
+    "blurb": "Start each combat with 10 Block.",
+    "rarity": "Common",
+    "art": "art/relics/ANCHOR.webp"
+  },
+  "RELIC.ARCANE_SCROLL": {
+    "name": "Arcane Scroll",
+    "blurb": "Upon pickup, obtain a random Rare Card to add to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/ARCANE_SCROLL.webp"
+  },
+  "RELIC.ARCHAIC_TOOTH": {
+    "name": "Archaic Tooth",
+    "blurb": "Upon pickup, Transform a starter card into an ancient version.",
+    "rarity": "Ancient",
+    "art": "art/relics/ARCHAIC_TOOTH.webp"
+  },
+  "RELIC.ART_OF_WAR": {
+    "name": "Art of War",
+    "blurb": "If you do not play any {{QueryLink|Cards|type:Attack|Attacks|2}} during your turn, gain an additional 1 Energy next turn.",
+    "rarity": "Rare",
+    "art": "art/relics/ART_OF_WAR.webp"
+  },
+  "RELIC.ASTROLABE": {
+    "name": "Astrolabe",
+    "blurb": "Upon pickup, Transform 3 cards, then Upgrade them.",
+    "rarity": "Ancient",
+    "art": "art/relics/ASTROLABE.webp"
+  },
+  "RELIC.BAG_OF_MARBLES": {
+    "name": "Bag of Marbles",
+    "blurb": "At the start of each combat, apply 1 Vulnerable to ALL enemies.",
+    "rarity": "Common",
+    "art": "art/relics/BAG_OF_MARBLES.webp"
+  },
+  "RELIC.BAG_OF_PREPARATION": {
+    "name": "Bag of Preparation",
+    "blurb": "At the start of each combat, draw 2 additional cards.",
+    "rarity": "Common",
+    "art": "art/relics/BAG_OF_PREPARATION.webp"
+  },
+  "RELIC.BEATING_REMNANT": {
+    "name": "Beating Remnant",
+    "blurb": "You cannot lose more than 20 HP in a single turn.",
+    "rarity": "Rare",
+    "art": "art/relics/BEATING_REMNANT.webp"
+  },
+  "RELIC.BEAUTIFUL_BRACELET": {
+    "name": "Beautiful Bracelet",
+    "blurb": "Upon pickup, choose 4 cards in your Deck. Enchant them with Swift 2.",
+    "rarity": "Ancient",
+    "art": "art/relics/BEAUTIFUL_BRACELET.webp"
+  },
+  "RELIC.BELLOWS": {
+    "name": "Bellows",
+    "blurb": "The first Hand you draw each combat is Upgraded.",
+    "rarity": "Rare",
+    "art": "art/relics/BELLOWS.webp"
+  },
+  "RELIC.BELT_BUCKLE": {
+    "name": "Belt Buckle",
+    "blurb": "While you have no {{2|potions|Potion}}, you have 2 additional Dexterity.",
+    "rarity": "Shop",
+    "art": "art/relics/BELT_BUCKLE.webp"
+  },
+  "RELIC.BIG_HAT": {
+    "name": "Big Hat",
+    "blurb": "At the start of each combat, add 2 random Ethereal cards into your Hand.",
+    "rarity": "Rare",
+    "character": "Necrobinder",
+    "art": "art/relics/BIG_HAT.webp"
+  },
+  "RELIC.BIG_MUSHROOM": {
+    "name": "Big Mushroom",
+    "blurb": "Upon pickup, raise your Max HP by 20. At the start of each combat, draw 2 fewer cards.",
+    "rarity": "Event",
+    "art": "art/relics/BIG_MUSHROOM.webp"
+  },
+  "RELIC.BIIIG_HUG": {
+    "name": "Biiig Hug",
+    "blurb": "Upon pickup, remove 4 cards from your Deck. Whenever you shuffle your Draw Pile, add a {{C2|Soot}} into your Draw Pile.",
+    "rarity": "Ancient",
+    "art": "art/relics/BIIIG_HUG.webp"
+  },
+  "RELIC.BING_BONG": {
+    "name": "Bing Bong",
+    "blurb": "Whenever you add a card to your Deck, add one additional copy.",
+    "rarity": "Event",
+    "art": "art/relics/BING_BONG.webp"
+  },
+  "RELIC.BLACK_BLOOD": {
+    "name": "Black Blood",
+    "blurb": "At the end of combat, heal 12 HP.",
+    "rarity": "Starter",
+    "character": "Ironclad",
+    "art": "art/relics/BLACK_BLOOD.webp"
+  },
+  "RELIC.BLACK_STAR": {
+    "name": "Black Star",
+    "blurb": "Elites drop an additional Relic when defeated.",
+    "rarity": "Ancient",
+    "art": "art/relics/BLACK_STAR.webp"
+  },
+  "RELIC.BLESSED_ANTLER": {
+    "name": "Blessed Antler",
+    "blurb": "Gain 1 Energy at the start of each turn. At the start of each combat, shuffle 3 {{C2|Dazed}} into your Draw Pile.",
+    "rarity": "Ancient",
+    "art": "art/relics/BLESSED_ANTLER.webp"
+  },
+  "RELIC.BLOOD_SOAKED_ROSE": {
+    "name": "Blood-Soaked Rose",
+    "blurb": "Upon pickup, add 1 {{C2|Enthralled}} to your Deck. Gain 1 Energy at the start of each turn.",
+    "rarity": "Ancient"
+  },
+  "RELIC.BLOOD_VIAL": {
+    "name": "Blood Vial",
+    "blurb": "At the start of each combat, heal 2 HP.",
+    "rarity": "Common",
+    "art": "art/relics/BLOOD_VIAL.webp"
+  },
+  "RELIC.BONE_FLUTE": {
+    "name": "Bone Flute",
+    "blurb": "Whenever Osty attacks, gain 2 Block.",
+    "rarity": "Common",
+    "character": "Necrobinder",
+    "art": "art/relics/BONE_FLUTE.webp"
+  },
+  "RELIC.BONE_TEA": {
+    "name": "Bone Tea",
+    "blurb": "At the start of the next combat, Upgrade your starting hand.",
+    "rarity": "Event",
+    "art": "art/relics/BONE_TEA.webp"
+  },
+  "RELIC.BOOKMARK": {
+    "name": "Bookmark",
+    "blurb": "At the end of each turn, lower the cost of a random Retained card by 1 until played.",
+    "rarity": "Rare",
+    "character": "Necrobinder",
+    "art": "art/relics/BOOKMARK.webp"
+  },
+  "RELIC.BOOK_OF_FIVE_RINGS": {
+    "name": "Book of Five Rings",
+    "blurb": "Every 5 cards you add to your Deck, heal 20 HP.",
+    "rarity": "Common",
+    "art": "art/relics/BOOK_OF_FIVE_RINGS.webp"
+  },
+  "RELIC.BOOK_REPAIR_KNIFE": {
+    "name": "Book Repair Knife",
+    "blurb": "Whenever a non-Minion enemy dies to Doom, heal 3 HP.",
+    "rarity": "Uncommon",
+    "character": "Necrobinder",
+    "art": "art/relics/BOOK_REPAIR_KNIFE.webp"
+  },
+  "RELIC.BOOMING_CONCH": {
+    "name": "Booming Conch",
+    "blurb": "At the start of Elite combats, draw 2 additional cards and gain 1 Energy.",
+    "rarity": "Ancient",
+    "art": "art/relics/BOOMING_CONCH.webp"
+  },
+  "RELIC.BOUND_PHYLACTERY": {
+    "name": "Bound Phylactery",
+    "blurb": "At the start of your turn, Summon 1.",
+    "rarity": "Starter",
+    "character": "Necrobinder",
+    "art": "art/relics/BOUND_PHYLACTERY.webp"
+  },
+  "RELIC.BOWLER_HAT": {
+    "name": "Bowler Hat",
+    "blurb": "Gain 25% additional Gold old.",
+    "rarity": "Uncommon",
+    "art": "art/relics/BOWLER_HAT.webp"
+  },
+  "RELIC.BREAD": {
+    "name": "Bread",
+    "blurb": "At the start of your first turn, lose 2 Energy. At the start of all other turns, gain 1 Energy.",
+    "rarity": "Shop",
+    "art": "art/relics/BREAD.webp"
+  },
+  "RELIC.BRILLIANT_SCARF": {
+    "name": "Brilliant Scarf",
+    "blurb": "The 5th card you play from your hand each turn is free.",
+    "rarity": "Ancient",
+    "art": "art/relics/BRILLIANT_SCARF.webp"
+  },
+  "RELIC.BRIMSTONE": {
+    "name": "Brimstone",
+    "blurb": "At the start of your turn, gain 2 Strength and ALL enemies gain 1 Strength.",
+    "rarity": "Shop",
+    "character": "Ironclad",
+    "art": "art/relics/BRIMSTONE.webp"
+  },
+  "RELIC.BRONZE_SCALES": {
+    "name": "Bronze Scales",
+    "blurb": "Start each combat with 3 Thorns.",
+    "rarity": "Common",
+    "art": "art/relics/BRONZE_SCALES.webp"
+  },
+  "RELIC.BURNING_BLOOD": {
+    "name": "Burning Blood",
+    "blurb": "At the end of combat, heal 6 HP.",
+    "rarity": "Starter",
+    "character": "Ironclad",
+    "art": "art/relics/BURNING_BLOOD.webp"
+  },
+  "RELIC.BURNING_STICKS": {
+    "name": "Burning Sticks",
+    "blurb": "The first time each combat you Exhaust a {{QueryLink|Cards|type:Skill|Skill|2}}, add a copy of it into your Hand.",
+    "rarity": "Shop",
+    "art": "art/relics/BURNING_STICKS.webp"
+  },
+  "RELIC.BYRDPIP": {
+    "name": "Byrdpip",
+    "blurb": "Upon pickup, gain the card {{C2|Byrd Swoop}}. A Byrdpip will accompany you in battles.",
+    "rarity": "Event",
+    "art": "art/relics/BYRDPIP.webp"
+  },
+  "RELIC.CALLING_BELL": {
+    "name": "Calling Bell",
+    "blurb": "Upon pickup, obtain a unique {{C|Curse of the Bell|Curse|2}} and 3 Relics.",
+    "rarity": "Ancient",
+    "art": "art/relics/CALLING_BELL.webp"
+  },
+  "RELIC.CANDELABRA": {
+    "name": "Candelabra",
+    "blurb": "At the start of your 2nd turn, gain 2 Energy.",
+    "rarity": "Uncommon",
+    "art": "art/relics/CANDELABRA.webp"
+  },
+  "RELIC.CAPTAINS_WHEEL": {
+    "name": "Captain's Wheel",
+    "blurb": "At the start of your 3rd turn, gain 18 Block.",
+    "rarity": "Rare",
+    "art": "art/relics/CAPTAINS_WHEEL.webp"
+  },
+  "RELIC.CAULDRON": {
+    "name": "Cauldron",
+    "blurb": "Upon pickup, brews 5 random {{2|potions|Potion}}.",
+    "rarity": "Shop",
+    "art": "art/relics/CAULDRON.webp"
+  },
+  "RELIC.CENTENNIAL_PUZZLE": {
+    "name": "Centennial Puzzle",
+    "blurb": "The first time you lose HP each combat, draw 3 cards.",
+    "rarity": "Common",
+    "art": "art/relics/CENTENNIAL_PUZZLE.webp"
+  },
+  "RELIC.CHANDELIER": {
+    "name": "Chandelier",
+    "blurb": "At the start of your 3rd turn, gain 3 Energy.",
+    "rarity": "Rare",
+    "art": "art/relics/CHANDELIER.webp"
+  },
+  "RELIC.CHARONS_ASHES": {
+    "name": "Charon's Ashes",
+    "blurb": "Whenever you Exhaust a card, deal 3 damage to ALL enemies.",
+    "rarity": "Rare",
+    "character": "Ironclad",
+    "art": "art/relics/CHARONS_ASHES.webp"
+  },
+  "RELIC.CHEMICAL_X": {
+    "name": "Chemical X",
+    "blurb": "The effects of your cost X cards are increased by 2.",
+    "rarity": "Shop",
+    "flavor": "WARNING: Do not combine with sugar, spice, and everything nice.",
+    "art": "art/relics/CHEMICAL_X.webp"
+  },
+  "RELIC.CHOICES_PARADOX": {
+    "name": "Choices Paradox",
+    "blurb": "At the start of each combat, add 1 of 5 random cards into your Hand. Add Retain to the chosen card.",
+    "rarity": "Ancient",
+    "art": "art/relics/CHOICES_PARADOX.webp"
+  },
+  "RELIC.CIRCLET": {
+    "name": "Circlet",
+    "blurb": "It's a circlet.",
+    "rarity": "Special",
+    "flavor": "A curious relic which appears when there's a problem within the Spire or there are no more relics to discover.",
+    "art": "art/relics/CIRCLET.webp"
+  },
+  "RELIC.CLAWS": {
+    "name": "Claws",
+    "blurb": "Upon pickup, Transform up to 6 cards into {{C2|Maul}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/CLAWS.webp"
+  },
+  "RELIC.CLOAK_CLASP": {
+    "name": "Cloak Clasp",
+    "blurb": "At the end of your turn, gain 1 Block for each card in your Hand.",
+    "rarity": "Rare",
+    "art": "art/relics/CLOAK_CLASP.webp"
+  },
+  "RELIC.CRACKED_CORE": {
+    "name": "Cracked Core",
+    "blurb": "At the start of each combat, Channel 1 Lightning.",
+    "rarity": "Starter",
+    "character": "Defect",
+    "art": "art/relics/CRACKED_CORE.webp"
+  },
+  "RELIC.CROSSBOW": {
+    "name": "Crossbow",
+    "blurb": "At the start of your turn, add a random {{QueryLink|Cards|type:Attack|Attack|2}} into your Hand. It's free to play this turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/CROSSBOW.webp"
+  },
+  "RELIC.CURSED_PEARL": {
+    "name": "Cursed Pearl",
+    "blurb": "Upon pickup, receive {{C2|Greed}}. Gain 333 Gold old.",
+    "rarity": "Ancient",
+    "art": "art/relics/CURSED_PEARL.webp"
+  },
+  "RELIC.DARKSTONE_PERIAPT": {
+    "name": "Darkstone Periapt",
+    "blurb": "Whenever you obtain a Curse, raise your Max HP by 6.",
+    "rarity": "Event",
+    "art": "art/relics/DARKSTONE_PERIAPT.webp"
+  },
+  "RELIC.DATA_DISK": {
+    "name": "Data Disk",
+    "blurb": "Start each combat with 1 Focus.",
+    "rarity": "Common",
+    "character": "Defect",
+    "art": "art/relics/DATA_DISK.webp"
+  },
+  "RELIC.DAUGHTER_OF_THE_WIND": {
+    "name": "Daughter of the Wind",
+    "blurb": "Whenever you play an {{QueryLink|Cards|type:Attack|Attack|2}}, gain 1 Block.",
+    "rarity": "Event"
+  },
+  "RELIC.DELICATE_FROND": {
+    "name": "Delicate Frond",
+    "blurb": "At the start of each combat, fill all empty {{2|potions|Potion}} slots with random {{2|potions|Potion}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/DELICATE_FROND.webp"
+  },
+  "RELIC.DEMON_TONGUE": {
+    "name": "Demon Tongue",
+    "blurb": "The first time you lose HP on your turn, heal HP equal to the amount lost.",
+    "rarity": "Rare",
+    "character": "Ironclad",
+    "art": "art/relics/DEMON_TONGUE.webp"
+  },
+  "RELIC.DIAMOND_DIADEM": {
+    "name": "Diamond Diadem",
+    "blurb": "Start combat with 20 Block. Your Block is not removed at the start of your 2nd turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/DIAMOND_DIADEM.webp"
+  },
+  "RELIC.DINGY_RUG": {
+    "name": "Dingy Rug",
+    "blurb": "Card rewards can now contain {{QueryLink|Cards|color:Colorless|Colorless|2}} cards.",
+    "rarity": "Shop",
+    "art": "art/relics/DINGY_RUG.webp"
+  },
+  "RELIC.DISTINGUISHED_CAPE": {
+    "name": "Distinguished Cape",
+    "blurb": "Upon pickup, add 2 random Curses and 3 {{C|Apparition|Apparitions|2}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/DISTINGUISHED_CAPE.webp"
+  },
+  "RELIC.DIVINE_DESTINY": {
+    "name": "Divine Destiny",
+    "blurb": "At the start of each combat, gain 7 Strength.",
+    "rarity": "Starter",
+    "character": "Regent",
+    "art": "art/relics/DIVINE_DESTINY.webp"
+  },
+  "RELIC.DIVINE_RIGHT": {
+    "name": "Divine Right",
+    "blurb": "At the start of each combat, gain 3 Strength.",
+    "rarity": "Starter",
+    "character": "Regent",
+    "art": "art/relics/DIVINE_RIGHT.webp"
+  },
+  "RELIC.DOLLYS_MIRROR": {
+    "name": "Dolly's Mirror",
+    "blurb": "Upon pickup, obtain an additional copy of a card in your Deck.",
+    "rarity": "Shop",
+    "art": "art/relics/DOLLYS_MIRROR.webp"
+  },
+  "RELIC.DOWSING_ROD": {
+    "name": "Dowsing Rod",
+    "blurb": "Upon pickup, add 1 {{C2|Dowsing}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/DOWSING_ROD.webp"
+  },
+  "RELIC.DRAGON_FRUIT": {
+    "name": "Dragon Fruit",
+    "blurb": "Whenever you gain Gold old, raise your Max HP by 1.",
+    "rarity": "Shop",
+    "art": "art/relics/DRAGON_FRUIT.webp"
+  },
+  "RELIC.DREAM_CATCHER": {
+    "name": "Dream Catcher",
+    "blurb": "Whenever you Rest, you may add a card to your Deck.",
+    "rarity": "Event",
+    "art": "art/relics/DREAM_CATCHER.webp"
+  },
+  "RELIC.DRIFTWOOD": {
+    "name": "Driftwood",
+    "blurb": "You may reroll each card reward once.",
+    "rarity": "Ancient",
+    "art": "art/relics/DRIFTWOOD.webp"
+  },
+  "RELIC.DUSTY_TOME": {
+    "name": "Dusty Tome",
+    "blurb": "Upon pickup, obtain an Ancient Card.",
+    "rarity": "Ancient",
+    "art": "art/relics/DUSTY_TOME.webp"
+  },
+  "RELIC.ECTOPLASM": {
+    "name": "Ectoplasm",
+    "blurb": "You can no longer gain Gold old. Gain 1 Energy at the start of each turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/ECTOPLASM.webp"
+  },
+  "RELIC.ELECTRIC_SHRYMP": {
+    "name": "Electric Shrymp",
+    "blurb": "Upon pickup, Enchant a {{QueryLink|Cards|type:Skill|Skill|2}} with Imbued.",
+    "rarity": "Ancient",
+    "art": "art/relics/ELECTRIC_SHRYMP.webp"
+  },
+  "RELIC.EMBER_TEA": {
+    "name": "Ember Tea",
+    "blurb": "At the start of the next 5 combats, gain 2 Strength.",
+    "rarity": "Event",
+    "art": "art/relics/EMBER_TEA.webp"
+  },
+  "RELIC.EMOTION_CHIP": {
+    "name": "Emotion Chip",
+    "blurb": "If you lost HP during the previous turn, trigger the passive ability of all Orbs at the start of your turn.",
+    "rarity": "Rare",
+    "character": "Defect",
+    "art": "art/relics/EMOTION_CHIP.webp"
+  },
+  "RELIC.EMPTY_CAGE": {
+    "name": "Empty Cage",
+    "blurb": "Upon pickup, remove 2 cards from your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/EMPTY_CAGE.webp"
+  },
+  "RELIC.ETERNAL_FEATHER": {
+    "name": "Eternal Feather",
+    "blurb": "For every 5 cards in your Deck, heal 3 HP whenever you enter a {{2|Rest Site|Rest Site}}.",
+    "rarity": "Uncommon",
+    "art": "art/relics/ETERNAL_FEATHER.webp"
+  },
+  "RELIC.FENCING_MANUAL": {
+    "name": "Fencing Manual",
+    "blurb": "At the start of each combat, Forge 10.",
+    "rarity": "Common",
+    "character": "Regent",
+    "art": "art/relics/FENCING_MANUAL.webp"
+  },
+  "RELIC.FESTIVE_POPPER": {
+    "name": "Festive Popper",
+    "blurb": "At the start of each combat, deal 9 damage to ALL enemies.",
+    "rarity": "Common",
+    "art": "art/relics/FESTIVE_POPPER.webp"
+  },
+  "RELIC.FIDDLE": {
+    "name": "Fiddle",
+    "blurb": "At the start of each turn, draw 2 additional cards. You may not draw cards during your turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/FIDDLE.webp"
+  },
+  "RELIC.FISHING_ROD": {
+    "name": "Fishing Rod",
+    "blurb": "Every 3 normal combats, {{KW|Upgrade}} a random card in your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/FISHING_ROD.webp"
+  },
+  "RELIC.FORGOTTEN_SOUL": {
+    "name": "Forgotten Soul",
+    "blurb": "Whenever you Exhaust a card, deal 1 damage to a random enemy.",
+    "rarity": "Event",
+    "art": "art/relics/FORGOTTEN_SOUL.webp"
+  },
+  "RELIC.FRAGRANT_MUSHROOM": {
+    "name": "Fragrant Mushroom",
+    "blurb": "Upon pickup, lose 15 HP and Upgrade 2 random cards.",
+    "rarity": "Event",
+    "art": "art/relics/FRAGRANT_MUSHROOM.webp"
+  },
+  "RELIC.FRESNEL_LENS": {
+    "name": "Fresnel Lens",
+    "blurb": "Whenever you add a card that gains Block to your Deck, Enchant it with Nimble 2.",
+    "rarity": "Event",
+    "art": "art/relics/FRESNEL_LENS.webp"
+  },
+  "RELIC.FROZEN_EGG": {
+    "name": "Frozen Egg",
+    "blurb": "Whenever you add a {{QueryLink|Cards|type:Power|Power|2}} into your Deck, Upgrade it.",
+    "rarity": "Rare",
+    "art": "art/relics/FROZEN_EGG.webp"
+  },
+  "RELIC.FUNERARY_MASK": {
+    "name": "Funerary Mask",
+    "blurb": "At the start of each combat, add 3 {{C|Soul|Souls|2}} into your Draw Pile.",
+    "rarity": "Uncommon",
+    "character": "Necrobinder",
+    "art": "art/relics/FUNERARY_MASK.webp"
+  },
+  "RELIC.FUR_COAT": {
+    "name": "Fur Coat",
+    "blurb": "Upon pickup, mark 8 random combats. Enemies in those rooms have 1 HP.",
+    "rarity": "Ancient",
+    "art": "art/relics/FUR_COAT.webp"
+  },
+  "RELIC.GALACTIC_DUST": {
+    "name": "Galactic Dust",
+    "blurb": "For every 10 1 Strength spent, gain 10 Block.",
+    "rarity": "Uncommon",
+    "character": "Regent",
+    "art": "art/relics/GALACTIC_DUST.webp"
+  },
+  "RELIC.GAMBLING_CHIP": {
+    "name": "Gambling Chip",
+    "blurb": "At the start of each combat, discard any number of cards then draw that many.",
+    "rarity": "Rare",
+    "art": "art/relics/GAMBLING_CHIP.webp"
+  },
+  "RELIC.GAME_PIECE": {
+    "name": "Game Piece",
+    "blurb": "Whenever you play a {{QueryLink|Cards|type:Power|Power|2}}, draw 1 card.",
+    "rarity": "Rare",
+    "art": "art/relics/GAME_PIECE.webp"
+  },
+  "RELIC.GHOST_SEED": {
+    "name": "Ghost Seed",
+    "blurb": "Strikes and Defends gain Ethereal.",
+    "rarity": "Shop",
+    "art": "art/relics/GHOST_SEED.webp"
+  },
+  "RELIC.GIRYA": {
+    "name": "Girya",
+    "blurb": "You can now gain Strength at {{2|Rest Sites|Rest Site}}. (3 times max)",
+    "rarity": "Rare",
+    "art": "art/relics/GIRYA.webp"
+  },
+  "RELIC.GLASS_EYE": {
+    "name": "Glass Eye",
+    "blurb": "Upon pickup, obtain 2 Common cards, 2 Uncommon cards, and 1 Rare card.",
+    "rarity": "Ancient",
+    "art": "art/relics/GLASS_EYE.webp"
+  },
+  "RELIC.GLITTER": {
+    "name": "Glitter",
+    "blurb": "Enchant all card rewards with Glam.",
+    "rarity": "Ancient",
+    "art": "art/relics/GLITTER.webp"
+  },
+  "RELIC.GNARLED_HAMMER": {
+    "name": "Gnarled Hammer",
+    "blurb": "Upon pickup, Enchant up to 3 {{QueryLink|Cards|type:Attack|Attacks|2}} with Sharp 3.",
+    "rarity": "Shop",
+    "art": "art/relics/GNARLED_HAMMER.webp"
+  },
+  "RELIC.GOLDEN_COMPASS": {
+    "name": "Golden Compass",
+    "blurb": "Upon pickup, replace the Act 2 Map with a single special path.",
+    "rarity": "Ancient",
+    "art": "art/relics/GOLDEN_COMPASS.webp"
+  },
+  "RELIC.GOLDEN_PEARL": {
+    "name": "Golden Pearl",
+    "blurb": "Upon pickup, gain 150 Gold old.",
+    "rarity": "Ancient",
+    "art": "art/relics/GOLDEN_PEARL.webp"
+  },
+  "RELIC.GOLD_PLATED_CABLES": {
+    "name": "Gold-Plated Cables",
+    "blurb": "Your rightmost Orb triggers its passive an additional time.",
+    "rarity": "Uncommon",
+    "character": "Defect",
+    "art": "art/relics/GOLD_PLATED_CABLES.webp"
+  },
+  "RELIC.GORGET": {
+    "name": "Gorget",
+    "blurb": "At the start of each combat, gain 4 Plating.",
+    "rarity": "Common",
+    "art": "art/relics/GORGET.webp"
+  },
+  "RELIC.GREMLIN_HORN": {
+    "name": "Gremlin Horn",
+    "blurb": "Whenever an enemy dies, gain 1 Energy and draw 1 card.",
+    "rarity": "Uncommon",
+    "art": "art/relics/GREMLIN_HORN.webp"
+  },
+  "RELIC.HAND_DRILL": {
+    "name": "Hand Drill",
+    "blurb": "Whenever you break an enemy's Block, apply 2 Vulnerable.",
+    "rarity": "Event",
+    "art": "art/relics/HAND_DRILL.webp"
+  },
+  "RELIC.HAPPY_FLOWER": {
+    "name": "Happy Flower",
+    "blurb": "Every 3 turns, gain 1 Energy.",
+    "rarity": "Common",
+    "art": "art/relics/HAPPY_FLOWER.webp"
+  },
+  "RELIC.HEFTY_TABLET": {
+    "name": "Hefty Tablet",
+    "blurb": "Choose 1 of 3 Rare cards to add to your Deck. Add 1 {{C2|Injury}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/HEFTY_TABLET.webp"
+  },
+  "RELIC.HELICAL_DART": {
+    "name": "Helical Dart",
+    "blurb": "Whenever you play a Shiv, gain 1 Dexterity this turn.",
+    "rarity": "Rare",
+    "character": "Silent",
+    "art": "art/relics/HELICAL_DART.webp"
+  },
+  "RELIC.HISTORY_COURSE": {
+    "name": "History Course",
+    "blurb": "At the start of your turn, play a copy of your last played {{QueryLink|Cards|type:Attack|Attack|2}}.",
+    "rarity": "Event",
+    "art": "art/relics/HISTORY_COURSE.webp"
+  },
+  "RELIC.HORN_CLEAT": {
+    "name": "Horn Cleat",
+    "blurb": "At the start of your 2nd turn, gain 14 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/HORN_CLEAT.webp"
+  },
+  "RELIC.ICE_CREAM": {
+    "name": "Ice Cream",
+    "blurb": "Energy is now conserved between turns.",
+    "rarity": "Rare",
+    "art": "art/relics/ICE_CREAM.webp"
+  },
+  "RELIC.INFUSED_CORE": {
+    "name": "Infused Core",
+    "blurb": "At the start of each combat, Channel 3 Lightning. <br> Lightning Orbs deal 1 additional damage.",
+    "rarity": "Starter",
+    "character": "Defect",
+    "art": "art/relics/INFUSED_CORE.webp"
+  },
+  "RELIC.INTIMIDATING_HELMET": {
+    "name": "Intimidating Helmet",
+    "blurb": "Whenever you play a card that costs 2 Energy or more, gain 4 Block.",
+    "rarity": "Rare",
+    "art": "art/relics/INTIMIDATING_HELMET.webp"
+  },
+  "RELIC.IRON_CLUB": {
+    "name": "Iron Club",
+    "blurb": "Every 4 cards you play, draw 1 card.",
+    "rarity": "Ancient",
+    "art": "art/relics/IRON_CLUB.webp"
+  },
+  "RELIC.IVORY_TILE": {
+    "name": "Ivory Tile",
+    "blurb": "Whenever you play a card that costs 3 Energy or more, gain 1 Energy.",
+    "rarity": "Rare",
+    "character": "Necrobinder",
+    "art": "art/relics/IVORY_TILE.webp"
+  },
+  "RELIC.JEWELED_MASK": {
+    "name": "Jeweled Mask",
+    "blurb": "At the start of each combat put a random {{QueryLink|Cards|type:Power|Power|2}} from your Draw Pile into your Hand. It's free to play this combat.",
+    "rarity": "Ancient",
+    "art": "art/relics/JEWELED_MASK.webp"
+  },
+  "RELIC.JEWELRY_BOX": {
+    "name": "Jewelry Box",
+    "blurb": "Upon pickup, add 1 {{C2|Apotheosis}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/JEWELRY_BOX.webp"
+  },
+  "RELIC.JOSS_PAPER": {
+    "name": "Joss Paper",
+    "blurb": "Every 5 times you Exhaust a card, draw 1 card.",
+    "rarity": "Uncommon",
+    "art": "art/relics/JOSS_PAPER.webp"
+  },
+  "RELIC.JUZU_BRACELET": {
+    "name": "Juzu Bracelet",
+    "blurb": "Regular enemy combats are no longer encountered in ? rooms.",
+    "rarity": "Common",
+    "art": "art/relics/JUZU_BRACELET.webp"
+  },
+  "RELIC.KALEIDOSCOPE": {
+    "name": "Kaleidoscope",
+    "blurb": "Upon pickup, obtain 2 card rewards from other characters.",
+    "rarity": "Ancient",
+    "art": "art/relics/KALEIDOSCOPE.webp"
+  },
+  "RELIC.KIFUDA": {
+    "name": "Kifuda",
+    "blurb": "Upon pickup, Enchant up to 3 cards with Adroit.",
+    "rarity": "Shop",
+    "art": "art/relics/KIFUDA.webp"
+  },
+  "RELIC.KUNAI": {
+    "name": "Kunai",
+    "blurb": "Every time you play 3 {{QueryLink|Cards|type:Attack|Attacks|2}} in a single turn, gain 1 Dexterity.",
+    "rarity": "Rare",
+    "art": "art/relics/KUNAI.webp"
+  },
+  "RELIC.KUSARIGAMA": {
+    "name": "Kusarigama",
+    "blurb": "Every time you play 3 {{QueryLink|Cards|type:Attack|Attacks|2}} in a single turn, deal 6 damage to a random enemy.",
+    "rarity": "Uncommon",
+    "art": "art/relics/KUSARIGAMA.webp"
+  },
+  "RELIC.LANTERN": {
+    "name": "Lantern",
+    "blurb": "Start each combat with an additional 1 Energy.",
+    "rarity": "Common",
+    "art": "art/relics/LANTERN.webp"
+  },
+  "RELIC.LARGE_CAPSULE": {
+    "name": "Large Capsule",
+    "blurb": "Upon pickup, obtain 2 random Relics. Add an additional Strike and Defend to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/LARGE_CAPSULE.webp"
+  },
+  "RELIC.LASTING_CANDY": {
+    "name": "Lasting Candy",
+    "blurb": "Every other combat, your card rewards gain an additional {{QueryLink|Cards|type:Power|Power|2}}.",
+    "rarity": "Uncommon",
+    "art": "art/relics/LASTING_CANDY.webp"
+  },
+  "RELIC.LAVA_LAMP": {
+    "name": "Lava Lamp",
+    "blurb": "At the end of combat, Upgrade all card rewards if you took no damage.",
+    "rarity": "Shop",
+    "art": "art/relics/LAVA_LAMP.webp"
+  },
+  "RELIC.LAVA_ROCK": {
+    "name": "Lava Rock",
+    "blurb": "The Act 1 Boss drops 2 Relics.",
+    "rarity": "Ancient",
+    "art": "art/relics/LAVA_ROCK.webp"
+  },
+  "RELIC.LEAD_PAPERWEIGHT": {
+    "name": "Lead Paperweight",
+    "blurb": "Upon pickup, choose 1 of 2 {{QueryLink|Cards|color:Colorless|Colorless|2}} cards to add to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/LEAD_PAPERWEIGHT.webp"
+  },
+  "RELIC.LEAFY_POULTICE": {
+    "name": "Leafy Poultice",
+    "blurb": "Upon pickup, Transform 1 of your Strikes and 1 of your Defends and lose 12 Max HP.",
+    "rarity": "Ancient",
+    "art": "art/relics/LEAFY_POULTICE.webp"
+  },
+  "RELIC.LEES_WAFFLE": {
+    "name": "Lee's Waffle",
+    "blurb": "Upon pickup, raise your Max HP by 7 and heal all of your HP.",
+    "rarity": "Shop",
+    "art": "art/relics/LEES_WAFFLE.webp"
+  },
+  "RELIC.LETTER_OPENER": {
+    "name": "Letter Opener",
+    "blurb": "Every time you play 3 {{QueryLink|Cards|type:Skill|Skills|2}} in a single turn, deal 5 damage to ALL enemies.",
+    "rarity": "Uncommon",
+    "art": "art/relics/LETTER_OPENER.webp"
+  },
+  "RELIC.LIZARD_TAIL": {
+    "name": "Lizard Tail",
+    "blurb": "When your HP would be reduced to 0, heal to 50% of your Max HP instead (works once).",
+    "rarity": "Rare",
+    "art": "art/relics/LIZARD_TAIL.webp"
+  },
+  "RELIC.LOOMING_FRUIT": {
+    "name": "Looming Fruit",
+    "blurb": "Upon pickup, raise your Max HP by 31.",
+    "rarity": "Ancient",
+    "art": "art/relics/LOOMING_FRUIT.webp"
+  },
+  "RELIC.LORDS_PARASOL": {
+    "name": "Lord's Parasol",
+    "blurb": "When you encounter the Merchant, immediately obtain EVERYTHING he sells.",
+    "rarity": "Ancient",
+    "art": "art/relics/LORDS_PARASOL.webp"
+  },
+  "RELIC.LOST_COFFER": {
+    "name": "Lost Coffer",
+    "blurb": "Upon pickup, gain 1 card reward and procure 1 random {{2|potion|Potion}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/LOST_COFFER.webp"
+  },
+  "RELIC.LOST_WISP": {
+    "name": "Lost Wisp",
+    "blurb": "Whenever you play a {{QueryLink|Cards|type:Power|Power|2}}, deal 8 damage to ALL enemies.",
+    "rarity": "Event",
+    "art": "art/relics/LOST_WISP.webp"
+  },
+  "RELIC.LUCKY_FYSH": {
+    "name": "Lucky Fysh",
+    "blurb": "Whenever you add a card to your Deck, gain 15 Gold old.",
+    "rarity": "Uncommon",
+    "art": "art/relics/LUCKY_FYSH.webp"
+  },
+  "RELIC.LUNAR_PASTRY": {
+    "name": "Lunar Pastry",
+    "blurb": "At the end of your turn, gain 1 Strength.",
+    "rarity": "Rare",
+    "character": "Regent",
+    "art": "art/relics/LUNAR_PASTRY.webp"
+  },
+  "RELIC.MANGO": {
+    "name": "Mango",
+    "blurb": "Upon pickup, raise your Max HP by 14.",
+    "rarity": "Rare",
+    "art": "art/relics/MANGO.webp"
+  },
+  "RELIC.MASSIVE_SCROLL": {
+    "name": "Massive Scroll",
+    "blurb": "Upon pickup, choose 1 of 3 {{QueryLink|Cards|multiplayer:True|Multiplayer Cards|2}} to add to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/MASSIVE_SCROLL.webp"
+  },
+  "RELIC.MAW_BANK": {
+    "name": "Maw Bank",
+    "blurb": "Whenever you climb a floor, gain 12 Gold old. No longer works when you spend any Gold old at the shop.",
+    "rarity": "Event",
+    "art": "art/relics/MAW_BANK.webp"
+  },
+  "RELIC.MEAL_TICKET": {
+    "name": "Meal Ticket",
+    "blurb": "Whenever you enter a shop room, heal 15 HP.",
+    "rarity": "Common",
+    "art": "art/relics/MEAL_TICKET.webp"
+  },
+  "RELIC.MEAT_CLEAVER": {
+    "name": "Meat Cleaver",
+    "blurb": "You may Cook at {{2|Rest Sites}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/MEAT_CLEAVER.webp"
+  },
+  "RELIC.MEAT_ON_THE_BONE": {
+    "name": "Meat on the Bone",
+    "blurb": "If your HP is at or below 50% at the end of combat, heal 12 HP.",
+    "rarity": "Rare"
+  },
+  "RELIC.MEMBERSHIP_CARD": {
+    "name": "Membership Card",
+    "blurb": "50% discount on all products!",
+    "rarity": "Shop",
+    "art": "art/relics/MEMBERSHIP_CARD.webp"
+  },
+  "RELIC.MERCURY_HOURGLASS": {
+    "name": "Mercury Hourglass",
+    "blurb": "At the start of your turn, deal 3 damage to ALL enemies.",
+    "rarity": "Uncommon",
+    "art": "art/relics/MERCURY_HOURGLASS.webp"
+  },
+  "RELIC.METRONOME": {
+    "name": "Metronome",
+    "blurb": "The first time you Channel 7 Orbs each combat, deal 30 damage to ALL enemies.",
+    "rarity": "Rare",
+    "character": "Defect",
+    "art": "art/relics/METRONOME.webp"
+  },
+  "RELIC.MINIATURE_CANNON": {
+    "name": "Miniature Cannon",
+    "blurb": "Upgraded {{QueryLink|Cards|type:Attack|Attacks|2}} deal 3 additional damage.",
+    "rarity": "Uncommon",
+    "art": "art/relics/MINIATURE_CANNON.webp"
+  },
+  "RELIC.MINIATURE_TENT": {
+    "name": "Miniature Tent",
+    "blurb": "You may choose any number of options at {{2|Rest Sites|Rest Site}}.",
+    "rarity": "Shop",
+    "art": "art/relics/MINIATURE_TENT.webp"
+  },
+  "RELIC.MINI_REGENT": {
+    "name": "Mini Regent",
+    "blurb": "The first time you spend 1 Strength each turn, gain 1 Strength.",
+    "rarity": "Rare",
+    "character": "Regent",
+    "art": "art/relics/MINI_REGENT.webp"
+  },
+  "RELIC.MOLTEN_EGG": {
+    "name": "Molten Egg",
+    "blurb": "Whenever you add an {{QueryLink|Cards|type:Attack|Attack|2}} card to your Deck, Upgrade it.",
+    "rarity": "Rare",
+    "art": "art/relics/MOLTEN_EGG.webp"
+  },
+  "RELIC.MR_STRUGGLES": {
+    "name": "Mr. Struggles",
+    "blurb": "At the start of your turn, deal damage equal to the turn number to ALL enemies.",
+    "rarity": "Event",
+    "art": "art/relics/MR_STRUGGLES.webp"
+  },
+  "RELIC.MUMMIFIED_HAND": {
+    "name": "Mummified Hand",
+    "blurb": "Whenever you play a {{QueryLink|Cards|type:Power|Power|2}}, a random card in your Hand is free to play that turn.",
+    "rarity": "Rare",
+    "art": "art/relics/MUMMIFIED_HAND.webp"
+  },
+  "RELIC.MUSIC_BOX": {
+    "name": "Music Box",
+    "blurb": "Create an Ethereal copy of the first {{QueryLink|Cards|type:Attack|Attack|2}} you play each turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/MUSIC_BOX.webp"
+  },
+  "RELIC.MYSTIC_LIGHTER": {
+    "name": "Mystic Lighter",
+    "blurb": "Enchanted {{QueryLink|Cards|type:Attack|Attacks|2}} deal 9 additional damage.",
+    "rarity": "Shop",
+    "art": "art/relics/MYSTIC_LIGHTER.webp"
+  },
+  "RELIC.NEOWS_BONES": {
+    "name": "Neow's Bones",
+    "blurb": "Upon pickup, gain 2 random Neow Relics. Add 1 random Curse to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/NEOWS_BONES.webp"
+  },
+  "RELIC.NEOWS_SACRIFICE": {
+    "name": "Neow's Sacrifice",
+    "blurb": "Upon pickup, procure 1 {{P|Ambergris||2}} and 1 {{C2|Guilty}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/NEOWS_SACRIFICE.webp"
+  },
+  "RELIC.NEOWS_TALISMAN": {
+    "name": "Neow's Talisman",
+    "blurb": "Upon pickup, Upgrade 1 of your Strikes and 1 of your Defends.",
+    "rarity": "Ancient",
+    "art": "art/relics/NEOWS_TALISMAN.webp"
+  },
+  "RELIC.NEOWS_TORMENT": {
+    "name": "Neow's Torment",
+    "blurb": "Upon pickup, add 1 {{C2|Neow's Fury}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/NEOWS_TORMENT.webp"
+  },
+  "RELIC.NEW_LEAF": {
+    "name": "New Leaf",
+    "blurb": "Upon pickup, Transform 1 card.",
+    "rarity": "Ancient",
+    "art": "art/relics/NEW_LEAF.webp"
+  },
+  "RELIC.NINJA_SCROLL": {
+    "name": "Ninja Scroll",
+    "blurb": "At the start of each combat, add 3 {{C|Shiv|Shivs|2}} into your Hand.",
+    "rarity": "Shop",
+    "character": "Silent",
+    "art": "art/relics/NINJA_SCROLL.webp"
+  },
+  "RELIC.NUNCHAKU": {
+    "name": "Nunchaku",
+    "blurb": "Every time you play 10 {{QueryLink|Cards|type:Attack|Attacks|2}}, gain 1 Energy.",
+    "rarity": "Uncommon",
+    "art": "art/relics/NUNCHAKU.webp"
+  },
+  "RELIC.NUTRITIOUS_OYSTER": {
+    "name": "Nutritious Oyster",
+    "blurb": "Upon pickup, raise your Max HP by 11.",
+    "rarity": "Ancient",
+    "art": "art/relics/NUTRITIOUS_OYSTER.webp"
+  },
+  "RELIC.NUTRITIOUS_SOUP": {
+    "name": "Nutritious Soup",
+    "blurb": "Upon pickup, Enchant all Strikes in your Deck with {{KW2|Tezcatara's Ember}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/NUTRITIOUS_SOUP.webp"
+  },
+  "RELIC.ODDLY_SMOOTH_STONE": {
+    "name": "Oddly Smooth Stone",
+    "blurb": "Start each combat with 1 Dexterity.",
+    "rarity": "Common",
+    "art": "art/relics/ODDLY_SMOOTH_STONE.webp"
+  },
+  "RELIC.OLD_COIN": {
+    "name": "Old Coin",
+    "blurb": "Upon pickup, gain 300 Gold old.",
+    "rarity": "Rare",
+    "art": "art/relics/OLD_COIN.webp"
+  },
+  "RELIC.ORANGE_DOUGH": {
+    "name": "Orange Dough",
+    "blurb": "At the start of each combat, add 2 random {{QueryLink|Cards|color:Colorless|Colorless|2}} cards into your Hand.",
+    "rarity": "Rare",
+    "character": "Regent",
+    "art": "art/relics/ORANGE_DOUGH.webp"
+  },
+  "RELIC.ORICHALCUM": {
+    "name": "Orichalcum",
+    "blurb": "If you end your turn without Block, gain 6 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/ORICHALCUM.webp"
+  },
+  "RELIC.ORNAMENTAL_FAN": {
+    "name": "Ornamental Fan",
+    "blurb": "Every time you play 3 {{QueryLink|Cards|type:Attack|Attacks|2}} in a single turn, gain 4 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/ORNAMENTAL_FAN.webp"
+  },
+  "RELIC.ORRERY": {
+    "name": "Orrery",
+    "blurb": "Upon pickup, gain 5 card rewards.",
+    "rarity": "Shop",
+    "art": "art/relics/ORRERY.webp"
+  },
+  "RELIC.PAELS_BLOOD": {
+    "name": "Pael's Blood",
+    "blurb": "At the start of your turn, draw 1 additional card.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_BLOOD.webp"
+  },
+  "RELIC.PAELS_CLAW": {
+    "name": "Pael's Claw",
+    "blurb": "Upon pickup, Enchant all Defends with Goopy.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_CLAW.webp"
+  },
+  "RELIC.PAELS_EYE": {
+    "name": "Pael's Eye",
+    "blurb": "The first time each combat you end your turn without playing cards, Exhaust your Hand, and take an extra turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_EYE.webp"
+  },
+  "RELIC.PAELS_FLESH": {
+    "name": "Pael's Flesh",
+    "blurb": "Gain an additional 1 Energy at the start of your 3rd turn, and every turn after that.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_FLESH.webp"
+  },
+  "RELIC.PAELS_GROWTH": {
+    "name": "Pael's Growth",
+    "blurb": "Upon pickup, Enchant a card with Clone.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_GROWTH.webp"
+  },
+  "RELIC.PAELS_HORN": {
+    "name": "Pael's Horn",
+    "blurb": "Upon pickup, add 2 {{C2|Relax}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_HORN.webp"
+  },
+  "RELIC.PAELS_LEGION": {
+    "name": "Pael's Legion",
+    "blurb": "Doubles Block gained from a card, then goes to sleep for 2 turns.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_LEGION.webp"
+  },
+  "RELIC.PAELS_TEARS": {
+    "name": "Pael's Tears",
+    "blurb": "If you end your turn with unspent 1 Energy, gain an additional 2 Energy next turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_TEARS.webp"
+  },
+  "RELIC.PAELS_TOOTH": {
+    "name": "Pael's Tooth",
+    "blurb": "Upon pickup, remove 5 cards from your Deck. After each combat, randomly add 1 back Upgraded.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_TOOTH.webp"
+  },
+  "RELIC.PAELS_WING": {
+    "name": "Pael's Wing",
+    "blurb": "You may sacrifice card rewards to Pael. Every 2 sacrifices, obtain a Relic.",
+    "rarity": "Ancient",
+    "art": "art/relics/PAELS_WING.webp"
+  },
+  "RELIC.PANDORAS_BOX": {
+    "name": "Pandora's Box",
+    "blurb": "Transform ALL Strikes and Defends.",
+    "rarity": "Ancient",
+    "art": "art/relics/PANDORAS_BOX.webp"
+  },
+  "RELIC.PANTOGRAPH": {
+    "name": "Pantograph",
+    "blurb": "At the start of each Boss combat, heal 25 HP.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PANTOGRAPH.webp"
+  },
+  "RELIC.PAPER_KRANE": {
+    "name": "Paper Krane",
+    "blurb": "Enemies with Weak deal 40% less damage to you rather than 25%.",
+    "rarity": "Rare",
+    "character": "Silent",
+    "art": "art/relics/PAPER_KRANE.webp"
+  },
+  "RELIC.PAPER_PHROG": {
+    "name": "Paper Phrog",
+    "blurb": "Enemies with Vulnerable take 75% more damage rather than 50%.",
+    "rarity": "Uncommon",
+    "character": "Ironclad",
+    "art": "art/relics/PAPER_PHROG.webp"
+  },
+  "RELIC.PARRYING_SHIELD": {
+    "name": "Parrying Shield",
+    "blurb": "If you end a turn with at least 10 Block, deal 6 damage to a random enemy.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PARRYING_SHIELD.webp"
+  },
+  "RELIC.PEAR": {
+    "name": "Pear",
+    "blurb": "Upon pickup, raise your Max HP by 10.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PEAR.webp"
+  },
+  "RELIC.PENDULUM": {
+    "name": "Pendulum",
+    "blurb": "Every 3 turns, draw 1 card.",
+    "rarity": "Common",
+    "art": "art/relics/PENDULUM.webp"
+  },
+  "RELIC.PEN_NIB": {
+    "name": "Pen Nib",
+    "blurb": "Every 10th {{QueryLink|Cards|type:Attack|Attack|2}} you play deals double damage.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PEN_NIB.webp"
+  },
+  "RELIC.PERMAFROST": {
+    "name": "Permafrost",
+    "blurb": "The first time you play a {{QueryLink|Cards|type:Power|Power|2}} each combat, gain 7 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PERMAFROST.webp"
+  },
+  "RELIC.PETRIFIED_TOAD": {
+    "name": "Petrified Toad",
+    "blurb": "At the start of each combat, procure a {{P|Potion-Shaped Rock||2}}.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PETRIFIED_TOAD.webp"
+  },
+  "RELIC.PHIAL_HOLSTER": {
+    "name": "Phial Holster",
+    "blurb": "Upon pickup, gain 1 potion slot and procure 2 random {{2|potions|Potion}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/PHIAL_HOLSTER.webp"
+  },
+  "RELIC.PHILOSOPHERS_STONE": {
+    "name": "Philosopher's Stone",
+    "blurb": "Gain 1 Energy at the start of each turn. ALL enemies start combat with 1 Strength.",
+    "rarity": "Ancient",
+    "art": "art/relics/PHILOSOPHERS_STONE.webp"
+  },
+  "RELIC.PHYLACTERY_UNBOUND": {
+    "name": "Phylactery Unbound",
+    "blurb": "At the start of each combat, Summon 5. At the start of your turn, Summon 2.",
+    "rarity": "Starter",
+    "character": "Necrobinder",
+    "art": "art/relics/PHYLACTERY_UNBOUND.webp"
+  },
+  "RELIC.PLANISPHERE": {
+    "name": "Planisphere",
+    "blurb": "Whenever you enter a ? room, heal 5 HP.",
+    "rarity": "Uncommon",
+    "art": "art/relics/PLANISPHERE.webp"
+  },
+  "RELIC.POCKETWATCH": {
+    "name": "Pocketwatch",
+    "blurb": "Whenever you play 3 or fewer cards during your turn, draw 3 additional cards at the start of your next turn.",
+    "rarity": "Rare",
+    "art": "art/relics/POCKETWATCH.webp"
+  },
+  "RELIC.POLLINOUS_CORE": {
+    "name": "Pollinous Core",
+    "blurb": "Every 4 turns, draw 2 additional cards.",
+    "rarity": "Event",
+    "art": "art/relics/POLLINOUS_CORE.webp"
+  },
+  "RELIC.POMANDER": {
+    "name": "Pomander",
+    "blurb": "Upon pickup, Upgrade a card.",
+    "rarity": "Ancient",
+    "art": "art/relics/POMANDER.webp"
+  },
+  "RELIC.POTION_BELT": {
+    "name": "Potion Belt",
+    "blurb": "Upon pickup, gain 2 {{2|potion}} slots.",
+    "rarity": "Common",
+    "art": "art/relics/POTION_BELT.webp"
+  },
+  "RELIC.POWER_CELL": {
+    "name": "Power Cell",
+    "blurb": "At the start of each combat, add 2 zero-cost cards from your Draw Pile into your Hand.",
+    "rarity": "Rare",
+    "character": "Defect",
+    "art": "art/relics/POWER_CELL.webp"
+  },
+  "RELIC.PRAYER_WHEEL": {
+    "name": "Prayer Wheel",
+    "blurb": "Normal enemies drop an additional card reward.",
+    "rarity": "Rare",
+    "art": "art/relics/PRAYER_WHEEL.webp"
+  },
+  "RELIC.PRECARIOUS_SHEARS": {
+    "name": "Precarious Shears",
+    "blurb": "Upon pickup, remove 2 cards from your Deck and take 16 damage.",
+    "rarity": "Ancient",
+    "art": "art/relics/PRECARIOUS_SHEARS.webp"
+  },
+  "RELIC.PRECISE_SCISSORS": {
+    "name": "Precise Scissors",
+    "blurb": "Upon pickup, remove 1 card from your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/PRECISE_SCISSORS.webp"
+  },
+  "RELIC.PRESERVED_FOG": {
+    "name": "Preserved Fog",
+    "blurb": "Upon pickup, remove 3 cards from your Deck. Add {{C2|Folly}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/PRESERVED_FOG.webp"
+  },
+  "RELIC.PRISMATIC_GEM": {
+    "name": "Prismatic Gem",
+    "blurb": "Gain 1 Energy at the start of each turn. Card rewards now contain cards from other colors.",
+    "rarity": "Ancient",
+    "art": "art/relics/PRISMATIC_GEM.webp"
+  },
+  "RELIC.PUMPKIN_CANDLE": {
+    "name": "Pumpkin Candle",
+    "blurb": "Gain 1 Energy at the start of each turn. Extinguishes after 5 combats. Can be Kindled at {{2|Rest Sites}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/PUMPKIN_CANDLE.webp"
+  },
+  "RELIC.PUNCH_DAGGER": {
+    "name": "Punch Dagger",
+    "blurb": "Upon pickup, Enchant an {{QueryLink|Cards|type:Attack|Attack|2}} with Momentum 5.",
+    "rarity": "Shop",
+    "art": "art/relics/PUNCH_DAGGER.webp"
+  },
+  "RELIC.RADIANT_PEARL": {
+    "name": "Radiant Pearl",
+    "blurb": "At the start of each combat, add 1 {{C2|Luminesce}} into your Hand.",
+    "rarity": "Ancient",
+    "art": "art/relics/RADIANT_PEARL.webp"
+  },
+  "RELIC.RAINBOW_RING": {
+    "name": "Rainbow Ring",
+    "blurb": "The first time you play an {{QueryLink|Cards|type:Attack|Attack|2}}, {{QueryLink|Cards|type:Skill|Skill|2}}, and {{QueryLink|Cards|type:Power|Power|2}} each turn, gain 1 Strength and 1 Dexterity.",
+    "rarity": "Rare",
+    "art": "art/relics/RAINBOW_RING.webp"
+  },
+  "RELIC.RAZOR_TOOTH": {
+    "name": "Razor Tooth",
+    "blurb": "Every time you play an {{QueryLink|Cards|type:Attack|Attack|2}} or {{QueryLink|Cards|type:Skill|Skill|2}}, Upgrade it for the remainder of combat.",
+    "rarity": "Rare",
+    "art": "art/relics/RAZOR_TOOTH.webp"
+  },
+  "RELIC.RED_MASK": {
+    "name": "Red Mask",
+    "blurb": "At the start of each combat, apply 1 Weak to ALL enemies.",
+    "rarity": "Common",
+    "art": "art/relics/RED_MASK.webp"
+  },
+  "RELIC.RED_SKULL": {
+    "name": "Red Skull",
+    "blurb": "While your HP is at or below 50%, you have 3 additional Strength.",
+    "rarity": "Common",
+    "character": "Ironclad",
+    "art": "art/relics/RED_SKULL.webp"
+  },
+  "RELIC.REGALITE": {
+    "name": "Regalite",
+    "blurb": "The first time you create a card each turn, gain 6 Block.",
+    "rarity": "Uncommon",
+    "character": "Regent",
+    "art": "art/relics/REGALITE.webp"
+  },
+  "RELIC.REGAL_PILLOW": {
+    "name": "Regal Pillow",
+    "blurb": "Whenever you Rest, heal an additional 15 HP.",
+    "rarity": "Common",
+    "art": "art/relics/REGAL_PILLOW.webp"
+  },
+  "RELIC.REPTILE_TRINKET": {
+    "name": "Reptile Trinket",
+    "blurb": "Whenever you use a {{2|potion|Potion}}, gain 3 Strength this turn.",
+    "rarity": "Uncommon",
+    "art": "art/relics/REPTILE_TRINKET.webp"
+  },
+  "RELIC.RINGING_TRIANGLE": {
+    "name": "Ringing Triangle",
+    "blurb": "Retain your Hand on the first turn of combat.",
+    "rarity": "Shop",
+    "art": "art/relics/RINGING_TRIANGLE.webp"
+  },
+  "RELIC.RING_OF_THE_DRAKE": {
+    "name": "Ring of the Drake",
+    "blurb": "At the start of your first 3 turns, draw 2 additional cards.",
+    "rarity": "Starter",
+    "character": "Silent",
+    "art": "art/relics/RING_OF_THE_DRAKE.webp"
+  },
+  "RELIC.RING_OF_THE_SNAKE": {
+    "name": "Ring of the Snake",
+    "blurb": "At the start of each combat, draw 2 additional cards.",
+    "rarity": "Starter",
+    "character": "Silent",
+    "art": "art/relics/RING_OF_THE_SNAKE.webp"
+  },
+  "RELIC.RIPPLE_BASIN": {
+    "name": "Ripple Basin",
+    "blurb": "If you did not play any {{QueryLink|Cards|type:Attack|Attacks|2}} during your turn, gain 4 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/RIPPLE_BASIN.webp"
+  },
+  "RELIC.ROYAL_POISON": {
+    "name": "Royal Poison",
+    "blurb": "At the start of each combat, lose 4 HP.",
+    "rarity": "Event",
+    "art": "art/relics/ROYAL_POISON.webp"
+  },
+  "RELIC.ROYAL_STAMP": {
+    "name": "Royal Stamp",
+    "blurb": "Upon pickup, choose an {{QueryLink|Cards|type:Attack|Attack|2}} or {{QueryLink|Cards|type:Skill|Skill|2}} in your Deck to Enchant with Royally Approved.",
+    "rarity": "Shop",
+    "art": "art/relics/ROYAL_STAMP.webp"
+  },
+  "RELIC.RUINED_HELMET": {
+    "name": "Ruined Helmet",
+    "blurb": "The first time you gain Strength each combat, double the amount gained.",
+    "rarity": "Rare",
+    "character": "Ironclad",
+    "art": "art/relics/RUINED_HELMET.webp"
+  },
+  "RELIC.RUNIC_CAPACITOR": {
+    "name": "Runic Capacitor",
+    "blurb": "Start each combat with 3 additional Orb Slots.",
+    "rarity": "Shop",
+    "character": "Defect",
+    "art": "art/relics/RUNIC_CAPACITOR.webp"
+  },
+  "RELIC.RUNIC_PYRAMID": {
+    "name": "Runic Pyramid",
+    "blurb": "At the end of your turn, you no longer discard your Hand.",
+    "rarity": "Ancient",
+    "art": "art/relics/RUNIC_PYRAMID.webp"
+  },
+  "RELIC.SAI": {
+    "name": "Sai",
+    "blurb": "At the start of your turn, gain 7 Block.",
+    "rarity": "Ancient",
+    "art": "art/relics/SAI.webp"
+  },
+  "RELIC.SAND_CASTLE": {
+    "name": "Sand Castle",
+    "blurb": "Upon pickup, Upgrade 6 random cards.",
+    "rarity": "Ancient",
+    "art": "art/relics/SAND_CASTLE.webp"
+  },
+  "RELIC.SCREAMING_FLAGON": {
+    "name": "Screaming Flagon",
+    "blurb": "If you end your turn with no cards in your Hand, deal 20 damage to ALL enemies.",
+    "rarity": "Shop",
+    "art": "art/relics/SCREAMING_FLAGON.webp"
+  },
+  "RELIC.SCROLL_BOXES": {
+    "name": "Scroll Boxes",
+    "blurb": "Choose 1 of 2 packs of cards to add to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/SCROLL_BOXES.webp"
+  },
+  "RELIC.SEAL_OF_GOLD": {
+    "name": "Seal of Gold",
+    "blurb": "At the start of your turn, spend 3 Gold old to gain 1 Energy.",
+    "rarity": "Ancient"
+  },
+  "RELIC.SEA_GLASS": {
+    "name": "Sea Glass",
+    "blurb": "See 15 cards from another character. Choose any number of them to add to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/SEA_GLASS.webp"
+  },
+  "RELIC.SELF_FORMING_CLAY": {
+    "name": "Self-Forming Clay",
+    "blurb": "Whenever you lose HP in combat, gain 3 Block next turn.",
+    "rarity": "Uncommon",
+    "character": "Ironclad",
+    "art": "art/relics/SELF_FORMING_CLAY.webp"
+  },
+  "RELIC.SERE_TALON": {
+    "name": "Sere Talon",
+    "blurb": "Upon pickup, lose 9 Max HP. Add 3 {{C|Wish|Wishes|2}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/SERE_TALON.webp"
+  },
+  "RELIC.SHOVEL": {
+    "name": "Shovel",
+    "blurb": "You can now dig at {{2|Rest Sites|Rest Site}} to obtain a random Relic.",
+    "rarity": "Rare",
+    "art": "art/relics/SHOVEL.webp"
+  },
+  "RELIC.SHURIKEN": {
+    "name": "Shuriken",
+    "blurb": "Every time you play 3 {{QueryLink|Cards|type:Attack|Attacks|2}} in a single turn, gain 1 Strength.",
+    "rarity": "Rare",
+    "art": "art/relics/SHURIKEN.webp"
+  },
+  "RELIC.SIGNET_RING": {
+    "name": "Signet Ring",
+    "blurb": "Upon pickup, gain 888 Gold old.",
+    "rarity": "Ancient",
+    "art": "art/relics/SIGNET_RING.webp"
+  },
+  "RELIC.SILKEN_TRESS": {
+    "name": "Silken Tress",
+    "blurb": "Upon pickup, lose all Gold. {{KW2|Enchant}} all cards in your first card reward with {{KW2|Glam}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/SILKEN_TRESS.webp"
+  },
+  "RELIC.SILVER_CRUCIBLE": {
+    "name": "Silver Crucible",
+    "blurb": "The first 3 card rewards you see are Upgraded. The first Treasure Chest you open is empty.",
+    "rarity": "Ancient",
+    "art": "art/relics/SILVER_CRUCIBLE.webp"
+  },
+  "RELIC.SLING_OF_COURAGE": {
+    "name": "Sling of Courage",
+    "blurb": "Start each Elite combat with 2 Strength.",
+    "rarity": "Shop"
+  },
+  "RELIC.SMALL_CAPSULE": {
+    "name": "Small Capsule",
+    "blurb": "Upon pickup, obtain a random Relic.",
+    "rarity": "Ancient",
+    "art": "art/relics/SMALL_CAPSULE.webp"
+  },
+  "RELIC.SNECKO_EYE": {
+    "name": "Snecko Eye",
+    "blurb": "At the start of your turn, draw 2 additional cards. Start each combat Confused.",
+    "rarity": "Ancient",
+    "art": "art/relics/SNECKO_EYE.webp"
+  },
+  "RELIC.SNECKO_SKULL": {
+    "name": "Snecko Skull",
+    "blurb": "Whenever you apply Poison, apply an additional 1 Poison.",
+    "rarity": "Common",
+    "character": "Silent",
+    "art": "art/relics/SNECKO_SKULL.webp"
+  },
+  "RELIC.SOZU": {
+    "name": "Sozu",
+    "blurb": "Gain 1 Energy at the start of each turn. You can no longer obtain {{2|potions|Potions}}.",
+    "rarity": "Ancient",
+    "art": "art/relics/SOZU.webp"
+  },
+  "RELIC.SPARKLING_ROUGE": {
+    "name": "Sparkling Rouge",
+    "blurb": "At the start of your 3rd turn, gain 1 Strength and 1 Dexterity.",
+    "rarity": "Uncommon",
+    "art": "art/relics/SPARKLING_ROUGE.webp"
+  },
+  "RELIC.SPIKED_GAUNTLETS": {
+    "name": "Spiked Gauntlets",
+    "blurb": "Gain 1 Energy at the start of each turn. {{QueryLink|Cards|type:Power|Powers|2}} cost 1 more 1 Energy.",
+    "rarity": "Ancient",
+    "art": "art/relics/SPIKED_GAUNTLETS.webp"
+  },
+  "RELIC.STONE_CALENDAR": {
+    "name": "Stone Calendar",
+    "blurb": "At the end of turn 7, deal 52 damage to ALL enemies.",
+    "rarity": "Rare",
+    "art": "art/relics/STONE_CALENDAR.webp"
+  },
+  "RELIC.STONE_CRACKER": {
+    "name": "Stone Cracker",
+    "blurb": "At the start of combat, Upgrade 2 random cards in your Draw Pile for the rest of combat.",
+    "rarity": "Uncommon",
+    "art": "art/relics/STONE_CRACKER.webp"
+  },
+  "RELIC.STONE_HUMIDIFIER": {
+    "name": "Stone Humidifier",
+    "blurb": "Whenever you Rest at a {{2|Rest Site|Rest Site}}, raise your Max HP by 5.",
+    "rarity": "Ancient",
+    "art": "art/relics/STONE_HUMIDIFIER.webp"
+  },
+  "RELIC.STORYBOOK": {
+    "name": "Storybook",
+    "blurb": "Upon pickup, add 1 {{C2|Brightest Flame}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/STORYBOOK.webp"
+  },
+  "RELIC.STRAWBERRY": {
+    "name": "Strawberry",
+    "blurb": "Upon pickup, raise your Max HP by 7.",
+    "rarity": "Common",
+    "art": "art/relics/STRAWBERRY.webp"
+  },
+  "RELIC.STRIKE_DUMMY": {
+    "name": "Strike Dummy",
+    "blurb": "Cards containing “Strike” deal 3 additional damage.",
+    "rarity": "Common",
+    "art": "art/relics/STRIKE_DUMMY.webp"
+  },
+  "RELIC.STURDY_CLAMP": {
+    "name": "Sturdy Clamp",
+    "blurb": "Up to 10 Block persists across turns.",
+    "rarity": "Rare",
+    "art": "art/relics/STURDY_CLAMP.webp"
+  },
+  "RELIC.SWORD_OF_JADE": {
+    "name": "Sword of Jade",
+    "blurb": "Start each combat with 3 Strength.",
+    "rarity": "Event"
+  },
+  "RELIC.SWORD_OF_STONE": {
+    "name": "Sword of Stone",
+    "blurb": "Transforms into a powerful Relic after defeating 5 Elites.",
+    "rarity": "Event"
+  },
+  "RELIC.SYMBIOTIC_VIRUS": {
+    "name": "Symbiotic Virus",
+    "blurb": "At the start of each combat, Channel 1 Dark.",
+    "rarity": "Uncommon",
+    "character": "Defect",
+    "art": "art/relics/SYMBIOTIC_VIRUS.webp"
+  },
+  "RELIC.TANXS_WHISTLE": {
+    "name": "Tanx's Whistle",
+    "blurb": "Upon pickup, add 1 {{C2|Whistle}} to your Deck.",
+    "rarity": "Ancient",
+    "art": "art/relics/TANXS_WHISTLE.webp"
+  },
+  "RELIC.TEA_OF_DISCOURTESY": {
+    "name": "Tea of Discourtesy",
+    "blurb": "At the start of the next combat, shuffle 2 Dazed into your Draw Pile.",
+    "rarity": "Event"
+  },
+  "RELIC.THE_ABACUS": {
+    "name": "The Abacus",
+    "blurb": "Whenever you shuffle your Draw Pile, gain 6 Block.",
+    "rarity": "Shop",
+    "art": "art/relics/THE_ABACUS.webp"
+  },
+  "RELIC.THE_BOOT": {
+    "name": "The Boot",
+    "blurb": "Whenever you would deal 4 or less unblocked attack damage, increase it to 5.",
+    "rarity": "Event",
+    "art": "art/relics/THE_BOOT.webp"
+  },
+  "RELIC.THE_CHOSEN_CHEESE": {
+    "name": "The Chosen Cheese",
+    "blurb": "At the end of combat, gain 1 Max HP.",
+    "rarity": "Event",
+    "art": "art/relics/THE_CHOSEN_CHEESE.webp"
+  },
+  "RELIC.THE_COURIER": {
+    "name": "The Courier",
+    "blurb": "The merchant no longer runs out of cards, relics, or {{2|potions|Potion}} and his prices are reduced by 20%.",
+    "rarity": "Rare",
+    "art": "art/relics/THE_COURIER.webp"
+  },
+  "RELIC.THE_MERCHANTS_RUG": {
+    "name": "The Merchant's Rug???",
+    "blurb": "Poor imitation. Does nothing.",
+    "rarity": "Event",
+    "art": "art/relics/THE_MERCHANTS_RUG.webp"
+  },
+  "RELIC.THROWING_AXE": {
+    "name": "Throwing Axe",
+    "blurb": "The first card you play each combat is played an extra time.",
+    "rarity": "Ancient",
+    "art": "art/relics/THROWING_AXE.webp"
+  },
+  "RELIC.TINGSHA": {
+    "name": "Tingsha",
+    "blurb": "Whenever you discard a card during your turn, deal 3 damage to a random enemy for each card discarded.",
+    "rarity": "Uncommon",
+    "character": "Silent",
+    "art": "art/relics/TINGSHA.webp"
+  },
+  "RELIC.TINY_MAILBOX": {
+    "name": "Tiny Mailbox",
+    "blurb": "Whenever you Rest, procure 2 random {{2|potions|Potion}}.",
+    "rarity": "Uncommon",
+    "art": "art/relics/TINY_MAILBOX.webp"
+  },
+  "RELIC.TOASTY_MITTENS": {
+    "name": "Toasty Mittens",
+    "blurb": "At the start of your turn, Exhaust 1 card from your Hand and gain 1 Strength.",
+    "rarity": "Ancient",
+    "art": "art/relics/TOASTY_MITTENS.webp"
+  },
+  "RELIC.TOOLBOX": {
+    "name": "Toolbox",
+    "blurb": "At the start of each combat, choose 1 of 3 random {{QueryLink|Cards|color:Colorless|Colorless|2}} cards and add the chosen card into your Hand.",
+    "rarity": "Shop",
+    "art": "art/relics/TOOLBOX.webp"
+  },
+  "RELIC.TOUCH_OF_OROBAS": {
+    "name": "Touch of Orobas",
+    "blurb": "Upon pickup, replace your starter Relic with an Ancient version.",
+    "rarity": "Ancient"
+  },
+  "RELIC.TOUGH_BANDAGES": {
+    "name": "Tough Bandages",
+    "blurb": "Whenever you discard a card during your turn, gain 3 Block.",
+    "rarity": "Rare",
+    "character": "Silent",
+    "art": "art/relics/TOUGH_BANDAGES.webp"
+  },
+  "RELIC.TOXIC_EGG": {
+    "name": "Toxic Egg",
+    "blurb": "Whenever you add a {{QueryLink|Cards|type:Skill|Skill|2}} into your Deck, Upgrade it.",
+    "rarity": "Rare",
+    "art": "art/relics/TOXIC_EGG.webp"
+  },
+  "RELIC.TOY_BOX": {
+    "name": "Toy Box",
+    "blurb": "Upon pickup, obtain 5 Wax Relics. Every 3 combats, your left-most Wax Relic will melt away.",
+    "rarity": "Ancient",
+    "art": "art/relics/TOY_BOX.webp"
+  },
+  "RELIC.TRI_BOOMERANG": {
+    "name": "Tri-Boomerang",
+    "blurb": "Choose 3 {{QueryLink|Cards|type:Attack|Attacks|2}} in your Deck. Enchant them with Instinct.",
+    "rarity": "Ancient"
+  },
+  "RELIC.TUNGSTEN_ROD": {
+    "name": "Tungsten Rod",
+    "blurb": "Whenever you would lose HP, lose 1 less.",
+    "rarity": "Rare",
+    "art": "art/relics/TUNGSTEN_ROD.webp"
+  },
+  "RELIC.TUNING_FORK": {
+    "name": "Tuning Fork",
+    "blurb": "Every time you play 10 {{QueryLink|Cards|type:Skill|Skills|2}}, gain 7 Block.",
+    "rarity": "Uncommon",
+    "art": "art/relics/TUNING_FORK.webp"
+  },
+  "RELIC.TWISTED_FUNNEL": {
+    "name": "Twisted Funnel",
+    "blurb": "At the start of each combat, apply 4 Poison to ALL enemies.",
+    "rarity": "Uncommon",
+    "character": "Silent",
+    "art": "art/relics/TWISTED_FUNNEL.webp"
+  },
+  "RELIC.UNCEASING_TOP": {
+    "name": "Unceasing Top",
+    "blurb": "Whenever you have no cards in Hand during your turn, draw a card.",
+    "rarity": "Rare",
+    "art": "art/relics/UNCEASING_TOP.webp"
+  },
+  "RELIC.UNDYING_SIGIL": {
+    "name": "Undying Sigil",
+    "blurb": "Enemies with at least as much Doom as HP deal 50% less damage.",
+    "rarity": "Shop",
+    "character": "Necrobinder",
+    "art": "art/relics/UNDYING_SIGIL.webp"
+  },
+  "RELIC.UNSETTLING_LAMP": {
+    "name": "Unsettling Lamp",
+    "blurb": "Each combat, the first time you play a card that Debuffs an enemy, double its effect.",
+    "rarity": "Rare",
+    "art": "art/relics/UNSETTLING_LAMP.webp"
+  },
+  "RELIC.VAJRA": {
+    "name": "Vajra",
+    "blurb": "Start each combat with 1 Strength.",
+    "rarity": "Common",
+    "art": "art/relics/VAJRA.webp"
+  },
+  "RELIC.VAMBRACE": {
+    "name": "Vambrace",
+    "blurb": "The first time you gain Block from a card each combat, double the amount gained.",
+    "rarity": "Uncommon",
+    "art": "art/relics/VAMBRACE.webp"
+  },
+  "RELIC.VELVET_CHOKER": {
+    "name": "Velvet Choker",
+    "blurb": "Gain 1 Energy at the start of each turn. You cannot play more than 6 cards per turn.",
+    "rarity": "Ancient",
+    "art": "art/relics/VELVET_CHOKER.webp"
+  },
+  "RELIC.VENERABLE_TEA_SET": {
+    "name": "Venerable Tea Set",
+    "blurb": "Whenever you enter a {{2|Rest Site|Rest Site}}, start the next combat with an additional 2 Energy.",
+    "rarity": "Common",
+    "art": "art/relics/VENERABLE_TEA_SET.webp"
+  },
+  "RELIC.VERY_HOT_COCOA": {
+    "name": "Very Hot Cocoa",
+    "blurb": "Start each combat with an additional 41 Energy.",
+    "rarity": "Ancient",
+    "art": "art/relics/VERY_HOT_COCOA.webp"
+  },
+  "RELIC.VEXING_PUZZLEBOX": {
+    "name": "Vexing Puzzlebox",
+    "blurb": "At the start of each combat, add a random card into your Hand. It's free to play this turn.",
+    "rarity": "Rare",
+    "art": "art/relics/VEXING_PUZZLEBOX.webp"
+  },
+  "RELIC.VITRUVIAN_MINION": {
+    "name": "Vitruvian Minion",
+    "blurb": "Cards containing “Minion” deal double damage and gain double Block.",
+    "rarity": "Shop",
+    "character": "Regent",
+    "art": "art/relics/VITRUVIAN_MINION.webp"
+  },
+  "RELIC.WAR_HAMMER": {
+    "name": "War Hammer",
+    "blurb": "Whenever you kill an {{2|Elites|Elite}}, Upgrade 4 random cards.",
+    "rarity": "Ancient",
+    "art": "art/relics/WAR_HAMMER.webp"
+  },
+  "RELIC.WAR_PAINT": {
+    "name": "War Paint",
+    "blurb": "Upon pickup, Upgrade 2 random {{QueryLink|Cards|type:Skill|Skills|2}}.",
+    "rarity": "Common",
+    "art": "art/relics/WAR_PAINT.webp"
+  },
+  "RELIC.WHETSTONE": {
+    "name": "Whetstone",
+    "blurb": "Upon pickup, Upgrade 2 random {{QueryLink|Cards|type:Attack|Attacks|2}}.",
+    "rarity": "Common",
+    "art": "art/relics/WHETSTONE.webp"
+  },
+  "RELIC.WHISPERING_EARRING": {
+    "name": "Whispering Earring",
+    "blurb": "Gain 1 Energy at the start of each turn. Vakuu plays your first turn for you.",
+    "rarity": "Ancient",
+    "art": "art/relics/WHISPERING_EARRING.webp"
+  },
+  "RELIC.WHITE_BEAST_STATUE": {
+    "name": "White Beast Statue",
+    "blurb": "{{2|Potions|Potion}} always appear in combat rewards.",
+    "rarity": "Rare",
+    "art": "art/relics/WHITE_BEAST_STATUE.webp"
+  },
+  "RELIC.WHITE_STAR": {
+    "name": "White Star",
+    "blurb": "Elites drop an additional Rare card reward.",
+    "rarity": "Rare",
+    "art": "art/relics/WHITE_STAR.webp"
+  },
+  "RELIC.WINGED_BOOTS": {
+    "name": "Winged Boots",
+    "blurb": "You may ignore paths when choosing the next rooms to travel to 3 times.",
+    "rarity": "Ancient",
+    "art": "art/relics/WINGED_BOOTS.webp"
+  },
+  "RELIC.WING_CHARM": {
+    "name": "Wing Charm",
+    "blurb": "A random card in each card reward is Enchanted with Swift 1.",
+    "rarity": "Shop",
+    "art": "art/relics/WING_CHARM.webp"
+  },
+  "RELIC.WONGOS_MYSTERY_TICKET": {
+    "name": "Wongo's Mystery Ticket",
+    "blurb": "Receive 3 random Relics after 5 combats.",
+    "rarity": "Event",
+    "art": "art/relics/WONGOS_MYSTERY_TICKET.webp"
+  },
+  "RELIC.WONGO_CUSTOMER_APPRECIATION_BADGE": {
+    "name": "Wongo Customer Appreciation Badge",
+    "blurb": "Does nothing.",
+    "rarity": "Event",
+    "art": "art/relics/WONGO_CUSTOMER_APPRECIATION_BADGE.webp"
+  },
+  "RELIC.YUMMY_COOKIE": {
+    "name": "Yummy Cookie",
+    "blurb": "Upon pickup, Upgrade 4 cards.",
+    "rarity": "Ancient",
+    "art": "art/relics/YUMMY_COOKIE.webp"
+  }
+}

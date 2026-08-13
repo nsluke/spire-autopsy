@@ -3,20 +3,15 @@
  * what you took, and what it cost. Sits under the coach's read; hovering a
  * row rings the same floor on the HP chart.
  */
-import { monsterArt } from '../lib/art';
-import {
-  FLOOR_KIND_LABEL,
-  floorFacts,
-  hpTone,
-  momentsOnFloor,
-  restLabel,
-  type FloorFacts,
-} from '../lib/floorLog';
+import { FLOOR_KIND_LABEL, floorFacts, hpTone, momentsOnFloor, type FloorFacts } from '../lib/floorLog';
 import { displayName } from '../lib/idFormat';
+import { floorThumb } from '../lib/places';
 import type { AutopsyMoment, NormalizedRun } from '../lib/types';
 import ArtImg from './ArtImg';
 import CardName from './CardName';
 import EnemyName from './EnemyName';
+import { PotionName, RelicName } from './ItemName';
+import PlaceName from './PlaceName';
 
 interface Props {
   run: NormalizedRun;
@@ -51,19 +46,19 @@ export default function FloorTimeline({ run, moments, highlightFloors, onFloorHo
     <section className="panel floorLog" aria-label="Floor-by-floor timeline">
       <h2 className="sectionTitle">The floors</h2>
       <p className="floorLogLead">
-        Every node, top to bottom. Color is the room type; red and green numbers are
-        damage and healing.
+        Every floor, top to bottom. Red is damage, green is healing. Hover anything for
+        what it does.
       </p>
       <ol className="floorList">
         {acts.map((group) => (
           <li key={group.act} className="floorAct">
             <h3 className="floorActTitle">
-              Act {group.act}
+              Act {['I', 'II', 'III', 'IV'][group.act - 1] ?? group.act}
               {group.name ? <span> · {displayName(group.name)}</span> : null}
             </h3>
             <ol className="floorActList">
               {group.nodes.map((node) => {
-                const facts = floorFacts(node);
+                const facts = floorFacts(node, run.player.relics);
                 const on = lit.has(facts.floor);
                 return (
                   <li
@@ -98,10 +93,12 @@ function FloorRow({ facts, chips }: { facts: FloorFacts; chips: AutopsyMoment[] 
       <div className="floorBody">
         <div className="floorHead">
           <span className="floorNum num">fl {facts.floor}</span>
-          <span className={`floorKind kind-${facts.kind}`}>{FLOOR_KIND_LABEL[facts.kind]}</span>
-          <ArtImg src={monsterArt(facts.encounterId)} className="floorArt" />
+          <span className={`floorKind kind-${facts.kind}`}>
+            <PlaceName kind={facts.kind} label={FLOOR_KIND_LABEL[facts.kind]} />
+          </span>
+          <ArtImg src={floorThumb(facts)} className="floorArt" />
           <span className="floorTitle">
-            {facts.encounterId ? <EnemyName id={facts.encounterId} /> : facts.title}
+            {facts.encounterId ? <EnemyName id={facts.encounterId} /> : <PlaceName kind={facts.kind} eventId={facts.eventId} />}
           </span>
           {chips.map((m) => (
             <span key={m.kind} className={`floorChip chip-${m.kind}`}>
@@ -134,11 +131,14 @@ function hasDetails(f: FloorFacts): boolean {
       f.upgraded.length +
       f.relics.length +
       f.potions.length +
-      f.potionsUsed.length >
+      f.potionsUsed.length +
+      f.eventChoices.length >
       0 ||
     Boolean(f.rest) ||
     f.goldSpent > 0 ||
-    f.goldGained >= 20
+    f.goldGained >= 20 ||
+    f.maxHpLost > 0 ||
+    f.maxHpGained > 0
   );
 }
 
@@ -147,36 +147,25 @@ function FloorDetails({ facts }: { facts: FloorFacts }) {
   if (facts.rest) {
     bits.push(
       <span key="rest" className="floorBit">
-        {restLabel(facts.rest)}
+        <PlaceName kind="rest" rest={facts.rest} />
+      </span>,
+    );
+  }
+  if (facts.eventChoices.length > 0) {
+    bits.push(
+      <span key="chose" className="floorBit">
+        chose <span className="floorChoice">{facts.eventChoices.join(', ')}</span>
       </span>,
     );
   }
   pushCards(bits, 'picked', facts.picked);
-  pushCards(bits, 'skipped', facts.skipped, 'skipped');
+  pushCards(bits, facts.skippedAll ? 'skipped all' : 'skipped', facts.skipped, 'skipped');
   pushCards(bits, 'gained', facts.gainedExtra);
   pushCards(bits, 'removed', facts.removed, 'removed');
   pushCards(bits, 'upgraded', facts.upgraded, 'upgraded');
-  if (facts.relics.length) {
-    bits.push(
-      <span key="relics" className="floorBit">
-        relic {facts.relics.map((id) => displayName(id)).join(', ')}
-      </span>,
-    );
-  }
-  if (facts.potions.length) {
-    bits.push(
-      <span key="pots" className="floorBit">
-        potion {facts.potions.map((id) => displayName(id)).join(', ')}
-      </span>,
-    );
-  }
-  if (facts.potionsUsed.length) {
-    bits.push(
-      <span key="used" className="floorBit">
-        used {facts.potionsUsed.map((id) => displayName(id)).join(', ')}
-      </span>,
-    );
-  }
+  pushItems(bits, 'relic', facts.relics, (id) => <RelicName id={id} />);
+  pushItems(bits, 'potion', facts.potions, (id) => <PotionName id={id} />);
+  pushItems(bits, 'used', facts.potionsUsed, (id) => <PotionName id={id} />);
   if (facts.goldSpent > 0) {
     bits.push(
       <span key="gs" className="floorBit floorGold num">
@@ -190,6 +179,20 @@ function FloorDetails({ facts }: { facts: FloorFacts }) {
       </span>,
     );
   }
+  if (facts.maxHpLost > 0) {
+    bits.push(
+      <span key="mhl" className="floorBit floorMaxLoss num">
+        max −{facts.maxHpLost}
+      </span>,
+    );
+  }
+  if (facts.maxHpGained > 0) {
+    bits.push(
+      <span key="mhg" className="floorBit floorMaxGain num">
+        max +{facts.maxHpGained}
+      </span>,
+    );
+  }
   return (
     <>
       {bits.map((el, i) => (
@@ -199,6 +202,21 @@ function FloorDetails({ facts }: { facts: FloorFacts }) {
         </span>
       ))}
     </>
+  );
+}
+
+function pushItems(bits: JSX.Element[], key: string, ids: string[], render: (id: string) => JSX.Element) {
+  if (ids.length === 0) return;
+  bits.push(
+    <span key={key} className="floorBit">
+      {key}{' '}
+      {ids.map((id, i) => (
+        <span key={`${key}-${i}-${id}`}>
+          {i > 0 ? ', ' : ''}
+          {render(id)}
+        </span>
+      ))}
+    </span>,
   );
 }
 

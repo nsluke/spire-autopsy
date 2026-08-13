@@ -46,20 +46,43 @@ button { font-family: inherit; }
 
 :focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: 2px; }
 
-/* shared primitives */
+/* shared primitives — near-square carved chips, not web pills. The bevel is
+   two inset hairlines (parchment above, shadow below) over a stone gradient;
+   the active state swaps the border trick for a gold keyline. */
 .pill {
   display: inline-block;
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  border: 1px solid #0b0805;
+  border-radius: 3px;
   padding: 3px 10px;
   color: var(--ink2);
-  background: none;
+  background: linear-gradient(180deg, #2a2118, #221a12);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 228, 211, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
-.pill.on { background: var(--ember-dim); border-color: rgba(232, 163, 61, 0.5); color: var(--ember); }
+.pill.on {
+  color: var(--ember);
+  background: linear-gradient(180deg, #2f2415, #251c0f);
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 163, 61, 0.55),
+    inset 0 1px 0 rgba(237, 228, 211, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
 button.pill { cursor: pointer; }
+
+/* stock scrollbars glare on the torchlit ground — thin them into the material */
+* { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track { background: transparent; }
 
 .panel { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px; padding: 16px 18px; }
 

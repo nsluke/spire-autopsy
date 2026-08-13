@@ -12,8 +12,10 @@ import { getMeta } from '../lib/db';
 import { LEDGER_META_KEY, type ImportProgress } from '../lib/import';
 import { fmtInt } from '../lib/idFormat';
 import { exportJournal, importJournal, JournalImportError } from '../lib/journal';
+import { characterArt } from '../lib/art';
 import type { Ledger } from '../lib/ledger';
 import type { NormalizedRun } from '../lib/types';
+import ArtImg from '../components/ArtImg';
 import ContributePanel from '../components/ContributePanel';
 import Dropzone from '../components/Dropzone';
 import GameLedger from '../components/GameLedger';
@@ -129,7 +131,7 @@ function ImportPanel({ p }: { p: ImportProgress }) {
             <a href={ISSUES_URL} target="_blank" rel="noreferrer">
               Open an issue
             </a>{' '}
-            with the file’s schema_version — it helps us keep up with game patches.
+            with the file’s schema_version — game patches move, and we chase.
           </p>
         </div>
       )}
@@ -178,7 +180,7 @@ function JournalRow({ hasData }: { hasData: boolean }) {
         onChange={(e) => void handleImport(e.target.files?.[0])}
       />
       {state === 'error' && <span className="journalError">{error}</span>}
-      <span className="journalHint">runs + coach state, one file — your move-machines / backup story</span>
+      <span className="journalHint">Every run and every note, one file — carry it to another machine or keep it safe.</span>
     </div>
   );
 }
@@ -241,7 +243,14 @@ export default function Landing({ onImport, onDemo, importState, hasData, runs }
   return (
     <div className="landing">
       <p className="landingBrand">
-        <span className="landingMark">✝</span> Spire Autopsy
+        <span className="landingMark" aria-hidden="true">
+          {/* the favicon's dagger-cross, inlined so it can never render as emoji */}
+          <svg viewBox="0 0 512 512" fill="none" stroke="currentColor" strokeWidth="52" strokeLinecap="round">
+            <line x1="256" y1="72" x2="256" y2="440" />
+            <line x1="140" y1="184" x2="372" y2="184" />
+          </svg>
+        </span>{' '}
+        Spire Autopsy
       </p>
       {hasData && (
         <p className="backRow">
@@ -264,6 +273,14 @@ export default function Landing({ onImport, onDemo, importState, hasData, runs }
         </p>
       )}
 
+      {!hasData && (
+        <div className="charLineup" aria-hidden="true">
+          {['IRONCLAD', 'SILENT', 'DEFECT', 'NECROBINDER', 'REGENT'].map((c) => (
+            <ArtImg key={c} src={characterArt(`CHARACTER.${c}`)} />
+          ))}
+        </div>
+      )}
+
       <Dropzone
         onFiles={(files) => void onImport(files)}
         disabled={busy}
@@ -280,7 +297,7 @@ export default function Landing({ onImport, onDemo, importState, hasData, runs }
         <button type="button" className="demoBtn" onClick={() => void onDemo()} disabled={busy}>
           Try sample data
         </button>
-        <span className="demoNote">28 real runs, bundled with the site — look around before importing your own</span>
+        <span className="demoNote">28 real runs from a fellow climber — look around before importing your own</span>
       </div>
 
       {importState && <ImportPanel p={importState} />}
@@ -312,7 +329,7 @@ export default function Landing({ onImport, onDemo, importState, hasData, runs }
           aria-label="Copy save-folder path"
           aria-live="polite"
         >
-          {copyState === 'copied' ? 'Copied ✓' : copyState === 'failed' ? 'Press Ctrl/⌘+C' : '⧉ Copy'}
+          {copyState === 'copied' ? 'Copied ✓' : copyState === 'failed' ? 'Press Ctrl/⌘+C' : 'Copy'}
         </button>
       </div>
       <p className="pathNote">({info.note})</p>

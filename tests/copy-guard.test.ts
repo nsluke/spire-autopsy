@@ -167,3 +167,50 @@ describe('copy guard: the coach never advises settling at a lower ascension', ()
     }
   });
 });
+
+// ---------- the observation drawer's one-line summary ----------
+
+describe('firstSentence', () => {
+  // Mirrors src/views/Coach.tsx — observation bodies are full of decimals, and
+  // "Wins average 2." shipped to the drawer before this rule existed.
+  function firstSentence(text: string): string {
+    const match = text.match(/^.*?[.!?](?=\s+[A-Z“"(]|\s*$)/s);
+    return match ? match[0].trim() : text;
+  }
+
+  it('does not cut a sentence at a decimal point', () => {
+    expect(firstSentence('Wins average 2.4 elites in act 1; losses average 1.9. Then more.')).toBe(
+      'Wins average 2.4 elites in act 1; losses average 1.9.',
+    );
+    expect(firstSentence('Your losses draft as much early damage as your wins (1.8 vs 1.6 attacks).')).toBe(
+      'Your losses draft as much early damage as your wins (1.8 vs 1.6 attacks).',
+    );
+  });
+
+  it('still stops at a real sentence break', () => {
+    expect(firstSentence('The door was half-closed. The rest followed.')).toBe('The door was half-closed.');
+  });
+
+  it('returns the whole text when there is no terminator', () => {
+    expect(firstSentence('No period here')).toBe('No period here');
+  });
+
+  it('keeps every shipped observation body to one readable sentence', () => {
+    const bodies = CORPORA.flatMap((c) =>
+      detectLeaks(c)
+        .filter((l) => l.tier === 'observation' && l.applicable)
+        .map((l) => l.body),
+    );
+    expect(bodies.length).toBeGreaterThan(5);
+    for (const body of bodies) {
+      const line = firstSentence(body);
+      expect(body.startsWith(line)).toBe(true);
+      expect(line.length).toBeGreaterThan(12);
+      // The cut is only legal at a real sentence break: either the body ends
+      // there, or what follows opens a new sentence. "Wins average 2." — the
+      // shipped bug — fails here because "4 elites" follows.
+      const rest = body.slice(line.length);
+      if (rest.trim().length > 0) expect(rest).toMatch(/^\s+[A-Z“"(]/);
+    }
+  });
+});

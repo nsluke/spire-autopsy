@@ -5,21 +5,38 @@
  * Baalorlord; STS2Guides): act 1 wants raw damage first. Gannon's benchmark is
  * enough damage for ~100 in 3 turns before the first elite, and early
  * powers/scaling picks "act like a curse". We can't see damage dealt, so the
- * honest proxy is HOW MANY ATTACK CARDS you added before your first act-1
- * elite fight (card types via the bundled metadata pack).
+ * honest proxy is HOW MANY ATTACK CARDS entered your deck before your first
+ * act-1 elite fight (card types via the bundled metadata pack).
+ *
+ * "Entered your deck" counts BOTH picked card rewards (cardChoices) and cards
+ * gained from shops/events (cardsGained) — an attack bought in an act-1 shop
+ * is real damage the player drafted, and a receipt claiming "0 attacks" that
+ * the player can falsify from memory is lethal for a receipts coach.
+ *
+ * cardsGained is in fact a SUPERSET of the picks: in all six reference runs
+ * every picked reward is also logged as a gain at the same node (the gain
+ * carries no floor_added_to_deck, the pick carries the node's floor). The
+ * union is therefore deduped by id + floor added, which collapses those pairs
+ * to one card and also absorbs the log's re-add entries (a card bouncing back
+ * into the deck is logged as a gain carrying its ORIGINAL floor).
  *
  * Cohorts: wins vs losses among completed runs that fought at least one act-1
  * elite (runs that never reached an elite can't be judged on pre-elite
  * drafting). Also tracked: power/scaling picks inside your first 3 picks.
  */
 import { cardType, metadataCoverage } from '../cards';
-import type { EvidenceStrength, LeakResult, NormalizedRun } from '../types';
-import { healthyResult, mean1, mostRecent, n1, notYetApplicable, pctLabel, rankScore, runTag } from './helpers';
+import type { CardRef, EvidenceStrength, LeakResult, NormalizedRun } from '../types';
+import { SYNTHETIC_DELTA_CAP, healthyResult, mean1, mostRecent, n1, notYetApplicable, pctLabel, rankScore, runTag, winRate } from './helpers';
 
 const ID = 'damage-drafting';
 const TITLE = 'Act 1 wants damage first';
 const MIN_COMPLETED = 20;
-const ATTACK_TARGET = 2;
+/**
+ * The bar. Was 2, which counting only picked rewards made nearly automatic;
+ * with shop/event gains now counted too, 3 is the honest translation of
+ * Gannon's "~100 damage in 3 turns" benchmark.
+ */
+export const ATTACK_TARGET = 3;
 
 interface DraftProfile {
   run: NormalizedRun;
@@ -28,21 +45,31 @@ interface DraftProfile {
   earlyPowerPicks: number; // powers among the first 3 picks of the run
 }
 
-/** Attack-type cards picked at act-1 nodes before the first act-1 elite fight. */
+/** Attack cards that entered the deck (picks + shop/event gains) before the first act-1 elite. */
 export function draftProfile(run: NormalizedRun): DraftProfile | undefined {
   const firstElite = run.nodes.find((n) => n.act === 1 && n.rooms.some((r) => r.roomType === 'elite'));
   if (!firstElite) return undefined;
   let attacks = 0;
   let picks = 0;
   let earlyPowers = 0;
+  const counted = new Set<string>();
+  const countAttack = (card: CardRef, floor: number) => {
+    if (cardType(card.id) !== 'attack') return;
+    const key = `${card.id}|${card.floorAdded ?? floor}`;
+    if (counted.has(key)) return;
+    counted.add(key);
+    attacks += 1;
+  };
   for (const node of run.nodes) {
     if (node.act !== 1) break;
     for (const choice of node.stats.cardChoices) {
       if (!choice.wasPicked) continue;
       picks += 1;
-      const type = cardType(choice.card.id);
-      if (node.floor < firstElite.floor && type === 'attack') attacks += 1;
-      if (picks <= 3 && type === 'power') earlyPowers += 1;
+      if (picks <= 3 && cardType(choice.card.id) === 'power') earlyPowers += 1;
+      if (node.floor < firstElite.floor) countAttack(choice.card, node.floor);
+    }
+    if (node.floor < firstElite.floor) {
+      for (const gained of node.stats.cardsGained) countAttack(gained, node.floor);
     }
   }
   return { run, attacksBeforeElite: attacks, firstEliteFloor: firstElite.floor, earlyPowerPicks: earlyPowers };
@@ -108,8 +135,18 @@ export function damageDraftingLeak(completed: NormalizedRun[]): LeakResult {
   const offenders = losses.filter((p) => p.attacksBeforeElite < ATTACK_TARGET);
   const runReceipts = mostRecent(offenders, (p) => p.run.startTime, 5).map((p) => ({
     runId: p.run.id,
-    label: `${runTag(p.run)} · ${p.attacksBeforeElite} ${p.attacksBeforeElite === 1 ? 'attack' : 'attacks'} added before the floor-${p.firstEliteFloor} elite`,
+    label: `${runTag(p.run)} · ${p.attacksBeforeElite} ${p.attacksBeforeElite === 1 ? 'attack' : 'attacks'} added before the floor-${p.firstEliteFloor} elite${p.earlyPowerPicks > 0 ? ', a power in the first 3 picks' : ''}`,
   }));
+
+  // Ranking delta: MEASURED win-rate gap between on-target and light drafts
+  // when both cohorts are real; otherwise the synthetic (winAvg−lossAvg)/4,
+  // capped so it can't outrank measured gaps elsewhere.
+  const onTarget = profiles.filter((p) => p.attacksBeforeElite >= ATTACK_TARGET);
+  const light = profiles.filter((p) => p.attacksBeforeElite < ATTACK_TARGET);
+  const rateDelta =
+    onTarget.length >= 5 && light.length >= 5
+      ? Math.max(0, winRate(onTarget.map((p) => p.run)) - winRate(light.map((p) => p.run)))
+      : Math.min(SYNTHETIC_DELTA_CAP, (winAvg - lossAvg) / 4);
 
   return {
     id: ID,
@@ -133,10 +170,10 @@ export function damageDraftingLeak(completed: NormalizedRun[]): LeakResult {
       'Card offers are random — some runs are never offered good attacks. This measures the tendency, not any single draft.',
     drill: {
       title: 'Damage first',
-      body: `Next 5 runs: add at least ${ATTACK_TARGET} attack cards before your first elite fight.`,
+      body: `Next 5 runs: add at least ${ATTACK_TARGET} attack cards before your first elite fight — rewards, shops, and events all count.`,
     },
     strength,
-    expectedWinsLost: rankScore(lowLossShare, (winAvg - lossAvg) / 4, strength),
+    expectedWinsLost: rankScore(lowLossShare, rateDelta, strength),
     applicable: true,
   };
 }

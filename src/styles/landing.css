@@ -16,6 +16,23 @@
   letter-spacing: 0.01em;
 }
 .landingMark { color: var(--ember); margin-right: 2px; }
+.landingMark svg { width: 13px; height: 13px; vertical-align: -1px; }
+
+/* ---- character lineup — the five climbers, before a word is read ---- */
+.charLineup {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 0 0 20px;
+}
+.charLineup img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
+}
+.charLineup img:nth-child(even) { height: 72px; }
 
 .backRow { margin: 0 0 18px; }
 .backLink {
@@ -92,14 +109,23 @@
 .demoBtn {
   font-size: 0.85rem;
   color: var(--ink2);
-  background: none;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  background: linear-gradient(180deg, #2a2118, #221a12);
+  border: 1px solid #0b0805;
+  border-radius: 3px;
+  box-shadow:
+    inset 0 1px 0 rgba(237, 228, 211, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
   padding: 7px 18px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: box-shadow 0.15s, color 0.15s;
 }
-.demoBtn:hover:enabled { color: var(--ember); border-color: rgba(232, 163, 61, 0.5); }
+.demoBtn:hover:enabled {
+  color: var(--ember);
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 163, 61, 0.55),
+    inset 0 1px 0 rgba(237, 228, 211, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
 .demoBtn:disabled { opacity: 0.6; cursor: default; }
 .demoNote { font-size: 0.75rem; color: var(--faint); }
 
@@ -121,14 +147,18 @@
 
 .progressTrack {
   height: 8px;
-  border-radius: 4px;
+  border-radius: 3px;
   background: var(--line-soft);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
 .progressFill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: 3px;
   background: var(--ember);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
   transition: width 0.2s;
 }
 
@@ -199,7 +229,7 @@
   color: var(--ember);
   background: none;
   border: 1px solid rgba(232, 163, 61, 0.35);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 4px 10px;
   cursor: pointer;
   white-space: nowrap;

@@ -11,12 +11,35 @@
  *   strengthWeight = strong 1.0 / moderate 0.6 / weak 0.3.
  * The product estimates "wins lost per 100 runs" — a heuristic for ordering
  * leaks by how much fixing them could matter, never shown as a promise.
+ *
+ * UNITS MUST MATCH, and this is the easiest way to get ranking wrong: pair a
+ * per-RUN frequency with a per-RUN rateDelta (win-rate gap between run
+ * cohorts), or a per-FIGHT frequency with a per-FIGHT rateDelta (death-rate
+ * gap between fight cohorts — the bossEntry.ts / upgradeTempo.ts shape).
+ * Crossing them multiplies the same evidence in twice: a per-fight frequency
+ * against a per-run win-rate delta once scored potion-hoarding 158 next to
+ * boss-entry's 26 on the same corpus. Cross-detector ranking only means
+ * anything while every detector answers in the same currency.
  */
 import { characterName, shortDate } from '../idFormat';
 import type { EvidenceStrength, LeakResult, LeakTier, NormalizedRun } from '../types';
 
 /** Entering a boss fight below this HP fraction counts as a "low" entry. */
 export const LOW_BOSS_ENTRY = 0.6;
+
+/**
+ * Cap for SYNTHETIC rateDelta values — the invented scalings (gap/10, flat
+ * 0.1) some detectors fall back on when a measured probability gap isn't
+ * computable. Measured gaps (death-rate or win-rate differences between real
+ * cohorts) pass through uncapped, so a genuine 30-point rate delta always
+ * outranks an invented one at equal frequency.
+ */
+export const SYNTHETIC_DELTA_CAP = 0.3;
+
+/** Win rate of a cohort of runs; 0 for an empty cohort. */
+export function winRate(runs: NormalizedRun[]): number {
+  return runs.length ? runs.filter((r) => r.win).length / runs.length : 0;
+}
 
 const STRENGTH_WEIGHT: Record<EvidenceStrength, number> = {
   strong: 1,

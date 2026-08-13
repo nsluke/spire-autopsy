@@ -27,7 +27,10 @@
   text-decoration: none;
   letter-spacing: 0.01em;
 }
+/* Inline-SVG mark (same glyph as the favicon) — never subject to emoji
+   presentation the way the raw ✝ character is on mobile platforms. */
 .brandMark { color: var(--ember); margin-right: 2px; }
+.brandMark svg { width: 13px; height: 13px; vertical-align: -1px; }
 
 .nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
 .nav a {
@@ -35,7 +38,7 @@
   text-decoration: none;
   font-size: 0.85rem;
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 3px;
 }
 .nav a.on { color: var(--ember); background: var(--ember-dim); }
 .nav a:hover { color: var(--ink); }
@@ -46,7 +49,7 @@
   letter-spacing: 0.1em;
   color: var(--win);
   border: 1px solid rgba(78, 158, 71, 0.4);
-  border-radius: 999px;
+  border-radius: 3px;
   padding: 3px 10px;
 }
 

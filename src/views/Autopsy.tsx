@@ -8,14 +8,19 @@
  */
 import { useMemo, useState } from 'react';
 import ArtImg from '../components/ArtImg';
+import AscensionName from '../components/AscensionName';
+import CardName from '../components/CardName';
 import EnemyName from '../components/EnemyName';
 import FloorTimeline from '../components/FloorTimeline';
 import HpTrajectory from '../components/HpTrajectory';
+import { RelicName } from '../components/ItemName';
+import { EventName } from '../components/PlaceName';
 import RichLine from '../components/RichLine';
 import { characterArt, monsterArt } from '../lib/art';
-import { buildAutopsy } from '../lib/autopsy';
+import { buildAutopsy, type AutopsyBeat } from '../lib/autopsy';
 import { FLOOR_KIND_LABEL, floorKind, floorTitle, hpTone } from '../lib/floorLog';
 import { characterColor, characterName, displayName, formatDuration, shortDate } from '../lib/idFormat';
+import { eventArt } from '../lib/places';
 import { detectLeaks } from '../lib/leaks';
 import type { LeakResult, NormalizedRun } from '../lib/types';
 import '../styles/autopsy.css';
@@ -79,11 +84,26 @@ export default function Autopsy({ runs, runId }: Props) {
   }, [report, leaks]);
 
   if (!selected || !report) {
-    return <p className="autopsyEmpty">No runs on the table yet — import some and the first autopsy begins.</p>;
+    return (
+      <div className="emptyState">
+        <img src="art/events/NEOW.webp" alt="" />
+        <p className="autopsyEmpty">No runs on the table yet — import some and the first autopsy begins.</p>
+      </div>
+    );
   }
 
   const last = selected.nodes[selected.nodes.length - 1];
   const logHighlight = beatFloors ?? (chartFloor !== null ? [chartFloor] : undefined);
+
+  // The final deck, in draft order: starters first, then by the floor each
+  // card joined. The final relics ride the same panel.
+  const deck = [...selected.player.deck].sort((a, b) => (a.floorAdded ?? 0) - (b.floorAdded ?? 0));
+  const relics = [...selected.player.relics].sort((a, b) => (a.floorAdded ?? 0) - (b.floorAdded ?? 0));
+  const deckTitle = report.win
+    ? 'The deck that won'
+    : report.killedBy
+      ? 'The deck it died with'
+      : 'The deck it carried';
 
   return (
     <div className="autopsy">
@@ -112,15 +132,17 @@ export default function Autopsy({ runs, runId }: Props) {
             <h1 className="autopsyTitle">
               <span style={{ color: characterColor(report.character) }}>{characterName(report.character)}</span>
               {' · '}
-              Ascension <span className="num">{report.ascension}</span>
+              <AscensionName level={report.ascension} label={`Ascension ${report.ascension}`} className="artName ascName" />
               {' · '}
               {report.win ? (
                 <span className="autopsyWin">VICTORY</span>
               ) : report.killedBy ? (
                 <span className="autopsyLoss">
                   slain by{' '}
-                  {selected.killedByEncounter || selected.killedByEvent ? (
-                    <EnemyName id={(selected.killedByEncounter ?? selected.killedByEvent)!} />
+                  {selected.killedByEncounter ? (
+                    <EnemyName id={selected.killedByEncounter} />
+                  ) : selected.killedByEvent ? (
+                    <EventName id={selected.killedByEvent} />
                   ) : (
                     pretty(report.killedBy)
                   )}
@@ -185,7 +207,9 @@ export default function Autopsy({ runs, runId }: Props) {
           </div>
         </div>
         <div className="autopsyHeadRight">
-          {!report.win && <ArtImg src={monsterArt(selected.killedByEncounter)} className="killerArt" />}
+          {!report.win && (
+            <ArtImg src={monsterArt(selected.killedByEncounter) ?? eventArt(selected.killedByEvent)} className="killerArt" />
+          )}
           <span className="pill num">{report.runId}.run</span>
         </div>
       </header>
@@ -198,7 +222,7 @@ export default function Autopsy({ runs, runId }: Props) {
         <section className="panel coachRead">
           <h2 className="sectionTitle">The coach's read</h2>
           <ul className="beatList">
-            {report.narrative.map((beat, i) => {
+            {(report.narrative as AutopsyBeat[]).map((beat, i) => {
               const anchored = beat.floors.length > 0;
               const lit = chartFloor !== null && beat.floors.includes(chartFloor);
               return (
@@ -213,7 +237,20 @@ export default function Autopsy({ runs, runId }: Props) {
                   onClick={anchored ? () => scrollToFloor(beat.floors[0]) : undefined}
                 >
                   <span className="beatText">
-                    <RichLine text={beat.text} enemyIds={beat.enemyIds} />
+                    <RichLine
+                      text={beat.text}
+                      enemyIds={beat.enemyIds}
+                      relicIds={beat.relicIds}
+                      potionIds={beat.potionIds}
+                    />
+                    {beat.runRef && (
+                      <>
+                        {' '}
+                        <a className="beatRunLink" href={`#/autopsy/${beat.runRef}`}>
+                          Open that run ↗
+                        </a>
+                      </>
+                    )}
                   </span>
                   {anchored && (
                     <span className="beatFloors num" aria-label={`floors ${beat.floors.join(', ')}`}>
@@ -234,6 +271,47 @@ export default function Autopsy({ runs, runId }: Props) {
                 </span>
               ))}
             </p>
+          )}
+        </section>
+      )}
+
+      {deck.length > 0 && (
+        <section className="panel deckPanel">
+          <h2 className="sectionTitle">
+            {deckTitle} · <span className="num">{deck.length}</span> cards
+          </h2>
+          <ul className="deckList">
+            {deck.map((c, i) => {
+              const jump = (c.floorAdded ?? 0) > 1;
+              return (
+                <li
+                  key={`${c.id}-${i}`}
+                  className={`deckCard${jump ? ' deckCardJump' : ''}`}
+                  onClick={jump ? () => scrollToFloor(c.floorAdded!) : undefined}
+                  title={jump ? `Joined on floor ${c.floorAdded} — click to jump there` : undefined}
+                >
+                  <CardName id={c.id} />
+                  {c.upgradeLevel > 0 && (
+                    <span className="deckPlus">+{c.upgradeLevel > 1 ? c.upgradeLevel : ''}</span>
+                  )}
+                  {jump && <span className="deckFloor num">fl {c.floorAdded}</span>}
+                </li>
+              );
+            })}
+          </ul>
+          {relics.length > 0 && (
+            <>
+              <h2 className="sectionTitle relicStripTitle">
+                Relics · <span className="num">{relics.length}</span>
+              </h2>
+              <ul className="relicStrip">
+                {relics.map((r, i) => (
+                  <li key={`${r.id}-${i}`} className="relicStripItem">
+                    <RelicName id={r.id} />
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </section>
       )}

@@ -238,6 +238,10 @@ export interface RunReceipt {
   label: string; // e.g. "Aug 10 · Defect A6 · entered The Insatiable at 57%"
   /** encounter ids whose display names appear in label — wrapped for hover art */
   enemyIds?: string[];
+  /** card / relic / potion ids named in label — wrapped for the same hover cards */
+  cardIds?: string[];
+  relicIds?: string[];
+  potionIds?: string[];
 }
 
 export interface DumbbellStat {
@@ -269,6 +273,13 @@ export interface LeakResult {
   runReceipts: RunReceipt[];
   confoundNote?: string;
   drill?: { title: string; body: string };
+  /**
+   * Numeric bar this player's drill is graded against, when the detector
+   * derives it from their own history rather than a fixed constant. Carried
+   * onto the accepted drill so the grader can never hold a player to a
+   * different number than the card quoted them.
+   */
+  drillBar?: number;
   strength: EvidenceStrength;
   /** ranking key: estimated wins lost per 100 runs (heuristic) */
   expectedWinsLost: number;

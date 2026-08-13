@@ -149,6 +149,24 @@
 
 .dash .emptyNote { color: var(--muted); font-size: 0.8rem; margin: 6px 0 0; }
 
+/* filter-empty state — Neow greets you at the foot of the Spire */
+.dash .emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+.dash .emptyState img {
+  width: 200px;
+  max-width: 60%;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6));
+  opacity: 0.92;
+}
+.dash .emptyState p { margin: 0; }
+
 /* ---- enemy & character art ---- */
 .dash .nem { grid-template-columns: auto 1fr auto; }
 .dash .nem .nemArt {
@@ -237,7 +255,8 @@
   min-width: 0;
 }
 
-/* Portaled off .dash (document.body) — latest-run hover card. */
+/* Portaled off .dash (document.body) — latest-run hover card. Framed like
+   the STS2 tooltip in card-name.css: carved edge, gold keyline, parchment-dark. */
 .runTip {
   position: fixed;
   z-index: 40;
@@ -248,11 +267,15 @@
   gap: 10px;
   min-width: 200px;
   max-width: 280px;
-  padding: 10px 12px;
-  background: var(--surface2);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.75);
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #241c12, #1b150d 55%, #17110b);
+  border: 1px solid #0a0604;
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 163, 61, 0.5),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.55),
+    inset 0 2px 0 1px rgba(237, 228, 211, 0.07),
+    0 14px 30px -10px rgba(0, 0, 0, 0.85);
 }
 .runTip.below { transform: translate(-50%, 8px); }
 .runTipChar {

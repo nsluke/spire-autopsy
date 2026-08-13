@@ -20,7 +20,11 @@ import { detectLeaks } from '../src/lib/leaks';
 import { bossEntryLeak } from '../src/lib/leaks/bossEntry';
 import { removalDisciplineLeak, STARTER_CARD_RE } from '../src/lib/leaks/removals';
 import { ASCENSION_CAP, climbSummary, wallLine } from '../src/lib/climb';
-import { eliteAppetite, goldAtDeath, potionHoarding } from '../src/lib/leaks/observations';
+import { eliteAppetite, eventTax, goldAtDeath, restDiscipline } from '../src/lib/leaks/observations';
+import { beltAtLastFight, potionHoarding } from '../src/lib/leaks/potions';
+import { act1Bar, deckAdditions, deckBloatLeak } from '../src/lib/leaks/deckBloat';
+import { bossEntries, upgradeTempoLeak } from '../src/lib/leaks/upgradeTempo';
+import { fightPacing, medianHallwayTurns } from '../src/lib/leaks/fightPacing';
 import type { NormalizedRun } from '../src/lib/types';
 
 function loadFixture(name: string): NormalizedRun {
@@ -68,18 +72,22 @@ const corpusMain = [
   ...clones(loss1774, 2),
 ];
 
+/** Registered detector counts — the tier split detectLeaks guarantees. */
+const LEAK_DETECTORS = 6;
+const OBSERVATION_DETECTORS = 5;
+
 describe('gating (applicable=false below thresholds)', () => {
   it('every detector declines politely on the 5-completed-run fixture corpus', () => {
     const results = detectLeaks(fixtures);
-    expect(results).toHaveLength(8); // 3 leak detectors + 5 observations (ascension retired to climb.ts)
+    expect(results).toHaveLength(LEAK_DETECTORS + OBSERVATION_DETECTORS);
     for (const r of results) {
       expect(r.applicable).toBe(false);
       expect(r.body.length).toBeGreaterThan(0);
       expect(r.receiptLines).toHaveLength(0);
       expect(r.expectedWinsLost).toBe(0);
     }
-    expect(results.slice(0, 3).every((r) => r.tier === 'leak')).toBe(true);
-    expect(results.slice(3).every((r) => r.tier === 'observation')).toBe(true);
+    expect(results.slice(0, LEAK_DETECTORS).every((r) => r.tier === 'leak')).toBe(true);
+    expect(results.slice(LEAK_DETECTORS).every((r) => r.tier === 'observation')).toBe(true);
   });
 
   it('boss-entry-hp needs 20 completed runs', () => {
@@ -195,18 +203,38 @@ describe('removal-discipline', () => {
     });
   });
 
-  it('counts rich shop visits left without a removal', () => {
-    // per clone: loss1785 4 rich shops / 3 skipped ×14; wins 3 rich each, 2 and 1 skipped ×7
-    expect(leak.receiptLines[1]).toBe('rich shop visits (entered with 100+ gold) with no removal: 63/98 (64%)');
+  it('counts only the rich shops where real gold was spent on something else', () => {
+    // The act-stepped bar (100/150/200) and the 75-gold spend test cut the
+    // denominator to shops where the removal was plainly affordable: a visit
+    // where the player held gold but barely spent is never an accusation.
+    expect(leak.receiptLines[1]).toBe('rich shop visits where 75+ gold was spent, none on removal: 49/70 (70%)');
     expect(leak.runReceipts).toHaveLength(5);
     for (const r of leak.runReceipts) {
-      expect(r.label).toMatch(/left a shop holding \d+ gold, no removal$/);
+      expect(r.label).toMatch(/spent \d+ gold at the shop, none on removal$/);
     }
   });
 
-  it('names its confounder and prescribes the shop drill', () => {
+  it('never counts a light-spend visit against the player', () => {
+    // Same gold walked in with (entry gold is preserved), but almost none of
+    // it spent and nothing removed: the removal may not have been on offer or
+    // affordable, so these visits stay in the denominator and out of the count.
+    const browsed = (r: NormalizedRun) => {
+      for (const node of r.nodes) {
+        if (!node.rooms.some((x) => x.roomType === 'shop')) continue;
+        node.stats.gold += node.stats.goldSpent - 10;
+        node.stats.goldSpent = 10;
+        node.stats.cardsRemoved = [];
+      }
+    };
+    const res = removalDisciplineLeak([...clones(win1779, 10, browsed), ...clones(loss1785, 10, browsed)]);
+    expect(res.receiptLines[1]).toBe('rich shop visits where 75+ gold was spent, none on removal: 0/50 (0%)');
+    expect(res.runReceipts).toHaveLength(0);
+  });
+
+  it('names its confounder and prescribes the spend-first drill', () => {
     expect(leak.confoundNote).toContain('act-2+');
-    expect(leak.drill?.body).toContain('under 100 gold');
+    expect(leak.confoundNote).toContain('not counted against you');
+    expect(leak.drill?.body).toContain('75+ gold');
   });
 });
 
@@ -330,16 +358,21 @@ describe('observations', () => {
     });
   });
 
-  it('potion-hoarding counts deaths holding potions and quiet death fights', () => {
-    const corpus = [...corpusMain, ...clones(loss1778, 5)];
-    const obs = potionHoarding(corpus);
-    expect(obs.applicable).toBe(true);
-    expect(obs.receiptLines).toEqual([
-      'deaths with unused potions still held: 5/21',
-      'death fights where no potion was used: 7/21 (33%)',
-    ]);
-    expect(obs.runReceipts.length).toBeGreaterThan(0);
-    expect(obs.runReceipts[0].label).toContain('died to Cultists holding 3 potions');
+  it('elite-appetite conditions the advice on whether the deck could kill them', () => {
+    // Three extra attacks drafted before the floor-6 elite puts these runs on
+    // the ready side of the same bar damage-drafting uses.
+    const armed = (r: NormalizedRun) => {
+      r.nodes[1].stats.cardsGained.push(
+        { id: 'CARD.CLAW', upgradeLevel: 0 },
+        { id: 'CARD.BEAM_CELL', upgradeLevel: 0 },
+        { id: 'CARD.STRIKE_DEFECT', upgradeLevel: 0 },
+      );
+    };
+    const obs = eliteAppetite([...clones(win1776, 10, armed), ...clones(loss1785, 10)]);
+    expect(obs.receiptLines[1]).toBe(
+      'first act-1 elite met with 3+ attacks drafted: 100% win rate across 10 runs vs 0% across 10 runs that met it lighter',
+    );
+    expect(obs.body).toContain('It is the deck that decides');
   });
 
   it('gold-at-death reports a clean bill of health when the median is modest', () => {
@@ -350,7 +383,7 @@ describe('observations', () => {
     expect(obs.body).toContain('53');
   });
 
-  it('gold-at-death fires when the median exceeds 150', () => {
+  it('gold-at-death judges each death against its own act’s shop money', () => {
     const corpus = [
       ...clones(win1779, 7),
       ...clones(win1776, 7),
@@ -362,19 +395,297 @@ describe('observations', () => {
     expect(obs.applicable).toBe(true);
     expect(obs.receiptLines).toEqual([
       'median gold entering the death fight: 463',
-      'deaths carrying more than 150 gold: 16/30',
+      "deaths carrying the act's shop money unspent (100/150/200 by act): 16/30 (53%)",
     ]);
-    expect(obs.runReceipts[0].label).toMatch(/died carrying 463 gold$/);
+    expect(obs.runReceipts[0].label).toMatch(/died in act 1 carrying 463 gold$/);
+    // the 53-gold act-2 deaths sit under the act-2 bar and are not counted
+    expect(obs.runReceipts.every((r) => r.runId.startsWith('1774194024'))).toBe(true);
+  });
+});
+
+describe('event-tax names the offenders', () => {
+  it('itemizes act-1 event damage by the event that charged it', () => {
+    const corpus = [...clones(loss1774, 10), ...clones(win1776, 10)];
+    const obs = eventTax(corpus);
+    expect(obs.applicable).toBe(true);
+    expect(obs.receiptLines[2]).toBe(
+      'worst offenders in act-1 deaths: Dense Vegetation 110 HP over 10 runs, Whispering Hollow 90 HP over 10 runs',
+    );
+    expect(obs.body).toContain('Dense Vegetation');
+    expect(obs.runReceipts[0].label).toContain('(worst: Dense Vegetation, 11)');
+  });
+});
+
+describe('potion-hoarding (promoted to a leak)', () => {
+  /** Die at the act-2 boss with a full belt and nothing thrown. */
+  const hoardingDeath = (r: NormalizedRun) => {
+    r.player.potions = ['POTION.FIRE_POTION', 'POTION.BLOCK_POTION'];
+    r.nodes[32].stats.potionsUsed = [];
+  };
+
+  it('reads the belt entering the last fight exactly (end belt, that node reversed)', () => {
+    expect(beltAtLastFight(loss1778)).toBe(3); // died holding 3, none thrown
+    expect(beltAtLastFight(loss1785)).toBe(2); // ended empty, threw 2 at the boss
+    expect(beltAtLastFight(win1779)).toBe(2); // ended holding 1, threw 1 at the boss
+    expect(beltAtLastFight(loss1774)).toBe(0);
+  });
+
+  it('credits a player who spends them: no gap, no hoarding deaths, no card', () => {
+    const res = potionHoarding(corpusMain);
+    expect(res.applicable).toBe(true);
+    expect(res.healthy).toBe(true);
+    expect(res.tier).toBe('leak');
+    expect(res.receiptLines).toEqual([
+      'elite/boss fights that got a potion: 63/98 in wins (64%) vs 42/72 in losses (58%)',
+      'elite/boss deaths that entered the killing fight holding 2+ potions and threw none: 0/16',
+    ]);
+  });
+
+  it('never counts a hallway death in the denominator of an elite/boss statistic', () => {
+    // loss1778 died to Cultists in a monster room holding 3 potions, none
+    // thrown. It is NOT an elite/boss death, so it belongs on neither side of
+    // that fraction — a player who remembers it must not be able to read the
+    // line as "you had 6 such deaths and I counted 0 of them".
+    expect(beltAtLastFight(loss1778)).toBe(3);
+    expect(loss1778.nodes[loss1778.nodes.length - 1].stats.potionsUsed).toHaveLength(0);
+    const corpus = [
+      ...clones(win1779, 7),
+      ...clones(win1776, 7),
+      ...clones(loss1785, 10, hoardingDeath),
+      ...clones(loss1778, 6),
+    ];
+    const res = potionHoarding(corpus);
+    // 16 deaths in the corpus, but only the 10 boss deaths are judged here.
+    expect(corpus.filter((r) => !r.win && !r.abandoned)).toHaveLength(16);
+    expect(res.receiptLines[1]).toBe(
+      'elite/boss deaths that entered the killing fight holding 2+ potions and threw none: 10/10',
+    );
+  });
+
+  it('fires on deaths that arrived at the boss with a full belt', () => {
+    const corpus = [
+      ...clones(win1779, 7),
+      ...clones(win1776, 7),
+      ...clones(loss1785, 14, hoardingDeath),
+      ...clones(loss1774, 2),
+    ];
+    const res = potionHoarding(corpus);
+    expect(res.healthy).toBeFalsy();
+    expect(res.receiptLines).toEqual([
+      'elite/boss fights that got a potion: 63/98 in wins (64%) vs 28/72 in losses (39%)',
+      // all 16 deaths here ARE elite/boss deaths (14 at the boss, 2 to an elite)
+      'elite/boss deaths that entered the killing fight holding 2+ potions and threw none: 14/16',
+    ]);
+    expect(res.dumbbell).toEqual({
+      label: 'Elite/boss fights that got a potion',
+      winValue: 64.3,
+      lossValue: 38.9,
+      format: 'pct',
+      sampleLabel: '98 fights in wins vs 72 in losses',
+    });
+    expect(res.runReceipts).toHaveLength(5);
+    expect(res.runReceipts[0].label).toContain('died to The Insatiable holding 2 potions, none thrown');
+    expect(res.runReceipts[0].enemyIds).toEqual(['ENCOUNTER.THE_INSATIABLE_BOSS']);
+    expect(res.confoundNote).toBeTruthy();
+    expect(res.drill?.title).toBe('Throw them at the boss');
+    // 16 of 30 runs leave most hard fights unarmed × the measured win-rate gap
+    expect(res.expectedWinsLost).toBeCloseTo(32, 1);
+  });
+});
+
+describe('deck-bloat', () => {
+  const leak = deckBloatLeak(corpusMain);
+
+  it('counts unique deck additions, never double-counting a pick logged as a gain', () => {
+    // cardsGained is a superset of the picks; id + floor-added collapses them.
+    expect(deckAdditions(win1779, 1)).toBe(6);
+    expect(deckAdditions(win1776, 1)).toBe(9);
+    expect(deckAdditions(loss1785, 1)).toBe(12);
+    // 6 starters left in the final deck + 22 additions = the 28-card deck
+    expect(deckAdditions(win1776, 3) + win1776.player.deck.filter((c) => c.floorAdded === 1).length).toBe(
+      win1776.player.deck.length,
+    );
+  });
+
+  it('compares act-1 additions across act-matched runs only', () => {
+    expect(leak.applicable).toBe(true);
+    expect(leak.receiptLines).toEqual([
+      'cards added by the end of act 1 (act-2+ runs only): 7.5 across 14 wins vs 12 across 14 losses',
+      'act-1 drafts over the 8-card bar: 21/28 (75%)',
+    ]);
+    expect(leak.dumbbell).toEqual({
+      label: 'Cards added by the end of act 1',
+      winValue: 7.5,
+      lossValue: 12,
+      format: 'count',
+      sampleLabel: '14 wins vs 14 act-2+ losses',
+    });
+    // the act-1 death never entered the comparison
+    expect(leak.runReceipts.every((r) => r.runId.startsWith('1785858459'))).toBe(true);
+    expect(leak.drill?.body).toContain('skip');
+  });
+
+  it('coaches the skip and ranks on the measured win-rate gap', () => {
+    // 75% of act-2+ runs are over the bar × (100% lean win rate − 33% bloated)
+    expect(leak.expectedWinsLost).toBeCloseTo(30, 1);
+    expect(leak.strength).toBe('moderate');
+    expect(leak.confoundNote).toContain('cleared act 1');
+  });
+
+  it('stays quiet when losing decks are no fatter than winning ones', () => {
+    const res = deckBloatLeak([...clones(loss1785, 15, (r) => (r.win = true)), ...clones(win1776, 15, (r) => (r.win = false))]);
+    expect(res.applicable).toBe(true);
+    expect(res.healthy).toBe(true);
+  });
+});
+
+describe('upgrade-tempo', () => {
+  const leak = upgradeTempoLeak(corpusMain);
+
+  it('banks upgrades in visit order and marks entries below the act bar', () => {
+    expect(bossEntries(win1779).map((e) => [e.act, e.banked, e.short])).toEqual([
+      [1, 4, false],
+      [2, 6, false],
+      [3, 8, true], // 8 banked, act-3 bar is 9
+    ]);
+    expect(bossEntries(loss1785).map((e) => [e.act, e.banked, e.short, e.died])).toEqual([
+      [1, 1, true, false],
+      [2, 2, true, true],
+    ]);
+    expect(bossEntries(loss1774)).toHaveLength(0);
+  });
+
+  it('compares boss-fight death rates either side of the bar', () => {
+    expect(leak.applicable).toBe(true);
+    expect(leak.receiptLines).toEqual([
+      'boss fights entered under the upgrade bar: 14 deaths / 56 fights (25%)',
+      'boss fights entered at or above it: 0 deaths / 14 fights (0%)',
+      'upgrades banked at the boss door: 2.6 avg when short vs 5 avg when stocked',
+    ]);
+    expect(leak.dumbbell?.winLabel).toBe('at the bar'); // not a win/loss cohort
+    expect(leak.dumbbell?.lossLabel).toBe('under the bar');
+    expect(leak.ratioBadge).toBeUndefined(); // only 14 fights on the stocked side
+    expect(leak.runReceipts[0].label).toContain('met The Insatiable with 2 upgrades banked, needed 6');
+    expect(leak.expectedWinsLost).toBeCloseTo(28, 1); // 56/30 short entries × 25pp × moderate
+  });
+
+  it('credits a player who always arrives stocked', () => {
+    const smithed = clones(win1779, 20, (r) => {
+      r.nodes[1].stats.cardsUpgraded = ['CARD.A', 'CARD.B', 'CARD.C', 'CARD.D', 'CARD.E'];
+      r.nodes[2].stats.cardsUpgraded = ['CARD.F', 'CARD.G', 'CARD.H', 'CARD.I'];
+    });
+    const res = upgradeTempoLeak(smithed);
+    expect(res.applicable).toBe(true);
+    expect(res.healthy).toBe(true);
+  });
+});
+
+describe('fight-pacing', () => {
+  const obs = fightPacing(corpusMain);
+
+  it('reads turnsTaken from act-1/2 hallway fights only', () => {
+    expect(medianHallwayTurns(win1776)).toBe(3);
+    expect(medianHallwayTurns(loss1774)).toBe(5);
+    expect(obs.tier).toBe('observation');
+    expect(obs.applicable).toBe(true);
+    expect(obs.receiptLines).toEqual([
+      'median turns per act-1/2 hallway fight: 4 across 140 fights in wins vs 4 across 116 in losses',
+      'hallway fights running over 4 turns: 10% in wins vs 28% in losses',
+    ]);
+    expect(obs.dumbbell).toEqual({
+      label: 'Hallway fights over 4 turns',
+      winValue: 10,
+      lossValue: 27.6,
+      format: 'pct',
+      sampleLabel: '140 fights in wins vs 116 in losses',
+    });
+    expect(obs.runReceipts[0].label).toMatch(/\d+ turns to clear .+ on floor \d+$/);
+    expect(obs.runReceipts[0].enemyIds?.length).toBe(1);
+  });
+
+  it('says nothing when both sides close fights at the same pace', () => {
+    const brisk = clones(loss1785, 15, (r) => {
+      for (const node of r.nodes) for (const room of node.rooms) if (room.turnsTaken > 0) room.turnsTaken = 3;
+    });
+    const res = fightPacing([...brisk, ...clones(win1776, 15)]);
+    expect(res.applicable).toBe(true);
+    expect(res.healthy).toBe(true);
+  });
+});
+
+describe('rest-discipline (heals judged against the path actually walked)', () => {
+  it('never counts a heal taken right before an elite or a boss', () => {
+    const obs = restDiscipline(corpusMain);
+    expect(obs.applicable).toBe(true);
+    expect(obs.healthy).toBe(true); // every above-half heal in this corpus preceded real danger
+    expect(obs.receiptLines).toEqual([
+      'heals taken above 50% HP with no elite or boss in the next 3 nodes: 0/105 (0%)',
+      'heals above 50% HP that were followed by an elite or boss (correct, not counted): 21',
+    ]);
+  });
+
+  it('still flags heals taken healthy into a quiet stretch', () => {
+    // Enter the floor-12 and floor-40 campfires at full HP; both are followed
+    // by hallways, treasure and shops — nothing that justifies the heal.
+    const looseHeals = (r: NormalizedRun) => {
+      r.nodes[10].stats.hp = r.nodes[10].stats.maxHp;
+      r.nodes[38].stats.hp = r.nodes[38].stats.maxHp;
+    };
+    const obs = restDiscipline([...clones(win1776, 15, looseHeals), ...clones(loss1785, 5)]);
+    expect(obs.healthy).toBeFalsy();
+    expect(obs.receiptLines[0]).toBe(
+      'heals taken above 50% HP with no elite or boss in the next 3 nodes: 30/90 (33%)',
+    );
+    expect(obs.runReceipts).toHaveLength(5);
+    expect(obs.runReceipts[0].label).toContain('nothing bigger than a hallway for 3 nodes');
   });
 });
 
 describe('detectLeaks ordering', () => {
   it('returns leaks ranked by expectedWinsLost, observations after', () => {
     const results = detectLeaks(corpusMain);
-    expect(results).toHaveLength(8); // 3 leak detectors + 5 observations (ascension retired to climb.ts)
-    expect(results.slice(0, 3).map((r) => r.tier)).toEqual(['leak', 'leak', 'leak']);
-    expect(results.slice(3).every((r) => r.tier === 'observation')).toBe(true);
-    expect(results[0].id).toBe('boss-entry-hp');
-    expect(results[0].expectedWinsLost).toBeGreaterThanOrEqual(results[1].expectedWinsLost);
+    expect(results).toHaveLength(LEAK_DETECTORS + OBSERVATION_DETECTORS);
+    expect(results.slice(0, LEAK_DETECTORS).every((r) => r.tier === 'leak')).toBe(true);
+    expect(results.slice(LEAK_DETECTORS).every((r) => r.tier === 'observation')).toBe(true);
+    // within a tier: applicable first, then descending rank
+    for (const tier of ['leak', 'observation'] as const) {
+      const inTier = results.filter((r) => r.tier === tier);
+      expect(inTier.map((r) => Number(r.applicable))).toEqual(
+        [...inTier.map((r) => Number(r.applicable))].sort((a, b) => b - a),
+      );
+      const scores = inTier.filter((r) => r.applicable).map((r) => r.expectedWinsLost);
+      expect(scores).toEqual([...scores].sort((a, b) => b - a));
+    }
+    expect(results[0].id).toBe('deck-bloat'); // the biggest measured gap in this corpus
+  });
+
+  it('gives every registered detector a distinct id', () => {
+    const ids = detectLeaks(corpusMain).map((r) => r.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+// ---------- the drill bar is the player's own number ----------
+
+describe('deck-bloat drill bar', () => {
+  it('never asks for a leaner act 1 than the decks this player wins with', () => {
+    // Genre default is 8; this corpus wins at 9.4, so holding them to 8 would
+    // be a bar their own victories disprove.
+    expect(act1Bar(9.4, 11.3)).toBe(9);
+    expect(act1Bar(5.2, 9.0)).toBe(8); // lean player keeps the genre default
+  });
+
+  it('tracks a heavy drafter up to their own winning average', () => {
+    expect(act1Bar(14.0, 14.4)).toBe(14);
+    expect(act1Bar(20.0, 21.0)).toBe(20);
+  });
+
+  it('quotes one number across the card, the receipt, and the drill', () => {
+    const leak = deckBloatLeak(corpusMain);
+    expect(leak.applicable).toBe(true);
+    const bar = leak.drillBar!;
+    expect(bar).toBeGreaterThanOrEqual(8);
+    expect(leak.drill?.body).toContain(`at most ${bar} cards`);
+    expect(leak.receiptLines[1]).toContain(`over the ${bar}-card bar`);
   });
 });

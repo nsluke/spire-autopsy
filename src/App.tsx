@@ -86,7 +86,14 @@ export default function App() {
     <div className="shell">
       <header className="topbar">
         <a className="brand" href="#/">
-          <span className="brandMark">✝</span> Spire Autopsy
+          <span className="brandMark" aria-hidden="true">
+            {/* the favicon's dagger-cross, inlined so it can never render as emoji */}
+            <svg viewBox="0 0 512 512" fill="none" stroke="currentColor" strokeWidth="52" strokeLinecap="round">
+              <line x1="256" y1="72" x2="256" y2="440" />
+              <line x1="140" y1="184" x2="372" y2="184" />
+            </svg>
+          </span>{' '}
+          Spire Autopsy
         </a>
         <nav className="nav">
           <a className={!page ? 'on' : ''} href="#/">Dashboard</a>

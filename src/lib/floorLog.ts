@@ -89,13 +89,43 @@ export function floorTitle(node: NodeVisit): string {
 /** Encounter id to look up monster art — combat rooms only. */
 export function floorEncounterId(node: NodeVisit): string | undefined {
   const combat = node.rooms.find(
-    (r) => r.roomType === 'boss' || r.roomType === 'elite' || r.roomType === 'monster' || r.monsterIds.length > 0,
+    (r) =>
+      (r.roomType === 'boss' || r.roomType === 'elite' || r.roomType === 'monster') &&
+      r.modelId &&
+      !r.modelId.startsWith('EVENT.'),
   );
   return combat?.modelId;
 }
 
+/** EVENT.* id when this node is (or contains) a named event. */
+export function floorEventId(node: NodeVisit): string | undefined {
+  const room = primaryRoom(node);
+  if (room?.modelId?.startsWith('EVENT.')) return room.modelId;
+  return node.rooms.find((r) => r.modelId?.startsWith('EVENT.'))?.modelId;
+}
+
 export function floorTurns(node: NodeVisit): number {
   return Math.max(0, ...node.rooms.map((r) => r.turnsTaken));
+}
+
+/**
+ * Human name of a chosen event option, from its localization key.
+ * "TABLET_OF_TRUTH.pages.INITIAL.options.SMASH.title" → "Smash".
+ * Keys without an options segment (relic titles, mod keys) return undefined —
+ * a raw loc key would cheapen the log more than absence does.
+ */
+export function eventChoiceLabel(key: string): string | undefined {
+  const m = /\.pages\.[^.]+\.options\.([^.]+)\.title$/.exec(key);
+  if (!m) return undefined;
+  const raw = m[1];
+  if (!/^[A-Za-z0-9_]+$/.test(raw)) return undefined;
+  const label = raw
+    .toLowerCase()
+    .split('_')
+    .filter(Boolean)
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(' ');
+  return label || undefined;
 }
 
 /** Tone for an HP reading — 60% is the same boss-entry line the chart uses. */
@@ -114,6 +144,7 @@ export interface FloorFacts {
   kind: FloorKind;
   title: string;
   encounterId?: string;
+  eventId?: string;
   turns: number;
   hp: number;
   maxHp: number;
@@ -121,9 +152,13 @@ export interface FloorFacts {
   hpHealed: number;
   goldGained: number;
   goldSpent: number;
+  maxHpGained: number;
+  maxHpLost: number;
   picked: string[];
   /** Offered-and-skipped, only when the skip list is a small combat reward. */
   skipped: string[];
+  /** True when a combat reward was skipped whole — skipped holds the full offer. */
+  skippedAll: boolean;
   /** Cards that entered the deck without being a listed pick (shop, event, transform). */
   gainedExtra: string[];
   removed: string[];
@@ -132,6 +167,8 @@ export interface FloorFacts {
   potions: string[];
   potionsUsed: string[];
   rest?: string;
+  /** Chosen event options, prettified from their localization keys. */
+  eventChoices: string[];
 }
 
 function unique(ids: string[]): string[] {
@@ -145,14 +182,23 @@ function unique(ids: string[]): string[] {
   return out;
 }
 
-export function floorFacts(node: NodeVisit): FloorFacts {
+export function floorFacts(node: NodeVisit, runRelics?: { id: string; floorAdded?: number }[]): FloorFacts {
   const { stats } = node;
   const picked = unique(stats.cardChoices.filter((c) => c.wasPicked).map((c) => c.card.id));
   const skippedRaw = unique(stats.cardChoices.filter((c) => !c.wasPicked).map((c) => c.card.id));
   const pickedSet = new Set(picked);
   const gainedExtra = stats.cardsGained.map((c) => c.id).filter((id) => id && !pickedSet.has(id));
   const kind = floorKind(node);
+  const combat = kind === 'monster' || kind === 'elite' || kind === 'boss';
   const showSkipped = kind !== 'shop' && picked.length > 0 && skippedRaw.length > 0 && skippedRaw.length <= 3;
+  // A combat reward passed whole IS the skip — show the full offer.
+  const skippedAll = combat && picked.length === 0 && skippedRaw.length > 0 && skippedRaw.length <= 4;
+  // Relics that arrived on this floor without a choice or purchase record
+  // (event grants, boss chests) — diffed off the run-end relic list. Floor 1
+  // is excluded: starter relics carry floorAdded 1 and are not floor loot.
+  const grantedRelics = (runRelics ?? [])
+    .filter((r) => r.floorAdded === node.floor && node.floor > 1)
+    .map((r) => r.id);
 
   return {
     floor: node.floor,
@@ -160,6 +206,7 @@ export function floorFacts(node: NodeVisit): FloorFacts {
     kind,
     title: floorTitle(node),
     encounterId: floorEncounterId(node),
+    eventId: floorEventId(node),
     turns: floorTurns(node),
     hp: stats.hp,
     maxHp: stats.maxHp,
@@ -167,14 +214,18 @@ export function floorFacts(node: NodeVisit): FloorFacts {
     hpHealed: stats.hpHealed,
     goldGained: stats.goldGained,
     goldSpent: stats.goldSpent,
+    maxHpGained: stats.maxHpGained,
+    maxHpLost: stats.maxHpLost,
     picked,
-    skipped: showSkipped ? skippedRaw : [],
+    skipped: showSkipped || skippedAll ? skippedRaw : [],
+    skippedAll,
     gainedExtra,
     removed: stats.cardsRemoved.map((c) => c.id).filter(Boolean),
     upgraded: stats.cardsUpgraded.filter(Boolean),
     relics: unique([
       ...stats.relicChoices.filter((c) => c.wasPicked).map((c) => c.choice),
       ...stats.boughtRelics,
+      ...grantedRelics,
     ]),
     potions: unique([
       ...stats.potionChoices.filter((c) => c.wasPicked).map((c) => c.choice),
@@ -182,6 +233,9 @@ export function floorFacts(node: NodeVisit): FloorFacts {
     ]),
     potionsUsed: unique(stats.potionsUsed),
     rest: stats.restChoices[0],
+    eventChoices: stats.eventChoiceKeys
+      .map(eventChoiceLabel)
+      .filter((l): l is string => l !== undefined),
   };
 }
 

@@ -1,0 +1,312 @@
+{
+  "EVENT.BRAIN_LEECH": {
+    "name": "Brain Leech",
+    "blurb": "You contract a Brain Leech seeking knowldge. You may choose to Share Knowedge or Rip it out.",
+    "art": "art/events/BRAIN_LEECH.webp"
+  },
+  "EVENT.CRYSTAL_SPHERE": {
+    "name": "Crystal Sphere",
+    "blurb": "You meet a Fortune Teller offering to divine your future. you pick a plan to Uncover your] Future and earn rewards.",
+    "art": "art/events/CRYSTAL_SPHERE.webp"
+  },
+  "EVENT.DOLL_ROOM": {
+    "name": "Doll Room",
+    "blurb": "You stumbled upon a room of dolls. You leave with one of the following relics: Bing Bong, Daughter of the Wind, Mr. Struggles.",
+    "art": "art/events/DOLL_ROOM.webp"
+  },
+  "EVENT.THE_MERCHANT": {
+    "name": "The Merchant???",
+    "blurb": "You meet a strange man selling a variety of cheap imitations of various Relics. If you have a Foul Potion, you can throw it at them to start a fight with them for great rewards.",
+    "art": "art/events/THE_MERCHANT.webp"
+  },
+  "EVENT.POTION_COURIER": {
+    "name": "Potion Courier",
+    "blurb": "There is a sour smell in the air and shortly after, you find a Potion Courier collapsed on the ground.",
+    "art": "art/events/POTION_COURIER.webp"
+  },
+  "EVENT.RANWID_THE_ELDER": {
+    "name": "Ranwid the Elder",
+    "blurb": "You are approached by the oldest person you have ever seen.",
+    "art": "art/events/RANWID_THE_ELDER.webp"
+  },
+  "EVENT.RELIC_TRADER": {
+    "name": "Relic Trader",
+    "blurb": "You turn a corner and suddenly, a shadowy figure is just standing there.",
+    "art": "art/events/RELIC_TRADER.webp"
+  },
+  "EVENT.ROOM_FULL_OF_CHEESE": {
+    "name": "Room Full of Cheese",
+    "blurb": "This room is full of cheese!!! You look around to see if there are any traps and above you is...",
+    "art": "art/events/ROOM_FULL_OF_CHEESE.webp"
+  },
+  "EVENT.SELF_HELP_BOOK": {
+    "name": "Self-Help Book",
+    "blurb": "You stumble upon a bloody book. You may study its contents to enhance an Attack, Skill, or Power card in your deck.",
+    "art": "art/events/SELF_HELP_BOOK.webp"
+  },
+  "EVENT.SLIPPERY_BRIDGE": {
+    "name": "Slippery Bridge",
+    "blurb": "You cross a rickety bridge only to be threatened by a sudden tempest attempting to blow you away. You must overcome this obstacle by sacrificing a random card in your deck, or hang on to randomize which card to lose.",
+    "art": "art/events/SLIPPERY_BRIDGE.webp"
+  },
+  "EVENT.STONE_OF_ALL_TIME": {
+    "name": "Stone of All Time",
+    "blurb": "A massive boulder sits in the middle of an abandoned courtyard.",
+    "art": "art/events/STONE_OF_ALL_TIME.webp"
+  },
+  "EVENT.SYMBIOTE": {
+    "name": "Symbiote",
+    "blurb": "Along your travels, you stumble upon a dark, amorphous polyp.",
+    "art": "art/events/SYMBIOTE.webp"
+  },
+  "EVENT.TEA_MASTER": {
+    "name": "Tea Master",
+    "blurb": "You stumble into a dimly lit shack and find yourself immersed in a very peaceful space containing an obsessive variety of tea.",
+    "art": "art/events/TEA_MASTER.webp"
+  },
+  "EVENT.THE_FUTURE_OF_POTIONS": {
+    "name": "The Future of Potions?",
+    "blurb": "You discover a strange machine that can transform a potion into a card reward depending on its rarity.",
+    "art": "art/events/THE_FUTURE_OF_POTIONS.webp"
+  },
+  "EVENT.THE_LEGENDS_WERE_TRUE": {
+    "name": "The Legends Were True",
+    "blurb": "Entering into a pitch dark chamber, a sudden light pierces the darkness from above, just as the door slams behind you.",
+    "art": "art/events/THE_LEGENDS_WERE_TRUE.webp"
+  },
+  "EVENT.THIS_OR_THAT": {
+    "name": "This or That?",
+    "blurb": "Arms suddenly jut out from a nearby hole, clutching a suspicious bag of riches and a clearly cursed relic.",
+    "art": "art/events/THIS_OR_THAT.webp"
+  },
+  "EVENT.WAR_HISTORIAN_REPY": {
+    "name": "War Historian, Repy",
+    "blurb": "You find someone trapped in a cage next to a chest filled with loot. You may either unlock the chest to obtain its loot or free the scholar for the powerful History Course Relic.",
+    "art": "art/events/WAR_HISTORIAN_REPY.webp"
+  },
+  "EVENT.WELCOME_TO_WONGOS": {
+    "name": "Welcome to Wongo's",
+    "blurb": "You meet an extremely unenthusiastic clerk in a shop selling a variety of Relics. You can purchase a random common relic, a specific rare relic, or a ticket that gives you multiple random relics after enough combat…",
+    "art": "art/events/WELCOME_TO_WONGOS.webp"
+  },
+  "EVENT.AROMA_OF_CHAOS": {
+    "name": "Aroma of Chaos",
+    "blurb": "You can choose to Transform a card or Upgrade a card.",
+    "art": "art/events/AROMA_OF_CHAOS.webp"
+  },
+  "EVENT.BYRDONIS_NEST": {
+    "name": "Byrdonis Nest",
+    "blurb": "A large byrd flees from an enormous beast, leaving its nest and egg unattended for you to sneak in and steal from. You may either consume the egg to increase your Max HP, or stash it away to add it into your deck.",
+    "art": "art/events/BYRDONIS_NEST.webp"
+  },
+  "EVENT.DENSE_VEGETATION": {
+    "name": "Dense Vegetation",
+    "blurb": "You get lost in the jungle, while exhaustion sets in. You can either press onwards to remove a card from your deck at the cost of some HP, or take a rest and battle a group of Wrigglers.",
+    "art": "art/events/DENSE_VEGETATION.webp"
+  },
+  "EVENT.JUNGLE_MAZE_ADVENTURE": {
+    "name": "Jungle Maze Adventure",
+    "blurb": "You encounter a group of adventurers gearing up to head into a dangerous dungeon. You may either join forces with them to gain a small amount of gold, or enter alone to gain more at the cost of some HP.",
+    "art": "art/events/JUNGLE_MAZE_ADVENTURE.webp"
+  },
+  "EVENT.LUMINOUS_CHOIR": {
+    "name": "Luminous Choir",
+    "blurb": "You stumble upon a clearing bathed in an unnatural blue glow.",
+    "art": "art/events/LUMINOUS_CHOIR.webp"
+  },
+  "EVENT.MORPHIC_GROVE": {
+    "name": "Morphic Grove",
+    "blurb": "You enter a grove of crystalline trees, and they begin to quiver excitedly! A chorus of hellos and welcomes bombard you as a group of Morphics burst forth from trees.",
+    "art": "art/events/MORPHIC_GROVE.webp"
+  },
+  "EVENT.SAPPHIRE_SEED": {
+    "name": "Sapphire Seed",
+    "blurb": "You barely avoid stepping on a magical seed thought to have gone extinct. You can consume the seed to heal some HP and upgrade a card, or nurture it to apply a unique enchantment to a card in your deck.",
+    "art": "art/events/SAPPHIRE_SEED.webp"
+  },
+  "EVENT.TABLET_OF_TRUTH": {
+    "name": "Tablet of Truth",
+    "blurb": "Swiftly defeating some foes, you encounter a mysterious tablet. You may decipher its language to upgrade cards in your deck at the cost of increasing amounts of Max HP, or break it to recover some health.",
+    "art": "art/events/TABLET_OF_TRUTH.webp"
+  },
+  "EVENT.UNREST_SITE": {
+    "name": "Unrest Site",
+    "blurb": "You find a secluded Rest Site and start a fire to get some rest.",
+    "art": "art/events/UNREST_SITE.webp"
+  },
+  "EVENT.WELLSPRING": {
+    "name": "Wellspring",
+    "blurb": "You follow a low rumble to its source to encounter a spring with emerald-colored water. You can bottle up the water to gain a random potion, or bathe in it to remove a card from your deck at the cost of adding a…",
+    "art": "art/events/WELLSPRING.webp"
+  },
+  "EVENT.WHISPERING_HOLLOW": {
+    "name": "Whispering Hollow",
+    "blurb": "Making your way through a hollow of dead trees you happen upon a single bone-white tree.",
+    "art": "art/events/WHISPERING_HOLLOW.webp"
+  },
+  "EVENT.WOOD_CARVINGS": {
+    "name": "Wood Carvings",
+    "blurb": "You open a dusty box to find a set of 3 elaborate wood carvings: A bird, snake, and...",
+    "art": "art/events/WOOD_CARVINGS.webp"
+  },
+  "EVENT.ABYSSAL_BATHS": {
+    "name": "Abyssal Baths",
+    "blurb": "You find a secluded area with a strange pool of liquid. You can either immerse yourself in it, increasing your Max HP at the cost of taking damage as many times as you wish, or gather the salts around the pool to…",
+    "art": "art/events/ABYSSAL_BATHS.webp"
+  },
+  "EVENT.DOORS_OF_LIGHT_AND_DARK": {
+    "name": "Doors of Light and Dark",
+    "blurb": "You enter into a doorway that takes you to a mysterious plane with an equally mysterious doorman. You may either enter the light door to upgrade 2 random cards, or enter the dark door to remove a card from your deck.",
+    "art": "art/events/DOORS_OF_LIGHT_AND_DARK.webp"
+  },
+  "EVENT.DROWNING_BEACON": {
+    "name": "Drowning Beacon",
+    "blurb": "You come across a sinking lighthouse that emits anti-light from the lens at the top. You can either bottle the water around the lighthouse to obtain a Glowwater Potion, or pry the lens out of the lighthouse to obtain…",
+    "art": "art/events/DROWNING_BEACON.webp"
+  },
+  "EVENT.ENDLESS_CONVEYOR": {
+    "name": "Endless Conveyor",
+    "blurb": "You find a shack where a chef is skillfully preparing food and placing it onto a conveyor belt. You can either pay gold to gain various benefits as many times as you wish, or hold back and upgrade a card instead.",
+    "art": "art/events/ENDLESS_CONVEYOR.webp"
+  },
+  "EVENT.PUNCH_OFF": {
+    "name": "Punch Off",
+    "blurb": "You find two Punch Constructs in a fighting match over a Relic. You can either steal the relic, adding a curse into your deck in the process, or enter combat against them to obtain it with various other rewards.",
+    "art": "art/events/PUNCH_OFF.webp"
+  },
+  "EVENT.SPIRALING_WHIRLPOOL": {
+    "name": "Spiraling Whirlpool",
+    "blurb": "You encounter and are captivated by a beautiful, pristine whirlpool. You can take in its beauty to enchant a Strike or Defend in your deck, or drink from the water to recover some HP.",
+    "art": "art/events/SPIRALING_WHIRLPOOL.webp"
+  },
+  "EVENT.THE_SUNKEN_STATUE": {
+    "name": "The Sunken Statue",
+    "blurb": "You find a crumbling stone statue submerged in the waters of the Underdocks, clutching a sword of stone. You can either take the sword as a unique relic, or claim the offerings of gold at the foot of the statue at the…",
+    "art": "art/events/THE_SUNKEN_STATUE.webp"
+  },
+  "EVENT.SUNKEN_TREASURY": {
+    "name": "Sunken Treasury",
+    "blurb": "You discover a sunken vault with two treasure chests and a fragile key. You can open the small chest to get a bit of gold, or the large chest to get a lot of gold while adding a permanent curse to your deck.",
+    "art": "art/events/SUNKEN_TREASURY.webp"
+  },
+  "EVENT.TRASH_HEAP": {
+    "name": "Trash Heap",
+    "blurb": "You find an enormous tower of discarded matter. You can rummage through the waste to obtain one of several unique Relics at the cost of some HP, or scavenge around the garbage to obtain some gold and add a unique card…",
+    "art": "art/events/TRASH_HEAP.webp"
+  },
+  "EVENT.WATERLOGGED_SCRIPTORIUM": {
+    "name": "Waterlogged Scriptorium",
+    "blurb": "Navigating the murky passages, you stumble upon a withered figure working a small shop.",
+    "art": "art/events/WATERLOGGED_SCRIPTORIUM.webp"
+  },
+  "EVENT.AMALGAMATOR": {
+    "name": "Amalgamator",
+    "blurb": "CLANG! CLANG!!! You hear the echoes of metal upon metal on the otherside of a wall...",
+    "art": "art/events/AMALGAMATOR.webp"
+  },
+  "EVENT.BUGSLAYER": {
+    "name": "Bugslayer",
+    "blurb": "As youre fending off a swarm of aggressive insects you suddenly notice a Mighty Rugged Warrior-Man fighting beside you this whole time! The insects, sensing defeat, scatter.",
+    "art": "art/events/BUGSLAYER.webp"
+  },
+  "EVENT.COLORFUL_PHILOSOPHERS": {
+    "name": "Colorful Philosophers",
+    "blurb": "Before you is a rather epic sight.",
+    "art": "art/events/COLORFUL_PHILOSOPHERS.webp"
+  },
+  "EVENT.COLOSSAL_FLOWER": {
+    "name": "Colossal Flower",
+    "blurb": "There is a colossal flower growing atop a mountain of bones.",
+    "art": "art/events/COLOSSAL_FLOWER.webp"
+  },
+  "EVENT.FIELD_OF_MAN_SIZED_HOLES": {
+    "name": "Field of Man-Sized Holes",
+    "blurb": "The sudden sight of a massive field, gouged with large outlines of bodies, stops you in your tracks.",
+    "art": "art/events/FIELD_OF_MAN_SIZED_HOLES.webp"
+  },
+  "EVENT.INFESTED_AUTOMATON": {
+    "name": "Infested Automaton",
+    "blurb": "Theres a chamber filled with dead robots.",
+    "art": "art/events/INFESTED_AUTOMATON.webp"
+  },
+  "EVENT.THE_LOST_WISP": {
+    "name": "The Lost Wisp",
+    "blurb": "In the distance is an odd sight.",
+    "art": "art/events/THE_LOST_WISP.webp"
+  },
+  "EVENT.SPIRIT_GRAFTER": {
+    "name": "Spirit Grafter",
+    "blurb": "Above, a cocoon is shaking and wriggling, about to burst forth! ...it stops wriggling.",
+    "art": "art/events/SPIRIT_GRAFTER.webp"
+  },
+  "EVENT.THE_LANTERN_KEY": {
+    "name": "The Lantern Key",
+    "blurb": "You stumble upon a strange key when a heavily armored knight asks you to give it to them. You may oblige and obtain some gold, or take the key by force by facing the knight head-on.",
+    "art": "art/events/THE_LANTERN_KEY.webp"
+  },
+  "EVENT.ZEN_WEAVER": {
+    "name": "Zen Weaver",
+    "blurb": "You walk through a spider web and PANIC! But then, a wave of calm washes over you...",
+    "art": "art/events/ZEN_WEAVER.webp"
+  },
+  "EVENT.BATTLEWORN_DUMMY": {
+    "name": "Battleworn Dummy",
+    "blurb": "You approach a training dummy when it suddenly activates, offering a selection of battle options for you to test your might on. You have 3 turns to defeat the dummy, and if you fail to defeat them in that time, you get…",
+    "art": "art/events/BATTLEWORN_DUMMY.webp"
+  },
+  "EVENT.GRAVE_OF_THE_FORGOTTEN": {
+    "name": "Grave of the Forgotten",
+    "blurb": "You sight a grave with the soul of a warrior who still longs for battle. You may either take it with you as a unique Relic, or confront it with the truth of the matter to add a highly powerful enchantment to a card that…",
+    "art": "art/events/GRAVE_OF_THE_FORGOTTEN.webp"
+  },
+  "EVENT.HUNGRY_FOR_MUSHROOMS": {
+    "name": "Hungry for Mushrooms",
+    "blurb": "How long has it been since you ate? ...wait, whats that fantastic smell? Following the scent, you reach a cozy campground with all manner of tasty mushrooms being cooked! You dont consider the safety of eating these…",
+    "art": "art/events/HUNGRY_FOR_MUSHROOMS.webp"
+  },
+  "EVENT.REFLECTIONS_SNOITCELFER": {
+    "name": "Reflections snoitcelfeR",
+    "blurb": "What is this? Something feels wrong here...",
+    "art": "art/events/REFLECTIONS_SNOITCELFER.webp"
+  },
+  "EVENT.THE_ROUND_TEA_PARTY": {
+    "name": "The Round Tea Party",
+    "blurb": "You show up to a tea party in the stead of a knight with a party of powerful figures. You can either drink the tea, fully healing you, but giving you a negative relic for the rest of the run, or start a fight to obtain…",
+    "art": "art/events/THE_ROUND_TEA_PARTY.webp"
+  },
+  "EVENT.TINKER_TIME": {
+    "name": "Tinker Time",
+    "blurb": "You meet a scientist who offers to create you a powerful card of your chosing. You can 2 of 3 categories of cards, and then 2 of 3 unique effects added onto the card.",
+    "art": "art/events/TINKER_TIME.webp"
+  },
+  "EVENT.THE_TRIAL": {
+    "name": "The Trial",
+    "blurb": "You join a line of people and are forced into becoming the judge for a trial that you may not refuse. You may either declare the defendant guilty or innocent to obtain various rewards, though most often also resulting…",
+    "art": "art/events/THE_TRIAL.webp"
+  },
+  "EVENT.NEOW": {
+    "name": "Neow",
+    "blurb": "Neow’s gift at the start of a run. Pick one of three boons — relics, transforms, max HP, or a curse trade. Ancients also heal missing HP.",
+    "art": "art/events/NEOW.webp"
+  },
+  "EVENT.PAEL": {
+    "name": "Pael",
+    "blurb": "Pael, an Act 2 Ancient. Offers three relics (one from each pool) and typically strips starter cards from your deck.",
+    "art": "art/events/PAEL.webp"
+  },
+  "EVENT.OROBAS": {
+    "name": "Orobas",
+    "blurb": "Orobas, an Act 2 Ancient. Offers one relic from each of his pools.",
+    "art": "art/events/OROBAS.webp"
+  },
+  "EVENT.TANX": {
+    "name": "Tanx",
+    "blurb": "Tanx, an Act 3 Ancient. Offers a random selection of three relics.",
+    "art": "art/events/TANX.webp"
+  },
+  "EVENT.NONUPEIPE": {
+    "name": "Nonupeipe",
+    "blurb": "Nonupeipe, an Act 3 Ancient. Offers a random selection of three relics.",
+    "art": "art/events/NONUPEIPE.webp"
+  }
+}

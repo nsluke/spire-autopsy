@@ -4,6 +4,7 @@
  */
 import { fmtInt } from '../lib/idFormat';
 import type { AscensionRecord, PickCount } from '../lib/types';
+import AscensionName from './AscensionName';
 import CardName from './CardName';
 
 interface DraftBoardProps {
@@ -40,7 +41,9 @@ export default function DraftBoard({ topPicks, byAscension }: DraftBoardProps) {
           <h2 className="sectionTitle">By ascension</h2>
           {byAscension.map((a) => (
             <div className="cbar" key={a.ascension}>
-              <span className="nm">A{a.ascension}</span>
+              <span className="nm">
+                <AscensionName level={a.ascension} />
+              </span>
               <div className="tr" aria-hidden="true">
                 <div
                   className="fl"

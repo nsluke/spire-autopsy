@@ -8,6 +8,7 @@ import { useCallback, useId, useState, type FocusEvent, type MouseEvent } from '
 import { createPortal } from 'react-dom';
 import { characterArt, monsterArt } from '../lib/art';
 import { characterColor, characterName, displayName, formatDuration, shortDate } from '../lib/idFormat';
+import { eventArt } from '../lib/places';
 import type { NormalizedRun } from '../lib/types';
 import ArtImg from './ArtImg';
 
@@ -125,7 +126,7 @@ function RunSummaryCard({
           {last ? ` · ${last.stats.hp}/${last.stats.maxHp} HP` : ''}
         </div>
       </div>
-      {!run.win && <ArtImg src={monsterArt(run.killedByEncounter)} className="runTipKiller" />}
+      {!run.win && <ArtImg src={monsterArt(run.killedByEncounter) ?? eventArt(run.killedByEvent)} className="runTipKiller" />}
     </div>
   );
 }

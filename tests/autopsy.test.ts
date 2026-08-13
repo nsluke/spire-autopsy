@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { buildAutopsy } from '../src/lib/autopsy';
+import { buildAutopsy, type AutopsyBeat } from '../src/lib/autopsy';
 import { detectLeaks } from '../src/lib/leaks';
 import { normalizeRun } from '../src/lib/normalize';
 import type { NormalizedRun } from '../src/lib/types';
@@ -21,6 +21,7 @@ function loadFixture(name: string): NormalizedRun {
 const win1779 = loadFixture('1779248265');
 const win1776 = loadFixture('1776190046'); // Defect A0 win
 const loss1785 = loadFixture('1785858459');
+const loss1774 = loadFixture('1774194024'); // Ironclad A1 loss, died rich
 const abandoned = loadFixture('1778528032');
 
 let cloneCounter = 0;
@@ -211,5 +212,244 @@ describe('autopsy of an abandoned run', () => {
     expect(report.moments.some((m) => m.kind === 'death')).toBe(false);
     expect(report.narrative).toHaveLength(1);
     expect(report.narrative[0].text).toContain('Abandoned');
+  });
+});
+
+// ---------- the kill: fight length and entry HP ----------
+
+describe('the kill beat', () => {
+  it('reports the killer fight length — 52 damage over 7 turns', () => {
+    const report = buildAutopsy(loss1785, [loss1785], []);
+    const kill = report.narrative.find((b) => b.text.includes('Walked into'));
+    expect(kill).toBeDefined();
+    expect(kill!.text).toContain('at 57%');
+    expect(kill!.text).toContain('52 damage over 7 turns');
+  });
+
+  it('keeps the entry number when a hallway fight kills the run', () => {
+    const run = clones(loss1785, 1)[0];
+    for (const room of run.nodes[run.nodes.length - 1].rooms) room.roomType = 'monster';
+    const report = buildAutopsy(run, [run], []);
+    expect(report.moments.some((m) => m.kind === 'boss-entry')).toBe(false);
+    // The descent beat also carries the death floor — match the kill by its verb.
+    const kill = report.narrative.find((b) => b.floors.includes(33) && b.text.includes('ended it'));
+    expect(kill).toBeDefined();
+    expect(kill!.text).toContain('you walked in at 57%');
+    expect(kill!.text).toContain('over 7 turns');
+  });
+});
+
+// ---------- the death kit ----------
+
+describe('the death kit', () => {
+  it('reads out unthrown potions with hover ids', () => {
+    const run = clones(loss1785, 1)[0];
+    run.player.potions = ['POTION.FIRE_POTION', 'POTION.DUPLICATION_POTION'];
+    run.nodes[run.nodes.length - 1].stats.potionsUsed = [];
+    const report = buildAutopsy(run, [run], []);
+    const kit = report.narrative.find((b) => b.text.startsWith('Died holding')) as AutopsyBeat;
+    expect(kit).toBeDefined();
+    expect(kit.text).toContain('Fire Potion and Duplication Potion — neither thrown');
+    expect(kit.potionIds).toEqual(['POTION.FIRE_POTION', 'POTION.DUPLICATION_POTION']);
+    // 53 gold at death is not worth a clause
+    expect(kit.text).not.toContain('gold');
+  });
+
+  it('drops the unthrown clause when potions were actually used', () => {
+    const run = clones(loss1785, 1)[0];
+    run.player.potions = ['POTION.FIRE_POTION'];
+    const report = buildAutopsy(run, [run], []); // fixture death used two potions
+    const kit = report.narrative.find((b) => b.text.startsWith('Died holding'));
+    expect(kit).toBeDefined();
+    expect(kit!.text).not.toContain('thrown');
+  });
+
+  it('names the unspent gold on a rich death (Ironclad died carrying 463)', () => {
+    const report = buildAutopsy(loss1774, [loss1774], []);
+    const kit = report.narrative.find((b) => b.text.includes('gold unspent'));
+    expect(kit).toBeDefined();
+    expect(kit!.text).toContain('463 gold unspent');
+  });
+
+  it('says nothing when the kit is empty (no potions, thin purse)', () => {
+    const report = buildAutopsy(loss1785, [loss1785], []);
+    expect(report.narrative.some((b) => b.text.startsWith('Died '))).toBe(false);
+  });
+});
+
+// ---------- wall siege progress ----------
+
+describe('wall siege progress', () => {
+  function priorAt(depth: number, hoursAgo: number): NormalizedRun {
+    const r = clones(loss1785, 1)[0];
+    r.startTime = loss1785.startTime - hoursAgo * 3600;
+    r.nodes = r.nodes.slice(0, depth);
+    return r;
+  }
+
+  it('celebrates the deepest push and lists where earlier attempts fell', () => {
+    const p1 = priorAt(12, 2);
+    const p2 = priorAt(18, 1);
+    const report = buildAutopsy(loss1785, [p1, p2, loss1785], []);
+    expect(report.narrative[0].text).toContain('wall attempt #3');
+    const depth = report.narrative.find((b) => b.text.includes('deepest push'));
+    expect(depth).toBeDefined();
+    expect(depth!.text).toContain('#1–2 fell on floors 12 and 18');
+  });
+
+  it('measures a shallower attempt against the best prior push', () => {
+    const p1 = priorAt(33, 2); // full-depth prior
+    const current = priorAt(20, 0);
+    current.startTime = loss1785.startTime; // after p1
+    const report = buildAutopsy(current, [p1, current], []);
+    const depth = report.narrative.find((b) => b.text.includes('stopped on floor 20'));
+    expect(depth).toBeDefined();
+    expect(depth!.text).toContain("shy of attempt #1's floor 33");
+  });
+
+  it('counts the repeat killer by name', () => {
+    const p1 = priorAt(12, 2);
+    const p2 = priorAt(18, 1);
+    const report = buildAutopsy(loss1785, [p1, p2, loss1785], []);
+    const repeat = report.narrative.find((b) => b.text.includes('ended a wall attempt'));
+    expect(repeat).toBeDefined();
+    expect(repeat!.text).toBe('Third time The Insatiable has ended a wall attempt.');
+    expect(repeat!.enemyIds).toEqual(['ENCOUNTER.THE_INSATIABLE_BOSS']);
+  });
+
+  it('stays quiet on the first attempt', () => {
+    const report = buildAutopsy(loss1785, [loss1785], []);
+    expect(report.narrative.some((b) => b.text.includes('deepest push'))).toBe(false);
+    expect(report.narrative.some((b) => b.text.includes('ended a wall attempt'))).toBe(false);
+  });
+});
+
+// ---------- win contrast ----------
+
+describe('win contrast', () => {
+  function survivedInsatiable(): NormalizedRun {
+    const r = clones(loss1785, 1)[0];
+    r.win = true;
+    r.startTime = loss1785.startTime - 30 * 24 * 3600;
+    const last = r.nodes[r.nodes.length - 1];
+    last.stats.hp = 40; // walked out alive
+    return r;
+  }
+
+  it('contrasts entry HP when the player has beaten this boss before', () => {
+    const prior = survivedInsatiable();
+    prior.nodes[31].stats.hp = 80; // entered the boss at 80/92 ≈ 87%
+    const report = buildAutopsy(loss1785, [prior, loss1785], []);
+    const contrast = report.narrative.find((b) => b.text.includes("You've beaten")) as AutopsyBeat;
+    expect(contrast).toBeDefined();
+    expect(contrast.text).toContain("You've beaten The Insatiable before");
+    expect(contrast.text).toContain('entered at 87% and walked out');
+    expect(contrast.text).toContain('Today: 57%');
+    expect(contrast.runRef).toBe(prior.id);
+    expect(contrast.floors).toEqual([]);
+  });
+
+  it('falls back to deck size when the entries match', () => {
+    const prior = survivedInsatiable(); // same 57% entry
+    prior.player.deck = prior.player.deck.slice(0, 20);
+    const report = buildAutopsy(loss1785, [prior, loss1785], []);
+    const contrast = report.narrative.find((b) => b.text.includes("You've beaten"));
+    expect(contrast).toBeDefined();
+    expect(contrast!.text).toContain("carrying 20 cards to today's 28");
+  });
+
+  it('never cites a fight the other run also died in', () => {
+    const prior = clones(loss1785, 1)[0]; // died to the same boss
+    prior.startTime = loss1785.startTime - 3600;
+    const report = buildAutopsy(loss1785, [prior, loss1785], []);
+    expect(report.narrative.some((b) => b.text.includes("You've beaten"))).toBe(false);
+  });
+});
+
+// ---------- linked leaks: gold-at-death ----------
+
+describe('gold-at-death linking', () => {
+  const richDeaths = clones(loss1785, 16).map((r) => {
+    r.nodes[r.nodes.length - 1].stats.gold = 300;
+    return r;
+  });
+  const corpus = [...richDeaths, loss1785];
+  const leaks = detectLeaks(corpus);
+
+  it('links the pattern on a run that died rich', () => {
+    const report = buildAutopsy(richDeaths[0], corpus, leaks);
+    expect(report.linkedLeakIds).toContain('gold-at-death');
+  });
+
+  it('does not link it on a run that died poor (53 gold)', () => {
+    const report = buildAutopsy(loss1785, corpus, leaks);
+    expect(report.linkedLeakIds).not.toContain('gold-at-death');
+  });
+});
+
+// ---------- point of no return: slide vs plateau ----------
+
+describe('point of no return', () => {
+  it('keeps the descent framing when the death is close (floor 32 → 33)', () => {
+    const report = buildAutopsy(loss1785, [loss1785], []);
+    const pnr = report.moments.find((m) => m.kind === 'point-of-no-return');
+    expect(pnr!.label).toBe('Point of no return');
+    expect(pnr!.detail).toContain('never climbed above half again');
+    expect(report.narrative.some((b) => b.text.includes('never crossed half again'))).toBe(true);
+  });
+
+  it('reads a long sub-half plateau as an observation, not a death spiral', () => {
+    const run = clones(loss1785, 1)[0];
+    for (const node of run.nodes.slice(5, 32)) node.stats.hp = 40; // ≤43% of maxHp from floor 6 on
+    const report = buildAutopsy(run, [run], []);
+    const pnr = report.moments.find((m) => m.kind === 'point-of-no-return');
+    expect(pnr).toBeDefined();
+    expect(pnr!.label).toBe('Below half from here');
+    expect(pnr!.detail).toBe(`From floor ${pnr!.floor} on, you fought below half HP.`);
+    expect(report.narrative.some((b) => b.text.includes('you fought below half HP'))).toBe(true);
+    expect(report.narrative.some((b) => b.text.includes('never crossed half'))).toBe(false);
+  });
+});
+
+// ---------- draft thinness on the death act ----------
+
+describe('draft thinness', () => {
+  it('calls out an extreme skip rate in the death act', () => {
+    const run = clones(loss1785, 1)[0];
+    const deathAct = run.nodes[run.nodes.length - 1].act;
+    for (const node of run.nodes.filter((n) => n.act === deathAct)) {
+      for (const c of node.stats.cardChoices) c.wasPicked = false;
+    }
+    const report = buildAutopsy(run, [run], []);
+    const thin = report.narrative.find((b) => b.text.includes('card rewards'));
+    expect(thin).toBeDefined();
+    expect(thin!.text).toBe(`Passed on 7 of 7 card rewards in act ${deathAct}.`);
+  });
+
+  it('says nothing at the fixture skip rate (2 of 7)', () => {
+    const report = buildAutopsy(loss1785, [loss1785], []);
+    expect(report.narrative.some((b) => b.text.includes('card rewards'))).toBe(false);
+  });
+});
+
+// ---------- copy details ----------
+
+describe('moment copy', () => {
+  it('the spike names the killing blow on losses and the run on wins', () => {
+    const lossReport = buildAutopsy(loss1785, [loss1785], []);
+    expect(lossReport.moments.find((m) => m.kind === 'spike')!.detail).toContain(
+      'outside the killing blow',
+    );
+    const winReport = buildAutopsy(win1779, [win1779], []);
+    expect(winReport.moments.find((m) => m.kind === 'spike')!.detail).toContain(
+      'the biggest single hit of the run',
+    );
+  });
+
+  it('the clutch beat is built from node stats, not label surgery', () => {
+    const report = buildAutopsy(win1779, [win1779], []);
+    const squeeze = report.narrative.find((b) => b.text.includes('Tightest squeeze'));
+    expect(squeeze).toBeDefined();
+    expect(squeeze!.text).toContain('24/70 HP (34%)');
   });
 });

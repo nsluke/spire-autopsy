@@ -11,8 +11,12 @@ import { completedRuns } from '../normalize';
 import type { LeakResult, NormalizedRun } from '../types';
 import { bossEntryLeak } from './bossEntry';
 import { damageDraftingLeak } from './damageDrafting';
-import { eliteAppetite, eventTax, goldAtDeath, potionHoarding, restDiscipline } from './observations';
+import { deckBloatLeak } from './deckBloat';
+import { fightPacing } from './fightPacing';
+import { eliteAppetite, eventTax, goldAtDeath, restDiscipline } from './observations';
+import { potionHoarding } from './potions';
 import { removalDisciplineLeak } from './removals';
+import { upgradeTempoLeak } from './upgradeTempo';
 
 // Note: ascension pacing is deliberately NOT a detector. Telling a climber to
 // settle at a lower level misreads the game — the next ascension is always the
@@ -24,15 +28,20 @@ function byRank(a: LeakResult, b: LeakResult): number {
 
 export function detectLeaks(runs: NormalizedRun[]): LeakResult[] {
   const completed = completedRuns(runs);
-  const leaks = [bossEntryLeak(completed), removalDisciplineLeak(completed), damageDraftingLeak(completed)].sort(
-    byRank,
-  );
+  const leaks = [
+    bossEntryLeak(completed),
+    removalDisciplineLeak(completed),
+    damageDraftingLeak(completed),
+    potionHoarding(completed),
+    deckBloatLeak(completed),
+    upgradeTempoLeak(completed),
+  ].sort(byRank);
   const observations = [
     eliteAppetite(completed),
-    potionHoarding(completed),
     goldAtDeath(completed),
     eventTax(completed),
     restDiscipline(completed),
+    fightPacing(completed),
   ].sort(byRank);
   return [...leaks, ...observations];
 }

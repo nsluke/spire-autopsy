@@ -14,6 +14,7 @@
  */
 import { useCallback, useRef, useState, type PointerEvent } from 'react';
 import { monsterArt } from '../lib/art';
+import { restLabel } from '../lib/floorLog';
 import { displayName } from '../lib/idFormat';
 import type { AutopsyMoment, AutopsyReport } from '../lib/types';
 
@@ -216,7 +217,7 @@ export default function HpTrajectory({ report, highlightFloors, onFloorHover }: 
         `Floor ${hover.floor} · ${hover.roomLabel ? pretty(hover.roomLabel) : hover.mapPointType.replace('_', ' ')}`,
         `HP ${hover.hp}/${hover.maxHp} (${Math.round(toFrac(hover.hpPct) * 100)}%)`,
         ...(hover.damageTaken > 0 ? [`−${hover.damageTaken} damage`] : []),
-        ...(hover.restChoice ? [`Campfire: ${hover.restChoice.toLowerCase()}`] : []),
+        ...(hover.restChoice ? [`Campfire: ${restLabel(hover.restChoice)}`] : []),
       ]
     : [];
   const hoverArt = hover?.encounterId ? monsterArt(hover.encounterId) : undefined;
