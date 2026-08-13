@@ -2,9 +2,9 @@
  * Most-drafted cards (starters omitted) and the ascension record.
  * Win rates here are descriptive — the climb itself lives on the Coach.
  */
-import { cardInfo } from '../lib/cards';
-import { displayName, fmtInt } from '../lib/idFormat';
+import { fmtInt } from '../lib/idFormat';
 import type { AscensionRecord, PickCount } from '../lib/types';
+import CardName from './CardName';
 
 interface DraftBoardProps {
   topPicks: PickCount[];
@@ -22,7 +22,9 @@ export default function DraftBoard({ topPicks, byAscension }: DraftBoardProps) {
           <h2 className="sectionTitle">Most drafted</h2>
           {topPicks.map((p) => (
             <div className="cbar" key={p.id}>
-              <span className="nm draftNm">{cardInfo(p.id)?.name ?? displayName(p.id)}</span>
+              <span className="nm draftNm">
+                <CardName id={p.id} />
+              </span>
               <div className="tr" aria-hidden="true">
                 <div className="fl draftFill" style={{ width: `${Math.min(100, (p.picks / maxPicks) * 82).toFixed(1)}%` }} />
               </div>

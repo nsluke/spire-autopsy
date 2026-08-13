@@ -18,6 +18,7 @@
  *  - heal:               every rest site where HEAL was chosen.
  */
 import { characterName, displayName } from './idFormat';
+import { floorEncounterId } from './floorLog';
 import { completedRuns, deathNode, entryHpPct } from './normalize';
 import type {
   AutopsyMoment,
@@ -76,6 +77,7 @@ export function buildAutopsy(run: NormalizedRun, allRuns: NormalizedRun[], leaks
     roomLabel: roomLabel(node),
     restChoice: node.stats.restChoices[0],
     damageTaken: node.stats.damageTaken,
+    encounterId: floorEncounterId(node),
   }));
 
   // ---------- moments ----------
@@ -181,7 +183,7 @@ export function buildAutopsy(run: NormalizedRun, allRuns: NormalizedRun[], leaks
     linkedLeakIds.push('potion-hoarding');
 
   // ---------- narrative ----------
-  const narrative = buildNarrative(run, allRuns, { death, spikeNode, moments, killer, linkedLeakIds, leaks });
+  const narrative = buildNarrative(run, allRuns, { death, spikeNode, moments, killer, killerId, linkedLeakIds, leaks });
 
   return {
     runId: run.id,
@@ -205,12 +207,25 @@ interface NarrativeParts {
   spikeNode?: NodeVisit;
   moments: AutopsyMoment[];
   killer?: string;
+  killerId?: string;
   linkedLeakIds: string[];
   leaks: LeakResult[];
 }
 
+function combatId(node: NodeVisit | undefined): string[] | undefined {
+  if (!node) return undefined;
+  const id = floorEncounterId(node);
+  if (!id || (!id.startsWith('ENCOUNTER.') && !id.startsWith('MONSTER.'))) return undefined;
+  return [id];
+}
+
+function combatIds(...ids: (string | undefined)[]): string[] | undefined {
+  const out = ids.filter((id): id is string => Boolean(id) && (id!.startsWith('ENCOUNTER.') || id!.startsWith('MONSTER.')));
+  return out.length > 0 ? out : undefined;
+}
+
 function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: NarrativeParts): NarrativeBeat[] {
-  const { death, spikeNode, moments, killer, linkedLeakIds, leaks } = parts;
+  const { death, spikeNode, moments, killer, killerId, linkedLeakIds, leaks } = parts;
   const who = `${characterName(run.player.character)} at A${run.ascension}`;
   const beats: NarrativeBeat[] = [];
 
@@ -259,6 +274,7 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
       beats.push({
         text: `Most expensive floor: ${spikeNode.floor} — ${roomLabel(spikeNode) ?? 'that fight'} took ${spikeNode.stats.damageTaken} HP.`,
         floors: [spikeNode.floor],
+        enemyIds: combatId(spikeNode),
       });
     }
     return beats;
@@ -301,6 +317,7 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
     beats.push({
       text: `Floor ${spikeNode.floor} was the wound: ${roomLabel(spikeNode) ?? 'the fight'} took ${spikeNode.stats.damageTaken} HP${depthNote}.`,
       floors: [spikeNode.floor],
+      enemyIds: combatId(spikeNode),
     });
   }
 
@@ -321,6 +338,7 @@ function buildNarrative(run: NormalizedRun, allRuns: NormalizedRun[], parts: Nar
       ? `Walked into ${killer ?? 'the final fight'} at ${entry !== undefined ? Math.round(entry * 100) : '?'}% — it had ${death.stats.damageTaken} damage waiting.`
       : `${killer ?? 'The final fight'} ended it on floor ${death.floor} — ${death.stats.damageTaken} damage in the fight.`,
     floors: [death.floor],
+    enemyIds: combatIds(killerId),
   });
 
   // The way forward — one line, only when a real pattern matches.

@@ -13,6 +13,7 @@
  * nothing here is hardcoded data.
  */
 import { useCallback, useRef, useState, type PointerEvent } from 'react';
+import { monsterArt } from '../lib/art';
 import { displayName } from '../lib/idFormat';
 import type { AutopsyMoment, AutopsyReport } from '../lib/types';
 
@@ -218,8 +219,10 @@ export default function HpTrajectory({ report, highlightFloors, onFloorHover }: 
         ...(hover.restChoice ? [`Campfire: ${hover.restChoice.toLowerCase()}`] : []),
       ]
     : [];
-  const tipW = Math.max(...tipLines.map((l) => l.length), 0) * 5.4 + 16;
-  const tipH = tipLines.length * 13 + 10;
+  const hoverArt = hover?.encounterId ? monsterArt(hover.encounterId) : undefined;
+  const imgW = hoverArt ? 52 : 0;
+  const tipW = Math.max(...tipLines.map((l) => l.length), 0) * 5.4 + 16 + imgW;
+  const tipH = Math.max(tipLines.length * 13 + 10, hoverArt ? 62 : 0);
   const tipX = hoverPt ? (hoverPt.x + 12 + tipW > R ? hoverPt.x - 12 - tipW : hoverPt.x + 12) : 0;
   const tipY = hoverPt ? Math.max(T, Math.min(B - tipH, hoverPt.y - tipH / 2)) : 0;
 
@@ -322,8 +325,21 @@ export default function HpTrajectory({ report, highlightFloors, onFloorHover }: 
               <line x1={hoverPt.x} y1={T} x2={hoverPt.x} y2={B} stroke="var(--ink2)" opacity={0.25} />
               <circle cx={hoverPt.x} cy={hoverPt.y} r={4.5} fill="var(--ember)" stroke="var(--ground)" strokeWidth={1.5} />
               <rect x={tipX} y={tipY} width={tipW} height={tipH} rx={5} fill="var(--surface2)" stroke="var(--line)" />
+              {hoverArt && (
+                <image
+                  href={hoverArt}
+                  x={tipX + 6}
+                  y={tipY + 6}
+                  width={44}
+                  height={44}
+                  preserveAspectRatio="xMidYMid meet"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              )}
               {tipLines.map((l, i) => (
-                <text key={i} x={tipX + 8} y={tipY + 15 + i * 13} fontSize={9.5} fill={i === 0 ? 'var(--ink)' : 'var(--ink2)'} fontWeight={i === 0 ? 600 : undefined}>
+                <text key={i} x={tipX + 8 + imgW} y={tipY + 15 + i * 13} fontSize={9.5} fill={i === 0 ? 'var(--ink)' : 'var(--ink2)'} fontWeight={i === 0 ? 600 : undefined}>
                   {l}
                 </text>
               ))}

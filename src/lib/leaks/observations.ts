@@ -128,10 +128,12 @@ export function potionHoarding(completed: NormalizedRun[]): LeakResult {
       : `None of your ${deaths.length} deaths ended with potions in your belt — you spend them, which is exactly right. In ${noPotionThrown.length} of ${deathFights.length} death fights no potion was thrown, usually because the belt was already empty. Nothing to fix here; carry on.`;
 
   const runReceipts = mostRecent(holding, (r) => r.startTime, 5).map((r) => {
-    const killer = displayName(r.killedByEncounter ?? r.killedByEvent);
+    const killerId = r.killedByEncounter ?? r.killedByEvent;
+    const killer = displayName(killerId);
     return {
       runId: r.id,
       label: `${runTag(r)} · died ${killer ? `to ${killer} ` : ''}holding ${r.player.potions.length} ${r.player.potions.length === 1 ? 'potion' : 'potions'}`,
+      enemyIds: killerId ? [killerId] : undefined,
     };
   });
 

@@ -236,6 +236,8 @@ export type LeakTier = 'leak' | 'observation';
 export interface RunReceipt {
   runId: string;
   label: string; // e.g. "Aug 10 · Defect A6 · entered The Insatiable at 57%"
+  /** encounter ids whose display names appear in label — wrapped for hover art */
+  enemyIds?: string[];
 }
 
 export interface DumbbellStat {
@@ -297,6 +299,8 @@ export interface AutopsyMoment {
 export interface NarrativeBeat {
   text: string;
   floors: number[];
+  /** encounter ids whose display names appear in text — wrapped for hover art */
+  enemyIds?: string[];
 }
 
 export interface AutopsyReport {
@@ -310,7 +314,7 @@ export interface AutopsyReport {
   seed: string;
   actNames: string[];
   /** hp/maxHp after each node, in visit order */
-  trajectory: { floor: number; act: number; hpPct: number; hp: number; maxHp: number; mapPointType: string; roomLabel?: string; restChoice?: string; damageTaken: number }[];
+  trajectory: { floor: number; act: number; hpPct: number; hp: number; maxHp: number; mapPointType: string; roomLabel?: string; restChoice?: string; damageTaken: number; encounterId?: string }[];
   moments: AutopsyMoment[];
   /** Warm Coach read as floor-anchored beats (see NarrativeBeat) */
   narrative: NarrativeBeat[];

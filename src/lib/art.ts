@@ -33,6 +33,12 @@ export function monsterArt(id: string | undefined): string | undefined {
   return `art/monsters/${ALIASES[base] ?? base}.png`;
 }
 
+/** Art path for a CARD.* id. Missing files are hidden by <ArtImg>. */
+export function cardArt(id: string | undefined): string | undefined {
+  if (!id?.startsWith('CARD.')) return undefined;
+  return `art/cards/${id.slice('CARD.'.length)}.webp`;
+}
+
 /** Art path for a CHARACTER.* id. */
 export function characterArt(id: string | undefined): string | undefined {
   if (!id?.startsWith('CHARACTER.')) return undefined;

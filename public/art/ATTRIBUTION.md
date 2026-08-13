@@ -23,7 +23,12 @@ content policy applies to both games.
 
 All images were sourced from the community wiki **slaythespire.wiki.gg**
 (Slay the Spire 2 namespace), which hosts them as game-asset uploads © Mega Crit.
-Per-file original URLs are recorded in `manifest.json` under `"sources"`.
+Per-file original URLs are recorded in `manifest.json` under `"sources"` (enemies/
+characters) and `"cardSources"` (card portraits).
+
+Card portraits are 220px-wide thumbs of the unupgraded wiki card image, fetched by
+`scripts/fetch-card-art.mjs`, converted to WebP, and shown only as a hover preview
+on listed card names.
 
 Notes on representative sprites for group enemies:
 - `THE_KIN.png` uses the Kin Priest sprite (`File:StS2 Kin Priest.png`).

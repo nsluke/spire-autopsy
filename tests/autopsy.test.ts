@@ -108,6 +108,7 @@ describe('autopsy of 1785858459 (loss)', () => {
     expect(wound.text).toContain('Floor 12');
     expect(wound.text).toContain('47');
     expect(wound.floors).toContain(12);
+    expect(wound.enemyIds?.[0]).toMatch(/BYGONE_EFFIGY/);
     // the kill beat anchors on the death floor
     const kill = report.narrative.find((b) => b.floors.includes(33));
     expect(kill).toBeDefined();

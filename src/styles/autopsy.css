@@ -1,4 +1,4 @@
-/* Autopsy view — owned by views/Autopsy.tsx and components/HpTrajectory.tsx. */
+/* Autopsy view — owned by views/Autopsy.tsx, components/HpTrajectory.tsx, and components/FloorTimeline.tsx. */
 
 /* run picker */
 .runPicker {
@@ -9,7 +9,10 @@
 }
 .runPicker .runPill {
   text-decoration: none;
+  border-left-width: 3px;
 }
+.runPill.win { color: var(--ink); }
+.runPill.loss { color: var(--ink2); }
 .runPillWin {
   color: var(--win);
 }
@@ -18,9 +21,23 @@
 .autopsyHead {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 10px;
+}
+.autopsyHeadMain {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
+}
+.autopsyCharArt {
+  width: 44px;
+  height: 52px;
+  object-fit: contain;
+  object-position: bottom;
+  flex-shrink: 0;
 }
 .autopsyTitle {
   font-family: var(--sans);
@@ -41,6 +58,40 @@
 .autopsySub {
   color: var(--muted);
   margin: 0;
+}
+.subSep { color: var(--faint); }
+.actName { color: var(--ember); }
+.hp-win { color: var(--win); }
+.hp-ember { color: var(--ember); }
+.hp-loss { color: var(--loss); }
+.hp-muted { color: var(--muted); }
+
+.runSpine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 10px;
+}
+.spineTick {
+  display: block;
+  width: 9px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--ink2);
+  cursor: pointer;
+}
+.spineTick.kind-elite,
+.spineTick.kind-treasure { background: var(--ember); }
+.spineTick.kind-boss { background: var(--loss); }
+.spineTick.kind-rest { background: var(--win); }
+.spineTick.kind-shop { background: var(--c-regent); }
+.spineTick.kind-event { background: var(--c-necro); }
+.spineTick.kind-monster { background: var(--ink2); }
+.spineTick.on {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
 }
 
 /* trajectory chart */
@@ -144,7 +195,7 @@
   font-size: 0.92rem;
   line-height: 1.55;
 }
-.beatAnchored { cursor: default; }
+.beatAnchored { cursor: pointer; }
 .beatAnchored:hover,
 .beatAnchored:focus-visible,
 .beatLit {
@@ -172,3 +223,148 @@
 }
 
 .autopsyTitle { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; font-size: 1.45rem; }
+
+/* ---- floor-by-floor log ---- */
+.floorLog { margin-top: 16px; }
+.floorLogLead {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: -4px 0 14px;
+}
+.floorList,
+.floorActList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.floorActTitle {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin: 18px 0 8px;
+  padding-left: 28px;
+}
+.floorAct:first-child .floorActTitle { margin-top: 0; }
+.floorActTitle span { color: var(--muted); letter-spacing: 0.08em; }
+
+.floorRow {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 10px;
+  padding: 7px 8px 7px 0;
+  margin: 0 -8px 0 0;
+  border-radius: 8px;
+}
+.floorRow.on { background: var(--ember-dim); }
+
+.floorRail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.floorRail::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 1px;
+  background: var(--line);
+}
+.floorActList .floorRow:first-child .floorRail::before { top: 8px; }
+.floorActList .floorRow:last-child .floorRail::before { bottom: calc(100% - 14px); }
+
+.floorDot {
+  position: relative;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--ink2);
+  box-shadow: 0 0 0 3px var(--surface);
+}
+.floorDot.kind-elite,
+.floorDot.kind-treasure { background: var(--ember); }
+.floorDot.kind-boss { background: var(--loss); }
+.floorDot.kind-rest { background: var(--win); }
+.floorDot.kind-shop { background: var(--c-regent); }
+.floorDot.kind-event { background: var(--c-necro); }
+.floorDot.kind-monster { background: var(--ink2); }
+
+.floorHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 9px;
+}
+.floorNum {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--faint);
+  min-width: 2.5rem;
+}
+.floorKind {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  min-width: 4.8rem;
+}
+.floorKind.kind-elite,
+.floorKind.kind-treasure { color: var(--ember); }
+.floorKind.kind-boss { color: var(--loss); }
+.floorKind.kind-rest { color: var(--win); }
+.floorKind.kind-shop { color: var(--c-regent); }
+.floorKind.kind-event { color: var(--c-necro); }
+.floorKind.kind-monster { color: var(--muted); }
+
+.floorTitle { font-weight: 650; color: var(--ink); }
+.floorRow.kind-boss .floorTitle { color: var(--loss); }
+.floorArt {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+.floorHp { margin-left: auto; font-size: 0.82rem; font-weight: 650; }
+.floorDmg { color: var(--loss); font-weight: 650; }
+.floorHeal { color: var(--win); font-weight: 650; }
+.floorTurns { color: var(--faint); font-size: 0.72rem; }
+
+.floorChip {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 7px;
+  color: var(--muted);
+}
+.floorChip.chip-spike,
+.floorChip.chip-death,
+.floorChip.chip-boss-entry,
+.floorChip.chip-point-of-no-return {
+  color: var(--loss);
+  border-color: rgba(204, 90, 78, 0.45);
+}
+.floorChip.chip-heal,
+.floorChip.chip-clutch {
+  color: var(--win);
+  border-color: rgba(78, 158, 71, 0.45);
+}
+
+.floorDetails {
+  margin: 3px 0 0;
+  font-size: 0.8rem;
+  color: var(--ink2);
+  line-height: 1.45;
+}
+.floorBit.skipped { color: var(--faint); }
+.floorBit.removed { color: var(--loss); }
+.floorBit.upgraded { color: var(--ember); }
+.floorGold { color: var(--ember); }
+.floorSep { color: var(--faint); }

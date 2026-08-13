@@ -1,0 +1,40 @@
+/* Listed card/enemy names: optional hover portrait (portaled). */
+
+.artName,
+.cardName,
+.enemyName {
+  font-weight: 650;
+  cursor: default;
+  outline: none;
+}
+.artName:focus-visible,
+.cardName:focus-visible,
+.enemyName:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.artTip,
+.cardTip {
+  position: fixed;
+  z-index: 40;
+  transform: translate(-50%, calc(-100% - 10px));
+  pointer-events: none;
+  line-height: 0;
+}
+.artTip.below,
+.cardTip.below {
+  transform: translate(-50%, 8px);
+}
+.artTip img,
+.cardTip img {
+  width: 168px;
+  height: auto;
+  border-radius: 8px;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.65));
+}
+.artTip.enemyTip img {
+  width: 200px;
+  max-height: 260px;
+  object-fit: contain;
+}

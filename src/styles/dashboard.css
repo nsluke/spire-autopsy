@@ -216,3 +216,9 @@
   text-overflow: ellipsis;
   min-width: 0;
 }
+.dash .cbar .nm.draftNm .cardName {
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}

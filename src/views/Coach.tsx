@@ -22,6 +22,7 @@ import { completedRuns } from '../lib/normalize';
 import type { LeakResult, NormalizedRun } from '../lib/types';
 import ArtImg from '../components/ArtImg';
 import LeakCard, { type DrillSlot } from '../components/LeakCard';
+import RichLine from '../components/RichLine';
 import '../styles/coach.css';
 
 const MAX_LEAK_CARDS = 3;
@@ -150,7 +151,10 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
             </div>
           </div>
           <div className="climbNote">
-            {wallLine(climb.active)}
+            <RichLine
+              text={wallLine(climb.active)}
+              enemyIds={climb.active.topKiller ? [climb.active.topKiller.encounter] : undefined}
+            />
             {climb.leverTitle && !climb.active.summited && (
               <>
                 {' '}

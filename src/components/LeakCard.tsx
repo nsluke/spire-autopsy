@@ -11,6 +11,7 @@ import { useState } from 'react';
 import type { DrillProgress } from '../lib/drills';
 import type { LeakResult } from '../lib/types';
 import Dumbbell from './Dumbbell';
+import RichLine from './RichLine';
 import TrendSpark from './TrendSpark';
 import '../styles/coach.css';
 
@@ -139,7 +140,7 @@ export default function LeakCard({
             // key includes the index: one run can appear twice (e.g. two flagged
             // heals in the same run's receipts)
             <a className="receiptLine runReceipt num" key={`${r.runId}-${i}`} href={`#/autopsy/${r.runId}`}>
-              {r.label} <span className="openCue">· open autopsy →</span>
+              <RichLine text={r.label} enemyIds={r.enemyIds} /> <span className="openCue">· open autopsy →</span>
             </a>
           ))}
           {leak.confoundNote && <p className="confoundNote">{leak.confoundNote}</p>}

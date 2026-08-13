@@ -5,9 +5,10 @@
  * which count standard solo runs only — labeled as such, never mixed with
  * our run-frame stats.
  */
-import { cardInfo } from '../lib/cards';
-import { characterColor, characterName, displayName, fmtInt } from '../lib/idFormat';
+import { characterColor, characterName, fmtInt } from '../lib/idFormat';
 import type { Ledger } from '../lib/ledger';
+import CardName from './CardName';
+import EnemyName from './EnemyName';
 import '../styles/ledger.css';
 
 export default function GameLedger({ ledger }: { ledger: Ledger }) {
@@ -54,7 +55,7 @@ export default function GameLedger({ ledger }: { ledger: Ledger }) {
               {ledger.topKillers.map((k, i) => (
                 <span key={k.encounter}>
                   {i > 0 && ', '}
-                  <b>{displayName(k.encounter)}</b> <span className="num">×{k.losses}</span>
+                  <EnemyName id={k.encounter} /> <span className="num">×{k.losses}</span>
                 </span>
               ))}
             </>
@@ -66,7 +67,7 @@ export default function GameLedger({ ledger }: { ledger: Ledger }) {
               {ledger.topPicked.map((c, i) => (
                 <span key={c.card}>
                   {i > 0 && ', '}
-                  {cardInfo(c.card)?.name ?? displayName(c.card)}
+                  <CardName id={c.card} />
                 </span>
               ))}
             </>

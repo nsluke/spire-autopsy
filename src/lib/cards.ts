@@ -31,6 +31,35 @@ export function cardType(id: string): CardType | undefined {
   return CARDS[id]?.type;
 }
 
+/** Display name: wiki name when we have it, otherwise the prettified id. */
+export function cardLabel(id: string): string {
+  return CARDS[id]?.name ?? id.replace(/^CARD\./, '').toLowerCase().split('_').filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+}
+
+/**
+ * Text color for a listed card — the character's banner color (the color of
+ * the card), with curses on the loss red. CSS variables so it follows tokens.
+ */
+export function cardColor(id: string): string {
+  const info = CARDS[id];
+  if (!info) return 'var(--muted)';
+  if (info.type === 'curse') return 'var(--loss)';
+  switch (info.character) {
+    case 'IRONCLAD':
+      return 'var(--c-ironclad)';
+    case 'SILENT':
+      return 'var(--c-silent)';
+    case 'DEFECT':
+      return 'var(--c-defect)';
+    case 'NECROBINDER':
+      return 'var(--c-necro)';
+    case 'REGENT':
+      return 'var(--c-regent)';
+    default:
+      return 'var(--muted)';
+  }
+}
+
 /** Share of ids in the list that have metadata — surface this when filtering by type. */
 export function metadataCoverage(ids: string[]): number {
   if (ids.length === 0) return 1;

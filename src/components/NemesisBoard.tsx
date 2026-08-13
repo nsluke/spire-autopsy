@@ -5,9 +5,10 @@
  * encounter was actually fought (modal act across the corpus).
  */
 import { monsterArt } from '../lib/art';
-import { displayName, encounterTier, fmtInt } from '../lib/idFormat';
+import { encounterTier, fmtInt } from '../lib/idFormat';
 import type { KillCause, NormalizedRun } from '../lib/types';
 import ArtImg from './ArtImg';
+import EnemyName from './EnemyName';
 
 const MIN_FIGHTS = 10;
 const TOP_N = 5;
@@ -86,7 +87,7 @@ export default function NemesisBoard({ killCauses, runs }: NemesisBoardProps) {
             <div className="nem" key={k.encounter}>
               <ArtImg src={monsterArt(k.encounter)} className="nemArt" />
               <span className="nm">
-                {displayName(k.encounter)} <span className="pill">{tierLabel}</span>
+                <EnemyName id={k.encounter} /> <span className="pill">{tierLabel}</span>
               </span>
               <span className="rate num">{k.deathRatePct}%</span>
               <span className="meta num">

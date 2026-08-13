@@ -6,9 +6,10 @@
  * so color never carries the information alone.
  */
 import { characterArt } from '../lib/art';
-import { characterColor, characterName, displayName } from '../lib/idFormat';
+import { characterColor, characterName } from '../lib/idFormat';
 import type { CharacterStats } from '../lib/types';
 import ArtImg from './ArtImg';
+import CardName from './CardName';
 
 interface CharacterBarsProps {
   byCharacter: CharacterStats[];
@@ -22,7 +23,7 @@ export default function CharacterBars({ byCharacter }: CharacterBarsProps) {
 
   const signatures = byCharacter
     .filter((c) => c.favoriteCard)
-    .map((c) => `${characterName(c.character)}: ${displayName(c.favoriteCard!.id)}`);
+    .map((c) => ({ character: c.character, id: c.favoriteCard!.id }));
 
   return (
     <section>
@@ -50,7 +51,17 @@ export default function CharacterBars({ byCharacter }: CharacterBarsProps) {
           </span>
         </div>
       ))}
-      {signatures.length > 0 && <p className="sigLine">Signature picks — {signatures.join(' · ')}</p>}
+      {signatures.length > 0 && (
+        <p className="sigLine">
+          Signature picks —{' '}
+          {signatures.map((s, i) => (
+            <span key={s.character}>
+              {i > 0 && ' · '}
+              {characterName(s.character)}: <CardName id={s.id} />
+            </span>
+          ))}
+        </p>
+      )}
     </section>
   );
 }
