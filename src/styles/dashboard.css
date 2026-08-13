@@ -177,17 +177,31 @@
 }
 .dash .recentTick {
   display: block;
+  position: relative;
   width: 14px;
   height: 22px;
   border-radius: 3px;
   background: var(--faint);
   text-decoration: none;
 }
-.dash .recentTick .recentMark { display: none; }
-.dash .recentTick.win { background: var(--win); }
-.dash .recentTick.loss { background: var(--loss); }
-.dash .recentTick.abandoned { background: var(--line); }
-.dash .recentTick:hover { outline: 2px solid var(--ember); outline-offset: 1px; }
+.dash .recentTick.abandoned { opacity: 0.4; }
+.dash .recentTick .recentMark {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 5px;
+  height: 8px;
+  border: 1.5px solid var(--ink);
+  border-top: 0;
+  border-left: 0;
+  transform: translateX(-50%) rotate(45deg);
+  filter: drop-shadow(0 0 1px var(--ground));
+}
+.dash .recentTick:hover,
+.dash .recentTick:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 1px;
+}
 
 /* path mix */
 .dash .pathMix {
@@ -222,3 +236,55 @@
   text-overflow: ellipsis;
   min-width: 0;
 }
+
+/* Portaled off .dash (document.body) — latest-run hover card. */
+.runTip {
+  position: fixed;
+  z-index: 40;
+  transform: translate(-50%, calc(-100% - 10px));
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 10px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.75);
+}
+.runTip.below { transform: translate(-50%, 8px); }
+.runTipChar {
+  width: 36px;
+  height: 44px;
+  object-fit: contain;
+  object-position: bottom;
+  flex-shrink: 0;
+}
+.runTipKiller {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-left: auto;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+}
+.runTipWho {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+.runTipMeta {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.runTipEnd {
+  font-size: 0.8rem;
+  font-weight: 650;
+  margin-top: 4px;
+}
+.runTipEnd.win { color: var(--win); }
+.runTipEnd.loss { color: var(--loss); }
+.runTipEnd.muted { color: var(--muted); }
