@@ -71,7 +71,7 @@
 /* character win-rate bars */
 .dash .cbar {
   display: grid;
-  grid-template-columns: 92px 1fr 96px;
+  grid-template-columns: 108px 1fr 118px;
   align-items: center;
   gap: 10px;
   margin: 9px 0;
@@ -167,3 +167,52 @@
 .dash .cbar .cbarArt { width: 22px; height: 26px; object-fit: contain; object-position: bottom; }
 
 .dash .dashHead h1 { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; }
+
+/* latest-runs strip (sits between tiles and the panel row) */
+.dash > section { margin-top: 22px; }
+.dash .recent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.dash .recentTick {
+  display: block;
+  width: 14px;
+  height: 22px;
+  border-radius: 3px;
+  background: var(--faint);
+  text-decoration: none;
+}
+.dash .recentTick .recentMark { display: none; }
+.dash .recentTick.win { background: var(--win); }
+.dash .recentTick.loss { background: var(--loss); }
+.dash .recentTick.abandoned { background: var(--line); }
+.dash .recentTick:hover { outline: 2px solid var(--ember); outline-offset: 1px; }
+
+/* path mix */
+.dash .pathMix {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+.dash .pathCell .k {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dash .pathCell .v {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 1px;
+}
+.dash .pathCell .d { font-size: 0.72rem; color: var(--muted); }
+.dash .restFill { background: var(--ember); }
+.dash .draftFill { background: var(--ink2); }
+.dash .cbar .nm.draftNm {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}

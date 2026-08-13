@@ -5,9 +5,10 @@ drop in your local run history and get a diagnosis — the habits costing you
 runs, with receipts, and a drill to fix each one. Plus lifetime stats and a
 floor-by-floor autopsy of every death.
 
-**Nothing uploads. Ever.** This is a static site: your run files are parsed in
-your browser, stored in your browser (IndexedDB), and never leave your machine.
-It works in airplane mode.
+**Run files never leave this browser.** They are parsed locally, stored in
+IndexedDB, and never uploaded. It works in airplane mode. The one optional
+exception is an anonymous snapshot you can send with an explicit click — counts
+and detector outcomes, not your `.run` files.
 
 ## Where your runs live
 
@@ -66,7 +67,45 @@ STS2_HISTORY="$HOME/Library/Application Support/SlayTheSpire2/steam/<id>/profile
   (verified across schema v8/v9). Fight length (`turns_taken`) is the offense
   proxy; anything the data can't support, the UI says so.
 - Sample data (`public/demo/`) and test fixtures are real, solo-only runs
-  (co-op files are excluded — they contain other players' Steam ids).
+  (co-op files are excluded — they contain other players' Steam ids). Bundled
+  demo runs are also omitted from anonymous snapshots so they cannot pollute
+  the drop-off.
+
+## Anonymous snapshot (opt-in)
+
+Nothing is sent on import, and nothing is sent because a toggle was left on.
+The dashboard (and the import page once you have data) offers **Share
+anonymously**. That click POSTs a JSON snapshot of:
+
+- corpus counts (runs / wins / losses, character mix, schema and build versions)
+- which coach checks fired (ids and scores — not receipts, not copy)
+- climb walls (character + target + attempt counts)
+
+It never includes run files, seeds, Steam ids, filenames, decks, floor-by-floor
+HP, dates, or timestamps. Extra keys a modified client might attach are stripped
+again on the server (`sanitizeContribution`).
+
+Until a drop-off URL is configured, Share stays disabled and **Copy JSON** still
+works.
+
+**Drop-off** is a small Cloudflare Worker (or Pages Function at
+`/api/contribute`) in `contribute-ingest/`. It stores allowlisted JSON in D1
+and does not persist IP or User-Agent.
+
+```bash
+npx wrangler d1 create spire-autopsy-contribute
+# paste the database_id into contribute-ingest/wrangler.toml
+npx wrangler d1 execute spire-autopsy-contribute --file=contribute-ingest/schema.sql
+npx wrangler deploy --config contribute-ingest/wrangler.toml
+```
+
+Then set `VITE_CONTRIBUTE_URL` to that worker URL (repo secret
+`VITE_CONTRIBUTE_URL` for the GitHub Pages build). The CSP `connect-src` list
+gains that origin at build time — the only extra network permission — and the
+app still only POSTs after Share.
+
+Cloudflare Pages can keep `connect-src 'self'` by setting
+`VITE_CONTRIBUTE_SAME_ORIGIN=true` and binding D1 to the Pages Function.
 
 ## Deploying
 
@@ -79,14 +118,18 @@ paths mean project pages (`user.github.io/repo/`) work as-is. The privacy CSP
 is injected as a `<meta>` tag at build time since Pages can't set headers.
 
 **Cloudflare Pages**: build command `npm run build`, output `dist` — picks up
-the stricter header CSP from `public/_headers` automatically.
+the header CSP from `dist/_headers` (written at build time). Bind D1 as `DB`
+if you are using the same-origin `/api/contribute` Function.
 
 ## Privacy, verifiably
 
-- Deployed with a strict `Content-Security-Policy` (see `public/_headers`):
-  the browser is not permitted to contact any other origin.
+- Default CSP is `connect-src 'self'` (see `public/_headers` / the build-time
+  `<meta>` tag). The browser cannot contact any other origin unless this build
+  set `VITE_CONTRIBUTE_URL`, in which case that one origin is added.
+- Run files are never uploaded. The opt-in snapshot is aggregates only; sending
+  it is a click, never an import side-effect.
 - No analytics, no cookies, no accounts.
-- Open source — audit the parser yourself.
+- Open source — audit the parser and `src/lib/contributeSnapshot.ts` yourself.
 
 Not affiliated with Mega Crit. Card/relic/encounter names appearing in the UI
 are derived from the ids in your own save files; no game assets are included.

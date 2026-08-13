@@ -2,7 +2,8 @@
  * Dashboard view (Mockup B): lifetime summary before detail.
  * Header line, three working filter pills (all / standard / current patch),
  * eight stat tiles, then the two-column panel row — characters + quarterly
- * sparks on the left, nemesis board + deaths-by-act on the right.
+ * sparks on the left, nemesis board + deaths-by-act on the right — then a
+ * second row: path/campfires and most-drafted/ascension.
  * Filtered figures are recomputed with the same pure computeStats used by
  * the app shell, so every number on screen always comes from the runs.
  */
@@ -14,12 +15,16 @@ import { computeStats } from '../lib/stats';
 import { fmtInt, shortDate } from '../lib/idFormat';
 import { downloadLifetimeCard } from '../lib/shareCard';
 import type { NormalizedRun, StatsSummary } from '../lib/types';
+import ContributePanel from '../components/ContributePanel';
 import GameLedger from '../components/GameLedger';
 import StatTiles from '../components/StatTiles';
 import CharacterBars from '../components/CharacterBars';
 import TrendSparks from '../components/TrendSparks';
 import NemesisBoard from '../components/NemesisBoard';
 import DeathsByAct from '../components/DeathsByAct';
+import RecentRuns from '../components/RecentRuns';
+import PathBoard from '../components/PathBoard';
+import DraftBoard from '../components/DraftBoard';
 import '../styles/dashboard.css';
 
 type Filter = 'all' | 'standard' | 'patch';
@@ -165,6 +170,8 @@ export default function Dashboard({ stats, runs }: DashboardProps) {
 
       <StatTiles stats={view} runs={filtered} />
 
+      <RecentRuns runs={filtered} />
+
       <div className="dashCols">
         <div className="panel">
           <CharacterBars byCharacter={view.byCharacter} />
@@ -176,11 +183,22 @@ export default function Dashboard({ stats, runs }: DashboardProps) {
         </div>
       </div>
 
+      <div className="dashCols">
+        <div className="panel">
+          <PathBoard stats={view} />
+        </div>
+        <div className="panel">
+          <DraftBoard topPicks={view.topPicks} byAscension={view.byAscension} />
+        </div>
+      </div>
+
       {ledger && (
         <div className="panel">
           <GameLedger ledger={ledger} />
         </div>
       )}
+
+      <ContributePanel runs={runs} variant="panel" />
     </div>
   );
 }

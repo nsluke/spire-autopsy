@@ -159,6 +159,23 @@ export interface KillCause {
   roomType?: RoomType;
 }
 
+export interface PickCount {
+  id: string;
+  picks: number;
+}
+
+export interface RestChoiceCount {
+  choice: string;
+  count: number;
+}
+
+export interface AscensionRecord {
+  ascension: number;
+  runs: number;
+  wins: number;
+  winRatePct: number;
+}
+
 export interface TrendPoint {
   label: string;
   runs: number;
@@ -191,9 +208,12 @@ export interface StatsSummary {
   eliteFights: number;
   bossFights: number;
   restSiteVisits: number;
+  shopVisits: number;
   potionsUsed: number;
   cardsOffered: number;
   cardsPicked: number;
+  cardsRemoved: number;
+  cardsUpgraded: number;
   pickRatePct: number;
   bestWinStreak: number;
   distinctSeeds: number;
@@ -201,6 +221,9 @@ export interface StatsSummary {
   byCharacter: CharacterStats[];
   killCauses: KillCause[];
   quarters: TrendPoint[];
+  restChoices: RestChoiceCount[];
+  topPicks: PickCount[];
+  byAscension: AscensionRecord[];
   firstRunDate?: string;
   lastRunDate?: string;
 }

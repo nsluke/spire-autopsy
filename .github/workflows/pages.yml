@@ -26,6 +26,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+        env:
+          VITE_CONTRIBUTE_URL: ${{ secrets.VITE_CONTRIBUTE_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

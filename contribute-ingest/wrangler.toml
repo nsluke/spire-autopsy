@@ -1,0 +1,12 @@
+name = "spire-autopsy-contribute"
+main = "worker.ts"
+compatibility_date = "2026-08-01"
+
+# After `npx wrangler d1 create spire-autopsy-contribute`, paste the id:
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "spire-autopsy-contribute"
+# database_id = "<id from wrangler>"
+
+[vars]
+ALLOWED_ORIGINS = "https://nsluke.github.io,http://localhost:5173,http://127.0.0.1:5173"

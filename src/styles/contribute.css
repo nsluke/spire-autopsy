@@ -1,0 +1,91 @@
+/* Opt-in anonymous snapshot — used on landing (row) and dashboard (panel). */
+
+.contributeLabel {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+.contributeHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contributePanel { margin-top: 22px; }
+.contributePanel .contributeHead { justify-content: flex-start; }
+
+.contributeMeta {
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.contributeLead {
+  margin: 6px 0 10px;
+  font-size: 0.82rem;
+  color: var(--ink2);
+}
+
+.contributePanel .contributeLead { text-align: left; }
+
+.contributeRow {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.contributeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.contributePanel .contributeActions { justify-content: flex-start; }
+
+.contributeSend.pill {
+  border-color: rgba(232, 163, 61, 0.5);
+  color: var(--ember);
+}
+.contributeSend.pill:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.contributeHint {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.contributeError {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--loss);
+}
+
+.contributePreview {
+  margin-top: 12px;
+  text-align: left;
+  font-size: 0.82rem;
+  color: var(--ink2);
+}
+
+.contributePreviewK {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 10px 0 4px;
+}
+
+.contributePreview ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.contributePreview li { margin: 2px 0; }

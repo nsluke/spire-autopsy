@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Your deaths have a paper trail. A zero-backend coach for Slay the Spire 2 — runs entirely in your browser.",
+  "description": "Your deaths have a paper trail. A coach for Slay the Spire 2 that runs in your browser.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

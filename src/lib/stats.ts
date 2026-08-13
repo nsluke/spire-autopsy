@@ -9,9 +9,26 @@
  *    rooms with that modelId across ALL runs.
  *  - Deaths-by-act = actsEntered of each non-abandoned loss.
  */
-import type { CharacterStats, KillCause, NormalizedRun, StatsSummary, TrendPoint } from './types';
+import type {
+  AscensionRecord,
+  CharacterStats,
+  KillCause,
+  NormalizedRun,
+  PickCount,
+  RestChoiceCount,
+  StatsSummary,
+  TrendPoint,
+} from './types';
+import { cardInfo } from './cards';
 
 const AFK_THRESHOLD_SECONDS = 8 * 3600;
+
+/** Starter strikes/defends (and anything tagged starter in the metadata pack). */
+function isStarterCard(id: string): boolean {
+  const rarity = cardInfo(id)?.rarity;
+  if (rarity) return rarity === 'starter';
+  return /^CARD\.(STRIKE|DEFEND)(_[A-Z_]+)?$/.test(id);
+}
 
 export function computeStats(runs: NormalizedRun[]): StatsSummary {
   const total = runs.length;
@@ -37,11 +54,16 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
     elites = 0,
     bosses = 0,
     rests = 0,
+    shops = 0,
     potionsUsed = 0,
     offered = 0,
-    picked = 0;
+    picked = 0,
+    removed = 0,
+    upgraded = 0;
 
   const fightCounts = new Map<string, number>();
+  const restCounts = new Map<string, number>();
+  const pickCounts = new Map<string, number>();
 
   for (const run of runs) {
     totalFloors += run.nodes.length;
@@ -55,10 +77,17 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
       potionsUsed += s.potionsUsed.length;
       offered += s.cardChoices.length;
       picked += s.cardChoices.filter((c) => c.wasPicked).length;
+      removed += s.cardsRemoved.length;
+      upgraded += s.cardsUpgraded.filter(Boolean).length;
+      for (const choice of s.restChoices) restCounts.set(choice, (restCounts.get(choice) ?? 0) + 1);
+      for (const ch of s.cardChoices) {
+        if (ch.wasPicked) pickCounts.set(ch.card.id, (pickCounts.get(ch.card.id) ?? 0) + 1);
+      }
       for (const room of node.rooms) {
         if (room.roomType === 'elite') elites++;
         if (room.roomType === 'boss') bosses++;
         if (room.roomType === 'rest_site') rests++;
+        if (room.roomType === 'shop') shops++;
         if (room.monsterIds.length > 0) {
           combatRooms++;
           monsters += room.monsterIds.length;
@@ -148,6 +177,37 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
   const maxAct = Math.max(0, ...deathsByActMap.keys());
   const deathsByAct = Array.from({ length: maxAct }, (_, i) => deathsByActMap.get(i + 1) ?? 0);
 
+  const REST_ORDER = ['SMITH', 'HEAL', 'HATCH', 'DIG', 'COOK', 'LIFT', 'CLONE'];
+  const restChoices: RestChoiceCount[] = [...restCounts.entries()]
+    .map(([choice, count]) => ({ choice, count }))
+    .sort((a, b) => {
+      const ia = REST_ORDER.indexOf(a.choice);
+      const ib = REST_ORDER.indexOf(b.choice);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || b.count - a.count;
+    });
+
+  const topPicks: PickCount[] = [...pickCounts.entries()]
+    .filter(([id]) => !isStarterCard(id))
+    .map(([id, n]) => ({ id, picks: n }))
+    .sort((a, b) => b.picks - a.picks || a.id.localeCompare(b.id))
+    .slice(0, 8);
+
+  const ascMap = new Map<number, { runs: number; wins: number }>();
+  for (const run of runs) {
+    const row = ascMap.get(run.ascension) ?? { runs: 0, wins: 0 };
+    row.runs += 1;
+    if (run.win) row.wins += 1;
+    ascMap.set(run.ascension, row);
+  }
+  const byAscension: AscensionRecord[] = [...ascMap.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([ascension, row]) => ({
+      ascension,
+      runs: row.runs,
+      wins: row.wins,
+      winRatePct: row.runs ? +((100 * row.wins) / row.runs).toFixed(1) : 0,
+    }));
+
   const dateFmt = (t: number) => new Date(t * 1000).toISOString().slice(0, 10);
 
   return {
@@ -173,9 +233,12 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
     eliteFights: elites,
     bossFights: bosses,
     restSiteVisits: rests,
+    shopVisits: shops,
     potionsUsed,
     cardsOffered: offered,
     cardsPicked: picked,
+    cardsRemoved: removed,
+    cardsUpgraded: upgraded,
     pickRatePct: offered ? +((100 * picked) / offered).toFixed(1) : 0,
     bestWinStreak: best,
     distinctSeeds: new Set(runs.map((r) => r.seed)).size,
@@ -183,6 +246,9 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
     byCharacter,
     killCauses,
     quarters,
+    restChoices,
+    topPicks,
+    byAscension,
     firstRunDate: chrono.length ? dateFmt(chrono[0].startTime) : undefined,
     lastRunDate: chrono.length ? dateFmt(chrono[chrono.length - 1].startTime) : undefined,
   };

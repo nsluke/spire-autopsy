@@ -45,7 +45,7 @@ export default function CharacterBars({ byCharacter }: CharacterBarsProps) {
           <span className="vl num">
             {c.winRatePct.toFixed(1)}%{' '}
             <span>
-              {c.wins}/{c.runs}
+              {c.wins}/{c.runs} · A{c.maxAscension}
             </span>
           </span>
         </div>

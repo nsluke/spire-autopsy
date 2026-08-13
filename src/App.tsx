@@ -66,7 +66,15 @@ export default function App() {
   const [page, param] = route.split('/');
 
   if (!hasData || page === 'import') {
-    return <Landing onImport={handleImport} onDemo={handleDemo} importState={importState} hasData={hasData} />;
+    return (
+      <Landing
+        onImport={handleImport}
+        onDemo={handleDemo}
+        importState={importState}
+        hasData={hasData}
+        runs={runs}
+      />
+    );
   }
 
   let view: JSX.Element;
@@ -86,13 +94,17 @@ export default function App() {
           <a className={page === 'autopsy' ? 'on' : ''} href="#/autopsy">Autopsy</a>
           <a href="#/import">Add runs</a>
         </nav>
-        <span className="privacyBadge" title="Static site, no backend. Your runs stay in this browser.">
+        <span
+          className="privacyBadge"
+          title="Your run files stay in this browser. An anonymous snapshot leaves only if you click Share."
+        >
           0 uploads
         </span>
       </header>
       <main className="content">{view}</main>
       <footer className="footer">
-        Everything on this page was computed in your browser from your own run files. Not affiliated with Mega Crit.
+        Everything on this page was computed in your browser from your own run files. Nothing uploads unless you send a
+        snapshot. Not affiliated with Mega Crit.
       </footer>
     </div>
   );

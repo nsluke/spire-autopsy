@@ -13,8 +13,11 @@ import { LEDGER_META_KEY, type ImportProgress } from '../lib/import';
 import { fmtInt } from '../lib/idFormat';
 import { exportJournal, importJournal, JournalImportError } from '../lib/journal';
 import type { Ledger } from '../lib/ledger';
+import type { NormalizedRun } from '../lib/types';
+import ContributePanel from '../components/ContributePanel';
 import Dropzone from '../components/Dropzone';
 import GameLedger from '../components/GameLedger';
+import { ingestConfigured } from '../lib/contribute';
 import '../styles/landing.css';
 
 export const ISSUES_URL = 'https://github.com/nsluke/spire-autopsy/issues/new/choose';
@@ -24,6 +27,7 @@ interface LandingProps {
   onDemo: () => Promise<void>;
   importState: ImportProgress | null;
   hasData: boolean;
+  runs: NormalizedRun[];
 }
 
 type OsKey = 'macos' | 'windows' | 'linux';
@@ -179,7 +183,7 @@ function JournalRow({ hasData }: { hasData: boolean }) {
   );
 }
 
-export default function Landing({ onImport, onDemo, importState, hasData }: LandingProps) {
+export default function Landing({ onImport, onDemo, importState, hasData, runs }: LandingProps) {
   const [os, setOs] = useState<OsKey>(() => detectOs());
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const [ledger, setLedger] = useState<Ledger | undefined>(undefined);
@@ -251,16 +255,26 @@ export default function Landing({ onImport, onDemo, importState, hasData }: Land
       {hasData ? (
         <p className="landingSub">
           Point us at the same <span className="inlineMono">history</span> folder again — runs we’ve already read are
-          skipped automatically. <strong>Nothing uploads. Ever.</strong>
+          skipped automatically. <strong>Run files never leave this browser.</strong>
         </p>
       ) : (
         <p className="landingSub">
           Slay the Spire 2 writes every run you finish to disk. Drop that folder here and get a coach’s read on why you
-          lose — in your browser, on your machine. <strong>Nothing uploads. Ever.</strong>
+          lose — in your browser, on your machine. <strong>Run files never leave this browser.</strong>
         </p>
       )}
 
-      <Dropzone onFiles={(files) => void onImport(files)} disabled={busy} />
+      <Dropzone
+        onFiles={(files) => void onImport(files)}
+        disabled={busy}
+        pickerHint={
+          os === 'macos'
+            ? 'in the picker, press ⌘⇧G and paste the path below'
+            : os === 'windows'
+              ? 'in the picker, paste the path into the address bar'
+              : undefined
+        }
+      />
 
       <div className="demoRow">
         <button type="button" className="demoBtn" onClick={() => void onDemo()} disabled={busy}>
@@ -320,8 +334,14 @@ export default function Landing({ onImport, onDemo, importState, hasData }: Land
 
       <JournalRow hasData={hasData} />
 
+      {hasData && <ContributePanel runs={runs} variant="row" />}
+
       <p className="privacyLine">
-        Open source · works in airplane mode · the browser can't phone home (strict CSP) ·{' '}
+        Open source · works in airplane mode ·{' '}
+        {ingestConfigured()
+          ? 'nothing uploads unless you send a snapshot'
+          : "the browser can't phone home (strict CSP)"}{' '}
+        ·{' '}
         <a href={ISSUES_URL} target="_blank" rel="noreferrer">
           report a problem
         </a>

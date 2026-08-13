@@ -5,7 +5,7 @@
  * Only *.run files are read; *.run.backup and everything else is filtered by
  * NAME before any bytes are touched.
  */
-import { knownRunIds, setMeta, storeRuns } from './db';
+import { getMeta, knownRunIds, setMeta, storeRuns } from './db';
 import { isProgressFile, LedgerParseError, parseProgressSave } from './ledger';
 import { runIdFromFileName } from './normalize';
 import type { ParseResponse, ParsedRow } from '../worker/parser.worker';
@@ -59,6 +59,53 @@ export async function filesFromDataTransfer(dt: DataTransfer): Promise<File[]> {
 }
 
 export const supportsDirectoryPicker = typeof window !== 'undefined' && 'showDirectoryPicker' in window;
+
+/** IndexedDB meta key for the File System Access directory handle (Chromium). */
+export const HISTORY_DIR_META = 'historyDirectoryHandle';
+
+type PermissionedHandle = FileSystemDirectoryHandle & {
+  queryPermission?: (d?: { mode?: 'read' | 'readwrite' }) => Promise<PermissionState>;
+  requestPermission?: (d?: { mode?: 'read' | 'readwrite' }) => Promise<PermissionState>;
+};
+
+export async function loadHistoryDirectory(): Promise<FileSystemDirectoryHandle | undefined> {
+  try {
+    return await getMeta<FileSystemDirectoryHandle>(HISTORY_DIR_META);
+  } catch {
+    return undefined;
+  }
+}
+
+export async function rememberHistoryDirectory(handle: FileSystemDirectoryHandle): Promise<void> {
+  await setMeta(HISTORY_DIR_META, handle);
+}
+
+/** Capture a dropped folder as a persistable handle (Chromium). Must run during the drop event. */
+export function directoryHandleFromDataTransfer(dt: DataTransfer): Promise<FileSystemDirectoryHandle | undefined> {
+  const pending: Promise<FileSystemHandle | null>[] = [];
+  for (const item of Array.from(dt.items)) {
+    const asHandle = (item as DataTransferItem & { getAsFileSystemHandle?: () => Promise<FileSystemHandle | null> })
+      .getAsFileSystemHandle;
+    if (typeof asHandle === 'function') pending.push(asHandle.call(item));
+  }
+  return Promise.all(pending).then((handles) => {
+    const dir = handles.find((h) => h?.kind === 'directory');
+    return dir && dir.kind === 'directory' ? (dir as FileSystemDirectoryHandle) : undefined;
+  });
+}
+
+export async function ensureDirectoryRead(handle: FileSystemDirectoryHandle): Promise<boolean> {
+  const h = handle as PermissionedHandle;
+  try {
+    const current = typeof h.queryPermission === 'function' ? await h.queryPermission({ mode: 'read' }) : 'prompt';
+    if (current === 'granted') return true;
+    if (current === 'denied') return false;
+    if (typeof h.requestPermission === 'function') return (await h.requestPermission({ mode: 'read' })) === 'granted';
+  } catch {
+    return false;
+  }
+  return false;
+}
 
 /** Collect *.run files (plus progress.save) from a directory handle (File System Access API). */
 export async function filesFromDirectoryHandle(handle: FileSystemDirectoryHandle): Promise<File[]> {

@@ -81,7 +81,7 @@ export default function StatTiles({ stats, runs }: StatTilesProps) {
     {
       k: 'Gold earned',
       v: fmtInt(stats.totalGoldGained),
-      d: stats.totalGoldStolen > 0 ? `${fmtInt(stats.totalGoldStolen)} stolen from you` : 'none stolen from you',
+      d: `${fmtInt(stats.totalGoldSpent)} spent${stats.totalGoldStolen > 0 ? ` · ${fmtInt(stats.totalGoldStolen)} stolen` : ''}`,
     },
     {
       k: 'Cards offered',
