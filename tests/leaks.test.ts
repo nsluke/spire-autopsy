@@ -19,7 +19,7 @@ import { normalizeRun } from '../src/lib/normalize';
 import { detectLeaks } from '../src/lib/leaks';
 import { bossEntryLeak } from '../src/lib/leaks/bossEntry';
 import { removalDisciplineLeak, STARTER_CARD_RE } from '../src/lib/leaks/removals';
-import { ASCENSION_CAP, climbSummary, wallLine } from '../src/lib/climb';
+import { ASCENSION_CAP, climbSummary, latestVictory, wallLine } from '../src/lib/climb';
 import { eliteAppetite, eventTax, goldAtDeath, restDiscipline } from '../src/lib/leaks/observations';
 import { beltAtLastFight, potionHoarding } from '../src/lib/leaks/potions';
 import { act1Bar, deckAdditions, deckBloatLeak } from '../src/lib/leaks/deckBloat';
@@ -699,5 +699,60 @@ describe('deck-bloat drill bar', () => {
     expect(bar).toBeGreaterThanOrEqual(8);
     expect(leak.drill?.body).toContain(`at most ${bar} cards`);
     expect(leak.receiptLines[1]).toContain(`over the ${bar}-card bar`);
+  });
+});
+
+// ---------- the victory opener ----------
+
+describe('latestVictory', () => {
+  it('is silent when the latest completed run lost', () => {
+    // corpusMain's most recent run is a loss clone
+    const latest = corpusMain.filter((r) => !r.abandoned).sort((a, b) => b.startTime - a.startTime)[0];
+    if (latest.win) {
+      expect(latestVictory(corpusMain)).toBeDefined();
+    } else {
+      expect(latestVictory(corpusMain)).toBeUndefined();
+    }
+  });
+
+  it('celebrates a new frontier and points the wall up, never down', () => {
+    const runs = [...clones(loss1785, 5), ...clones(win1779, 1)];
+    const newest = runs[runs.length - 1];
+    newest.startTime = Math.max(...runs.map((r) => r.startTime)) + 9999;
+    newest.ascension = 6;
+    const v = latestVictory(runs)!;
+    expect(v).toBeDefined();
+    expect(v.character).toBe(newest.player.character);
+    expect(v.ascension).toBe(6);
+    expect(v.newFrontier).toBe(true); // no prior win above A6 for Silent here
+    expect(v.nextTarget).toBe(7); // up, always up
+  });
+
+  it('a repeat win below the frontier holds the level instead of re-crowning it', () => {
+    const prior = clones(win1779, 1)[0];
+    prior.ascension = 8;
+    const again = clones(win1779, 1)[0];
+    again.ascension = 5;
+    again.startTime = 9_999_999_999; // newest of everything, including the loss clones
+    const v = latestVictory([prior, again, ...clones(loss1785, 3)])!;
+    expect(v.newFrontier).toBe(false);
+    expect(v.nextTarget).toBe(6);
+  });
+
+  it('a win at the cap has nothing above it to take', () => {
+    const capped = clones(win1779, 1)[0];
+    capped.ascension = ASCENSION_CAP;
+    capped.startTime = 9_999_999_999;
+    const v = latestVictory([capped, ...clones(loss1785, 3)])!;
+    expect(v.nextTarget).toBeUndefined();
+  });
+
+  it('an abandoned latest run neither congratulates nor mourns', () => {
+    const ghost = clones(abandoned, 1)[0];
+    ghost.startTime = 9_999_999_999;
+    const runs = [...clones(win1779, 2), ghost];
+    // the latest COMPLETED run decides; the abandoned one is invisible
+    const v = latestVictory(runs);
+    expect(v).toBeDefined();
   });
 });

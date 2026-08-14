@@ -24,6 +24,7 @@ import { detectLeaks } from '../src/lib/leaks';
 import { ASCENSION_CAP, climbSummary, wallLine } from '../src/lib/climb';
 import { buildAutopsy } from '../src/lib/autopsy';
 import { DRILLS } from '../src/lib/drills';
+import { firstSentence } from '../src/lib/richText';
 import type { NormalizedRun } from '../src/lib/types';
 
 const FORBIDDEN: RegExp[] = [
@@ -171,12 +172,6 @@ describe('copy guard: the coach never advises settling at a lower ascension', ()
 // ---------- the observation drawer's one-line summary ----------
 
 describe('firstSentence', () => {
-  // Mirrors src/views/Coach.tsx — observation bodies are full of decimals, and
-  // "Wins average 2." shipped to the drawer before this rule existed.
-  function firstSentence(text: string): string {
-    const match = text.match(/^.*?[.!?](?=\s+[A-Z“"(]|\s*$)/s);
-    return match ? match[0].trim() : text;
-  }
 
   it('does not cut a sentence at a decimal point', () => {
     expect(firstSentence('Wins average 2.4 elites in act 1; losses average 1.9. Then more.')).toBe(

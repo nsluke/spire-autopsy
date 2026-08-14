@@ -153,3 +153,36 @@ export function wallLine(wall: CharacterWall): string {
       : '';
   return `${attempts} — ${spread}.${killer}`;
 }
+
+export interface LatestVictory {
+  character: string;
+  ascension: number;
+  /** the win raised this character's frontier — a new highest level beaten */
+  newFrontier: boolean;
+  /** the wall the character now faces (undefined when the cap is beaten) */
+  nextTarget?: number;
+}
+
+/**
+ * The latest completed run, when it was a win — the coach opens with the
+ * celebration before the diagnosis. newFrontier compares against the wins
+ * BEFORE this one, so beating your own record reads as taking the wall even
+ * though the frontier already contains it by the time this runs.
+ */
+export function latestVictory(runs: NormalizedRun[]): LatestVictory | undefined {
+  const completed = completedRuns(runs);
+  if (completed.length === 0) return undefined;
+  const latest = completed.reduce((a, b) => (b.startTime > a.startTime ? b : a));
+  if (!latest.win) return undefined;
+  const effectiveCap = Math.max(ASCENSION_CAP, ...completed.map((r) => r.ascension));
+  const priorWins = completed.filter(
+    (r) => r.win && r.player.character === latest.player.character && r.id !== latest.id,
+  );
+  const priorFrontier = priorWins.length ? Math.max(...priorWins.map((r) => r.ascension)) : null;
+  return {
+    character: latest.player.character,
+    ascension: latest.ascension,
+    newFrontier: priorFrontier === null || latest.ascension > priorFrontier,
+    nextTarget: latest.ascension >= effectiveCap ? undefined : Math.min(effectiveCap, latest.ascension + 1),
+  };
+}

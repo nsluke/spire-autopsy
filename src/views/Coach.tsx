@@ -13,7 +13,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { detectLeaks } from '../lib/leaks';
-import { climbSummary, wallLine } from '../lib/climb';
+import { climbSummary, latestVictory, wallLine } from '../lib/climb';
 import { getMeta, setMeta } from '../lib/db';
 import { behaviorTrend, computeDrillProgress, DRILLS, type ActiveDrill } from '../lib/drills';
 import { characterArt } from '../lib/art';
@@ -22,6 +22,7 @@ import { completedRuns } from '../lib/normalize';
 import type { LeakResult, NormalizedRun } from '../lib/types';
 import ArtImg from '../components/ArtImg';
 import LeakCard, { type DrillSlot } from '../components/LeakCard';
+import { firstSentence } from '../lib/richText';
 import RichLine from '../components/RichLine';
 import '../styles/coach.css';
 
@@ -29,15 +30,6 @@ const MAX_LEAK_CARDS = 3;
 const DISMISSED_KEY = 'dismissedLeaks';
 const DRILL_KEY = 'activeDrill';
 
-/**
- * One-line rendering of an observation body: its first sentence. Observation
- * copy is dense with decimals ("Wins average 2.4 elites"), so a terminator
- * only counts when it is followed by a space and a capital, or ends the text.
- */
-function firstSentence(text: string): string {
-  const match = text.match(/^.*?[.!?](?=\s+[A-Z“"(]|\s*$)/s);
-  return match ? match[0].trim() : text;
-}
 
 export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   // null until the persisted veto list has loaded — avoids a flash where a
@@ -146,6 +138,28 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
         </div>
       </header>
 
+      {(() => {
+        const v = latestVictory(runs);
+        if (!v) return null;
+        const name = characterName(v.character);
+        const line = v.newFrontier
+          ? v.nextTarget !== undefined
+            ? `A${v.ascension} ${name} — beaten. The wall moves to A${v.nextTarget}.`
+            : `A${v.ascension} ${name} — beaten. Nothing above it to take.`
+          : `A win at A${v.ascension} — ${name} holds the level.`;
+        return (
+          <section className="victoryStrip" aria-label="Latest run won">
+            <ArtImg src={characterArt(v.character)} className="victoryArt" />
+            <div>
+              <span className="victoryK">Last run: victory</span>
+              <span className="victoryLine" style={{ color: characterColor(v.character) }}>
+                {line}
+              </span>
+            </div>
+          </section>
+        );
+      })()}
+
       {climb.active && (
         <section className="climbStrip" aria-label="The wall — current ascension target per character">
           <div className="wallHead">
@@ -198,7 +212,6 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
           key={leak.id}
           leak={leak}
           rank={i + 1}
-          defaultOpen={i === 0}
           onDemote={demote}
           drillSlot={drillSlotFor(leak)}
           trend={behaviorTrend(leak.id, runs)}
@@ -216,8 +229,8 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
       )}
 
       {locked.length > 0 && (
-        <section className="lockedCard" aria-label="Analyses that unlock with more runs">
-          <h2 className="lockedTitle">Locked — more coaching unlocks as your journal grows</h2>
+        <details className="lockedCard" aria-label="Analyses that unlock with more runs">
+          <summary className="lockedTitle">Locked — more coaching unlocks as your journal grows ({locked.length})</summary>
           <ul>
             {locked.map((l) => (
               <li key={l.id}>
@@ -226,7 +239,7 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
               </li>
             ))}
           </ul>
-        </section>
+        </details>
       )}
 
       {(drawerItems.length > 0 || demoted.length > 0) && (
