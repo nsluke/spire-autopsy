@@ -13,6 +13,7 @@ import { bossEntryLeak } from './bossEntry';
 import { damageDraftingLeak } from './damageDrafting';
 import { deckBloatLeak } from './deckBloat';
 import { fightPacing } from './fightPacing';
+import { nemesisLeak } from './nemesis';
 import { eliteAppetite, eventTax, goldAtDeath, restDiscipline } from './observations';
 import { potionHoarding } from './potions';
 import { removalDisciplineLeak } from './removals';
@@ -29,6 +30,7 @@ function byRank(a: LeakResult, b: LeakResult): number {
 export function detectLeaks(runs: NormalizedRun[]): LeakResult[] {
   const completed = completedRuns(runs);
   const leaks = [
+    nemesisLeak(completed),
     bossEntryLeak(completed),
     removalDisciplineLeak(completed),
     damageDraftingLeak(completed),

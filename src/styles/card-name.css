@@ -131,6 +131,25 @@
   text-wrap: pretty;
   text-align: center;
 }
+/* Enemy tips carry the intent table, so they run a little wider and read as a
+   left-aligned list: the blurb is newline-separated intent lines, not prose. */
+.artTip.enemyTip.framed {
+  max-width: 300px;
+}
+.artTip.enemyTip.framed img {
+  max-width: 148px;
+  max-height: 128px;
+}
+.artTip.enemyTip .artBlurb {
+  white-space: pre-line;
+  text-align: left;
+  font-size: 0.74rem;
+  width: 100%;
+}
+.artTip.enemyTip .artTipMeta {
+  text-align: center;
+}
+
 .artTipFlavor {
   display: block;
   font-size: 0.72rem;

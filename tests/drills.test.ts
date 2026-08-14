@@ -183,6 +183,42 @@ describe('the other drills grade the same predicate their detector reports', () 
     expect(DRILLS['fight-pacing'].grade(lossElite).verdict).toBe('na');
   });
 
+  it('nemesis grades the one encounter its card named, and nothing else', () => {
+    // Without a subject the corpus has not named a nemesis, so no run can be a
+    // miss — the same place nemesis.ts declines to accuse.
+    expect(DRILLS.nemesis.grade(lossDefect)).toEqual({
+      verdict: 'na',
+      note: 'no encounter in your history is a nemesis yet',
+    });
+    const INSATIABLE = 'ENCOUNTER.THE_INSATIABLE_BOSS';
+    expect(DRILLS.nemesis.grade(lossDefect, 74, INSATIABLE)).toEqual({
+      verdict: 'fail',
+      note: 'met The Insatiable at 57%, bar is 74%',
+    });
+    expect(DRILLS.nemesis.grade(winSilent, 74, INSATIABLE)).toEqual({
+      verdict: 'pass',
+      note: 'met The Insatiable at 74%, bar is 74%',
+    });
+    // The Ironclad run never reached act 2 — it never met the subject at all.
+    expect(DRILLS.nemesis.grade(lossElite, 74, INSATIABLE)).toEqual({
+      verdict: 'na',
+      note: 'did not meet The Insatiable',
+    });
+  });
+
+  it('nemesis resolves its subject from the corpus, not from a single run', () => {
+    // computeDrillProgress hands the whole history to context(); a drill
+    // accepted with a frozen bar still grades against that frozen number.
+    const corpus = [
+      ...Array.from({ length: 12 }, (_, i) => at(lossDefect, T0 + 100 + i)),
+      ...Array.from({ length: 10 }, (_, i) => at(winSilent, T0 + 200 + i)),
+    ];
+    const p = computeDrillProgress({ leakId: 'nemesis', acceptedAt: T0 * 1000, targetRuns: 5, bar: 74 }, corpus)!;
+    expect(p.graded).toHaveLength(5);
+    expect(p.graded.every((g) => g.note?.includes('The Insatiable'))).toBe(true);
+    expect(p.fails).toBe(5); // the Defect losses grade first and all entered at 57%
+  });
+
   it('every drill is registered against a detector the engine actually emits', () => {
     const ids = new Set(detectLeaks([winSilent, lossDefect, lossElite]).map((l) => l.id));
     for (const id of Object.keys(DRILLS)) expect(ids.has(id)).toBe(true);
@@ -241,5 +277,52 @@ describe('behaviorTrend', () => {
   it('returns undefined below the window and for unknown leaks', () => {
     expect(behaviorTrend('boss-entry-hp', [at(winSilent, T0)], 10)).toBeUndefined();
     expect(behaviorTrend('nope', [at(winSilent, T0)])).toBeUndefined();
+  });
+});
+
+describe('nemesis declines wherever its detector declines', () => {
+  const INSATIABLE = 'ENCOUNTER.THE_INSATIABLE_BOSS';
+
+  /**
+   * A corpus that names a nemesis but supports NO entry-HP bar: only two
+   * survived meetings, under the detector's 3-fight cohort floor. nemesis.ts
+   * offers no drill and sets no drillBar there, and says in the card body that
+   * the survivals are too few to read.
+   */
+  const thin = [
+    ...Array.from({ length: 2 }, (_, i) => at(winSilent, T0 + 100 + i)),
+    ...Array.from({ length: 14 }, (_, i) => at(lossDefect, T0 + 200 + i)),
+    ...Array.from({ length: 6 }, (_, i) => at(lossElite, T0 + 300 + i)),
+  ];
+
+  it('grades na rather than accusing against a bar the card never quoted', () => {
+    // Without this the bar defaulted to the 60% house floor and this run was
+    // scored a miss the card had made no case for.
+    expect(DRILLS.nemesis.grade(lossDefect, undefined, INSATIABLE)).toEqual({
+      verdict: 'na',
+      note: 'no entry-HP bar your history supports',
+    });
+  });
+
+  it('withholds the sparkline when the card names no bar to trend', () => {
+    const leak = detectLeaks(thin).find((l) => l.id === 'nemesis')!;
+    expect(leak.applicable).toBe(true);
+    expect(leak.drillBar).toBeUndefined();
+    expect(leak.drill).toBeUndefined();
+    // A curve against a 60% the card never mentions is a rule the reader
+    // cannot check against anything above it.
+    expect(behaviorTrend('nemesis', thin)).toBeUndefined();
+  });
+
+  it('still trends the bar the card does quote', () => {
+    const named = [
+      ...Array.from({ length: 10 }, (_, i) => at(winSilent, T0 + 100 + i)),
+      ...Array.from({ length: 12 }, (_, i) => at(lossDefect, T0 + 200 + i)),
+    ];
+    const leak = detectLeaks(named).find((l) => l.id === 'nemesis')!;
+    expect(leak.drillBar).toBe(74);
+    const trend = behaviorTrend('nemesis', named);
+    expect(trend).toBeDefined();
+    expect(trend!.length).toBe(22);
   });
 });

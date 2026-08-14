@@ -1,0 +1,2260 @@
+{
+  "AEONGLASS": {
+    "name": "Aeonglass",
+    "type": "Boss",
+    "hp": "512",
+    "ascHp": "535",
+    "startsWith": "Withering Presence Artifact 3",
+    "intents": [
+      {
+        "name": "Ebb",
+        "text": "Deals 22 (26 at A9+) damage. Gains 33 Block."
+      },
+      {
+        "name": "Eye Lasers",
+        "text": "Deals 11 (12 at A9+) damage x2."
+      },
+      {
+        "name": "Increasing Intensity",
+        "text": "Shuffles 1 (2 at A9+) into your discard pile. Gains 2(3 at A9+) + X Strength. Upgrade all. Withering Presence effect now creates."
+      }
+    ]
+  },
+  "ASSASSIN_RAIDER": {
+    "name": "Assassin Raider",
+    "type": "Normal",
+    "hp": "18-23",
+    "ascHp": "19-24",
+    "act": 1,
+    "party": "* 2 others randomly chosen from Axe Raider, Brute Raider, Crossbow Raider, Tracker Raider",
+    "intents": [
+      {
+        "name": "Killshot",
+        "text": "Deals 10 (11 at A9+) damage."
+      }
+    ]
+  },
+  "AXEBOT": {
+    "name": "Axebot",
+    "type": "Normal",
+    "hp": "70-78",
+    "ascHp": "78-86",
+    "act": 3,
+    "startsWith": "Stock 2",
+    "intents": [
+      {
+        "name": "Boot Up",
+        "text": "Gains 10(15 at A8+) Block and 3/6(4/8 at A9+) Strength."
+      },
+      {
+        "name": "The One-Two",
+        "text": "Deals 9 (10 at A9+) damage 2 times."
+      },
+      {
+        "name": "Hammer Uppercut",
+        "text": "Deals 12 (14 at A9+) damage. Applies 2 Weak and 2 Frail."
+      }
+    ]
+  },
+  "AXE_RAIDER": {
+    "name": "Axe Raider",
+    "type": "Normal",
+    "hp": "20-22",
+    "ascHp": "21-23",
+    "act": 1,
+    "party": "* 2 others randomly chosen from Assassin Raider, Brute Raider, Crossbow Raider, Tracker Raider",
+    "intents": [
+      {
+        "name": "Swing",
+        "text": "Deals 5 (6 at A9+) damage. Gains 5 (6 at A9+) Block."
+      },
+      {
+        "name": "Big Swing",
+        "text": "Deals 12 (13 at A9+) damage."
+      }
+    ]
+  },
+  "BATTLE_FRIEND_V1_0": {
+    "name": "Battle Friend V1.0",
+    "type": "Normal",
+    "hp": "75",
+    "startsWith": "Time Limit 3",
+    "intents": [
+      {
+        "name": "Nothing",
+        "text": "Does nothing."
+      }
+    ]
+  },
+  "BATTLE_FRIEND_V2_0": {
+    "name": "Battle Friend V2.0",
+    "type": "Normal",
+    "hp": "150",
+    "startsWith": "Time Limit 3",
+    "intents": [
+      {
+        "name": "Nothing",
+        "text": "Does nothing."
+      }
+    ]
+  },
+  "BATTLE_FRIEND_V3_0": {
+    "name": "Battle Friend V3.0",
+    "type": "Normal",
+    "hp": "300",
+    "startsWith": "Time Limit 3",
+    "intents": [
+      {
+        "name": "Nothing",
+        "text": "Does nothing."
+      }
+    ]
+  },
+  "BOWLBUG_EGG": {
+    "name": "Bowlbug (Egg)",
+    "type": "Normal",
+    "hp": "21-22",
+    "ascHp": "23-24",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Bite",
+        "text": "Deals 7 (8 at A9+) damage. Gains 7 (8 at A9+) Block."
+      }
+    ]
+  },
+  "BOWLBUG_NECTAR": {
+    "name": "Bowlbug (Nectar)",
+    "type": "Normal",
+    "hp": "35-38",
+    "ascHp": "36-39",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Thrash",
+        "text": "Deals 3 damage."
+      },
+      {
+        "name": "Buff",
+        "text": "Gains 15 (16 at A9+) Strength."
+      }
+    ]
+  },
+  "BOWLBUG_ROCK": {
+    "name": "Bowlbug (Rock)",
+    "type": "Normal",
+    "hp": "45-48",
+    "ascHp": "46-49",
+    "act": 2,
+    "startsWith": "Imbalanced",
+    "intents": [
+      {
+        "name": "Headbutt",
+        "text": "Deals 15 (16 at A9+) damage."
+      },
+      {
+        "name": "Dizzy",
+        "text": "Stunned. Does nothing."
+      }
+    ]
+  },
+  "BOWLBUG_SILK": {
+    "name": "Bowlbug (Silk)",
+    "type": "Normal",
+    "hp": "40-43",
+    "ascHp": "41-44",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Thrash",
+        "text": "Deals 4 (5 at A9+) damage x2."
+      },
+      {
+        "name": "Spin Web",
+        "text": "Applies 1 Weak."
+      }
+    ]
+  },
+  "BRUTE_RAIDER": {
+    "name": "Brute Raider",
+    "type": "Normal",
+    "hp": "30-33",
+    "ascHp": "31-34",
+    "act": 1,
+    "party": "* 2 others randomly chosen from Axe Raider, Assassin Raider, Crossbow Raider, Tracker Raider",
+    "intents": [
+      {
+        "name": "Beat",
+        "text": "Deals 7 (8 at A9+) damage."
+      },
+      {
+        "name": "Clap",
+        "text": "Gains 3 Strength."
+      }
+    ]
+  },
+  "BYGONE_EFFIGY": {
+    "name": "Bygone Effigy",
+    "type": "Elite",
+    "hp": "127",
+    "ascHp": "132",
+    "startsWith": "Slow",
+    "intents": [
+      {
+        "name": "Sleep",
+        "text": "Does nothing. Asleep."
+      },
+      {
+        "name": "Wake",
+        "text": "Gains 10 Strength."
+      },
+      {
+        "name": "Slashes",
+        "text": "Deals 13 (15 at A9+) damage."
+      }
+    ]
+  },
+  "BYRDONIS": {
+    "name": "Byrdonis",
+    "type": "Elite",
+    "hp": "81-84",
+    "ascHp": "90",
+    "startsWith": "Territorial 1",
+    "intents": [
+      {
+        "name": "Swoop",
+        "text": "Deals 17 (19 at A9+) damage."
+      },
+      {
+        "name": "Peck",
+        "text": "Deals 3x3 (4x3 at A9+) damage."
+      }
+    ]
+  },
+  "CALCIFIED_CULTIST": {
+    "name": "Calcified Cultist",
+    "type": "Normal",
+    "hp": "38-41",
+    "ascHp": "39-42",
+    "act": 2,
+    "party": "* Damp Cultist (Cultists encounter) * Seapunk (Seapunk Normal encounter)",
+    "intents": [
+      {
+        "name": "Incantation",
+        "text": "Gains 2 Ritual."
+      },
+      {
+        "name": "Dark Strike",
+        "text": "Deals 9 (11 at A9+) damage."
+      }
+    ]
+  },
+  "CEREMONIAL_BEAST": {
+    "name": "Ceremonial Beast",
+    "type": "Boss",
+    "hp": "252",
+    "ascHp": "262",
+    "intents": [
+      {
+        "name": "Stamp",
+        "text": "Gains Plow 150 (160 at A9+). When its HP drops to that amount, it becomes Stunned and loses all Strength."
+      },
+      {
+        "name": "Plow",
+        "text": "Deals 18 (20 at A9+) damage. Gains 2 Strength."
+      },
+      {
+        "name": "Stun",
+        "text": "Stunned. Does nothing."
+      },
+      {
+        "name": "Beast Cry",
+        "text": "Applies 1 Ringing."
+      },
+      {
+        "name": "Stomp",
+        "text": "Deals 15 (17 at A9+) damage."
+      },
+      {
+        "name": "Crush",
+        "text": "Deals 17 (19 at A9+) damage. Gains 3 (4 at A9+) Strength."
+      }
+    ]
+  },
+  "CHOMPER": {
+    "name": "Chomper",
+    "type": "Normal",
+    "hp": "60-64",
+    "ascHp": "63-67",
+    "act": 2,
+    "startsWith": "Artifact 2",
+    "intents": [
+      {
+        "name": "Clamp",
+        "text": "Deals 8 (9 at A9+) damage ×2."
+      },
+      {
+        "name": "Screech",
+        "text": "Shuffles 3 Dazed into your discard pile."
+      }
+    ]
+  },
+  "CORPSE_SLUG": {
+    "name": "Corpse Slug",
+    "type": "Normal",
+    "hp": "25-27",
+    "ascHp": "27-29",
+    "act": 2,
+    "startsWith": "Ravenous 4 (5 at A9+)",
+    "party": "* Corpse Slugs (Weak): 2× Corpse Slug * Corpse Slugs (Normal): 3× Corpse Slug",
+    "intents": [
+      {
+        "name": "Whip Slap",
+        "text": "Deals 3 damage ×2."
+      },
+      {
+        "name": "Glomp",
+        "text": "Deals 8 (9 at A9+) damage."
+      },
+      {
+        "name": "Goop",
+        "text": "Applies 2 Frail."
+      }
+    ]
+  },
+  "CROSSBOW_RAIDER": {
+    "name": "Crossbow Raider",
+    "type": "Normal",
+    "hp": "18-21",
+    "ascHp": "19-22",
+    "act": 1,
+    "party": "* 2 others randomly chosen from Axe Raider, Assassin Raider, Brute Raider, Tracker Raider",
+    "intents": [
+      {
+        "name": "Reload",
+        "text": "Gains 3 Block."
+      },
+      {
+        "name": "Fire!",
+        "text": "Deals 14 (16 at A9+) damage."
+      }
+    ]
+  },
+  "CRUSHER": {
+    "name": "Crusher",
+    "type": "Boss",
+    "hp": "209",
+    "ascHp": "219",
+    "startsWith": "Back Attack Crab Rage",
+    "intents": [
+      {
+        "name": "Thrash",
+        "text": "Deals 12 (14 at A9+) damage."
+      },
+      {
+        "name": "Enlarging Strike",
+        "text": "Deals 4 damage."
+      },
+      {
+        "name": "Bug Sting",
+        "text": "Deals 6x2 (7x2 at A9+) damage. Applies 2 Weak and 2 Frail."
+      },
+      {
+        "name": "Adapt",
+        "text": "Gains 2 (3 at A9+) Strength."
+      },
+      {
+        "name": "Guarded Strike",
+        "text": "Deals 12 (14 at A9+) damage. Gains 18 Block."
+      }
+    ]
+  },
+  "CUBEX_CONSTRUCT": {
+    "name": "Cubex Construct",
+    "type": "Normal",
+    "hp": "65",
+    "ascHp": "70",
+    "act": 1,
+    "startsWith": "Artifact 1",
+    "party": "Appears as a solo normal encounter. Glory * Construct Menagerie: Punch Construct + Cubex Construct ×2",
+    "intents": [
+      {
+        "name": "Charge Up",
+        "text": "Gains 2 Strength."
+      },
+      {
+        "name": "Repeater Blast",
+        "text": "Deals 7 (8 at A9+) damage. Gains 2 Strength."
+      },
+      {
+        "name": "Expel Blast",
+        "text": "Deals 5 (6 at A9+) damage ×2."
+      }
+    ]
+  },
+  "DAMP_CULTIST": {
+    "name": "Damp Cultist",
+    "type": "Normal",
+    "hp": "51-53",
+    "ascHp": "52-54",
+    "act": 2,
+    "party": "* Calcified Cultist (Cultists encounter)",
+    "intents": [
+      {
+        "name": "Incantation",
+        "text": "Gains 5 (6 at A9+) Ritual."
+      },
+      {
+        "name": "Dark Strike",
+        "text": "Deals 1 (3 at A9+) damage."
+      }
+    ]
+  },
+  "DECIMILLIPEDE": {
+    "name": "Decimillipede",
+    "type": "Elite",
+    "hp": "40-46",
+    "ascHp": "46-52",
+    "startsWith": "Reattach 25",
+    "intents": [
+      {
+        "name": "Bulk",
+        "text": "Deals 6 (7 at A9+) damage. Gains 2 Strength."
+      },
+      {
+        "name": "Writhe",
+        "text": "Deals 5x2 (6x2 at A9+) damage."
+      },
+      {
+        "name": "Outgas",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Weak."
+      },
+      {
+        "name": "Reattach",
+        "text": "Revives with 25 HP (if other segments are alive)."
+      }
+    ]
+  },
+  "DEVOTED_SCULPTOR": {
+    "name": "Devoted Sculptor",
+    "type": "Normal",
+    "hp": "162",
+    "ascHp": "172",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Forbidden Incantation",
+        "text": "Gains 9 Ritual."
+      },
+      {
+        "name": "Savage",
+        "text": "Deals 12 (15 at A9+) damage."
+      }
+    ]
+  },
+  "DOORMAKER": {
+    "name": "Doormaker",
+    "type": "Boss",
+    "hp": "489",
+    "ascHp": "512",
+    "intents": [
+      {
+        "name": "Dramatic Open",
+        "text": "Transforms into the Doormaker. Sets current buff to Hunger."
+      },
+      {
+        "name": "Hunger",
+        "text": "Deals 30 (35 at A9+) damage. Swaps current buff to Scrutiny."
+      },
+      {
+        "name": "Scrutiny",
+        "text": "Deals 24 (26 at A9+) damage. Swaps current buff to Grasp."
+      },
+      {
+        "name": "Grasp",
+        "text": "Deals 10x2 (11x2 at A9+) damage. Gains 3 Strength. Swaps current buff to Hunger."
+      }
+    ]
+  },
+  "ENTOMANCER": {
+    "name": "Entomancer",
+    "type": "Elite",
+    "hp": "145",
+    "ascHp": "155",
+    "startsWith": "Personal Hive 1",
+    "intents": [
+      {
+        "name": "Beeeees!",
+        "text": "Deals 3 damage ×7 (×8 at A9+)."
+      },
+      {
+        "name": "Spear!",
+        "text": "Deals 18 (20 at A9+) damage."
+      },
+      {
+        "name": "Pheromone Spit",
+        "text": "Gains 1 Personal Hive and 1 Strength. If Personal Hive is already at 3, gains 2 Strength instead."
+      }
+    ]
+  },
+  "EXOSKELETON": {
+    "name": "Exoskeleton",
+    "type": "Normal",
+    "hp": "24-28",
+    "ascHp": "25-29",
+    "act": 2,
+    "startsWith": "Hard to Kill 9",
+    "intents": [
+      {
+        "name": "Skitter",
+        "text": "Deals 1 damage ×3 (×4 at A9+)."
+      },
+      {
+        "name": "Mandibles",
+        "text": "Deals 8 (9 at A9+) damage."
+      },
+      {
+        "name": "Enrage",
+        "text": "Gains 2 Strength."
+      }
+    ]
+  },
+  "EYE_WITH_TEETH": {
+    "name": "Eye With Teeth",
+    "type": "Minion",
+    "hp": "6",
+    "act": 1,
+    "startsWith": "Illusion",
+    "party": "Summoned by Fogmog.",
+    "intents": [
+      {
+        "name": "Distract",
+        "text": "Shuffles 3 Dazed into your discard pile."
+      }
+    ]
+  },
+  "FABRICATOR": {
+    "name": "Fabricator",
+    "type": "Normal",
+    "hp": "150",
+    "ascHp": "155",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Fabricate",
+        "text": "Summons 1 defensive bot (Guardbot or Noisebot) and 1 aggressive bot (Zapbot or Stabbot)."
+      },
+      {
+        "name": "Fabricating Strike",
+        "text": "Deals 18 (21 at A9+) damage. Summons 1 aggressive bot (Zapbot or Stabbot)."
+      },
+      {
+        "name": "Disintegrate",
+        "text": "Deals 11 (13 at A9+) damage."
+      }
+    ]
+  },
+  "FAT_GREMLIN": {
+    "name": "Fat Gremlin",
+    "type": "Minion",
+    "hp": "13-17",
+    "ascHp": "14-18",
+    "act": 2,
+    "party": "Summoned by Gremlin Merc on death.",
+    "intents": [
+      {
+        "name": "Spawned",
+        "text": "Wakes up. Does nothing."
+      },
+      {
+        "name": "Flee",
+        "text": "Flees from combat with any stolen gold."
+      }
+    ]
+  },
+  "FLAIL_KNIGHT": {
+    "name": "Flail Knight",
+    "type": "Elite",
+    "hp": "101",
+    "ascHp": "108",
+    "party": "* Spectral Knight + Magi Knight",
+    "intents": [
+      {
+        "name": "Breaker",
+        "text": "Gains 3 Strength."
+      },
+      {
+        "name": "Flail",
+        "text": "Deals 9 (10 at A9+) damage ×2."
+      },
+      {
+        "name": "Ram",
+        "text": "Deals 15 (17 at A9+) damage."
+      }
+    ]
+  },
+  "FLYCONID": {
+    "name": "Flyconid",
+    "type": "Normal",
+    "hp": "47-49",
+    "ascHp": "51-53",
+    "act": 1,
+    "party": "* Flyconid encounter: Flyconid + 1 random from Leaf Slime (M) or Twig Slime (M) * Snapping Jaxfruit encounter: Snapping Jaxfruit + Flyconid",
+    "intents": [
+      {
+        "name": "Weakening Spores",
+        "text": "Applies 2 Vulnerable."
+      },
+      {
+        "name": "Frail Spores",
+        "text": "Deals 8 (9 at A9+) damage. Applies 2 Frail."
+      },
+      {
+        "name": "Smash",
+        "text": "Deals 11 (12 at A9+) damage."
+      }
+    ]
+  },
+  "FOGMOG": {
+    "name": "Fogmog",
+    "type": "Normal",
+    "hp": "74",
+    "ascHp": "78",
+    "act": 1,
+    "party": "Appears as a solo normal encounter. Summons Eye With Teeth mid-fight.",
+    "intents": [
+      {
+        "name": "Illusory Spores",
+        "text": "Summons an Eye With Teeth."
+      },
+      {
+        "name": "Thwack",
+        "text": "Deals 8 (9 at A9+) damage. Gains 1 Strength."
+      },
+      {
+        "name": "Headbutt",
+        "text": "Deals 14 (16 at A9+) damage."
+      }
+    ]
+  },
+  "FOSSIL_STALKER": {
+    "name": "Fossil Stalker",
+    "type": "Normal",
+    "hp": "51-53",
+    "ascHp": "54-56",
+    "act": 2,
+    "startsWith": "Suck 3",
+    "intents": [
+      {
+        "name": "Latch",
+        "text": "Deals 12 (14 at A9+) damage."
+      },
+      {
+        "name": "Tackle",
+        "text": "Deals 9 (11 at A9+) damage. Applies 1 Frail."
+      },
+      {
+        "name": "Lash",
+        "text": "Deals 3 (4 at A9+) damage ×2."
+      }
+    ]
+  },
+  "FROG_KNIGHT": {
+    "name": "Frog Knight",
+    "type": "Normal",
+    "hp": "191",
+    "ascHp": "199",
+    "act": 3,
+    "startsWith": "Plating 15 (19 at A8+)",
+    "intents": [
+      {
+        "name": "Tongue Lash",
+        "text": "Deals 13 (14 at A9+) damage. Applies 2 Frail."
+      },
+      {
+        "name": "Strike Down Evil",
+        "text": "Deals 21 (23 at A9+) damage."
+      },
+      {
+        "name": "For the Queen",
+        "text": "Gains 5 Strength."
+      },
+      {
+        "name": "Beetle Charge",
+        "text": "Deals 35 (40 at A9+) damage."
+      }
+    ]
+  },
+  "FUZZY_WURM_CRAWLER": {
+    "name": "Fuzzy Wurm Crawler",
+    "type": "Normal",
+    "hp": "55-57",
+    "ascHp": "58-59",
+    "act": 1,
+    "party": "Appears as a solo weak encounter. Also appears in a strong encounter with Shrinker Beetle.",
+    "intents": [
+      {
+        "name": "Acid Goop",
+        "text": "Deals 4 (6 at A9+) damage."
+      },
+      {
+        "name": "Inhale",
+        "text": "Gains 7 Strength."
+      }
+    ]
+  },
+  "GAS_BOMB": {
+    "name": "Gas Bomb",
+    "type": "Minion",
+    "hp": "7",
+    "ascHp": "8",
+    "act": 2,
+    "startsWith": "Minion",
+    "party": "Summoned by Living Fog.",
+    "intents": [
+      {
+        "name": "Explode",
+        "text": "Deals 8 (9 at A9+) damage. Dies."
+      }
+    ]
+  },
+  "GLOBE_HEAD": {
+    "name": "Globe Head",
+    "type": "Normal",
+    "hp": "148",
+    "ascHp": "158",
+    "act": 3,
+    "startsWith": "Galvanic 6",
+    "intents": [
+      {
+        "name": "Shocking Slap",
+        "text": "Deals 13 (14 at A9+) damage. Applies 2 Frail."
+      },
+      {
+        "name": "Thunder Strike",
+        "text": "Deals 6 (7 at A9+) damage 3 times."
+      },
+      {
+        "name": "Galvanic Burst",
+        "text": "Deals 16 (17 at A9+) damage. Gains 2 Strength."
+      }
+    ]
+  },
+  "GREMLIN_MERC": {
+    "name": "Gremlin Merc",
+    "type": "Normal",
+    "hp": "47-49",
+    "ascHp": "51-53",
+    "act": 2,
+    "startsWith": "Surprise 1 Thievery 20",
+    "party": "Appears as a solo normal encounter. Summons Fat Gremlin and Sneaky Gremlin on death.",
+    "intents": [
+      {
+        "name": "Gimme",
+        "text": "Deals 7x2 (8x2 at A8+) damage."
+      },
+      {
+        "name": "Double Smash",
+        "text": "Deals 6x2 (7x2 at A8+) damage. Applies 2 Weak."
+      },
+      {
+        "name": "Hehe",
+        "text": "Deals 8 (9 at A8+) damage. Gains 2 Strength."
+      }
+    ]
+  },
+  "GUARDBOT": {
+    "name": "Guardbot",
+    "type": "Minion",
+    "hp": "16-20",
+    "ascHp": "17-21",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Guard",
+        "text": "Gives the Fabricator 15 Block."
+      }
+    ]
+  },
+  "HAUNTED_SHIP": {
+    "name": "Haunted Ship",
+    "type": "Normal",
+    "hp": "63",
+    "ascHp": "67",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Haunt",
+        "text": "Shuffles 5 Dazed into your discard pile. Applies 3 Weak."
+      },
+      {
+        "name": "Swipe",
+        "text": "Deals 13 (14 at A9+) damage."
+      },
+      {
+        "name": "Stomp",
+        "text": "Deals 4 (5 at A9+) damage ×3."
+      }
+    ]
+  },
+  "HUNTER_KILLER": {
+    "name": "Hunter Killer",
+    "type": "Normal",
+    "hp": "121",
+    "ascHp": "126",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Tenderizing Goop",
+        "text": "Applies 1 Tender."
+      },
+      {
+        "name": "Bite",
+        "text": "Deals 17 (19 at A9+) damage."
+      },
+      {
+        "name": "Puncture",
+        "text": "Deals 7 (8 at A9+) damage ×3."
+      }
+    ]
+  },
+  "INFESTED_PRISM": {
+    "name": "Infested Prism",
+    "type": "Elite",
+    "hp": "161",
+    "ascHp": "171",
+    "startsWith": "Vital Spark 2(3 at A9+)",
+    "intents": [
+      {
+        "name": "Jab",
+        "text": "Deals 15 (17 at A9+) damage."
+      },
+      {
+        "name": "Radiate",
+        "text": "Deals 11 (13 at A9+) damage. Gains 16 (18 at A9+) Block."
+      },
+      {
+        "name": "Whirlwind",
+        "text": "Deals 5 (6 at A9+) damage ×3."
+      },
+      {
+        "name": "Pulsate",
+        "text": "Deal 8(10 at A9+) damage. Gains 20 (22 at A8+) Block and Vital Spark 2(3 at A9+)."
+      }
+    ]
+  },
+  "INKLET": {
+    "name": "Inklet",
+    "type": "Normal",
+    "hp": "11-17",
+    "ascHp": "12-18",
+    "act": 1,
+    "startsWith": "Slippery 1",
+    "party": "* Inklets: Inklet x3",
+    "intents": [
+      {
+        "name": "Jab",
+        "text": "Deals 3 (4 at A9+) damage."
+      },
+      {
+        "name": "Windup Punch",
+        "text": "Deals 2 (3 at A9+) damage ×3."
+      },
+      {
+        "name": "Piercing Gaze",
+        "text": "Deals 10 (11 at A9+) damage."
+      }
+    ]
+  },
+  "KIN_FOLLOWER": {
+    "name": "Kin Follower",
+    "type": "Boss",
+    "hp": "58-59",
+    "ascHp": "62-63",
+    "startsWith": "Minion",
+    "party": "* Kin Follower ×2 * Kin Priest",
+    "intents": [
+      {
+        "name": "Quick Slash",
+        "text": "Deals 5 damage."
+      },
+      {
+        "name": "Boomerang",
+        "text": "Deals 2 damage ×2."
+      },
+      {
+        "name": "Power Dance",
+        "text": "Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "KIN_PRIEST": {
+    "name": "Kin Priest",
+    "type": "Boss",
+    "hp": "190",
+    "ascHp": "199",
+    "party": "* Kin Follower ×2 * Kin Priest",
+    "intents": [
+      {
+        "name": "Orb of Frailty",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Frail."
+      },
+      {
+        "name": "Orb of Weakness",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Weak."
+      },
+      {
+        "name": "Soul Beam",
+        "text": "Deals 3 damage ×3."
+      },
+      {
+        "name": "Dark Ritual",
+        "text": "Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "KNIGHT_GANG": {
+    "name": "Knight Gang",
+    "type": "Elite",
+    "party": "* Flail Knight + Spectral Knight + Magi Knight"
+  },
+  "KNOWLEDGE_DEMON": {
+    "name": "Knowledge Demon",
+    "type": "Boss",
+    "hp": "379",
+    "ascHp": "399",
+    "intents": [
+      {
+        "name": "Curse of Knowledge",
+        "text": "Each player chooses one of two debuffs to receive. The options change each time this move is used."
+      },
+      {
+        "name": "Slap",
+        "text": "Deals 17 (18 at A9+) damage."
+      },
+      {
+        "name": "Knowledge Overwhelming",
+        "text": "Deals 8 (9 at A9+) damage ×3."
+      },
+      {
+        "name": "Ponder",
+        "text": "Deals 11 (13 at A9+) damage. Heals 30 HP per player. Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "LAGAVULIN_MATRIARCH": {
+    "name": "Lagavulin Matriarch",
+    "type": "Boss",
+    "hp": "222",
+    "ascHp": "233",
+    "startsWith": "Plating 12 Asleep 3",
+    "intents": [
+      {
+        "name": "Sleep",
+        "text": "Asleep. Does nothing."
+      },
+      {
+        "name": "Slash",
+        "text": "Deals 19 (21 at A9+) damage."
+      },
+      {
+        "name": "Disembowel",
+        "text": "Deals 9 (10 at A9+) damage x2."
+      },
+      {
+        "name": "Slash2",
+        "text": "Deals 12 (14 at A9+) damage. Gains 12 (14 at A8+) Block."
+      },
+      {
+        "name": "Soul Siphon",
+        "text": "Removes 2 Strength and 2 Dexterity from the player. Gains 2 Strength."
+      }
+    ]
+  },
+  "LEAF_SLIME_M": {
+    "name": "Leaf Slime (M)",
+    "type": "Normal",
+    "hp": "32-35",
+    "ascHp": "33-36",
+    "act": 1,
+    "party": "* Slimes (Weak): Leaf Slime (S), Twig Slime (S), and randomly chosen as the medium slime * Slimes (Normal): Leaf Slime (S), Twig Slime (S), Twig Slime (M) * Flyconid: randomly chosen companion with Flyconid * Slithering Strangler: possible companion with Slithering Strangler (medium slime variant)",
+    "intents": [
+      {
+        "name": "Clump Shot",
+        "text": "Deals 8 (9 at A9+) damage."
+      },
+      {
+        "name": "Sticky Shot",
+        "text": "Shuffles 2 Slimed into your discard pile."
+      }
+    ]
+  },
+  "LEAF_SLIME_S": {
+    "name": "Leaf Slime (S)",
+    "type": "Normal",
+    "hp": "11-15",
+    "ascHp": "12-16",
+    "act": 1,
+    "party": "* Slimes (Weak): Twig Slime (S) + 1 random from Leaf Slime (M) or Twig Slime (M) * Slimes (Normal): Leaf Slime (M), Twig Slime (S), Twig Slime (M) * Slithering Strangler: possible companion with Slithering Strangler (2 small slimes variant)",
+    "intents": [
+      {
+        "name": "Tackle",
+        "text": "Deals 3 (4 at A9+) damage."
+      },
+      {
+        "name": "Goop",
+        "text": "Shuffles 1 Slimed into your discard pile."
+      }
+    ]
+  },
+  "LIVING_FOG": {
+    "name": "Living Fog",
+    "type": "Normal",
+    "hp": "80",
+    "ascHp": "82",
+    "act": 2,
+    "party": "Appears as a solo normal encounter. Summons Gas Bomb mid-fight.",
+    "intents": [
+      {
+        "name": "Advanced Gas",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Smoggy."
+      },
+      {
+        "name": "Bloat",
+        "text": "Deals 5 (6 at A9+) damage. Summons 1 Gas Bomb."
+      },
+      {
+        "name": "Super Gas Blast",
+        "text": "Deals 8 (9 at A9+) damage."
+      }
+    ]
+  },
+  "LIVING_SHIELD": {
+    "name": "Living Shield",
+    "type": "Normal",
+    "hp": "55",
+    "ascHp": "65",
+    "act": 3,
+    "startsWith": "Rampart 25",
+    "intents": [
+      {
+        "name": "Shield Slam",
+        "text": "Deals 6 damage."
+      },
+      {
+        "name": "Smash",
+        "text": "Deals 16 (18 at A9+) damage. Gains 3 Strength."
+      }
+    ]
+  },
+  "LOUSE_PROGENITOR": {
+    "name": "Louse Progenitor",
+    "type": "Normal",
+    "hp": "134-136",
+    "ascHp": "138-141",
+    "act": 2,
+    "startsWith": "Curl Up 14 (18 at A8+)",
+    "intents": [
+      {
+        "name": "Web Cannon",
+        "text": "Deals 9 (10 at A9+) damage. Applies 2 Frail."
+      },
+      {
+        "name": "Curl and Grow",
+        "text": "Gains 14 (18 at A8+) Block. Gains 5 Strength."
+      },
+      {
+        "name": "Pounce",
+        "text": "Deals 14 (16 at A9+) damage."
+      }
+    ]
+  },
+  "MAGI_KNIGHT": {
+    "name": "Magi Knight",
+    "type": "Elite",
+    "hp": "82",
+    "ascHp": "89",
+    "party": "* Flail Knight + Spectral Knight",
+    "intents": [
+      {
+        "name": "Power Shield",
+        "text": "Deals 6 (7 at A9+) damage. Gains 5 (9 at A8+) Block."
+      },
+      {
+        "name": "Dampen",
+        "text": "Applies Dampen. While Magi Knight is alive, all your cards are Downgraded."
+      },
+      {
+        "name": "Ram",
+        "text": "Deals 10 (11 at A9+) damage."
+      },
+      {
+        "name": "Prep",
+        "text": "Gains 5 (9 at A8+) Block."
+      },
+      {
+        "name": "Magic Bomb",
+        "text": "Deals 35 (40 at A9+) damage."
+      }
+    ]
+  },
+  "MAWLER": {
+    "name": "Mawler",
+    "type": "Normal",
+    "hp": "72",
+    "ascHp": "76",
+    "act": 1,
+    "intents": [
+      {
+        "name": "Rip and Tear",
+        "text": "Deals 14 (16 at A9+) damage."
+      },
+      {
+        "name": "Roar",
+        "text": "Applies 3 Vulnerable."
+      },
+      {
+        "name": "Claw",
+        "text": "Deals 4 (5 at A9+) damage ×2."
+      }
+    ]
+  },
+  "MECHA_KNIGHT": {
+    "name": "Mecha Knight",
+    "type": "Elite",
+    "hp": "300",
+    "ascHp": "320",
+    "startsWith": "Artifact 3",
+    "intents": [
+      {
+        "name": "Charge",
+        "text": "Deals 25 (30 at A9+) damage."
+      },
+      {
+        "name": "Flamethrower",
+        "text": "Shuffles 4 Burn into your hand."
+      },
+      {
+        "name": "Windup",
+        "text": "Gains 15 Block and 5 Strength."
+      },
+      {
+        "name": "Heavy Cleave",
+        "text": "Deals 35 (40 at A9+) damage."
+      }
+    ]
+  },
+  "MYSTERIOUS_KNIGHT": {
+    "name": "Mysterious Knight",
+    "type": "Normal",
+    "hp": "101",
+    "ascHp": "108",
+    "act": 2,
+    "startsWith": "Strength 6 Plating 6",
+    "intents": [
+      {
+        "name": "Breaker",
+        "text": "Gains 3 Strength."
+      },
+      {
+        "name": "Flail",
+        "text": "Deals 9 (10 at A9+) damage x2."
+      },
+      {
+        "name": "Ram",
+        "text": "Deals 15 (17 at A9+) damage."
+      }
+    ]
+  },
+  "MYTE": {
+    "name": "Myte",
+    "type": "Normal",
+    "hp": "61-67",
+    "ascHp": "64-69",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Toxic Cornucopia",
+        "text": "Adds 2 Toxic to your hand."
+      },
+      {
+        "name": "Bite",
+        "text": "Deals 13 (15 at A9+) damage."
+      },
+      {
+        "name": "Suck",
+        "text": "Deals 4 (6 at A9+) damage. Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "NIBBIT": {
+    "name": "Nibbit",
+    "type": "Normal",
+    "hp": "42-46",
+    "ascHp": "44-48",
+    "act": 1,
+    "party": "* Nibbits (Weak): appears alone * Nibbits (Normal): Nibbit x2",
+    "intents": [
+      {
+        "name": "Butt",
+        "text": "Deals 12 (13 at A9+) damage."
+      },
+      {
+        "name": "Hesitant Slice",
+        "text": "Deals 6 (7 at A9+) damage. Gains 5 (6 at A8+) Block."
+      },
+      {
+        "name": "Hiss",
+        "text": "Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "NOISEBOT": {
+    "name": "Noisebot",
+    "type": "Minion",
+    "hp": "18-23",
+    "ascHp": "19-24",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Noise",
+        "text": "Shuffles 2 Dazed into the player's draw and discard piles."
+      }
+    ]
+  },
+  "OVICOPTER": {
+    "name": "Ovicopter",
+    "type": "Normal",
+    "hp": "124-130",
+    "ascHp": "126-132",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Lay Eggs",
+        "text": "Summons 3 Tough Eggs."
+      },
+      {
+        "name": "Smash",
+        "text": "Deals 16 (17 at A9+) damage."
+      },
+      {
+        "name": "Tenderizer",
+        "text": "Deals 7 (8 at A9+) damage. Applies 2 Vulnerable."
+      },
+      {
+        "name": "Nutritional Paste",
+        "text": "Gains 3 (4 at A9+) Strength."
+      }
+    ]
+  },
+  "OWL_MAGISTRATE": {
+    "name": "Owl Magistrate",
+    "type": "Normal",
+    "hp": "234",
+    "ascHp": "243",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Magistrate Scrutiny",
+        "text": "Deals 16 (17 at A9+) damage."
+      },
+      {
+        "name": "Peck Assault",
+        "text": "Deals 4 damage x6."
+      },
+      {
+        "name": "Judicial Flight",
+        "text": "Gains Soar."
+      },
+      {
+        "name": "Verdict",
+        "text": "Deals 33 (36 at A9+) damage. Applies 4 Vulnerable. Removes Soar."
+      }
+    ]
+  },
+  "PARAFRIGHT": {
+    "name": "Parafright",
+    "type": "Minion",
+    "hp": "21",
+    "act": 2,
+    "startsWith": "Illusion",
+    "intents": [
+      {
+        "name": "Slam",
+        "text": "Deals 16 (17 at A9+) damage."
+      }
+    ]
+  },
+  "PHANTASMAL_GARDENER": {
+    "name": "Phantasmal Gardener",
+    "type": "Elite",
+    "hp": "26-31",
+    "ascHp": "27-32",
+    "startsWith": "Skittish 6 (7 at A8+)",
+    "party": "* Phantasmal Gardener ×4",
+    "intents": [
+      {
+        "name": "Bite",
+        "text": "Deals 5 damage."
+      },
+      {
+        "name": "Lash",
+        "text": "Deals 7 damage."
+      },
+      {
+        "name": "Flail",
+        "text": "Deals 1 damage ×3."
+      },
+      {
+        "name": "Enlarge",
+        "text": "Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "PHROG_PARASITE": {
+    "name": "Phrog Parasite",
+    "type": "Elite",
+    "hp": "61-64",
+    "ascHp": "66-68",
+    "startsWith": "Infested",
+    "party": "Appears as a solo elite encounter. Summons Wriggler ×4 upon death (via Infested).",
+    "intents": [
+      {
+        "name": "Infect",
+        "text": "Shuffles 3 Infection into your discard pile."
+      },
+      {
+        "name": "Lash",
+        "text": "Deals 4 (5 at A9+) damage ×4."
+      }
+    ]
+  },
+  "PUNCH_CONSTRUCT": {
+    "name": "Punch Construct",
+    "type": "Normal",
+    "hp": "55",
+    "ascHp": "60",
+    "act": 2,
+    "startsWith": "Artifact 1",
+    "party": "Appears as a solo normal encounter. Glory * Cubex Construct ×2",
+    "intents": [
+      {
+        "name": "READY",
+        "text": "Gains 10 Block."
+      },
+      {
+        "name": "Fast Punch",
+        "text": "Deals 5 (6 at A9+) damage ×2. Applies 1 Frail."
+      },
+      {
+        "name": "Strong Punch",
+        "text": "Deals 14 (16 at A9+) damage."
+      }
+    ]
+  },
+  "QUEEN": {
+    "name": "Queen",
+    "type": "Boss",
+    "hp": "400",
+    "ascHp": "419",
+    "party": "* Torch Head Amalgam",
+    "intents": [
+      {
+        "name": "Puppet Strings",
+        "text": "Applies 3 Chains of Binding to all players."
+      },
+      {
+        "name": "You're Mine",
+        "text": "Applies 99 Frail, 99 Weak, and 99 Vulnerable to all players."
+      },
+      {
+        "name": "Burn Bright for Me",
+        "text": "Gives 1 Strength to Torch Head Amalgam. Gains 20 Block."
+      },
+      {
+        "name": "Off with Your Head",
+        "text": "Deals 3 (4 at A9+) damage x5."
+      },
+      {
+        "name": "Execution",
+        "text": "Deals 15 (18 at A9+) damage."
+      },
+      {
+        "name": "Enrage",
+        "text": "Gains 2 Strength."
+      }
+    ]
+  },
+  "ROCKET": {
+    "name": "Rocket",
+    "type": "Boss",
+    "hp": "199",
+    "ascHp": "209",
+    "startsWith": "Back Attack Crab Rage",
+    "intents": [
+      {
+        "name": "Targeting Reticle",
+        "text": "Deals 3 (4 at A9+) damage."
+      },
+      {
+        "name": "Precision Beam",
+        "text": "Deals 18 (20 at A9+) damage."
+      },
+      {
+        "name": "Charge Up",
+        "text": "Gains 2 (3 at A9+) Strength."
+      },
+      {
+        "name": "Laser",
+        "text": "Deals 31 (35 at A9+) damage."
+      },
+      {
+        "name": "Recharge",
+        "text": "Does nothing."
+      }
+    ]
+  },
+  "SCROLL_OF_BITING": {
+    "name": "Scroll of Biting",
+    "type": "Normal",
+    "hp": "31-38",
+    "ascHp": "32-39",
+    "act": 3,
+    "startsWith": "Paper Cuts 2",
+    "intents": [
+      {
+        "name": "Chomp",
+        "text": "Deals 14 (16 at A9+) damage."
+      },
+      {
+        "name": "More Teeth",
+        "text": "Gains 2 Strength."
+      },
+      {
+        "name": "Chew",
+        "text": "Deals 5 (6 at A9+) damage 2 times."
+      }
+    ]
+  },
+  "SEAPUNK": {
+    "name": "Seapunk",
+    "type": "Normal",
+    "hp": "44-46",
+    "ascHp": "47-49",
+    "act": 2,
+    "party": "* Calcified Cultist (Seapunk encounter)",
+    "intents": [
+      {
+        "name": "Sea Kick",
+        "text": "Deals 11 (13 at A9+) damage."
+      },
+      {
+        "name": "Spinning Kick",
+        "text": "Deals 2 damage ×4."
+      },
+      {
+        "name": "Bubble Burp",
+        "text": "Gains 7 (8 at A8+) Block and 1 (2 at A9+) Strength."
+      }
+    ]
+  },
+  "SEWER_CLAM": {
+    "name": "Sewer Clam",
+    "type": "Normal",
+    "hp": "56",
+    "ascHp": "58",
+    "act": 2,
+    "startsWith": "Plating 8 (9 at A8+)",
+    "intents": [
+      {
+        "name": "Jet",
+        "text": "Deals 10 (11 at A9+) damage."
+      },
+      {
+        "name": "Pressurize",
+        "text": "Gains 4 Strength."
+      }
+    ]
+  },
+  "SHRINKER_BEETLE": {
+    "name": "Shrinker Beetle",
+    "type": "Normal",
+    "hp": "38-40",
+    "ascHp": "40-42",
+    "act": 1,
+    "party": "Appears as a solo weak encounter. Also appears in a strong encounter with Fuzzy Wurm Crawler.",
+    "intents": [
+      {
+        "name": "Shrinker",
+        "text": "Applies Shrink."
+      },
+      {
+        "name": "Chomp",
+        "text": "Deals 7 (8 at A9+) damage."
+      },
+      {
+        "name": "Stomp",
+        "text": "Deals 13 (14 at A9+) damage."
+      }
+    ]
+  },
+  "SKULKING_COLONY": {
+    "name": "Skulking Colony",
+    "type": "Elite",
+    "hp": "75",
+    "ascHp": "80",
+    "startsWith": "Hardened Shell 20",
+    "intents": [
+      {
+        "name": "Zoom",
+        "text": "Deals 14 (16 at A9+) damage."
+      },
+      {
+        "name": "Inertia",
+        "text": "Deals 9 (11 at A9+) damage and gains 2 (3 at A9+) Strength."
+      },
+      {
+        "name": "Piercing Stabs",
+        "text": "Deals 7x2 (8x2 at A9+) damage."
+      }
+    ]
+  },
+  "SLIMED_BERSERKER": {
+    "name": "Slimed Berserker",
+    "type": "Normal",
+    "hp": "266",
+    "ascHp": "276",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Vomit Ichor",
+        "text": "Shuffles 10 Slimed into the discard pile."
+      },
+      {
+        "name": "Furious Pummeling",
+        "text": "Deals 4 (5 at A9+) damage x4."
+      },
+      {
+        "name": "Leeching Hug",
+        "text": "Applies 3 Weak. Gains 3 Strength."
+      },
+      {
+        "name": "Smother",
+        "text": "Deals 30 (33 at A9+) damage."
+      }
+    ]
+  },
+  "SLITHERING_STRANGLER": {
+    "name": "Slithering Strangler",
+    "type": "Normal",
+    "hp": "53-55",
+    "ascHp": "54-56",
+    "act": 1,
+    "party": "* Slithering Strangler + 1 random secondary: Snapping Jaxfruit, or 1 medium slime (Leaf Slime (M) or Twig Slime (M)), or 2 small slimes (Leaf Slime (S) + Twig Slime (S))",
+    "intents": [
+      {
+        "name": "Constrict",
+        "text": "Applies 3 Constrict."
+      },
+      {
+        "name": "Thwack",
+        "text": "Deals 7 (8 at A9+) damage. Gains 5 Block."
+      },
+      {
+        "name": "Lash",
+        "text": "Deals 12 (13 at A9+) damage."
+      }
+    ]
+  },
+  "SLUDGE_SPINNER": {
+    "name": "Sludge Spinner",
+    "type": "Normal",
+    "hp": "37-39",
+    "ascHp": "41-42",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Oil Spray",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Weak."
+      },
+      {
+        "name": "Slam",
+        "text": "Deals 11 (12 at A9+) damage."
+      },
+      {
+        "name": "Rage",
+        "text": "Deals 6 (7 at A9+) damage. Gains 3 Strength."
+      }
+    ]
+  },
+  "SLUMBERING_BEETLE": {
+    "name": "Slumbering Beetle",
+    "type": "Normal",
+    "hp": "86",
+    "ascHp": "89",
+    "act": 2,
+    "startsWith": "Plating 15 (18 at A8+) Slumber 3",
+    "intents": [
+      {
+        "name": "Snore",
+        "text": "Does nothing. Asleep."
+      },
+      {
+        "name": "Roll Out",
+        "text": "Deals 16 (18 at A9+) damage. Gains 2 Strength."
+      }
+    ]
+  },
+  "SNAPPING_JAXFRUIT": {
+    "name": "Snapping Jaxfruit",
+    "type": "Normal",
+    "hp": "31-33",
+    "ascHp": "34-36",
+    "act": 1,
+    "party": "* Snapping Jaxfruit encounter: Snapping Jaxfruit + Flyconid * Slithering Strangler encounter: Slithering Strangler + 1 random companion (Snapping Jaxfruit or 1 medium slime or 2 small slimes)",
+    "intents": [
+      {
+        "name": "Energy Orb",
+        "text": "Deals 3 (4 at A9+) damage. Gains 2 Strength."
+      }
+    ]
+  },
+  "SNEAKY_GREMLIN": {
+    "name": "Sneaky Gremlin",
+    "type": "Minion",
+    "hp": "10-14",
+    "ascHp": "11-15",
+    "act": 2,
+    "party": "Summoned by Gremlin Merc on death.",
+    "intents": [
+      {
+        "name": "Spawned",
+        "text": "Wakes up. Does nothing."
+      },
+      {
+        "name": "Tackle",
+        "text": "Deals 9 (10 at A9+) damage."
+      }
+    ]
+  },
+  "SOUL_FYSH": {
+    "name": "Soul Fysh",
+    "type": "Boss",
+    "hp": "211",
+    "ascHp": "221",
+    "intents": [
+      {
+        "name": "Beckon",
+        "text": "Shuffles 2 Beckon into your deck (1 into draw pile, 1 into discard pile)."
+      },
+      {
+        "name": "De-Gas",
+        "text": "Deals 16 (17 at A9+) damage."
+      },
+      {
+        "name": "Gaze",
+        "text": "Deals 7 (8 at A9+) damage. Shuffles 1 Beckon into your discard pile."
+      },
+      {
+        "name": "Fade",
+        "text": "Gains 2 Intangible."
+      },
+      {
+        "name": "Scream",
+        "text": "Deals 13 (15 at A9+) damage. Applies 3 Vulnerable."
+      }
+    ]
+  },
+  "SOUL_NEXUS": {
+    "name": "Soul Nexus",
+    "type": "Elite",
+    "hp": "234",
+    "ascHp": "254",
+    "intents": [
+      {
+        "name": "Soul Burn",
+        "text": "Deals 29 (31 at A9+) damage."
+      },
+      {
+        "name": "Maelstrom",
+        "text": "Deals 6 (7 at A9+) damage ×4."
+      },
+      {
+        "name": "Drain Life",
+        "text": "Deals 18 (19 at A9+) damage. Applies 2 Vulnerable and 2 Weak."
+      }
+    ]
+  },
+  "SPECTRAL_KNIGHT": {
+    "name": "Spectral Knight",
+    "type": "Elite",
+    "hp": "93",
+    "ascHp": "97",
+    "party": "* Flail Knight + Magi Knight",
+    "intents": [
+      {
+        "name": "Hex",
+        "text": "Applies 2 Hex."
+      },
+      {
+        "name": "Soul Slash",
+        "text": "Deals 15 (17 at A9+) damage."
+      },
+      {
+        "name": "Soul Flame",
+        "text": "Deals 3 (4 at A9+) damage ×3."
+      }
+    ]
+  },
+  "SPINY_TOAD": {
+    "name": "Spiny Toad",
+    "type": "Normal",
+    "hp": "116-119",
+    "ascHp": "121-124",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Protruding Spikes",
+        "text": "Gains 5 Thorns."
+      },
+      {
+        "name": "Spike Explosion",
+        "text": "Deals 23 (25 at A9+) damage. Loses 5 Thorns."
+      },
+      {
+        "name": "Tongue Lash",
+        "text": "Deals 17 (19 at A9+) damage."
+      }
+    ]
+  },
+  "STABBOT": {
+    "name": "Stabbot",
+    "type": "Minion",
+    "hp": "18-23",
+    "ascHp": "19-24",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Stab",
+        "text": "Deals 11 (12 at A9+) damage. Applies 1 Frail."
+      }
+    ]
+  },
+  "TERROR_EEL": {
+    "name": "Terror Eel",
+    "type": "Elite",
+    "hp": "140",
+    "ascHp": "150",
+    "startsWith": "Shriek 70 (75 at A8+)",
+    "intents": [
+      {
+        "name": "Crash",
+        "text": "Deals 16 (18 at A9+) damage."
+      },
+      {
+        "name": "Thrash",
+        "text": "Deals 3x3 (4x3 at A9+) damage. Gains 6 Vigor."
+      },
+      {
+        "name": "Stun",
+        "text": "Stunned. Does nothing."
+      },
+      {
+        "name": "Terror",
+        "text": "Applies 99 Vulnerable."
+      }
+    ]
+  },
+  "TEST_SUBJECT": {
+    "name": "Test Subject",
+    "type": "Boss",
+    "hp": "100",
+    "ascHp": "111",
+    "startsWith": "Adaptable, Enrage 2 (3 at A9+)",
+    "intents": [
+      {
+        "name": "Bite",
+        "text": "Deals 20 (22 at A9+) damage."
+      },
+      {
+        "name": "Skull Bash",
+        "text": "Deals 14 (16 at A9+) damage. Applies 1 Vulnerable."
+      }
+    ]
+  },
+  "TEST_SUBJECT_PHASE_2": {
+    "name": "Test Subject (Phase 2)",
+    "type": "Boss",
+    "hp": "200",
+    "ascHp": "212",
+    "startsWith": "Adaptable, Painful Stabs",
+    "intents": [
+      {
+        "name": "Multi-Claw",
+        "text": "Deals 10 (11 at A9+) damage x3 (increases by 1 hit each use)."
+      }
+    ]
+  },
+  "TEST_SUBJECT_PHASE_3": {
+    "name": "Test Subject (Phase 3)",
+    "type": "Boss",
+    "hp": "300",
+    "ascHp": "313",
+    "startsWith": "Nemesis",
+    "intents": [
+      {
+        "name": "Lacerate",
+        "text": "Deals 10 (11 at A9+) damage x3."
+      },
+      {
+        "name": "Big Pounce",
+        "text": "Deals 45 damage."
+      },
+      {
+        "name": "Burning Growl",
+        "text": "Shuffles 3 (5 at A9+) Burn into discard pile. Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "THE_FORGOTTEN": {
+    "name": "The Forgotten",
+    "type": "Normal",
+    "hp": "106",
+    "ascHp": "111",
+    "act": 3,
+    "startsWith": "Possess Speed",
+    "intents": [
+      {
+        "name": "Miasma",
+        "text": "Removes 2 Dexterity from the player. Gains 8 Block and 2 Dexterity."
+      },
+      {
+        "name": "Dread",
+        "text": "Deals 13 (15 at A9+) damage plus the amount of Dexterity the Forgotten has."
+      }
+    ]
+  },
+  "THE_INSATIABLE": {
+    "name": "The Insatiable",
+    "type": "Boss",
+    "hp": "321",
+    "ascHp": "341",
+    "intents": [
+      {
+        "name": "Liquify Ground",
+        "text": "Gains 4 Sandpit (counted separately for each player). Shuffles 6 Frantic Escape into each player's deck (3 into draw pile, 3 into discard pile)."
+      },
+      {
+        "name": "Thrash",
+        "text": "Deals 8 (9 at A9+) damage ×2."
+      },
+      {
+        "name": "Lunging Bite",
+        "text": "Deals 28 (31 at A9+) damage."
+      },
+      {
+        "name": "Salivate",
+        "text": "Gains 2 (3 at A9+) Strength."
+      }
+    ]
+  },
+  "THE_LOST": {
+    "name": "The Lost",
+    "type": "Normal",
+    "hp": "93",
+    "ascHp": "99",
+    "act": 3,
+    "startsWith": "Possess Strength",
+    "intents": [
+      {
+        "name": "Debilitating Smog",
+        "text": "Removes 2 Strength from the player and gains 2 Strength."
+      },
+      {
+        "name": "Eye Lasers",
+        "text": "Deals 4 (5 at A9+) damage x2."
+      }
+    ]
+  },
+  "THE_MERCHANT": {
+    "name": "The Merchant???",
+    "type": "Normal",
+    "hp": "165",
+    "ascHp": "175",
+    "intents": [
+      {
+        "name": "Swipe",
+        "text": "Deals 13 (15 at A9+) damage."
+      },
+      {
+        "name": "Spew Coins",
+        "text": "Deals 2 damage ×8."
+      },
+      {
+        "name": "Throw Relic",
+        "text": "Deals 9 (10 at A9+) damage. Applies 1 Frail."
+      },
+      {
+        "name": "Enrage",
+        "text": "Gains 2 Strength."
+      }
+    ]
+  },
+  "THE_OBSCURA": {
+    "name": "The Obscura",
+    "type": "Normal",
+    "hp": "123",
+    "ascHp": "129",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Illusion",
+        "text": "Summons a Parafright."
+      },
+      {
+        "name": "Piercing Gaze",
+        "text": "Deals 10 (11 at A9+) damage."
+      },
+      {
+        "name": "Wail",
+        "text": "All enemies gain 3 Strength."
+      },
+      {
+        "name": "Hardening Strike",
+        "text": "Deals 6 (7 at A9+) damage. Gains 6 (7 at A9+) Block."
+      }
+    ]
+  },
+  "THIEVING_HOPPER": {
+    "name": "Thieving Hopper",
+    "type": "Normal",
+    "hp": "79",
+    "ascHp": "84",
+    "act": 2,
+    "startsWith": "Escape Artist 5",
+    "intents": [
+      {
+        "name": "Thievery",
+        "text": "Deals 17 (19 at A9+) damage. Steals a card from your deck."
+      },
+      {
+        "name": "Flutter",
+        "text": "Gains Flutter (takes 50% less Attack damage; must be hit 5 times to Stun it)."
+      },
+      {
+        "name": "Hat Trick",
+        "text": "Deals 21 (23 at A9+) damage."
+      },
+      {
+        "name": "Nab",
+        "text": "Deals 14 (16 at A9+) damage."
+      },
+      {
+        "name": "Escape",
+        "text": "Flees the combat, taking any stolen cards with it."
+      }
+    ]
+  },
+  "TOADPOLE": {
+    "name": "Toadpole",
+    "type": "Normal",
+    "hp": "21-25",
+    "ascHp": "22-26",
+    "act": 2,
+    "party": "* Toadpoles (Weak): Toadpole ×2",
+    "intents": [
+      {
+        "name": "Spike Spit",
+        "text": "Deals 3 (4 at A9+) damage ×3. Removes 2 Thorns from self."
+      },
+      {
+        "name": "Whirl",
+        "text": "Deals 7 (8 at A9+) damage."
+      },
+      {
+        "name": "Spiken",
+        "text": "Gains 2 Thorns."
+      }
+    ]
+  },
+  "TORCH_HEAD_AMALGAM": {
+    "name": "Torch Head Amalgam",
+    "type": "Minion",
+    "hp": "199",
+    "ascHp": "211",
+    "startsWith": "Minion",
+    "party": "* Queen",
+    "intents": [
+      {
+        "name": "Strong Tackle",
+        "text": "Deals 26 (32 at A9+) damage."
+      },
+      {
+        "name": "Tackle",
+        "text": "Deals 18 (22 at A9+) damage."
+      },
+      {
+        "name": "Beam",
+        "text": "Deals 8 damage x3."
+      },
+      {
+        "name": "Weak Tackle",
+        "text": "Deals 14 (16 at A9+) damage."
+      }
+    ]
+  },
+  "TOUGH_EGG": {
+    "name": "Tough Egg",
+    "type": "Minion",
+    "hp": "14-18",
+    "ascHp": "15-19",
+    "act": 2,
+    "startsWith": "Hatch",
+    "intents": [
+      {
+        "name": "Hatch",
+        "text": "Hatches into a Hatchling with 19-22 (20-23 at A8+) HP. Removes all powers except Minion."
+      },
+      {
+        "name": "Nibble",
+        "text": "Deals 4 (5 at A9+) damage."
+      }
+    ]
+  },
+  "TRACKER_RAIDER": {
+    "name": "Tracker Raider",
+    "type": "Normal",
+    "hp": "21-25",
+    "ascHp": "22-26",
+    "act": 1,
+    "party": "* 2 others randomly chosen from Axe Raider, Assassin Raider, Brute Raider, Crossbow Raider",
+    "intents": [
+      {
+        "name": "Track",
+        "text": "Applies 2 Frail."
+      },
+      {
+        "name": "Unleash the Hounds",
+        "text": "Deals 1 damage x8 (x9 at A9+)."
+      }
+    ]
+  },
+  "TUNNELER": {
+    "name": "Tunneler",
+    "type": "Normal",
+    "hp": "87",
+    "ascHp": "92",
+    "act": 2,
+    "intents": [
+      {
+        "name": "Bite",
+        "text": "Deals 13 (15 at A9+) damage."
+      },
+      {
+        "name": "Burrow",
+        "text": "Gains Burrowed and 32 (37 at A8+) Block."
+      },
+      {
+        "name": "Attack from Below",
+        "text": "Deals 23 (26 at A9+) damage."
+      },
+      {
+        "name": "Emerging Strike",
+        "text": "Stunned. Does nothing this turn."
+      }
+    ]
+  },
+  "TURRET_OPERATOR": {
+    "name": "Turret Operator",
+    "type": "Normal",
+    "hp": "41",
+    "ascHp": "51",
+    "act": 3,
+    "intents": [
+      {
+        "name": "Unload!",
+        "text": "Deals 3 (4 at A9+) damage x5."
+      },
+      {
+        "name": "Loading",
+        "text": "Gains 1 Strength."
+      }
+    ]
+  },
+  "TWIG_SLIME_M": {
+    "name": "Twig Slime (M)",
+    "type": "Normal",
+    "hp": "26-28",
+    "ascHp": "27-29",
+    "act": 1,
+    "party": "* Slimes (Weak): Leaf Slime (S), Twig Slime (S), and randomly chosen as the medium slime * Slimes (Normal): Leaf Slime (S), Leaf Slime (M), Twig Slime (S) * Flyconid: randomly chosen companion with Flyconid * Slithering Strangler: possible companion with Slithering Strangler (medium slime variant)",
+    "intents": [
+      {
+        "name": "Chomp",
+        "text": "Deals 11 (12 at A9+) damage."
+      },
+      {
+        "name": "Sticky Shot",
+        "text": "Shuffles 1 Slimed into your discard pile."
+      }
+    ]
+  },
+  "TWIG_SLIME_S": {
+    "name": "Twig Slime (S)",
+    "type": "Normal",
+    "hp": "7-11",
+    "ascHp": "8-12",
+    "act": 1,
+    "party": "* Slimes (Weak): Leaf Slime (S) + 1 random from Leaf Slime (M) or Twig Slime (M) * Slimes (Normal): Leaf Slime (S), Leaf Slime (M), Twig Slime (M) * Slithering Strangler: possible companion with Slithering Strangler (2 small slimes variant)",
+    "intents": [
+      {
+        "name": "Tackle",
+        "text": "Deals 4 (5 at A9+) damage."
+      }
+    ]
+  },
+  "TWO_TAILED_RAT": {
+    "name": "Two-Tailed Rat",
+    "type": "Normal",
+    "hp": "17-21",
+    "ascHp": "18-22",
+    "act": 2,
+    "party": "* Two-Tailed Rat ×3",
+    "intents": [
+      {
+        "name": "Scratch",
+        "text": "Deals 8 (9 at A9+) damage."
+      },
+      {
+        "name": "Disease Bite",
+        "text": "Deals 6 (7 at A9+) damage."
+      },
+      {
+        "name": "Screech",
+        "text": "Applies 1 Frail."
+      },
+      {
+        "name": "Call for Backup",
+        "text": "Summons a new Two-Tailed Rat."
+      }
+    ]
+  },
+  "VANTOM": {
+    "name": "Vantom",
+    "type": "Boss",
+    "hp": "173",
+    "ascHp": "183",
+    "startsWith": "Slippery 9",
+    "intents": [
+      {
+        "name": "Ink Blot",
+        "text": "Deals 7 (8 at A9+) damage."
+      },
+      {
+        "name": "Inky Lance",
+        "text": "Deals 6 (7 at A9+) damage ×2."
+      },
+      {
+        "name": "Dismember",
+        "text": "Deals 27 (30 at A9+) damage. Shuffles 3 Wound into your discard pile."
+      },
+      {
+        "name": "Prepare",
+        "text": "Gains 2 Strength."
+      }
+    ]
+  },
+  "VINE_SHAMBLER": {
+    "name": "Vine Shambler",
+    "type": "Normal",
+    "hp": "61",
+    "ascHp": "64",
+    "act": 1,
+    "intents": [
+      {
+        "name": "Swipe",
+        "text": "Deals 6 (7 at A9+) damage ×2."
+      },
+      {
+        "name": "Grasping Vines",
+        "text": "Deals 8 (9 at A9+) damage. Applies 1 Tangled."
+      },
+      {
+        "name": "Chomp",
+        "text": "Deals 16 (18 at A9+) damage."
+      }
+    ]
+  },
+  "WATERFALL_GIANT": {
+    "name": "Waterfall Giant",
+    "type": "Boss",
+    "hp": "240",
+    "ascHp": "250",
+    "intents": [
+      {
+        "name": "Pressurize",
+        "text": "Gains 15 (20 at A9+) Steam Eruption."
+      },
+      {
+        "name": "Stomp",
+        "text": "Deals 15 (16 at A9+) damage. Applies 1 Weak. Gains 3 Steam Eruption."
+      },
+      {
+        "name": "Ram",
+        "text": "Deals 10 (11 at A9+) damage. Gains 3 Steam Eruption."
+      },
+      {
+        "name": "Siphon",
+        "text": "Heals 15 HP per player. Gains 3 Steam Eruption."
+      },
+      {
+        "name": "Pressure Gun",
+        "text": "Deals 20 (23 at A9+) damage (increases by 5 each use). Gains 3 Steam Eruption."
+      },
+      {
+        "name": "Pressure Up",
+        "text": "Deals 13 (14 at A9+) damage. Gains 3 Steam Eruption."
+      },
+      {
+        "name": "About To Blow",
+        "text": "Becomes invulnerable. Removes Steam Eruption and prepares to explode."
+      },
+      {
+        "name": "Explode",
+        "text": "Deals damage equal to its stored Steam Eruption amount, then dies."
+      }
+    ]
+  },
+  "WRIGGLER": {
+    "name": "Wriggler",
+    "type": "Normal",
+    "hp": "17-21",
+    "ascHp": "18-22",
+    "act": 1,
+    "party": "* Appears in the Dense Vegetation event (×4) * Summoned by Phrog Parasite upon death (×4, via Infested)",
+    "intents": [
+      {
+        "name": "Nasty Bite",
+        "text": "Deals 6 (7 at A9+) damage."
+      },
+      {
+        "name": "Wriggle",
+        "text": "Shuffles 1 Infection into your discard pile. Gains 2 Strength."
+      }
+    ]
+  },
+  "ZAPBOT": {
+    "name": "Zapbot",
+    "type": "Minion",
+    "hp": "18-23",
+    "ascHp": "19-24",
+    "act": 3,
+    "startsWith": "High Voltage 2",
+    "intents": [
+      {
+        "name": "Zap",
+        "text": "Deals 14 (15 at A9+) damage."
+      }
+    ]
+  }
+}

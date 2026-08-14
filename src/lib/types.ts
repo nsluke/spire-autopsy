@@ -157,6 +157,13 @@ export interface KillCause {
   timesFought: number;
   deathRatePct: number;
   roomType?: RoomType;
+  /**
+   * False when no combat room with this encounter was ever logged, so
+   * timesFought fell back to the kill count. The rate is then meaningless
+   * (always 100%) and callers must say "meetings not logged" rather than
+   * print a denominator that is really the numerator wearing a label.
+   */
+  meetingsLogged: boolean;
 }
 
 export interface PickCount {
@@ -280,6 +287,13 @@ export interface LeakResult {
    * different number than the card quoted them.
    */
   drillBar?: number;
+  /**
+   * What the drill is about when the detector's predicate names one thing in
+   * the player's history (the nemesis card is about ONE encounter, which no
+   * single run can name). Frozen onto the accepted drill alongside drillBar so
+   * the grader never re-derives a different subject than the card quoted.
+   */
+  drillSubject?: string;
   strength: EvidenceStrength;
   /** ranking key: estimated wins lost per 100 runs (heuristic) */
   expectedWinsLost: number;

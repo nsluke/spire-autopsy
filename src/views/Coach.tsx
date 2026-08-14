@@ -102,8 +102,14 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
     if (!DRILLS[leakId]) return;
     // Carry the card's own bar onto the drill: the player is graded against
     // the number they were shown, even if later runs move the average.
-    const bar = leaks.find((l) => l.id === leakId)?.drillBar;
-    const drill: ActiveDrill = { leakId, acceptedAt: Date.now(), targetRuns: DRILLS[leakId].targetRuns, bar };
+    const card = leaks.find((l) => l.id === leakId);
+    const drill: ActiveDrill = {
+      leakId,
+      acceptedAt: Date.now(),
+      targetRuns: DRILLS[leakId].targetRuns,
+      bar: card?.drillBar,
+      subject: card?.drillSubject,
+    };
     setActiveDrill(drill);
     void setMeta(DRILL_KEY, drill);
   };

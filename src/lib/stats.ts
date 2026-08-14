@@ -106,8 +106,15 @@ export function computeStats(runs: NormalizedRun[]): StatsSummary {
   }
   const killCauses: KillCause[] = [...deathCounts.entries()]
     .map(([encounter, deaths]) => {
-      const fought = fightCounts.get(encounter) ?? deaths;
-      return { encounter, deaths, timesFought: fought, deathRatePct: Math.round((deaths / fought) * 100) };
+      const logged = fightCounts.get(encounter);
+      const fought = logged ?? deaths;
+      return {
+        encounter,
+        deaths,
+        timesFought: fought,
+        deathRatePct: Math.round((deaths / fought) * 100),
+        meetingsLogged: logged !== undefined,
+      };
     })
     .sort((a, b) => b.deaths - a.deaths || b.deathRatePct - a.deathRatePct);
 

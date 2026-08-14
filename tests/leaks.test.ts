@@ -73,7 +73,7 @@ const corpusMain = [
 ];
 
 /** Registered detector counts — the tier split detectLeaks guarantees. */
-const LEAK_DETECTORS = 6;
+const LEAK_DETECTORS = 7;
 const OBSERVATION_DETECTORS = 5;
 
 describe('gating (applicable=false below thresholds)', () => {
@@ -657,6 +657,18 @@ describe('detectLeaks ordering', () => {
       expect(scores).toEqual([...scores].sort((a, b) => b - a));
     }
     expect(results[0].id).toBe('deck-bloat'); // the biggest measured gap in this corpus
+  });
+
+  it('carries the nemesis card as a leak, ranked in the same currency as the rest', () => {
+    const results = detectLeaks(corpusMain);
+    const nemesis = results.find((r) => r.id === 'nemesis')!;
+    expect(nemesis.tier).toBe('leak');
+    expect(nemesis.applicable).toBe(true);
+    expect(nemesis.title).toBe('The Insatiable is ending your runs');
+    // 21 meetings / 30 runs × (14/21 − 2/475) × moderate — same per-fight units
+    // as boss-entry and upgrade-tempo, so cross-detector ranking still means
+    // something. Below deck-bloat's 30 on this corpus, hence the order below.
+    expect(nemesis.expectedWinsLost).toBeCloseTo(27.8, 1);
   });
 
   it('gives every registered detector a distinct id', () => {

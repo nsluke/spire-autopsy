@@ -18,6 +18,7 @@ import { displayName, shortDate, characterName } from './idFormat';
 import { ATTACK_TARGET, draftProfile } from './leaks/damageDrafting';
 import { ACT1_ADD_TARGET, deckAdditions } from './leaks/deckBloat';
 import { TURN_TARGET, hallwayFights, medianHallwayTurns } from './leaks/fightPacing';
+import { meetings, nemesisContext } from './leaks/nemesis';
 import { HELD_BAR, beltAtLastFight, hardFights } from './leaks/potions';
 import { REAL_SPEND, richShopGold } from './leaks/removals';
 import { bossEntries, upgradeTarget, UPGRADES_PER_ACT } from './leaks/upgradeTempo';
@@ -25,17 +26,33 @@ import type { NormalizedRun } from './types';
 
 export type DrillVerdict = 'pass' | 'fail' | 'na';
 
+/**
+ * Corpus-derived context for a detector whose predicate is about one specific
+ * thing in the player's history rather than a constant — the nemesis card is
+ * about ONE encounter, and a single run cannot name it. LeakResult carries only
+ * a numeric drillBar, so the subject is re-derived here from the same corpus
+ * the detector ran on. The frozen bar still wins over the re-derived one.
+ */
+export interface DrillContext {
+  subject?: string;
+  bar?: number;
+}
+
 export interface DrillDef {
   leakId: string;
   title: string;
   assignment: string;
   targetRuns: number;
+  /** See DrillContext — only detectors with a per-corpus subject define this. */
+  context?(runs: NormalizedRun[]): DrillContext;
   /**
    * `bar` is the leak's per-player threshold (LeakResult.drillBar), carried
    * from the card the player accepted. Graders that have one must use it, so
    * the number they are held to is always the number they were quoted.
+   * `subject` comes from context() and is undefined when the corpus no longer
+   * names one — in which case the grader must decline, never guess.
    */
-  grade(run: NormalizedRun, bar?: number): { verdict: DrillVerdict; note?: string };
+  grade(run: NormalizedRun, bar?: number, subject?: string): { verdict: DrillVerdict; note?: string };
 }
 
 /** Persisted shape (IndexedDB meta key 'activeDrill'). */
@@ -45,6 +62,8 @@ export interface ActiveDrill {
   targetRuns: number;
   /** the card's drillBar at acceptance; older drills predate it */
   bar?: number;
+  /** the card's drillSubject at acceptance; older drills re-derive it */
+  subject?: string;
 }
 
 export interface GradedRun {
@@ -196,6 +215,36 @@ export const DRILLS: Record<string, DrillDef> = {
         : { verdict: 'pass', note: `all ${entries.length} boss ${entries.length === 1 ? 'entry' : 'entries'} at the bar` };
     },
   },
+  nemesis: {
+    leakId: 'nemesis',
+    title: 'Meet it healthy',
+    assignment:
+      'Reach the encounter that has ended the most of your runs at the HP you survive it at — rest site, potion, or the quieter path.',
+    targetRuns: 5,
+    context: nemesisContext,
+    // Mirrors nemesis.ts exactly: the population is meetings with the ONE
+    // encounter the card named, and the accusation is arriving under the bar
+    // it quoted. No nemesis, no meeting, or no readable entry HP means the
+    // behavior never came up — the run consumes no drill slot either way.
+    //
+    // No BAR either: nemesis.ts sets drillBar to undefined (and offers no
+    // drill) when the meetings survived are no healthier than the deaths, or
+    // when a cohort is too thin to compare. There the card explicitly says
+    // entry HP is not what separates them, so grading a run against the house
+    // 60% floor would accuse it of a miss the card never alleged.
+    grade(run, bar, subject) {
+      if (!subject) return { verdict: 'na', note: 'no encounter in your history is a nemesis yet' };
+      if (bar === undefined) return { verdict: 'na', note: 'no entry-HP bar your history supports' };
+      const name = displayName(subject);
+      const met = meetings(run, subject).filter((m) => m.entryPct !== undefined);
+      if (met.length === 0) return { verdict: 'na', note: `did not meet ${name}` };
+      const worst = met.reduce((a, b) => (a.entryPct! <= b.entryPct! ? a : b));
+      const pct = Math.round(worst.entryPct! * 100);
+      return pct < bar
+        ? { verdict: 'fail', note: `met ${name} at ${pct}%, bar is ${bar}%` }
+        : { verdict: 'pass', note: `met ${name} at ${pct}%, bar is ${bar}%` };
+    },
+  },
   'fight-pacing': {
     leakId: 'fight-pacing',
     title: 'Close the hallway',
@@ -219,12 +268,15 @@ export function computeDrillProgress(drill: ActiveDrill, runs: NormalizedRun[]):
     .filter((r) => r.startTime * 1000 >= drill.acceptedAt)
     .sort((a, b) => a.startTime - b.startTime);
 
+  // The subject is re-derived from the whole corpus (the detector's own view);
+  // the bar stays whatever the accepted card quoted.
+  const ctx = def.context?.(runs) ?? {};
   const graded: GradedRun[] = [];
   let passes = 0;
   let fails = 0;
   for (const run of eligible) {
     if (passes + fails >= drill.targetRuns) break;
-    const { verdict, note } = def.grade(run, drill.bar);
+    const { verdict, note } = def.grade(run, drill.bar ?? ctx.bar, drill.subject ?? ctx.subject);
     if (verdict === 'pass') passes++;
     if (verdict === 'fail') fails++;
     graded.push({
@@ -250,10 +302,11 @@ export function behaviorTrend(
 ): { startTime: number; rate: number }[] | undefined {
   const rateOf = RATE_FNS[leakId];
   if (!rateOf) return undefined;
+  const ctx = DRILLS[leakId]?.context?.(runs) ?? {};
   const chrono = completedRuns(runs).sort((a, b) => a.startTime - b.startTime);
   const perRun: { startTime: number; rate: number }[] = [];
   for (const run of chrono) {
-    const r = rateOf(run);
+    const r = rateOf(run, ctx);
     if (r !== undefined) perRun.push({ startTime: run.startTime, rate: r });
   }
   if (perRun.length < window) return undefined;
@@ -269,7 +322,7 @@ export function behaviorTrend(
  * Each entry mirrors its detector's headline predicate — a sparkline that
  * trends a different rule than the card above it is a lie with a nice curve.
  */
-const RATE_FNS: Record<string, (run: NormalizedRun) => number | undefined> = {
+const RATE_FNS: Record<string, (run: NormalizedRun, ctx?: DrillContext) => number | undefined> = {
   'boss-entry-hp': (run) => {
     let fights = 0;
     let low = 0;
@@ -316,5 +369,17 @@ const RATE_FNS: Record<string, (run: NormalizedRun) => number | undefined> = {
     const fights = hallwayFights(run);
     if (!fights.length) return undefined;
     return fights.filter((f) => f.turns > TURN_TARGET).length / fights.length;
+  },
+  // nemesis.ts headline: meetings with the named encounter entered under the
+  // bar it quoted. Same subject and same bar as the drill grades against, so
+  // the curve trends the rule the card states — and when the card names no
+  // bar (survivals no healthier than the deaths, or a cohort too thin), there
+  // is no rule to trend and the sparkline is withheld rather than silently
+  // curving against a 60% the card never mentioned.
+  nemesis: (run, ctx) => {
+    if (!ctx?.subject || ctx.bar === undefined) return undefined;
+    const met = meetings(run, ctx.subject).filter((m) => m.entryPct !== undefined);
+    if (!met.length) return undefined;
+    return met.filter((m) => m.entryPct! * 100 < ctx.bar!).length / met.length;
   },
 };

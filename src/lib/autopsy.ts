@@ -20,6 +20,7 @@
 import { characterName, displayName, shortDate } from './idFormat';
 import { floorEncounterId, floorTurns } from './floorLog';
 import { potionLabel } from './items';
+import { nemesisId } from './leaks/nemesis';
 import { isHoardingDeath } from './leaks/potions';
 import { completedRuns, deathNode, entryGold, entryHpPct } from './normalize';
 import type {
@@ -205,6 +206,10 @@ export function buildAutopsy(run: NormalizedRun, allRuns: NormalizedRun[], leaks
   // Link the potion leak on the card's own predicate, not a looser one: an
   // elite/boss death entered holding potions that never got thrown.
   if (isHoardingDeath(run) && applicableIds.has('potion-hoarding')) linkedLeakIds.push('potion-hoarding');
+  // A death to the encounter the Coach has crowned links that card, so the run
+  // page and the Coach agree on what killed this player.
+  if (death && applicableIds.has('nemesis') && run.killedByEncounter === nemesisId(completedRuns(allRuns)))
+    linkedLeakIds.push('nemesis');
   if (death && applicableIds.has('gold-at-death') && entryGold(death) > RICH_DEATH)
     linkedLeakIds.push('gold-at-death');
 

@@ -101,16 +101,17 @@
 .dash .spark svg { display: block; width: 100%; height: auto; }
 .dash .readTogether { font-size: 0.8rem; color: var(--ink2); margin: 8px 0 0; }
 
-/* nemesis board */
+/* nemesis board — the rule lives on the row wrapper so an open dossier sits
+   inside its own row rather than breaking the run of hairlines */
+.dash .nemRow { border-bottom: 1px solid var(--line-soft); }
+.dash .nemRow:last-child { border-bottom: 0; }
 .dash .nem {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 2px 12px;
   padding: 8px 0;
-  border-bottom: 1px solid var(--line-soft);
   font-size: 0.8rem;
 }
-.dash .nem:last-of-type { border-bottom: 0; }
 .dash .nem .nm { color: var(--ink); grid-column: 1; grid-row: 1; }
 .dash .nem .nm .pill { margin-left: 6px; }
 .dash .nem .meta { color: var(--muted); font-size: 0.72rem; grid-column: 1; grid-row: 2; }
@@ -168,7 +169,7 @@
 .dash .emptyState p { margin: 0; }
 
 /* ---- enemy & character art ---- */
-.dash .nem { grid-template-columns: auto 1fr auto; }
+.dash .nem { grid-template-columns: auto 1fr auto auto; }
 .dash .nem .nemArt {
   grid-column: 1;
   grid-row: 1 / 3;
@@ -181,6 +182,124 @@
 .dash .nem .nm { grid-column: 2; }
 .dash .nem .meta { grid-column: 2; }
 .dash .nem .rate { grid-column: 3; }
+.dash .nem .nemMore {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  align-self: center;
+  white-space: nowrap;
+}
+
+/* ---- enemy dossier: the reference sheet under an open nemesis row ---- */
+.dash .dossier {
+  margin: 0 0 12px;
+  padding: 12px 14px 13px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+.dash .dossHead { display: flex; align-items: center; gap: 12px; }
+.dash .dossArt {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55));
+  flex: none;
+}
+.dash .dossHeadText { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.dash .dossName {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+.dash .dossPills { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.dash .dossSection { margin-top: 14px; }
+.dash .dossTitle {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/* your record — one row per character under the all-runs row */
+.dash .dossRec {
+  display: grid;
+  grid-template-columns: minmax(84px, auto) 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.dash .dossRec:last-of-type { border-bottom: 0; }
+.dash .dossWho { color: var(--ink); font-weight: 600; }
+.dash .dossCount { color: var(--ink2); font-variant-numeric: tabular-nums; }
+.dash .dossRate {
+  color: var(--loss);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.dash .dossThin { color: var(--faint); font-weight: 500; font-size: 0.72rem; }
+.dash .dossLast { color: var(--muted); font-size: 0.74rem; margin: 8px 0 0; }
+.dash .dossNone { color: var(--muted); font-size: 0.78rem; margin: 12px 0 0; }
+.dash .dossFoot { color: var(--faint); font-size: 0.7rem; line-height: 1.45; margin: 10px 0 0; }
+
+/* roster of a group encounter */
+.dash .dossRoster { margin-top: 4px; }
+.dash .dossMemberRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.dash .dossMemberRow:last-child { border-bottom: 0; }
+.dash .dossMemberName { color: var(--ink); }
+.dash .dossMemberType { color: var(--muted); font-size: 0.72rem; }
+.dash .dossMemberHp { color: var(--ink2); font-variant-numeric: tabular-nums; }
+
+/* the intent table */
+.dash .dossIntentBlock { margin-top: 8px; }
+.dash .dossIntentOwner {
+  display: block;
+  font-weight: 650;
+  color: var(--ember);
+  font-size: 0.78rem;
+}
+.dash .dossStarts { color: var(--muted); font-weight: 500; font-size: 0.74rem; }
+.dash .dossIntents { list-style: none; margin: 4px 0 0; padding: 0; }
+.dash .dossIntent {
+  display: grid;
+  grid-template-columns: minmax(96px, auto) 1fr;
+  gap: 2px 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.dash .dossIntent:last-child { border-bottom: 0; }
+.dash .dossIntName { grid-column: 1; grid-row: 1; color: var(--ink); font-weight: 650; }
+.dash .dossIntTags { grid-column: 2; grid-row: 1; display: flex; flex-wrap: wrap; gap: 4px; }
+.dash .dossIntText { grid-column: 1 / 3; grid-row: 2; color: var(--ink2); font-size: 0.76rem; }
+.dash .dossIntTags .pill { font-size: 0.6rem; padding: 1px 7px; }
+.dash .dossIntTags .tag-attack { color: var(--loss); }
+.dash .dossIntTags .tag-debuff { color: var(--c-necro); }
+.dash .dossIntTags .tag-block { color: var(--ink2); }
+
+@media (max-width: 560px) {
+  .dash .dossRec { display: flex; flex-wrap: wrap; gap: 3px 10px; }
+  .dash .dossRate { margin-left: auto; }
+  .dash .dossIntent { grid-template-columns: 1fr; }
+  .dash .dossIntTags { grid-column: 1; grid-row: 2; }
+  .dash .dossIntText { grid-column: 1; grid-row: 3; }
+}
 .dash .cbar .nm { display: flex; align-items: center; gap: 7px; }
 .dash .cbar .cbarArt { width: 22px; height: 26px; object-fit: contain; object-position: bottom; }
 
