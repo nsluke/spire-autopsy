@@ -205,3 +205,68 @@ describe.skipIf(!HISTORY)('full-corpus validation against audited reference numb
     }
   });
 });
+
+/**
+ * Live-folder smoke: everything above pins to the audited snapshot; this
+ * section runs the WHOLE engine over every run in the folder, today's
+ * included. No reference numbers — the assertions are lawfulness: nothing
+ * throws, every emitted string honors the house rule, every ratio's
+ * numerator fits its denominator. Every new run keeps re-validating the
+ * detectors against reality.
+ */
+describe.skipIf(!HISTORY)('live-folder smoke over every run on disk', () => {
+  let all: NormalizedRun[] = [];
+
+  beforeAll(() => {
+    const files = readdirSync(HISTORY!).filter((f) => /\.run$/i.test(f) && !/\.backup$/i.test(f));
+    all = files.map((f) => normalizeRun(JSON.parse(readFileSync(join(HISTORY!, f), 'utf8')), f));
+  });
+
+  it('normalizes and autopsies every run without throwing', async () => {
+    const { buildAutopsy } = await import('../src/lib/autopsy');
+    const leaks = detectLeaks(all);
+    for (const run of all) {
+      const report = buildAutopsy(run, all, leaks);
+      expect(report.runId).toBe(run.id);
+      for (const beat of report.narrative) expect(beat.text.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('every detector speaks lawfully on the full live corpus', () => {
+    const leaks = detectLeaks(all);
+    expect(leaks.length).toBeGreaterThanOrEqual(11);
+    const FORBIDDEN = [/lower ascension/i, /easier (ascension|level)/i, /\bsettl(e|ed|ing)\b/i, /\bnot ready\b/i];
+    for (const leak of leaks) {
+      const strings = [
+        leak.title,
+        leak.body,
+        leak.confoundNote ?? '',
+        leak.drill?.body ?? '',
+        ...leak.receiptLines,
+        ...leak.runReceipts.map((r) => r.label),
+      ];
+      for (const s of strings) for (const re of FORBIDDEN) expect(s).not.toMatch(re);
+      // every "N/M" ratio in a receipt line keeps its numerator within its denominator
+      for (const line of leak.receiptLines) {
+        for (const m of line.matchAll(/(\d+)\/(\d+)/g)) {
+          expect(Number(m[1])).toBeLessThanOrEqual(Number(m[2]));
+        }
+      }
+      for (const r of leak.runReceipts) {
+        expect(all.some((run) => run.id === r.runId)).toBe(true);
+      }
+    }
+  });
+
+  it('the climb never points below current play, and the latest victory points up', async () => {
+    const { latestVictory } = await import('../src/lib/climb');
+    const climb = climbSummary(all, detectLeaks(all));
+    for (const wall of climb.walls) {
+      const characterRuns = completedRuns(all).filter((r) => r.player.character === wall.character);
+      const latest = characterRuns.reduce((a, b) => (b.startTime > a.startTime ? b : a));
+      expect(wall.target).toBeGreaterThanOrEqual(latest.ascension);
+    }
+    const v = latestVictory(all);
+    if (v && v.nextTarget !== undefined) expect(v.nextTarget).toBeGreaterThan(v.ascension);
+  });
+});

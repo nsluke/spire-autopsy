@@ -297,7 +297,7 @@ export default function Landing({ onImport, onDemo, importState, hasData, runs }
         <button type="button" className="demoBtn" onClick={() => void onDemo()} disabled={busy}>
           Try sample data
         </button>
-        <span className="demoNote">28 real runs from a fellow climber — look around before importing your own</span>
+        <span className="demoNote">57 real runs from a fellow climber — look around before importing your own</span>
       </div>
 
       {importState && <ImportPanel p={importState} />}
