@@ -14,6 +14,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { detectLeaks } from '../lib/leaks';
 import { climbSummary, latestVictory, wallLine } from '../lib/climb';
+import AnalystBoard from '../components/AnalystBoard';
+import SpireSpeaks from '../components/SpireSpeaks';
 import { getMeta, setMeta } from '../lib/db';
 import { behaviorTrend, computeDrillProgress, DRILLS, type ActiveDrill } from '../lib/drills';
 import { characterArt } from '../lib/art';
@@ -29,6 +31,19 @@ import '../styles/coach.css';
 const MAX_LEAK_CARDS = 3;
 const DISMISSED_KEY = 'dismissedLeaks';
 const DRILL_KEY = 'activeDrill';
+const VOICE_KEY = 'coachVoice';
+
+/**
+ * The three voices speak the same detector output. Coach: curt cards and the
+ * drill (the only voice that starts one). Analyst: every number as tables.
+ * Spire Speaks: the mountain narrates. Selection persists like the drill.
+ */
+type CoachVoice = 'coach' | 'analyst' | 'spire';
+const VOICES: { id: CoachVoice; label: string }[] = [
+  { id: 'coach', label: 'Coach' },
+  { id: 'analyst', label: 'Analyst' },
+  { id: 'spire', label: 'The Spire Speaks' },
+];
 
 
 export default function Coach({ runs }: { runs: NormalizedRun[] }) {
@@ -36,6 +51,7 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
   // demoted leak briefly renders as a card before dropping into the drawer.
   const [dismissed, setDismissed] = useState<string[] | null>(null);
   const [activeDrill, setActiveDrill] = useState<ActiveDrill | null | undefined>(undefined);
+  const [voice, setVoice] = useState<CoachVoice>('coach');
 
   useEffect(() => {
     let alive = true;
@@ -44,6 +60,9 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
     });
     void getMeta<ActiveDrill>(DRILL_KEY).then((d) => {
       if (alive) setActiveDrill(d ?? null);
+    });
+    void getMeta<CoachVoice>(VOICE_KEY).then((v) => {
+      if (alive && v) setVoice(v);
     });
     return () => {
       alive = false;
@@ -126,19 +145,27 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
           </p>
         </div>
         <div className="voiceRow" role="group" aria-label="Coach voice">
-          <button type="button" className="pill on" aria-pressed="true">
-            Coach
-          </button>
-          <button type="button" className="pill" disabled title="Soon">
-            Analyst
-          </button>
-          <button type="button" className="pill" disabled title="Soon">
-            The Spire Speaks
-          </button>
+          {VOICES.map((v) => (
+            <button
+              key={v.id}
+              type="button"
+              className={voice === v.id ? 'pill on' : 'pill'}
+              aria-pressed={voice === v.id}
+              onClick={() => {
+                setVoice(v.id);
+                void setMeta(VOICE_KEY, v.id);
+              }}
+            >
+              {v.label}
+            </button>
+          ))}
         </div>
       </header>
 
       {(() => {
+        // The Spire narrates the victory itself — two tellings of one win
+        // would have the page repeating itself in different voices.
+        if (voice === 'spire') return null;
         const v = latestVictory(runs);
         if (!v) return null;
         const name = characterName(v.character);
@@ -207,21 +234,38 @@ export default function Coach({ runs }: { runs: NormalizedRun[] }) {
         </section>
       )}
 
-      {cards.map((leak, i) => (
-        <LeakCard
-          key={leak.id}
-          leak={leak}
-          rank={i + 1}
-          onDemote={demote}
-          drillSlot={drillSlotFor(leak)}
-          trend={behaviorTrend(leak.id, runs)}
-          drillAcceptedAt={activeDrill?.leakId === leak.id ? activeDrill.acceptedAt : undefined}
-          onStartDrill={startDrill}
-          onClearDrill={clearDrill}
+      {/* Both voices receive the FULL ranked list plus the drawer (which
+          repeats ranks 4+) and dedupe by id themselves — pass rankedLeaks,
+          never cards, or the overflow leaks lose their rank. */}
+      {voice === 'analyst' && (
+        <AnalystBoard leaks={rankedLeaks} drawerItems={drawerItems} runs={runs} activeDrill={drillProgress} />
+      )}
+      {voice === 'spire' && (
+        <SpireSpeaks
+          leaks={rankedLeaks}
+          drawerItems={drawerItems}
+          runs={runs}
+          victory={latestVictory(runs)}
+          activeDrill={drillProgress}
         />
-      ))}
+      )}
 
-      {cards.length === 0 && (
+      {voice === 'coach' &&
+        cards.map((leak, i) => (
+          <LeakCard
+            key={leak.id}
+            leak={leak}
+            rank={i + 1}
+            onDemote={demote}
+            drillSlot={drillSlotFor(leak)}
+            trend={behaviorTrend(leak.id, runs)}
+            drillAcceptedAt={activeDrill?.leakId === leak.id ? activeDrill.acceptedAt : undefined}
+            onStartDrill={startDrill}
+            onClearDrill={clearDrill}
+          />
+        ))}
+
+      {voice === 'coach' && cards.length === 0 && (
         <p className="coachClear">
           No glaring leak. Nothing in your runs reads like a habit costing you wins. Keep climbing — the coach speaks
           when the evidence does.

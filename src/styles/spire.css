@@ -1,0 +1,103 @@
+/* The Spire Speaks — the Coach's third voice, set as an inscription.
+   Owned by SpireSpeaks.tsx; every color comes from tokens.css.
+
+   The page reads top to bottom like carved text: one display-face line, prose
+   at a reading measure, mono asides holding the receipts the prose rewords,
+   and the autopsy.css act-header idiom (a hairline that fades to nothing)
+   dividing the sections. */
+
+.spireScroll {
+  margin: 16px 0 8px;
+  padding: 26px 30px 30px;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(237, 228, 211, 0.03), transparent 40%),
+    var(--surface);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 228, 211, 0.05),
+    0 10px 28px -18px rgba(0, 0, 0, 0.75);
+}
+
+.spireTitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.spireTitle::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, rgba(232, 163, 61, 0.5), transparent 70%);
+}
+
+/* ---- section rubric: mono small-caps + the fading ember hairline ---- */
+.spireRubric {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 30px 0 12px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.spireRubric span { white-space: nowrap; }
+.spireRubric::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(232, 163, 61, 0.35), transparent);
+}
+
+/* ---- the Spire's prose ---- */
+.spireLine {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink2);
+  max-width: 64ch;
+  margin: 0 0 14px;
+}
+.spireLine:first-of-type { color: var(--ink); }
+.spireNote {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ---- receipts: the digits behind the sentence above them ---- */
+.spireAside {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 74ch;
+  margin: 0 0 5px;
+  padding: 4px 12px;
+  border-left: 2px solid rgba(232, 163, 61, 0.35);
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 0 3px 3px 0;
+}
+.spireAside + .spireLine,
+.spireAside + .spireNote { margin-top: 16px; }
+
+.spireOpen {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ember);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.spireOpen:hover { text-decoration: underline; }
+
+@media (max-width: 620px) {
+  .spireScroll { padding: 20px 18px 24px; }
+  .spireLine { font-size: 0.95rem; }
+}

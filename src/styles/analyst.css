@@ -1,0 +1,327 @@
+/* Analyst voice — one ledger, everything open. Owned by AnalystBoard.tsx.
+   Ruled hairlines instead of cards, mono for every figure, Cinzel only on the
+   board title. All colors come from tokens.css. */
+
+.analystBoard {
+  margin: 14px 0 4px;
+}
+
+/* ---- head ---- */
+.anHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.anTitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+.anLegend {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* mono small-caps key — the Analyst's only voice */
+.anK {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+}
+.anNil {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+/* ---- active drill: a status line, read-only ---- */
+.anDrill {
+  display: flex;
+  align-items: baseline;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.anDrillName {
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+.anDrillCount {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink2);
+}
+.anChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-left: auto;
+}
+.anChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink2);
+  text-decoration: none;
+}
+.anChip i {
+  font-style: normal;
+  font-weight: 700;
+}
+.anChip.pass { border-color: rgba(78, 158, 71, 0.5); }
+.anChip.pass i { color: var(--win); }
+.anChip.fail { border-color: rgba(204, 90, 78, 0.5); }
+.anChip.fail i { color: var(--loss); }
+.anChip.na { opacity: 0.55; }
+.anChip:hover { border-color: rgba(232, 163, 61, 0.5); }
+
+/* ---- the ledger ----
+   Wide rows scroll inside the board; the page never scrolls sideways. */
+.anScroll {
+  overflow-x: auto;
+  margin-top: 4px;
+}
+.anTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.anTable thead th {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.anGroup { border-bottom: 1px solid var(--line-soft); }
+.anRow > td {
+  padding: 7px 10px;
+  vertical-align: top;
+  color: var(--ink2);
+}
+.anGroup:hover .anRow > td { background: rgba(232, 163, 61, 0.04); }
+
+th.anRank,
+td.anRank {
+  text-align: right;
+  width: 1%;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding-right: 4px;
+}
+th.anScore,
+td.anScore {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+.anTier {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: var(--muted);
+}
+.anTier.t-leak { color: var(--loss); border-color: rgba(204, 90, 78, 0.45); }
+.anTier.t-obs { color: var(--ink2); }
+.anTier.t-clean { color: var(--win); border-color: rgba(78, 158, 71, 0.45); }
+
+.anFinding { min-width: 190px; }
+.anName {
+  color: var(--ink);
+  font-weight: 650;
+}
+.anRatio {
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--loss);
+  border: 1px solid rgba(204, 90, 78, 0.4);
+  border-radius: 3px;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+/* cohort pair: label left, figure right, tabular so the two dots line up */
+.anCohortCell { min-width: 190px; }
+.anPair {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 12px;
+  align-items: baseline;
+}
+.anPairLabel {
+  grid-column: 1 / -1;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.anTag {
+  font-style: normal;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+.anVal {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-align: right;
+}
+.anTag.win,
+.anVal.win { color: var(--win); }
+.anTag.loss,
+.anVal.loss { color: var(--loss); }
+
+.anSample {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  min-width: 150px;
+}
+
+.anStrength {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.anStrength.s-strong { color: var(--ember); }
+.anStrength.s-moderate { color: var(--ink2); }
+
+/* ---- evidence: always open, never a drawer ---- */
+.anEvidCell {
+  padding: 0 10px 10px 34px;
+  border-top: 1px dashed var(--line-soft);
+}
+.anReceipt {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--ink2);
+  padding: 2px 0 2px 10px;
+  border-left: 2px solid var(--line);
+  overflow-wrap: break-word;
+}
+a.anReceipt {
+  text-decoration: none;
+  color: var(--ink2);
+}
+a.anReceipt:hover {
+  border-left-color: var(--ember);
+  color: var(--ink);
+}
+.anCue { color: var(--ember); }
+.anDrillDef {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0 0;
+  font-size: 0.74rem;
+  color: var(--ink2);
+}
+.anDrillDef b { color: var(--ink); font-weight: 650; }
+.anConfound {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.anFoot {
+  margin: 8px 0 0;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+
+/* ---- clean bill: title + the one line, nothing else ---- */
+.anClean {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+}
+.anClean dl {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+.anCleanRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 4px 0;
+  font-size: 0.78rem;
+}
+.anCleanRow dt {
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.anCleanRow dd {
+  margin: 0;
+  color: var(--muted);
+  flex: 1;
+  min-width: 200px;
+}
+.anCleanReceipt {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--faint);
+}
+
+@media (max-width: 700px) {
+  .anChips { margin-left: 0; flex-basis: 100%; }
+  .anEvidCell { padding-left: 14px; }
+}
+
+/* The detector's verdict prose — the one sentence the ledger must not hide. */
+.anBody {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: var(--ink2);
+  max-width: 72ch;
+}
+.anStrength.s-weak { color: var(--muted); }
